@@ -14,6 +14,7 @@ namespace GameOfLife
         [STAThread]
         static void Main()
         {
+            // hi this is comment #5
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
