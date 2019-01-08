@@ -15,6 +15,7 @@ namespace GameOfLife
         static void Main()
         {
             //Hello rudey :))
+            //Test
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
