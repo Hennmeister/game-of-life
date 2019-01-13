@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    class Colony
+    class Colony : LivingUnit
     {
+        public Colony() { }
     }
 }

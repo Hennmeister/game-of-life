@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    class Cell : LivingUnit
+    class LivingUnit : Unit
     {
-        public Cell()
-        {
-        }
     }
 }

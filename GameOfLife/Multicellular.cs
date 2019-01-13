@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    class Multicellular
+    class Multicellular : LivingUnit
     {
     }
 }
