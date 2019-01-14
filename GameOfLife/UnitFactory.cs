@@ -12,18 +12,18 @@ namespace GameOfLife
         
         public Unit CreateUnit(int UnitTypeIndex)
         {
-            Enums.UnitTypes myType = (Enums.UnitTypes)UnitTypeIndex;
+            Enums.UnitType myType = (Enums.UnitType)UnitTypeIndex;
             switch (myType)
             {
-                case Enums.UnitTypes.Cell:
+                case Enums.UnitType.Cell:
                     return new Cell();
-                case Enums.UnitTypes.Colony:
+                case Enums.UnitType.Colony:
                     return new Colony();
-                case Enums.UnitTypes.Animal:
+                case Enums.UnitType.Animal:
                     return new Animal();
-                case Enums.UnitTypes.Plant:
+                case Enums.UnitType.Plant:
                     return new Plant();
-                case Enums.UnitTypes.Virus:
+                case Enums.UnitType.Virus:
                     return new Virus();
                 default:
                     return null;

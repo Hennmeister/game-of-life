@@ -8,9 +8,11 @@ namespace GameOfLife
 {
     public static class Enums
     {
-        public enum UnitTypes
+        public enum UnitType
         {
             Cell, Colony, Animal, Plant, Virus
         }
+
+        
     }
 }

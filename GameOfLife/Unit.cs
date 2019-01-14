@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    class Unit
+    abstract class Unit
     {
+        public double DecompositionValue { get; }
+
+        public Unit(double decompositionValue)
+        {
+            DecompositionValue = decompositionValue;
+        }
     }
 }
