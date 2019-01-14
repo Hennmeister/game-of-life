@@ -21,11 +21,12 @@ namespace GameOfLife
         public GasType InputGas { get; }
         public GasType OutpugGas { get; }
         public int IdealTemperature { get; }
+        public double InfectionResistance { get; }
         public bool Infected { get; }
 
         public LivingUnit(int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, GasType inputGas, 
-                          GasType outputGas, int idealTemperature, bool infected,
+                          GasType outputGas, int idealTemperature, double infectionResistance,
                           double decompositionValue) : base(decompositionValue)
         {
             SpeciesComplexity = speciesComplexity;
@@ -36,7 +37,8 @@ namespace GameOfLife
             InputGas = inputGas;
             OutpugGas = outputGas;
             IdealTemperature = idealTemperature;
-            Infected = infected;
+            InfectionResistance = infectionResistance;
+            Infected = false;
         }
     }
 }

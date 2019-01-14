@@ -8,5 +8,6 @@ namespace GameOfLife
 {
     class Virus : Unit
     {
+        public Virus() : base(0.1) { }
     }
 }
