@@ -52,6 +52,7 @@
     <Compile Include="Datastore.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Environment.cs" />
+    <Compile Include="EnvironmentFactory.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
