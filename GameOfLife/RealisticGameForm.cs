@@ -8,7 +8,7 @@ namespace GameOfLife
 {
     class RealisticModeGameForm : GameForm
     { 
-        public RealisticGameForm(GameManager manager) : base(manager)
+        public RealisticModeGameForm(GameManager manager) : base(manager)
         {
 
         }
