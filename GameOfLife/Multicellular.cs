@@ -8,19 +8,17 @@ namespace GameOfLife
 {
     abstract class Multicellular : LivingUnit
     {
-        public Multicellular(int senescence, int foodRequirement,
-                          int waterRequirement, int gasRequirement, GasType inputGas,
-                          GasType outputGas, int idealTemperature, double infectionResistance,
-                          double decompositionValue) : base(4, senescence, foodRequirement,
-                          waterRequirement, gasRequirement, inputGas,
-                          outputGas, idealTemperature, infectionResistance, decompositionValue)
+        public Multicellular(int senescence, int foodRequirement, int waterRequirement, int gasRequirement, 
+                             Enums.GasType inputGas, Enums.GasType outputGas, int idealTemperature, 
+                             double infectionResistance, double decompositionValue, System.Drawing.Color baselineColor) 
+                                    : base(4, senescence, foodRequirement, waterRequirement, gasRequirement, 
+                                      inputGas, outputGas, idealTemperature, infectionResistance, decompositionValue, baselineColor)
         {
 
         }
 
-        protected abstract DecreaseVictualRequirements(Unit[,] grid, int row, int col);
+        public abstract int DecreaseVictualRequirements(Unit[,] grid, int row, int col);
 
-        protected abstract IncreaseVictualRequirements(Unit[,] grid, int row, int col);
-
+        public abstract int IncreaseVictualRequirements(Unit[,] grid, int row, int col);
     }
 }
