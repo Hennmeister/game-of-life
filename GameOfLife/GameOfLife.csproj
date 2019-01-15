@@ -51,6 +51,7 @@
     <Compile Include="Colony.cs" />
     <Compile Include="Datastore.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Environment.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +70,7 @@
     <Compile Include="StartForm.Designer.cs">
       <DependentUpon>StartForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="State.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="UnitFactory.cs" />
     <Compile Include="Virus.cs" />
