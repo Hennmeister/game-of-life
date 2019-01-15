@@ -20,6 +20,7 @@ namespace GameOfLife
         public int GenerationCounter { get; set; }
         public Unit[,] UnitGrid { get; set; }
         private Environment gameEnvironment;
+        private List<State> previousStates;
 
         public State()
         {
