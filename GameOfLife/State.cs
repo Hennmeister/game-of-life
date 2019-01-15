@@ -18,6 +18,7 @@ namespace GameOfLife
         public int HighestConcurrentScore { get; set; }
         public string Username { get; set; }
         public int GenerationCounter { get; set; }
+        public Unit[,] UnitGrid { get; set; }
         private Environment gameEnvironment;
 
         public State()
@@ -25,9 +26,9 @@ namespace GameOfLife
             GenerationCounter = 0;
         }
 
-        public UpdateBlock(Unit unit, int row, int col)
+        public void UpdateBlock(Unit newUnit, int row, int col)
         {
-
+            UnitGrid[row, col] = newUnit;
         }
 
         public int CarbonDioxideLevel
@@ -161,19 +162,5 @@ namespace GameOfLife
 
             }
         }
-
-        public Unit[,] UnitGrid
-        {
-            set
-            {
-
-            }
-            get
-            {
-
-            }
-        }
-
-
     }
 }
