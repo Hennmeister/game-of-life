@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 namespace GameOfLife
 {
-    class GameManager
+    public class GameManager
     {
 
         private string username;
