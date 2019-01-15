@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    public class FreeModeGameForm : GameForm
+    class FreeModeGameForm : GameForm
     {
         public FreeModeGameForm(GameManager manager) : base(manager)
         {
