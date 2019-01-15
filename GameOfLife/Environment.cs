@@ -65,14 +65,9 @@ namespace GameOfLife
             return true;
         }
 
-        protected void EnvironmentalEvent()
-        {
-        }
+        abstract protected void EnvironmentalEvent();
 
-        protected void Rain()
-        {
-        }
-
+        abstract protected void Rain();
     }
 }
 
