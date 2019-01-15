@@ -1,4 +1,5 @@
-﻿using System;
+﻿// rudy 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -43,7 +44,23 @@ namespace GameOfLife
 
         }
 
-        protected
+        protected void DisplayGenerationNumber()
+        {
+
+        }
+
+        protected void DisplayCurrentScore()
+        {
+
+        }
+
+        protected void DisplayConcurrentHighScore()
+        {
+
+        }
+
+
+
         private void Test_Click(object sender, EventArgs e)
         {
             //Delete

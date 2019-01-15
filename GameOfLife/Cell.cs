@@ -8,8 +8,5 @@ namespace GameOfLife
 {
     class Cell : LivingUnit
     {
-        public Cell()
-        {
-        }
     }
 }
