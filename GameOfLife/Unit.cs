@@ -8,11 +8,19 @@ namespace GameOfLife
 {
     abstract class Unit
     {
-        public double DecompositionValue { get; }
+        protected System.Drawing.Color baseColor;
+        protected double DecompositionValue { get; }
 
         public Unit(double decompositionValue)
         {
             DecompositionValue = decompositionValue;
         }
+
+        public void Update(Unit[,] grid, int row, int col)
+        {
+
+        }
+
+        public abstract Unit Create(); 
     }
 }
