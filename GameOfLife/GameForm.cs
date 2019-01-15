@@ -14,14 +14,15 @@ namespace GameOfLife
     public abstract partial class GameForm : Form
     {
         //store game actions and data
-        GameManager manager = new GameManager();
+        GameManager manager;
         protected Enums.UnitType toolbarSelection;
         protected const int CELL_SIZE = 25;
         protected const int TOOLBAR_SIZE = 6;
 
-        public GameForm()
+        public GameForm(GameManager manager)
         {
             InitializeComponent();
+            this.manager = manager;
         }
 
         private void CreateToolbar()
