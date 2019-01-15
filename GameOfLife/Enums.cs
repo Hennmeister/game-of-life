@@ -13,6 +13,7 @@ namespace GameOfLife
             Cell, Colony, Animal, Plant, Virus
         }
 
+        public enum 
         
     }
 }
