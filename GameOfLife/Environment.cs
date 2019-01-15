@@ -61,7 +61,8 @@ namespace GameOfLife
 
         public bool EventOccurs()
         {
-
+            // to be changed
+            return true;
         }
 
         protected void EnvironmentalEvent()
