@@ -8,7 +8,7 @@ namespace GameOfLife
 {
     static class EnvironmentFactory
     {
-        public Environment CreateEnvironment(Enums.EnvironmentType environmentType)
+        public static Environment CreateEnvironment(Enums.EnvironmentType environmentType)
         {
             switch (environmentType)
             {
