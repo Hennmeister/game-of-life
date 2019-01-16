@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Tiffanie
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,17 @@ namespace GameOfLife
 {
     abstract class Unit
     {
-        public double DecompositionValue { get; }
+        protected System.Drawing.Color BaselineColor { get; }
+        protected double DecompositionValue { get; }
 
-        public Unit(double decompositionValue)
+        public Unit(double decompositionValue, System.Drawing.Color baselineColor)
         {
             DecompositionValue = decompositionValue;
+            BaselineColor = baselineColor;
         }
+
+        public abstract Unit Create();
+
+        public abstract void Update(Unit[,] grid, int row, int col);
     }
 }
