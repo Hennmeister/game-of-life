@@ -21,10 +21,13 @@ namespace GameOfLife
         public Unit[,] UnitGrid { get; set; }
         private Environment gameEnvironment;
         private List<State> previousStates;
+        private static int latestID;
+        private int currentID;
 
         public State()
         {
             GenerationCounter = 0;
+            currentID = ++latestID;
         }
 
         public void UpdateBlock(Unit newUnit, int row, int col)
