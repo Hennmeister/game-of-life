@@ -6,17 +6,21 @@ using System.Threading.Tasks;
 using System.Drawing;
 namespace GameOfLife
 {
-    public class GameManager
+    class GameManager
     {
-
-        private string username;
+        private State startingState;
+        private State currentState;
         const int UNIT_GRID_SIZE = 50;
-        UnitFactory Factory = new UnitFactory();
+        UnitFactory Factory;
 
+        public GameManager()
+        {
+            Factory = new UnitFactory();
+        }
 
-        public void CreateEnvironment(Environmenttype ENUM) { }
+        public void CreateEnvironment(Enums.EnvironmentType envType) { }
         public void CreateGrid(int row, int col) { }
-        public void CreateUnit(int row, int col, Enums.UnitType type) { }
+        public void CreateUnit(int row, int col, Enums.UnitType Unittype) { }
 
         public void NextGeneration() { }
         public void ApplyRuleset() { }
@@ -99,5 +103,7 @@ namespace GameOfLife
             set { }
         }
 
+        public State LoadState() { }
+        public void SaveState() { }
     }
 }
