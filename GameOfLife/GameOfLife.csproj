@@ -65,6 +65,12 @@
     </Compile>
     <Compile Include="GameManager.cs" />
     <Compile Include="Greenhouse.cs" />
+    <Compile Include="LeaderboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LeaderboardForm.Designer.cs">
+      <DependentUpon>LeaderboardForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LivingUnit.cs" />
     <Compile Include="Multicellular.cs" />
     <Compile Include="Plant.cs" />
