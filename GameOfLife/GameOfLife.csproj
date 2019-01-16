@@ -74,6 +74,7 @@
     <Compile Include="RealisticGameForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Ruleset.cs" />
     <Compile Include="StartForm.cs">
       <SubType>Form</SubType>
     </Compile>
