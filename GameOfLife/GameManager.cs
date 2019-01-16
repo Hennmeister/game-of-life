@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Henning Lindig
+ * RUDY DID THIS FIRST WITH STATES 
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +11,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 namespace GameOfLife
 {
-    class GameManager
+    public class GameManager
     {
         private State startingState;
         private State currentState;
@@ -27,7 +32,13 @@ namespace GameOfLife
         public void CalculateScore() { }
         public void UpdateAllUnits() { }
         public void ShowLeaderBoard() { }
-        
+
+        public Unit GetUnit(int row, int col) { }
+
+        public State LoadState() { }
+        public void SaveState() { }
+        public void CreateState(Environment env) { }
+
         public int GetCarbonDioxideLevel
         {
             get { }
@@ -95,15 +106,10 @@ namespace GameOfLife
             get { }
             set { }
         }
-        public Unit GetUnit(int row, int col) { }
-
         public int GetUsername
         {
             get { }
             set { }
         }
-
-        public State LoadState() { }
-        public void SaveState() { }
     }
 }

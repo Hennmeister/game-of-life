@@ -12,8 +12,11 @@ namespace GameOfLife
 {
     public partial class StartForm : Form
     {
-        public StartForm()
+        //store game actions and data
+        GameManager manager;
+        public StartForm(GameManager manager)
         {
+            this.manager = manager;
             InitializeComponent();
         }
     }

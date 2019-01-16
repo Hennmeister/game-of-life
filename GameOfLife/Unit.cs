@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    abstract class Unit
+    public abstract class Unit
     {
         protected System.Drawing.Color BaselineColor { get; }
         protected double DecompositionValue { get; }
