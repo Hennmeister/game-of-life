@@ -26,6 +26,7 @@ namespace GameOfLife
         public void CreateEnvironment(Enums.EnvironmentType envType) { }
         public void CreateGrid(int row, int col) { }
         public void CreateUnit(int row, int col, Enums.UnitType Unittype) { }
+        public void CreateState(Environment env) { }
 
         public void NextGeneration() { }
         public void ApplyRuleset() { }
@@ -33,70 +34,72 @@ namespace GameOfLife
         public void UpdateAllUnits() { }
         public void ShowLeaderBoard() { }
 
-        public Unit GetUnit(int row, int col) { }
+        public Unit GetUnit(int row, int col)
+        {
+            return currentState.
+        }
 
         public State LoadState() { }
         public void SaveState() { }
-        public void CreateState(Environment env) { }
 
-        public int GetCarbonDioxideLevel
-        {
-            get { }
-            set { }
-        }
-
-        public bool GetEnvironmentalEventOccurs
+        public int CarbonDioxideLevel
         {
             get { }
             set { }
         }
 
-        public Image GetEnvironmentImage
+        public bool EnvironmentalEventOccurs
         {
             get { }
             set { }
         }
 
-        public Image GetRainImage
+        public Image EnvironmentImage
         {
             get { }
             set { }
         }
 
-        public double GetFoodAvailability
+        public Image RainImage
         {
             get { }
             set { }
         }
 
-        public int GetGenerationCounter
+        public double FoodAvailability
         {
             get { }
             set { }
         }
 
-        public int GetGridSize
+        public int GenerationCounter
         {
             get { }
             set { }
         }
 
-        public int GetHighestConcurrentScore
+        public int GridSize
         {
             get { }
             set { }
         }
-        public int GetWaterAvailability
+
+        public int HighestConcurrentScore
         {
             get { }
             set { }
         }
-        public int GetOxygenLevel
+        public int WaterAvailability
         {
             get { }
             set { }
         }
-        public int GetScore
+        public int OxygenLevel
+        {
+            get { }
+            set { }
+        }
+        public int Score
         {
             get { }
             set { }
@@ -106,10 +109,15 @@ namespace GameOfLife
             get { }
             set { }
         }
-        public int GetUsername
+        public int Username
         {
             get { }
             set { }
+        }
+        //Returns the grid size
+        public int GetGridSize
+        {
+            get { return UNIT_GRID_SIZE; }
         }
     }
 }
