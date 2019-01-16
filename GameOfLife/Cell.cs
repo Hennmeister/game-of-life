@@ -80,7 +80,10 @@ namespace GameOfLife
 
         public void Merge(Unit[,] grid, int row, int col)
         {
-            UnitFactory
+            grid[row, col + 1] = null;
+            grid[row + 1, col] = null;
+            grid[row + 1, col + 1] = null;
+            grid[row, col] = UnitFactory.CreateUnit(Enums.UnitType.Colony);
         }
     }
 }
