@@ -32,6 +32,12 @@ namespace GameOfLife
             UnitGrid[row, col] = newUnit;
         }
 
+        public void SetGameEnvironment(Environment gameEnv)
+        {
+            gameEnvironment = gameEnv; 
+        }
+        
+
         public int CarbonDioxideLevel
         {
             set
