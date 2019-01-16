@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Nicole Beri
+ * Januray 15, 2019
+ * Base class for the environments (subclasses --> tundra, rainforest, greenhouse, desert)
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,19 +26,38 @@ namespace GameOfLife
 
         Random numberGenerator = new Random();
 
-        Image eventImage;
-        Image rainImage;
-        Image environmentImage;
+        private Image eventImage;
+        private Image rainImage;
+        private Image environmentImage;
 
         public Environment()
         {
 
         }
 
+        // getter for event images
+        public Image EventImage
+        {
+            get { return this.eventImage; }
+        }
+
+        // getter for rain images
+        public Image RainImage
+        {
+            get { return this.rainImage; }
+        }
+
+        // getter for environment images
+        public Image EnvironmentImage
+        {
+            get { return this.environmentImage; }
+        }
+
         // getter for carbon dioxide level
         public int CarbonDioxideLevel
         {
             get { return this.carbonDioxideLevel; }
+            set { }
         }
 
         // get and set food availability 
