@@ -19,7 +19,7 @@ namespace GameOfLife
         private GameManager gameManager;
         //store game actions and data
         GameManager manager;
-        
+
         public StartForm(GameManager manager)
         {
             this.manager = manager;
@@ -50,6 +50,15 @@ namespace GameOfLife
             {
                 trackBar.Enabled = enabled;
             }
+        }
+
+        // Configures the track bar parameters 
+        // TODO: use Environment methods
+        private void ConfigureTrackBars()
+        {
+            //sldFoodAvailability.SetRange((int)(0.9 * gameManager.FoodAvailability), (int)(1.1 * gameManager.FoodAvailability));
+            //sldWaterAvailability.SetRange((int)(0.9 * gameManager.WaterAvailability), (int)(1.1 * gameManager.WaterAvailability));
+            //sldTemperature.SetRange((int)(0.9 * gameManager.))
         }
 
         private void btnSaveUsername_Click(object sender, EventArgs e)
@@ -97,6 +106,7 @@ namespace GameOfLife
                 Enums.EnvironmentType selectedEnvironment;
                 Enum.TryParse(cbEnvironmentSelection.SelectedValue.ToString(), out selectedEnvironment);
                 gameManager.CreateEnvironment(selectedEnvironment);
+                // Configure the environment parameter trackbars according to the environment
             }
         }
     }
