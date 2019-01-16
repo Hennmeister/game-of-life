@@ -16,5 +16,9 @@ namespace GameOfLife
         {
             InitializeComponent();
         }
+
+        private void DisplayScores() { }
+        private void ReturnToGame() { }
+        private void SelectScoreState() { }
     }
 }
