@@ -17,9 +17,12 @@ namespace GameOfLife
         private TrackBar[] trackBars;
         private const int NUM_ENV_PARAMETERS = 5;
         private GameManager gameManager;
-
+        //store game actions and data
+        GameManager manager;
+        
         public StartForm(GameManager manager)
         {
+            this.manager = manager;
             InitializeComponent();
             AddTrackBars();
             ToggleTrackBars(enabled: false);

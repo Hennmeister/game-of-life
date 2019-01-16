@@ -12,7 +12,7 @@ using System.Drawing;
 
 namespace GameOfLife
 {
-    class State
+    public class State
     {
         public int CurrentScore { get; set; }
         public int HighestConcurrentScore { get; set; }

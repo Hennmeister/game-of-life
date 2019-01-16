@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +10,9 @@ namespace GameOfLife
     {
         public UnitFactory() { }
         
-        public Unit CreateUnit(int UnitTypeIndex)
+        public Unit CreateUnit(Enums.UnitType type)
         {
-            Enums.UnitType myType = (Enums.UnitType)UnitTypeIndex;
-            switch (myType)
+            switch (type)
             {
                 case Enums.UnitType.Cell:
                     return new Cell();

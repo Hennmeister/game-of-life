@@ -17,6 +17,11 @@ namespace GameOfLife
         {
             Rainforest, Tundra, Greenhouse, Desert
         }
+
+        public enum GasType
+        {
+            Oxygen, CarbonDioxide
+        }
         
     }
 }

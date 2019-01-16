@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Henning Lindig
+ * RUDY DID THIS FIRST WITH STATES 
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,96 +13,107 @@ namespace GameOfLife
 {
     public class GameManager
     {
-
-        private string username;
+        private State startingState;
+        private State currentState;
         const int UNIT_GRID_SIZE = 50;
-        UnitFactory Factory = new UnitFactory();
+        UnitFactory Factory;
 
+        public GameManager()
+        {
+            Factory = new UnitFactory();
+        }
 
-        public void CreateEnvironment(Environmenttype ENUM) { }
+        public void CreateEnvironment(Enums.EnvironmentType envType) { }
         public void CreateGrid(int row, int col) { }
-        public void CreateUnit(int row, int col, Enums.UnitType type) { }
+        public void CreateUnit(int row, int col, Enums.UnitType Unittype) { }
+        public void CreateState(Environment env) { }
 
         public void NextGeneration() { }
         public void ApplyRuleset() { }
         public void CalculateScore() { }
         public void UpdateAllUnits() { }
         public void ShowLeaderBoard() { }
-        
-        public int GetCarbonDioxideLevel
+
+        public Unit GetUnit(int row, int col)
         {
-            get { }
-            set { }
+            return currentState.UnitGrid[row, col];
         }
 
-        public bool GetEnvironmentalEventOccurs
+        public State LoadState() { }
+        public void SaveState() { }
+
+        public int CarbonDioxideLevel
         {
-            get { }
-            set { }
+            get { return currentState.CarbonDioxideLevel; }
+            set { currentState.CarbonDioxideLevel = value;  }
         }
 
-        public Image GetEnvironmentImage
+        public bool EnvironmentalEventOccurs
         {
-            get { }
-            set { }
+            get { return currentState.EnvironmentalEventOccurs; }
         }
 
-        public Image GetRainImage
+        public Image EnvironmentImage
         {
-            get { }
-            set { }
+            get { return currentState.EnvironmentalImage;  }
         }
 
-        public double GetFoodAvailability
+        public Image RainImage
         {
-            get { }
-            set { }
+            get { return currentState.RainImage; }
         }
 
-        public int GetGenerationCounter
+        public double FoodAvailability
         {
-            get { }
-            set { }
+            get { return currentState.FoodAvailability; }
+            set { currentState.FoodAvailability = value; }
         }
 
-        public int GetGridSize
+        public int GenerationCounter
         {
-            get { }
-            set { }
+            get { return currentState.GenerationCounter; }
+            set { currentState.GenerationCounter = value; }
         }
 
-        public int GetHighestConcurrentScore
+        public int GridSize
         {
-            get { }
-            set { }
+            get { return UNIT_GRID_SIZE; }
         }
-        public int GetWaterAvailability
+
+        public int HighestConcurrentScore
         {
-            get { }
-            set { }
+            get { return currentState.HighestConcurrentScore; }
+            set { currentState.HighestConcurrentScore = value; }
         }
-        public int GetOxygenLevel
+        public int WaterAvailability
         {
-            get { }
-            set { }
+            get { return currentState.WaterAvailability; }
+            set { currentState.WaterAvailability = value; }
         }
-        public int GetScore
+        public int OxygenLevel
         {
-            get { }
-            set { }
+            get { return currentState.OxygenLevel; }
+            set { currentState.OxygenLevel = value; }
+        }
+        public int CurrentScore
+        {
+            get { return currentState.CurrentScore;  }
+            set { currentState.CurrentScore = value; }
         }
         public int Temperature
         {
-            get { }
-            set { }
+            get { return currentState.Temperature; }
+            set { currentState.Temperature = value; }
         }
-        public Unit GetUnit(int row, int col) { }
-
-        public int GetUsername
+        public string Username
         {
-            get { }
-            set { }
+            get { return currentState.Username; }
+            set { currentState.Username = value; }
         }
-
+        //Returns the grid size
+        public int GetGridSize
+        {
+            get { return UNIT_GRID_SIZE; }
+        }
     }
 }

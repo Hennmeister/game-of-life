@@ -18,11 +18,13 @@ namespace GameOfLife
         protected Enums.UnitType toolbarSelection;
         protected const int CELL_SIZE = 25;
         protected const int TOOLBAR_SIZE = 6;
+        protected Rectangle[,] grid;
 
         public GameForm(GameManager manager)
         {
             InitializeComponent();
             this.manager = manager;
+            CreateGrid();
         }
 
         private void CreateToolbar()
@@ -30,9 +32,20 @@ namespace GameOfLife
 
         }
 
+        /// <summary>
+        /// Creates the rectangular UI grid.
+        /// </summary>
         private void CreateGrid()
         {
-
+            // TODO: need to refactor to parameratize?
+            grid = new Rectangle[50, 50];
+            for(int i = 0; i < grid.GetLength(0); i++)
+            {
+                for(int j = 0; j < grid.GetLength(1); j++)
+                {
+                    grid[i, j] = new Rectangle();
+                }
+            }
         }
 
         private void DisplayEnvironment()
