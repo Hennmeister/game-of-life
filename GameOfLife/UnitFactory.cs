@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    class UnitFactory
-    {
-        public UnitFactory() { }
-        
-        public Unit CreateUnit(Enums.UnitType type)
+    static class UnitFactory
+    {        
+        public static Unit CreateUnit(Enums.UnitType type)
         {
             switch (type)
             {
