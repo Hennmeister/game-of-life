@@ -13,6 +13,15 @@ namespace GameOfLife
             Cell, Colony, Animal, Plant, Virus
         }
 
+        public enum EnvironmentType
+        {
+            Rainforest, Tundra, Greenhouse, Desert
+        }
+
+        public enum GasType
+        {
+            Oxygen, CarbonDioxide
+        }
         
     }
 }
