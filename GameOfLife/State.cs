@@ -32,39 +32,37 @@ namespace GameOfLife
             UnitGrid[row, col] = newUnit;
         }
 
+        public void SetGameEnvironment(Environment gameEnv)
+        {
+            gameEnvironment = gameEnv; 
+        }
+        
+
         public int CarbonDioxideLevel
         {
             set
             {
-                gameEnvironment.
+                gameEnvironment.CarbonDioxideLevel = value;
             }
             get
             {
-                return gameEnvironment
+                return gameEnvironment.CarbonDioxideLevel;
             }
         }
 
         public bool EnvironmentalEventOccurs
         {
-            set
-            {
-
-            }
             get
             {
-
+                return gameEnvironment.EventOccurs();
             }
         }
 
         public Image EnvironmentalImage
         {
-            set
-            {
-
-            }
             get
             {
-
+                return gameEnvironment.environment
             }
         }
 
@@ -96,47 +94,24 @@ namespace GameOfLife
         {
             set
             {
-                
+                gameEnvironment.FoodAvailability = value;
             }
             get
             {
-
+                return gameEnvironment.FoodAvailability;
             }
         }
-
-        public int GenerationNumber
-        {
-            set
-            {
-
-            }
-            get
-            {
-
-            }
-        }
-
-        public int HighestConcurrentScore
-        {
-            set
-            {
-                
-            }
-            get
-            {
-
-            }
-        }
+        
 
         public int WaterAvailability
         {
             set
             {
-                
+                gameEnvironment.WaterAvailabilty = value;
             }
             get
             {
-
+                return gameEnvironment.WaterAvailabilty;
             }
         }
 
@@ -144,11 +119,11 @@ namespace GameOfLife
         {
             set
             {
-
+                gameEnvironment.OxygenLevel = value;
             }
             get
             {
-
+                return gameEnvironment.OxygenLevel;
             }
         }
 
@@ -156,11 +131,11 @@ namespace GameOfLife
         {
             set
             {
-                
+                gameEnvironment.Temperature = value;
             }
             get
             {
-
+                return gameEnvironment.Temperature;
             }
         }
     }
