@@ -80,7 +80,7 @@ namespace GameOfLife
 
         public void Merge(Unit[,] grid, int row, int col)
         {
-
+            UnitFactory
         }
     }
 }
