@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Henning Lindig
+ * RUDY DID THIS FIRST WITH STATES 
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,82 +11,95 @@ using System.Threading.Tasks;
 using System.Drawing;
 namespace GameOfLife
 {
-    class GameManager
+    public class GameManager
     {
-
-        private string username;
+        private State startingState;
+        private State currentState;
         const int UNIT_GRID_SIZE = 50;
-        UnitFactory Factory = new UnitFactory();
+        UnitFactory Factory;
 
+        public GameManager()
+        {
+            Factory = new UnitFactory();
+        }
 
-        public void CreateEnvironment(Environmenttype ENUM) { }
+        public void CreateEnvironment(Enums.EnvironmentType envType) { }
         public void CreateGrid(int row, int col) { }
-        public void CreateUnit(int row, int col, Enums.UnitType type) { }
+        public void CreateUnit(int row, int col, Enums.UnitType Unittype) { }
+        public void CreateState(Environment env) { }
 
         public void NextGeneration() { }
         public void ApplyRuleset() { }
         public void CalculateScore() { }
         public void UpdateAllUnits() { }
         public void ShowLeaderBoard() { }
-        
-        public int GetCarbonDioxideLevel
+
+        public Unit GetUnit(int row, int col)
+        {
+            return currentState.
+        }
+
+        public State LoadState() { }
+        public void SaveState() { }
+
+        public int CarbonDioxideLevel
         {
             get { }
             set { }
         }
 
-        public bool GetEnvironmentalEventOccurs
+        public bool EnvironmentalEventOccurs
         {
             get { }
             set { }
         }
 
-        public Image GetEnvironmentImage
+        public Image EnvironmentImage
         {
             get { }
             set { }
         }
 
-        public Image GetRainImage
+        public Image RainImage
         {
             get { }
             set { }
         }
 
-        public double GetFoodAvailability
+        public double FoodAvailability
         {
             get { }
             set { }
         }
 
-        public int GetGenerationCounter
+        public int GenerationCounter
         {
             get { }
             set { }
         }
 
-        public int GetGridSize
+        public int GridSize
         {
             get { }
             set { }
         }
 
-        public int GetHighestConcurrentScore
+        public int HighestConcurrentScore
         {
             get { }
             set { }
         }
-        public int GetWaterAvailability
+        public int WaterAvailability
         {
             get { }
             set { }
         }
-        public int GetOxygenLevel
+        public int OxygenLevel
         {
             get { }
             set { }
         }
-        public int GetScore
+        public int Score
         {
             get { }
             set { }
@@ -91,13 +109,15 @@ namespace GameOfLife
             get { }
             set { }
         }
-        public Unit GetUnit(int row, int col) { }
-
-        public int GetUsername
+        public int Username
         {
             get { }
             set { }
         }
-
+        //Returns the grid size
+        public int GetGridSize
+        {
+            get { return UNIT_GRID_SIZE; }
+        }
     }
 }

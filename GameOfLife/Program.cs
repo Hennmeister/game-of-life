@@ -14,11 +14,10 @@ namespace GameOfLife
         [STAThread]
         static void Main()
         {
-            //Hello rudey :))
-            //Test
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartForm());
+            //creates the application's game manager
+            Application.Run(new StartForm(new GameManager()));
         }
     }
 }

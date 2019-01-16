@@ -10,14 +10,15 @@ using System.Windows.Forms;
 
 namespace GameOfLife
 {
-    public partial class StartForm : Form
+    public partial class LeaderboardForm : Form
     {
-        //store game actions and data
-        GameManager manager;
-        public StartForm(GameManager manager)
+        public LeaderboardForm()
         {
-            this.manager = manager;
             InitializeComponent();
         }
+
+        private void DisplayScores() { }
+        private void ReturnToGame() { }
+        private void SelectScoreState() { }
     }
 }
