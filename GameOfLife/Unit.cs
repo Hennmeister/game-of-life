@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    abstract class Unit
+    public abstract class Unit
     {
+        // Specifies the dimension used for GetLength()
+        public const int ROW = 0;
+        public const int COLUMN = 1;
+
         protected System.Drawing.Color BaselineColor { get; }
         protected double DecompositionValue { get; }
 

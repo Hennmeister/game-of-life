@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    class Datastore
+    static class Datastore
     {
+        static void SaveState(State stateToSave) { }
+        static State LoadState(State toLoad) { }
+        static Tuple LoadHighScores() { }
     }
 }
