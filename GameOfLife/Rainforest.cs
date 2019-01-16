@@ -10,6 +10,7 @@ namespace GameOfLife
     {
         public Rainforest()
         {
+            // assign environmental property values for rainforest
             carbonDioxideLevel = 50;
             foodAvailability = 10000;
             oxygenLevel = 50;

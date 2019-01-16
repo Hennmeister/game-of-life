@@ -7,7 +7,7 @@ using System.Drawing; //document
 
 namespace GameOfLife
 {
-    public abstract class Environment
+    abstract class Environment
     {
         protected int carbonDioxideLevel;
         protected int eventGenerationsLeft;
@@ -30,35 +30,41 @@ namespace GameOfLife
 
         }
 
+        // getter for carbon dioxide level
         public int CarbonDioxideLevel
         {
             get { return this.carbonDioxideLevel; }
         }
 
+        // get and set food availability 
         public double FoodAvailability
         {
             get { return this.foodAvailability; }
             set { }
         }
 
+        // get and set oxyegen level 
         public int OxygenLevel
         {
             get { return this.oxygenLevel; }
             set { }
         }
 
+        // get and set temperature
         public int Temperature
         {
             get { return this.temperature; }
             set { }
         }
 
+        // get and set water availability
         public int WaterAvailabilty
         {
             get { return this.waterAvailability; }
             set { }
         }
 
+        // return true if an event occurs in the environment
         public bool EventOccurs()
         {
             // to be changed
