@@ -36,7 +36,7 @@ namespace GameOfLife
 
         public Unit GetUnit(int row, int col)
         {
-            return currentState.
+            return currentState.UnitGrid[row, col];
         }
 
         public State LoadState() { }
@@ -44,75 +44,71 @@ namespace GameOfLife
 
         public int CarbonDioxideLevel
         {
-            get { }
-            set { }
+            get { return currentState.CarbonDioxideLevel; }
+            set { currentState.CarbonDioxideLevel = value;  }
         }
 
         public bool EnvironmentalEventOccurs
         {
-            get { }
-            set { }
+            get { return currentState.EnvironmentalEventOccurs; }
         }
 
         public Image EnvironmentImage
         {
-            get { }
-            set { }
+            get { return currentState.EnvironmentalImage;  }
         }
 
         public Image RainImage
         {
-            get { }
-            set { }
+            get { return currentState.RainImage; }
         }
 
         public double FoodAvailability
         {
-            get { }
-            set { }
+            get { return currentState.FoodAvailability; }
+            set { currentState.FoodAvailability = value; }
         }
 
         public int GenerationCounter
         {
-            get { }
-            set { }
+            get { return currentState.GenerationCounter; }
+            set { currentState.GenerationCounter = value; }
         }
 
         public int GridSize
         {
-            get { }
-            set { }
+            get { return UNIT_GRID_SIZE; }
         }
 
         public int HighestConcurrentScore
         {
-            get { }
-            set { }
+            get { return currentState.HighestConcurrentScore; }
+            set { currentState.HighestConcurrentScore = value; }
         }
         public int WaterAvailability
         {
-            get { }
-            set { }
+            get { return currentState.WaterAvailability; }
+            set { currentState.WaterAvailability = value; }
         }
         public int OxygenLevel
         {
-            get { }
-            set { }
+            get { return currentState.OxygenLevel; }
+            set { currentState.OxygenLevel = value; }
         }
-        public int Score
+        public int CurrentScore
         {
-            get { }
-            set { }
+            get { return currentState.CurrentScore;  }
+            set { currentState.CurrentScore = value; }
         }
         public int Temperature
         {
-            get { }
-            set { }
+            get { return currentState.Temperature; }
+            set { currentState.Temperature = value; }
         }
-        public int Username
+        public string Username
         {
-            get { }
-            set { }
+            get { return currentState.Username; }
+            set { currentState.Username = value; }
         }
         //Returns the grid size
         public int GetGridSize
