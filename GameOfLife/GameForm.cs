@@ -37,13 +37,25 @@ namespace GameOfLife
         /// </summary>
         private void CreateGrid()
         {
-            // TODO: need to refactor to parameratize?
-            grid = new Rectangle[50, 50];
+            grid = new Rectangle[manager.GetGridSize, manager.GetGridSize];
             for(int i = 0; i < grid.GetLength(0); i++)
             {
                 for(int j = 0; j < grid.GetLength(1); j++)
                 {
                     grid[i, j] = new Rectangle();
+                }
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            for (int j = 0; j < grid.GetLength(0); j++)
+            {
+                for (int k = 0; k < grid.GetLength(1); k++)
+                {
+                    e.Graphics.DrawRectangle(manager.GetUnit(j, k). , grid[j, k]);
                 }
             }
         }
@@ -82,6 +94,7 @@ namespace GameOfLife
             Test.Text = manager.grid[0, 0].ToString();
         }
 
+        
 
     }
 }
