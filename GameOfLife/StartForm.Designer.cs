@@ -43,6 +43,10 @@
             this.lblPromptEnvParameters = new System.Windows.Forms.Label();
             this.btnSelectEnvironment = new System.Windows.Forms.Button();
             this.btnStartFree = new System.Windows.Forms.Button();
+            this.btnDisplayInstructions = new System.Windows.Forms.Button();
+            this.lblPromptExample = new System.Windows.Forms.Label();
+            this.cbExamples = new System.Windows.Forms.ComboBox();
+            this.btnLoadExample = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sldFoodAvailability)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldWaterAvailability)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldTemperature)).BeginInit();
@@ -177,11 +181,55 @@
             this.btnStartFree.UseVisualStyleBackColor = true;
             this.btnStartFree.Click += new System.EventHandler(this.btnStartFree_Click);
             // 
+            // btnDisplayInstructions
+            // 
+            this.btnDisplayInstructions.Location = new System.Drawing.Point(495, 323);
+            this.btnDisplayInstructions.Name = "btnDisplayInstructions";
+            this.btnDisplayInstructions.Size = new System.Drawing.Size(210, 103);
+            this.btnDisplayInstructions.TabIndex = 15;
+            this.btnDisplayInstructions.Text = "Show Instructions";
+            this.btnDisplayInstructions.UseVisualStyleBackColor = true;
+            // 
+            // lblPromptExample
+            // 
+            this.lblPromptExample.AutoSize = true;
+            this.lblPromptExample.Location = new System.Drawing.Point(471, 763);
+            this.lblPromptExample.Name = "lblPromptExample";
+            this.lblPromptExample.Size = new System.Drawing.Size(205, 32);
+            this.lblPromptExample.TabIndex = 16;
+            this.lblPromptExample.Text = "Load Example:";
+            // 
+            // cbExamples
+            // 
+            this.cbExamples.FormattingEnabled = true;
+            this.cbExamples.Items.AddRange(new object[] {
+            "Example 1",
+            "Example 2",
+            "Example 3"});
+            this.cbExamples.Location = new System.Drawing.Point(769, 763);
+            this.cbExamples.Name = "cbExamples";
+            this.cbExamples.Size = new System.Drawing.Size(121, 39);
+            this.cbExamples.TabIndex = 17;
+            // 
+            // btnLoadExample
+            // 
+            this.btnLoadExample.Location = new System.Drawing.Point(769, 847);
+            this.btnLoadExample.Name = "btnLoadExample";
+            this.btnLoadExample.Size = new System.Drawing.Size(212, 76);
+            this.btnLoadExample.TabIndex = 18;
+            this.btnLoadExample.Text = "Load Example";
+            this.btnLoadExample.UseVisualStyleBackColor = true;
+            this.btnLoadExample.Click += new System.EventHandler(this.btnLoadExample_Click);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1749, 983);
+            this.Controls.Add(this.btnLoadExample);
+            this.Controls.Add(this.cbExamples);
+            this.Controls.Add(this.lblPromptExample);
+            this.Controls.Add(this.btnDisplayInstructions);
             this.Controls.Add(this.btnStartFree);
             this.Controls.Add(this.btnSelectEnvironment);
             this.Controls.Add(this.lblPromptEnvParameters);
@@ -199,6 +247,7 @@
             this.Controls.Add(this.sldFoodAvailability);
             this.Name = "StartForm";
             this.Text = "StartForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.sldFoodAvailability)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldWaterAvailability)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldTemperature)).EndInit();
@@ -225,5 +274,9 @@
         private System.Windows.Forms.Label lblPromptEnvParameters;
         private System.Windows.Forms.Button btnSelectEnvironment;
         private System.Windows.Forms.Button btnStartFree;
+        private System.Windows.Forms.Button btnDisplayInstructions;
+        private System.Windows.Forms.Label lblPromptExample;
+        private System.Windows.Forms.ComboBox cbExamples;
+        private System.Windows.Forms.Button btnLoadExample;
     }
 }

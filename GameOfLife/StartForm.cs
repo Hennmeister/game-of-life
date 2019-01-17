@@ -143,6 +143,8 @@ namespace GameOfLife
                 }
                 // Display the new game form
                 gameForm.ShowDialog();
+                // Close this form
+                this.Close();
             }
         }
 
@@ -157,12 +159,26 @@ namespace GameOfLife
             StartGame(Enums.GameMode.Free);
         }
 
+        // Show instructions
         private void DisplayInstructions()
         {
-
+            InstructionsForm instructions = new InstructionsForm();
+            instructions.ShowDialog();
         }
 
-        private void CloseInstructions() { 
-}
+        // Close the program 
+        private void StartForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnLoadExample_Click(object sender, EventArgs e)
+        {
+            // Check that the user has selected an example
+            if(cbExamples.SelectedText == "")
+            {
+                MessageBox.Show("Please select an example.");
+            }
+        }
     }
 }
