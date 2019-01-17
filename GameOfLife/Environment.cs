@@ -97,7 +97,14 @@ namespace GameOfLife
 
         abstract protected void EnvironmentalEvent();
 
-        abstract protected void Rain();
+        /// <summary>
+        /// (Tiffanie) Enact raining in the environment
+        /// </summary>
+        protected void Rain()
+        {
+            // Increase water availab
+            this.waterAvailability += 10 * waterAvailability;
+        }
     }
 }
 
