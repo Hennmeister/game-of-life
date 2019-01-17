@@ -53,12 +53,18 @@ namespace GameOfLife
         }
 
         // Configures the track bar parameters 
-        // TODO: use Environment methods
         private void ConfigureTrackBars()
         {
-            sldFoodAvailability.SetRange(gameManager., (int)(1.1 * gameManager.FoodAvailability));
-            //sldWaterAvailability.SetRange((int)(0.9 * gameManager.WaterAvailability), (int)(1.1 * gameManager.WaterAvailability));
-            //sldTemperature.SetRange((int)(0.9 * gameManager.))
+            sldFoodAvailability.SetRange(EnvironmentHelper.EnvParamLowBound(gameManager.FoodAvailability),
+                                         EnvironmentHelper.EnvParamHighBound(gameManager.FoodAvailability));
+            sldWaterAvailability.SetRange(EnvironmentHelper.EnvParamLowBound(gameManager.WaterAvailability),
+                                          EnvironmentHelper.EnvParamHighBound(gameManager.WaterAvailability));
+            sldTemperature.SetRange(EnvironmentHelper.EnvParamLowBound(gameManager.Temperature),
+                                    EnvironmentHelper.EnvParamHighBound(gameManager.Temperature));
+            sldOxygenLevel.SetRange(EnvironmentHelper.EnvParamLowBound(gameManager.OxygenLevel),
+                                    EnvironmentHelper.EnvParamHighBound(gameManager.OxygenLevel));
+            sldCarbonDioxideLevel.SetRange(EnvironmentHelper.EnvParamLowBound(gameManager.CarbonDioxideLevel),
+                                           EnvironmentHelper.EnvParamHighBound(gameManager.CarbonDioxideLevel));
         }
 
         private void btnSaveUsername_Click(object sender, EventArgs e)
