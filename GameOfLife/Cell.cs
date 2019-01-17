@@ -29,7 +29,7 @@ namespace GameOfLife
         /// <summary>
         /// Used by the UnitFactory to create a new Cell
         /// </summary>
-        /// <returns> The newly constructed Cell object </returns>
+        /// <returns> A new Cell object </returns>
         public override Unit Create()
         {
             return new Cell();
@@ -43,12 +43,10 @@ namespace GameOfLife
         /// <param name="col"> The column of the grid that this Cell resides in </param>
         public override void Update(Unit[,] grid, int row, int col)
         {
-            // eats, drinks, merges
             if (ShouldMerge(grid, row, col))
             {
-
+                Merge(grid, row, col);
             }
-
         }
 
         /// <summary>
