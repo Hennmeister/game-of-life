@@ -21,7 +21,11 @@ namespace GameOfLife
         {
         }
 
-        public void CreateEnvironment(Enums.EnvironmentType envType) { }
+        public void CreateEnvironment(Enums.EnvironmentType envType)
+        {
+            currentState.GameEnvironment = EnvironmentFactory.CreateEnvironment(envType);
+        }
+
         public Unit[,] CreateGrid()
         {
             return new Unit[UNIT_GRID_SIZE, UNIT_GRID_SIZE];
@@ -117,10 +121,16 @@ namespace GameOfLife
             get { return currentState.Username; }
             set { currentState.Username = value; }
         }
+        
         //Returns the grid size
         public int GetGridSize
         {
             get { return UNIT_GRID_SIZE; }
+        }
+
+        public bool IsEnvironmentCreated()
+        {
+            return currentState.IsEnvironmentCreated();
         }
     }
 }

@@ -19,15 +19,8 @@ namespace GameOfLife
         protected const int CELL_SIZE = 25;
         protected const int TOOLBAR_SIZE = 6;
         protected Rectangle[,] grid;
-
-<<<<<<< HEAD
-        protected int CELL_SIZE = 25;
-        protected int TOOLBAR_SIZE = 6;
-
-        public GameForm()
-=======
+        
         public GameForm(GameManager manager)
->>>>>>> d63dee2ab05bbf470350513a03dcecc798daa93e
         {
             InitializeComponent();
             this.manager = manager;
@@ -54,11 +47,7 @@ namespace GameOfLife
                 }
             }
         }
-
-        private void DisplayEnvironment()
-        {
-
-        }
+        
 
         protected void DisplayEnvironmentalParameters()
         {
@@ -88,20 +77,7 @@ namespace GameOfLife
             manager.CreateUnit(0, 0, 0);
             Test.Text = manager.grid[0, 0].ToString();
         }
+        
 
-        private void CreateToolBar()
-        {
-
-        }
-
-        private void CreateGrid()
-        {
-
-        }
-
-        private void DisplayEnvironment()
-        {
-
-        }
     }
 }
