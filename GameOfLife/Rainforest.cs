@@ -18,7 +18,7 @@ namespace GameOfLife
         /// <summary>
         /// Create a Rainforest for the simulation's environment
         /// </summary>
-        public Rainforest()
+        public Rainforest() : base()
         {
             // Assign unique values for the environmental properties of Rainforest
             // Atmospheric composition
