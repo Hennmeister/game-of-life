@@ -13,15 +13,18 @@ namespace GameOfLife
         public const int ROW = 0;
         public const int COLUMN = 1;
 
-        protected System.Drawing.Color BaselineColor { get; }
+        static protected System.Drawing.Color baselineColor;
         protected double DecompositionValue { get; }
 
         public Unit(double decompositionValue, System.Drawing.Color baselineColor)
         {
             DecompositionValue = decompositionValue;
-            BaselineColor = baselineColor;
         }
 
+        public System.Drawing.Color BaselineColor
+        {
+            get { return baselineColor; }
+        }
         public abstract Unit Create();
 
         public abstract void Update(Unit[,] grid, int row, int col);
