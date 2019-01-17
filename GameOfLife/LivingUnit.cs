@@ -59,7 +59,7 @@ namespace GameOfLife
         // May also be incorporated into Age() itself
         public double AgeProbability()
         {
-
+            throw new NotImplementedException();
         }
 
         public void Cure()
@@ -69,17 +69,17 @@ namespace GameOfLife
 
         public double CureProbabillity()
         {
-
+            throw new NotImplementedException();
         }
 
         public int Drink(int waterAvailability)
         {
-
+            throw new NotImplementedException();
         }
 
         public double Eat(double foodAvailability)
         {
-
+            throw new NotImplementedException();
         }
 
         // Should have a pair return type

@@ -68,7 +68,7 @@ namespace GameOfLife
         {
             get
             {
-                return gameEnvironment.environment
+                return gameEnvironment.EnvironmentImage;
             }
         }
 
@@ -80,7 +80,7 @@ namespace GameOfLife
             }
             get
             {
-
+                return gameEnvironment.EventImage;
             }
         }
 
@@ -92,7 +92,7 @@ namespace GameOfLife
             }
             get
             {
-
+                return gameEnvironment.RainImage;
             }
         }
 

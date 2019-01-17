@@ -35,7 +35,7 @@ namespace GameOfLife
         public void CreateState(Environment env)
         {
             currentState = new State();
-            currentState.SetGameEnvironment(env);
+            currentState.GameEnvironment = env;
             currentState.UnitGrid = CreateGrid();
         }
 
@@ -50,7 +50,7 @@ namespace GameOfLife
             return currentState.UnitGrid[row, col];
         }
 
-        public State LoadState() { }
+        public State LoadState() { throw new NotImplementedException(); }
         public void SaveState() { }
 
         public int CarbonDioxideLevel

@@ -25,12 +25,12 @@ namespace GameOfLife
 
         public override int DecreaseVictualRequirements(Unit[,] grid, int row, int col)
         {
-
+            throw new NotImplementedException();
         }
 
         public override int IncreaseVictualRequirements(Unit[,] grid, int row, int col)
         {
-
+            throw new NotImplementedException();
         }
 
         public override void Update(Unit[,] grid, int row, int col)
@@ -60,12 +60,12 @@ namespace GameOfLife
 
         public bool IsStarving()
         {
-
+            throw new NotImplementedException();
         }
 
         public bool ShouldThermoregulate()
         {
-
+            throw new NotImplementedException();
         }
 
         public void Thermoregulate()

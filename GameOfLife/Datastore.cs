@@ -12,8 +12,8 @@ namespace GameOfLife
         private const string STATES_DIRECTORY_SUFFIX = "/PastStates";
         private static bool stateDirectoryExists;
         public static void SaveState(State stateToSave) { }
-        public static State LoadState(State toLoad) { }
-        public static Tuple LoadHighScores() { }
+        public static State LoadState(State toLoad) { return toLoad; }
+        public static Dictionary<int, string> LoadHighScores() { return new Dictionary<int, string>(); }
         // Creates a state directory
         private static void CreateStateDirectory()
         {

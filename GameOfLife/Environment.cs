@@ -101,9 +101,3 @@ namespace GameOfLife
     }
 }
 
-namespace GameOfLife
-{
-    class Environment
-    {
-    }
-}
