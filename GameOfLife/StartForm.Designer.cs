@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.sldFoodAvailability = new System.Windows.Forms.TrackBar();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnSaveUsername = new System.Windows.Forms.Button();
@@ -168,22 +165,11 @@
             this.btnSelectEnvironment.UseVisualStyleBackColor = true;
             this.btnSelectEnvironment.Click += new System.EventHandler(this.btnSelectEnvironment_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(268, 551);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(207, 101);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1749, 983);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.btnSelectEnvironment);
             this.Controls.Add(this.lblPromptEnvParameters);
             this.Controls.Add(this.lblPromptUsername);
@@ -211,9 +197,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TrackBar sldFoodAvailability;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnSaveUsername;
