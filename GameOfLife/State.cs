@@ -35,9 +35,12 @@ namespace GameOfLife
             UnitGrid[row, col] = newUnit;
         }
 
-        public void SetGameEnvironment(Environment gameEnv)
+        public Environment GameEnvironment
         {
-            gameEnvironment = gameEnv; 
+            set
+            {
+                gameEnvironment = value;
+            }
         }
         
 
@@ -140,6 +143,11 @@ namespace GameOfLife
             {
                 return gameEnvironment.Temperature;
             }
+        }
+
+        public bool IsEnvironmentCreated()
+        {
+            return gameEnvironment != null;
         }
         
     }

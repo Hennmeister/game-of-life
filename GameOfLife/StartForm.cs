@@ -83,15 +83,15 @@ namespace GameOfLife
 
         private void btnSetEnvParameters_Click(object sender, EventArgs e)
         {
-            // No environment selected
-            if(cbEnvironmentSelection.SelectedText == "")
+            // Check if an environment has already been set
+            if (gameManager.IsEnvironmentCreated())
             {
-                // Error
-                MessageBox.Show("Please select an environment.");
+                ConfigureTrackBars();
             }
             else
             {
-
+                // Error
+                MessageBox.Show("Please select an environment.");
             }
         }
 
@@ -114,6 +114,46 @@ namespace GameOfLife
                 gameManager.CreateEnvironment(selectedEnvironment);
                 // Configure the environment parameter trackbars according to the environment
             }
+        }
+
+        private void StartGame(Enums.GameMode selectedMode)
+        {
+            // Check if username has been set
+            if (username == "")
+            {
+                MessageBox.Show("Please enter a username.");
+            }
+            // Check if an environment has been selected
+            else if (!gameManager.IsEnvironmentCreated())
+            {
+                MessageBox.Show("Please select an environment.");
+            }
+            // Otherwise, can start the game
+            else
+            {
+                // Create the game form 
+                GameForm gameForm;
+                if(selectedMode == Enums.GameMode.Free)
+                {
+                    gameForm = new FreeModeGameForm(manager);
+                }
+                else
+                {
+                    gameForm = new RealisticModeGameForm(manager);
+                }
+                // Display the new game form
+                gameForm.ShowDialog();
+            }
+        }
+
+        private void btnStartRealistic_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnStartFree_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

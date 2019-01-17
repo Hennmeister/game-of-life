@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.sldFoodAvailability = new System.Windows.Forms.TrackBar();
-            this.btnStart = new System.Windows.Forms.Button();
+            this.btnStartRealistic = new System.Windows.Forms.Button();
             this.btnSaveUsername = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.sldWaterAvailability = new System.Windows.Forms.TrackBar();
@@ -42,6 +42,7 @@
             this.lblPromptUsername = new System.Windows.Forms.Label();
             this.lblPromptEnvParameters = new System.Windows.Forms.Label();
             this.btnSelectEnvironment = new System.Windows.Forms.Button();
+            this.btnStartFree = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sldFoodAvailability)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldWaterAvailability)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldTemperature)).BeginInit();
@@ -56,14 +57,15 @@
             this.sldFoodAvailability.Size = new System.Drawing.Size(258, 114);
             this.sldFoodAvailability.TabIndex = 0;
             // 
-            // btnStart
+            // btnStartRealistic
             // 
-            this.btnStart.Location = new System.Drawing.Point(120, 233);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(274, 114);
-            this.btnStart.TabIndex = 1;
-            this.btnStart.Text = "Start Game";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStartRealistic.Location = new System.Drawing.Point(120, 233);
+            this.btnStartRealistic.Name = "btnStartRealistic";
+            this.btnStartRealistic.Size = new System.Drawing.Size(274, 114);
+            this.btnStartRealistic.TabIndex = 1;
+            this.btnStartRealistic.Text = "Start Realistic Mode";
+            this.btnStartRealistic.UseVisualStyleBackColor = true;
+            this.btnStartRealistic.Click += new System.EventHandler(this.btnStartRealistic_Click);
             // 
             // btnSaveUsername
             // 
@@ -165,11 +167,22 @@
             this.btnSelectEnvironment.UseVisualStyleBackColor = true;
             this.btnSelectEnvironment.Click += new System.EventHandler(this.btnSelectEnvironment_Click);
             // 
+            // btnStartFree
+            // 
+            this.btnStartFree.Location = new System.Drawing.Point(120, 435);
+            this.btnStartFree.Name = "btnStartFree";
+            this.btnStartFree.Size = new System.Drawing.Size(274, 114);
+            this.btnStartFree.TabIndex = 14;
+            this.btnStartFree.Text = "Start Free Mode";
+            this.btnStartFree.UseVisualStyleBackColor = true;
+            this.btnStartFree.Click += new System.EventHandler(this.btnStartFree_Click);
+            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1749, 983);
+            this.Controls.Add(this.btnStartFree);
             this.Controls.Add(this.btnSelectEnvironment);
             this.Controls.Add(this.lblPromptEnvParameters);
             this.Controls.Add(this.lblPromptUsername);
@@ -182,7 +195,7 @@
             this.Controls.Add(this.sldWaterAvailability);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.btnSaveUsername);
-            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.btnStartRealistic);
             this.Controls.Add(this.sldFoodAvailability);
             this.Name = "StartForm";
             this.Text = "StartForm";
@@ -198,7 +211,7 @@
 
         #endregion
         private System.Windows.Forms.TrackBar sldFoodAvailability;
-        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnStartRealistic;
         private System.Windows.Forms.Button btnSaveUsername;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TrackBar sldWaterAvailability;
@@ -211,5 +224,6 @@
         private System.Windows.Forms.Label lblPromptUsername;
         private System.Windows.Forms.Label lblPromptEnvParameters;
         private System.Windows.Forms.Button btnSelectEnvironment;
+        private System.Windows.Forms.Button btnStartFree;
     }
 }

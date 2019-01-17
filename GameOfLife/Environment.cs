@@ -12,7 +12,7 @@ using System.Drawing; //document
 
 namespace GameOfLife
 {
-    abstract class Environment
+    public abstract class Environment
     {
         protected int carbonDioxideLevel;
         protected int eventGenerationsLeft;
