@@ -9,18 +9,16 @@ namespace GameOfLife
 {
     static class Datastore
     {
-        private const string STATES_SUFFIX = "/PastStates";
+        private const string STATES_DIRECTORY_SUFFIX = "/PastStates";
+        private static bool stateDirectoryExists;
         public static void SaveState(State stateToSave) { }
         public static State LoadState(State toLoad) { }
         public static Tuple LoadHighScores() { }
-        // Checks if the state folder already exists
-        private static void CheckDirectoryExists()
+        // Creates a state directory
+        private static void CreateStateDirectory()
         {
-            // Check
-            if(File.Exists(Directory.GetCurrentDirectory() + STATES_SUFFIX))
-            {
-
-            }
+            string solutionPath = Directory.GetCurrentDirectory();
+            Directory.CreateDirectory(solutionPath + STATES_DIRECTORY_SUFFIX);
         }
     }
 }
