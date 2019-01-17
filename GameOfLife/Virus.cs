@@ -9,7 +9,12 @@ namespace GameOfLife
 {
     class Virus : Unit
     {
-        public Virus() : base(0.1, System.Drawing.Color.SlateBlue) { }
+        public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.SlateBlue;
+
+        public Virus() : base(0.1)
+        {
+
+        }
 
         public override Unit Create()
         {

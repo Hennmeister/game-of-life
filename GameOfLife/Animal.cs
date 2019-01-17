@@ -9,11 +9,13 @@ namespace GameOfLife
 {
     class Animal : Multicellular
     {
+        public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.LightCoral;
+
         public Animal() : base( senescence: 32,
                                foodRequirement: 8, waterRequirement: 10,
                                gasRequirement: 8, inputGas: Enums.GasType.Oxygen,
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
-                               infectionResistance: 8, decompositionValue: 20, baselineColor: System.Drawing.Color.LightCoral)
+                               infectionResistance: 8, decompositionValue: 20)
         {
 
         }

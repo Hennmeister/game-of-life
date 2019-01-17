@@ -38,7 +38,7 @@ namespace GameOfLife
         public LivingUnit(int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, Enums.GasType inputGas,
                           Enums.GasType outputGas, int idealTemperature, double infectionResistance,
-                          double decompositionValue, System.Drawing.Color baselineColor) : base(decompositionValue, baselineColor)
+                          double decompositionValue) : base(decompositionValue)
         {
             SpeciesComplexity = speciesComplexity;
             Senescence = senescence;
