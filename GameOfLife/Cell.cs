@@ -43,6 +43,7 @@ namespace GameOfLife
         /// <param name="col"> The column of the grid that this Cell resides in </param>
         public override void Update(Unit[,] grid, int row, int col)
         {
+            // If the Cell is in a position to merge into a colony with other cells, do the merge
             if (ShouldMerge(grid, row, col))
             {
                 Merge(grid, row, col);
@@ -50,7 +51,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// 
+        /// Checks if the Cell is in a position to turn into a colony
         /// </summary>
         /// <param name="grid"> The grid of Units currently in the simulation </param>
         /// <param name="row"> The row of the grid that this Cell resides in </param>
@@ -76,11 +77,20 @@ namespace GameOfLife
             }
         }
 
+        /// <summary>
+        /// Merges the current Cell with the 3 other Cells in a 2x2 block with this Cell as the top left
+        /// </summary>
+        /// <param name="grid"> The grid of Units currently in the simulation </param>
+        /// <param name="row"> The row of the grid that this Cell resides in </param>
+        /// <param name="col"> The column of the grid that this Cell resides in </param>
         public void Merge(Unit[,] grid, int row, int col)
         {
+            // Delete references to the 3 other Cells in the 2x2 block 
+            // so they are deleted by the garbage collector
             grid[row, col + 1] = null;
             grid[row + 1, col] = null;
             grid[row + 1, col + 1] = null;
+            // Replace the current Cell with a newly created Colony
             grid[row, col] = UnitFactory.CreateUnit(Enums.UnitType.Colony);
         }
     }
