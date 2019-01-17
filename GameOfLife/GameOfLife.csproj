@@ -54,6 +54,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Environment.cs" />
     <Compile Include="EnvironmentFactory.cs" />
+    <Compile Include="EnvironmentHelper.cs" />
     <Compile Include="FreeModeGameForm.cs">
       <SubType>Form</SubType>
     </Compile>

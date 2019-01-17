@@ -117,6 +117,7 @@ namespace GameOfLife
             get { return currentState.Username; }
             set { currentState.Username = value; }
         }
+        
         //Returns the grid size
         public int GetGridSize
         {

@@ -34,17 +34,7 @@ namespace GameOfLife
         {
 
         }
-
-        public int EnvParameterHighBound(double param)
-        {
-            return (int)(1.1 * param);
-        }
-
-        public int EnvParameterLowBound(double param)
-        {
-            return (int)(0.9 * param);
-        }
-
+        
         // getter for event images
         public Image EventImage
         {

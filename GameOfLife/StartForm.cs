@@ -56,7 +56,7 @@ namespace GameOfLife
         // TODO: use Environment methods
         private void ConfigureTrackBars()
         {
-            //sldFoodAvailability.SetRange((int)(0.9 * gameManager.FoodAvailability), (int)(1.1 * gameManager.FoodAvailability));
+            sldFoodAvailability.SetRange(gameManager., (int)(1.1 * gameManager.FoodAvailability));
             //sldWaterAvailability.SetRange((int)(0.9 * gameManager.WaterAvailability), (int)(1.1 * gameManager.WaterAvailability));
             //sldTemperature.SetRange((int)(0.9 * gameManager.))
         }

@@ -141,5 +141,6 @@ namespace GameOfLife
                 return gameEnvironment.Temperature;
             }
         }
+        
     }
 }
