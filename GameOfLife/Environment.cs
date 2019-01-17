@@ -36,22 +36,25 @@ namespace GameOfLife
         private Image environmentImage;
 
         /// <summary>
-        /// (Tiffanie) 
+        /// (Tiffanie) Create a new Environment with the given values unique to a chosen type of Environment
         /// </summary>
-        /// <param name="defaultFood"></param>
-        /// <param name="defaultWater"></param>
-        /// <param name="oxygenLevel"></param>
-        /// <param name="carbonDioxideLevel"></param>
-        /// <param name="temperature"></param>
-        /// <param name="probOfRain"></param>
+        /// <param name="defaultFood"> The default amount of food in this type of environment </param>
+        /// <param name="defaultWater"> The default amount of water in this type of environment </param>
+        /// <param name="oxygenLevel"> The oxygen level of this environment </param>
+        /// <param name="carbonDioxideLevel"> The carbon dioxide level in this environment </param>
+        /// <param name="temperature"> The temperature of this environment </param>
+        /// <param name="probOfRain"> The probability of rain in this environment </param>
         public Environment(double defaultFood, int defaultWater,
                            int oxygenLevel, int carbonDioxideLevel,
                            int temperature, int probOfRain)
         {
-            // Initialize the environmental parameters based on the unqiue biome values
-            // Amount of food and water in the environment
+            // **** INITIALIZE ENVIRONMENT PARAMETERS BASED ON TYPE OF ENVIRONMENT ****
+            // The default/base amount of food and water in this biome
             DefaultFood = defaultFood;
             DefaultWater = defaultWater;
+            // Amount of food and water initially available for the simulation (this can be modified by the user)
+            foodAvailability = DefaultFood;
+            waterAvailability = DefaultWater;
             // Atmospheric composition
             CarbonDioxideLevel = carbonDioxideLevel;
             OxygenLevel = oxygenLevel;
