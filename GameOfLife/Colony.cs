@@ -28,7 +28,7 @@ namespace GameOfLife
 
         public bool CheckMerge(Unit[,] grid, int row, int col)
         {
-
+            throw new NotImplementedException();
         }
 
         public void Merge(Unit[,] grid, int row, int col)

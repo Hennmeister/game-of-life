@@ -16,17 +16,28 @@ namespace GameOfLife
         private State startingState;
         private State currentState;
         const int UNIT_GRID_SIZE = 50;
-        UnitFactory Factory;
 
         public GameManager()
         {
-            Factory = new UnitFactory();
         }
 
-        public void CreateEnvironment(Enums.EnvironmentType envType) { }
-        public void CreateGrid(int row, int col) { }
+        public void CreateEnvironment(Enums.EnvironmentType envType)
+        {
+            currentState.GameEnvironment = EnvironmentFactory.CreateEnvironment(envType);
+        }
+
+        public Unit[,] CreateGrid()
+        {
+            return new Unit[UNIT_GRID_SIZE, UNIT_GRID_SIZE];
+        }
         public void CreateUnit(int row, int col, Enums.UnitType Unittype) { }
-        public void CreateState(Environment env) { }
+
+        public void CreateState(Environment env)
+        {
+            currentState = new State();
+            currentState.GameEnvironment = env;
+            currentState.UnitGrid = CreateGrid();
+        }
 
         public void NextGeneration() { }
         public void ApplyRuleset() { }
@@ -39,7 +50,7 @@ namespace GameOfLife
             return currentState.UnitGrid[row, col];
         }
 
-        public State LoadState() { }
+        public State LoadState() { throw new NotImplementedException(); }
         public void SaveState() { }
 
         public int CarbonDioxideLevel
@@ -110,10 +121,16 @@ namespace GameOfLife
             get { return currentState.Username; }
             set { currentState.Username = value; }
         }
+        
         //Returns the grid size
         public int GetGridSize
         {
             get { return UNIT_GRID_SIZE; }
+        }
+
+        public bool IsEnvironmentCreated()
+        {
+            return currentState.IsEnvironmentCreated();
         }
     }
 }

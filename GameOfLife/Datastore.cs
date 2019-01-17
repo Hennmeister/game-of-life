@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace GameOfLife
 {
     static class Datastore
     {
-        static void SaveState(State stateToSave) { }
-        static State LoadState(State toLoad) { }
-        static Tuple LoadHighScores() { }
+        private const string STATES_DIRECTORY_SUFFIX = "/PastStates";
+        private static bool stateDirectoryExists;
+        public static void SaveState(State stateToSave) { }
+        public static State LoadState(State toLoad) { return toLoad; }
+        public static Dictionary<int, string> LoadHighScores() { return new Dictionary<int, string>(); }
+        // Creates a state directory
+        private static void CreateStateDirectory()
+        {
+            string solutionPath = Directory.GetCurrentDirectory();
+            Directory.CreateDirectory(solutionPath + STATES_DIRECTORY_SUFFIX);
+        }
     }
 }

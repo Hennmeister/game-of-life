@@ -21,16 +21,28 @@ namespace GameOfLife
         public Unit[,] UnitGrid { get; set; }
         private Environment gameEnvironment;
         private List<State> previousStates;
+        private static int latestID;
+        private int currentID;
 
         public State()
         {
             GenerationCounter = 0;
+            currentID = ++latestID;
         }
 
         public void UpdateBlock(Unit newUnit, int row, int col)
         {
             UnitGrid[row, col] = newUnit;
         }
+
+        public Environment GameEnvironment
+        {
+            set
+            {
+                gameEnvironment = value;
+            }
+        }
+        
 
         public int CarbonDioxideLevel
         {
@@ -56,7 +68,7 @@ namespace GameOfLife
         {
             get
             {
-                return gameEnvironment.environment
+                return gameEnvironment.EnvironmentImage;
             }
         }
 
@@ -68,7 +80,7 @@ namespace GameOfLife
             }
             get
             {
-
+                return gameEnvironment.EventImage;
             }
         }
 
@@ -80,7 +92,7 @@ namespace GameOfLife
             }
             get
             {
-
+                return gameEnvironment.RainImage;
             }
         }
 
@@ -132,5 +144,11 @@ namespace GameOfLife
                 return gameEnvironment.Temperature;
             }
         }
+
+        public bool IsEnvironmentCreated()
+        {
+            return gameEnvironment != null;
+        }
+        
     }
 }

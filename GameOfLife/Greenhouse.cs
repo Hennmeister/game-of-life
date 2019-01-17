@@ -10,6 +10,7 @@ namespace GameOfLife
     {
         public Greenhouse()
         {
+            // assign environmental property values for greenhouse
             carbonDioxideLevel = 75;
             foodAvailability = 3000;
             oxygenLevel = 25;

@@ -23,5 +23,9 @@ namespace GameOfLife
             Oxygen, CarbonDioxide
         }
         
+        public enum GameMode
+        {
+            Realistic, Free
+        }
     }
 }

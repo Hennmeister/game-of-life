@@ -23,7 +23,7 @@ namespace GameOfLife
 
         private bool Infect(Unit[,] grid, int row, int col)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace GameOfLife
         protected const int CELL_SIZE = 25;
         protected const int TOOLBAR_SIZE = 6;
         protected Rectangle[,] grid;
-
+        
         public GameForm(GameManager manager)
         {
             InitializeComponent();
@@ -47,11 +47,7 @@ namespace GameOfLife
                 }
             }
         }
-
-        private void DisplayEnvironment()
-        {
-
-        }
+        
 
         protected void DisplayEnvironmentalParameters()
         {
@@ -73,15 +69,7 @@ namespace GameOfLife
 
         }
 
-
-
-        private void Test_Click(object sender, EventArgs e)
-        {
-            //Delete
-            manager.CreateUnit(0, 0, 0);
-            Test.Text = manager.grid[0, 0].ToString();
-        }
-
+        
 
     }
 }

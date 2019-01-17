@@ -28,11 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.sldFoodAvailability = new System.Windows.Forms.TrackBar();
-            this.btnStart = new System.Windows.Forms.Button();
+            this.btnStartRealistic = new System.Windows.Forms.Button();
             this.btnSaveUsername = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.sldWaterAvailability = new System.Windows.Forms.TrackBar();
@@ -45,6 +42,11 @@
             this.lblPromptUsername = new System.Windows.Forms.Label();
             this.lblPromptEnvParameters = new System.Windows.Forms.Label();
             this.btnSelectEnvironment = new System.Windows.Forms.Button();
+            this.btnStartFree = new System.Windows.Forms.Button();
+            this.btnDisplayInstructions = new System.Windows.Forms.Button();
+            this.lblPromptExample = new System.Windows.Forms.Label();
+            this.cbExamples = new System.Windows.Forms.ComboBox();
+            this.btnLoadExample = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sldFoodAvailability)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldWaterAvailability)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldTemperature)).BeginInit();
@@ -59,14 +61,15 @@
             this.sldFoodAvailability.Size = new System.Drawing.Size(258, 114);
             this.sldFoodAvailability.TabIndex = 0;
             // 
-            // btnStart
+            // btnStartRealistic
             // 
-            this.btnStart.Location = new System.Drawing.Point(120, 233);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(274, 114);
-            this.btnStart.TabIndex = 1;
-            this.btnStart.Text = "Start Game";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStartRealistic.Location = new System.Drawing.Point(120, 233);
+            this.btnStartRealistic.Name = "btnStartRealistic";
+            this.btnStartRealistic.Size = new System.Drawing.Size(274, 114);
+            this.btnStartRealistic.TabIndex = 1;
+            this.btnStartRealistic.Text = "Start Realistic Mode";
+            this.btnStartRealistic.UseVisualStyleBackColor = true;
+            this.btnStartRealistic.Click += new System.EventHandler(this.btnStartRealistic_Click);
             // 
             // btnSaveUsername
             // 
@@ -168,22 +171,66 @@
             this.btnSelectEnvironment.UseVisualStyleBackColor = true;
             this.btnSelectEnvironment.Click += new System.EventHandler(this.btnSelectEnvironment_Click);
             // 
-            // button1
+            // btnStartFree
             // 
-            this.button1.Location = new System.Drawing.Point(268, 551);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(207, 101);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnStartFree.Location = new System.Drawing.Point(120, 435);
+            this.btnStartFree.Name = "btnStartFree";
+            this.btnStartFree.Size = new System.Drawing.Size(274, 114);
+            this.btnStartFree.TabIndex = 14;
+            this.btnStartFree.Text = "Start Free Mode";
+            this.btnStartFree.UseVisualStyleBackColor = true;
+            this.btnStartFree.Click += new System.EventHandler(this.btnStartFree_Click);
+            // 
+            // btnDisplayInstructions
+            // 
+            this.btnDisplayInstructions.Location = new System.Drawing.Point(495, 323);
+            this.btnDisplayInstructions.Name = "btnDisplayInstructions";
+            this.btnDisplayInstructions.Size = new System.Drawing.Size(210, 103);
+            this.btnDisplayInstructions.TabIndex = 15;
+            this.btnDisplayInstructions.Text = "Show Instructions";
+            this.btnDisplayInstructions.UseVisualStyleBackColor = true;
+            // 
+            // lblPromptExample
+            // 
+            this.lblPromptExample.AutoSize = true;
+            this.lblPromptExample.Location = new System.Drawing.Point(471, 763);
+            this.lblPromptExample.Name = "lblPromptExample";
+            this.lblPromptExample.Size = new System.Drawing.Size(205, 32);
+            this.lblPromptExample.TabIndex = 16;
+            this.lblPromptExample.Text = "Load Example:";
+            // 
+            // cbExamples
+            // 
+            this.cbExamples.FormattingEnabled = true;
+            this.cbExamples.Items.AddRange(new object[] {
+            "Example 1",
+            "Example 2",
+            "Example 3"});
+            this.cbExamples.Location = new System.Drawing.Point(769, 763);
+            this.cbExamples.Name = "cbExamples";
+            this.cbExamples.Size = new System.Drawing.Size(121, 39);
+            this.cbExamples.TabIndex = 17;
+            // 
+            // btnLoadExample
+            // 
+            this.btnLoadExample.Location = new System.Drawing.Point(769, 847);
+            this.btnLoadExample.Name = "btnLoadExample";
+            this.btnLoadExample.Size = new System.Drawing.Size(212, 76);
+            this.btnLoadExample.TabIndex = 18;
+            this.btnLoadExample.Text = "Load Example";
+            this.btnLoadExample.UseVisualStyleBackColor = true;
+            this.btnLoadExample.Click += new System.EventHandler(this.btnLoadExample_Click);
             // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1749, 983);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.btnLoadExample);
+            this.Controls.Add(this.cbExamples);
+            this.Controls.Add(this.lblPromptExample);
+            this.Controls.Add(this.btnDisplayInstructions);
+            this.Controls.Add(this.btnStartFree);
             this.Controls.Add(this.btnSelectEnvironment);
             this.Controls.Add(this.lblPromptEnvParameters);
             this.Controls.Add(this.lblPromptUsername);
@@ -196,10 +243,11 @@
             this.Controls.Add(this.sldWaterAvailability);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.btnSaveUsername);
-            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.btnStartRealistic);
             this.Controls.Add(this.sldFoodAvailability);
             this.Name = "StartForm";
             this.Text = "StartForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.sldFoodAvailability)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldWaterAvailability)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldTemperature)).EndInit();
@@ -211,11 +259,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TrackBar sldFoodAvailability;
-        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnStartRealistic;
         private System.Windows.Forms.Button btnSaveUsername;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TrackBar sldWaterAvailability;
@@ -228,5 +273,10 @@
         private System.Windows.Forms.Label lblPromptUsername;
         private System.Windows.Forms.Label lblPromptEnvParameters;
         private System.Windows.Forms.Button btnSelectEnvironment;
+        private System.Windows.Forms.Button btnStartFree;
+        private System.Windows.Forms.Button btnDisplayInstructions;
+        private System.Windows.Forms.Label lblPromptExample;
+        private System.Windows.Forms.ComboBox cbExamples;
+        private System.Windows.Forms.Button btnLoadExample;
     }
 }

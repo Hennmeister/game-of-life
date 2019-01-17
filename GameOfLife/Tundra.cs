@@ -10,6 +10,7 @@ namespace GameOfLife
     {
         public Tundra()
         {
+            // assign environmental property values for tundra
             carbonDioxideLevel = 50;
             foodAvailability = 10000;
             oxygenLevel = 75;
