@@ -6,6 +6,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace GameOfLife
 {
     class Cell : LivingUnit
     {
+        public static readonly Color baselineColor = Color.Turquoise;
         /// <summary>
         /// Create a new Cell object
         /// </summary>
@@ -21,9 +23,8 @@ namespace GameOfLife
                                foodRequirement: 1, waterRequirement: 1,
                                gasRequirement: 1, inputGas: Enums.GasType.Oxygen,
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
-                               infectionResistance: 3, decompositionValue: 0.5, baselineColor: System.Drawing.Color.Turquoise)
+                               infectionResistance: 3, decompositionValue: 0.5)
         {
-
         }
 
         /// <summary>

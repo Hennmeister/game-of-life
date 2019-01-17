@@ -56,20 +56,20 @@ namespace GameOfLife
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
             for (int j = 0; j < grid.GetLength(0); j++)
             {
                 for (int k = 0; k < grid.GetLength(1); k++)
                 {
-                    SolidBrush brush = new SolidBrush(manager.GetUnit(j, k).BaselineColor);
-                    e.Graphics.FillRectangle(brush, grid[j, k]);
-                    brush.Dispose();
+           //         SolidBrush brush = new SolidBrush(manager.GetUnit(j, k).BaselineColor);
+             //       e.Graphics.FillRectangle(brush, grid[j, k]);
+               //     brush.Dispose();
                 }
             }
             //hide cursor and draw box instead
             for(int i = 0; i < TOOLBAR_SIZE; i++)
             {
-                e.Graphics.DrawImage(Enums.UnitType, toolbar[i]);
+                Virus.
+        //        e.Graphics.DrawImage(Virus.BaselineColor toolbar[i]);
             }
         }
 

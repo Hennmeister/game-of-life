@@ -8,13 +8,14 @@ namespace GameOfLife
 {
     class Plant : Multicellular
     {
+        public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.YellowGreen;
         Random numberGenerator = new Random();
 
         public Plant() : base(senescence: 50,
                        foodRequirement: 5, waterRequirement: 25,
                        gasRequirement: 4, inputGas: Enums.GasType.CarbonDioxide,
                        outputGas: Enums.GasType.Oxygen, idealTemperature: 35,
-                       infectionResistance: 7, decompositionValue: 10, baselineColor: System.Drawing.Color.YellowGreen)
+                       infectionResistance: 7, decompositionValue: 10)
         {
 
         }

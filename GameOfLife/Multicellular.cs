@@ -10,9 +10,9 @@ namespace GameOfLife
     {
         public Multicellular(int senescence, int foodRequirement, int waterRequirement, int gasRequirement, 
                              Enums.GasType inputGas, Enums.GasType outputGas, int idealTemperature, 
-                             double infectionResistance, double decompositionValue, System.Drawing.Color baselineColor) 
+                             double infectionResistance, double decompositionValue) 
                                     : base(4, senescence, foodRequirement, waterRequirement, gasRequirement, 
-                                      inputGas, outputGas, idealTemperature, infectionResistance, decompositionValue, baselineColor)
+                                      inputGas, outputGas, idealTemperature, infectionResistance, decompositionValue)
         {
 
         }

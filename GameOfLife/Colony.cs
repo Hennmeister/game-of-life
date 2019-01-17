@@ -9,11 +9,13 @@ namespace GameOfLife
 {
     class Colony : LivingUnit
     {
+        public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.LightSkyBlue;
+
         public Colony() : base(speciesComplexity : 3, senescence : 16,
                                foodRequirement : 4, waterRequirement : 4,
                                gasRequirement: 2, inputGas : Enums.GasType.Oxygen, 
                                outputGas : Enums.GasType.CarbonDioxide, idealTemperature : 32,
-                               infectionResistance: 5, decompositionValue : 6, baselineColor: System.Drawing.Color.LightSkyBlue)
+                               infectionResistance: 5, decompositionValue : 6)
         { }
 
         public override Unit Create()
