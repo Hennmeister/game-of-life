@@ -19,6 +19,8 @@ namespace GameOfLife
         protected const int CELL_SIZE = 25;
         protected const int TOOLBAR_SIZE = 6;
         protected Rectangle[,] grid;
+        protected Rectangle[] toolbar = new Rectangle[TOOLBAR_SIZE];
+
         
         public GameForm(GameManager manager)
         {
@@ -29,7 +31,10 @@ namespace GameOfLife
 
         private void CreateToolbar()
         {
-
+            for (int i = 0; i < TOOLBAR_SIZE; i++)
+            {
+                toolbar[i] = new Rectangle(ClientSize.Width - CELL_SIZE, CELL_SIZE * i, CELL_SIZE, CELL_SIZE);
+            }
         }
 
         /// <summary>
@@ -39,15 +44,34 @@ namespace GameOfLife
         {
             // TODO: need to refactor to parameratize?
             grid = new Rectangle[50, 50];
-            for(int i = 0; i < grid.GetLength(0); i++)
+            for(int j = 0; j < grid.GetLength(0); j++)
             {
-                for(int j = 0; j < grid.GetLength(1); j++)
+                for(int k = 0; k < grid.GetLength(1); k++)
                 {
-                    grid[i, j] = new Rectangle();
+                    grid[j, k] = new Rectangle();
                 }
             }
         }
-        
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            for (int j = 0; j < grid.GetLength(0); j++)
+            {
+                for (int k = 0; k < grid.GetLength(1); k++)
+                {
+                    SolidBrush brush = new SolidBrush(manager.GetUnit(j, k).BaselineColor);
+                    e.Graphics.FillRectangle(brush, grid[j, k]);
+                    brush.Dispose();
+                }
+            }
+            //hide cursor and draw box instead
+            for(int i = 0; i < TOOLBAR_SIZE; i++)
+            {
+                e.Graphics.DrawImage(Enums.UnitType, toolbar[i]);
+            }
+        }
 
         protected void DisplayEnvironmentalParameters()
         {
@@ -69,7 +93,10 @@ namespace GameOfLife
 
         }
 
-        
-
+        private void tmrGeneration_Tick(object sender, EventArgs e)
+        {
+            manager.NextGeneration();
+            Refresh();
+        }
     }
 }
