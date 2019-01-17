@@ -146,14 +146,23 @@ namespace GameOfLife
             }
         }
 
+
         private void btnStartRealistic_Click(object sender, EventArgs e)
         {
-            
+            StartGame(Enums.GameMode.Realistic);
         }
 
         private void btnStartFree_Click(object sender, EventArgs e)
         {
+            StartGame(Enums.GameMode.Free);
+        }
+
+        private void DisplayInstructions()
+        {
 
         }
+
+        private void CloseInstructions() { 
+}
     }
 }
