@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Nicole Beri
+ * Januray 15, 2019
+ * Base class for the environments (subclasses --> tundra, rainforest, greenhouse, desert)
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +12,7 @@ using System.Drawing; //document
 
 namespace GameOfLife
 {
-    public abstract class Environment
+    abstract class Environment
     {
         protected int carbonDioxideLevel;
         protected int eventGenerationsLeft;
@@ -21,44 +26,69 @@ namespace GameOfLife
 
         Random numberGenerator = new Random();
 
-        Image eventImage;
-        Image rainImage;
-        Image environmentImage;
+        private Image eventImage;
+        private Image rainImage;
+        private Image environmentImage;
 
         public Environment()
         {
 
         }
 
+        // getter for event images
+        public Image EventImage
+        {
+            get { return this.eventImage; }
+        }
+
+        // getter for rain images
+        public Image RainImage
+        {
+            get { return this.rainImage; }
+        }
+
+        // getter for environment images
+        public Image EnvironmentImage
+        {
+            get { return this.environmentImage; }
+        }
+
+        // getter for carbon dioxide level
         public int CarbonDioxideLevel
         {
             get { return this.carbonDioxideLevel; }
+            set { }
         }
 
+        // get and set food availability 
         public double FoodAvailability
         {
             get { return this.foodAvailability; }
             set { }
         }
 
+        // get and set oxyegen level 
         public int OxygenLevel
         {
             get { return this.oxygenLevel; }
             set { }
         }
 
+        // get and set temperature
         public int Temperature
         {
             get { return this.temperature; }
             set { }
         }
 
+        // get and set water availability
         public int WaterAvailabilty
         {
             get { return this.waterAvailability; }
             set { }
         }
 
+        // return true if an event occurs in the environment
         public bool EventOccurs()
         {
             // to be changed
