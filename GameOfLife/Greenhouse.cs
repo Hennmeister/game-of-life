@@ -8,25 +8,14 @@ namespace GameOfLife
 {
     class Greenhouse : Environment
     {
-        public Greenhouse()
+        public Greenhouse() : base(3000, 50000, 25, 75, 35, 30)
         {
-            // assign environmental property values for greenhouse
-            carbonDioxideLevel = 75;
-            foodAvailability = 3000;
-            oxygenLevel = 25;
-            probabilityOfRain = 30;
-            temperature = 35;
-            waterAvailability = 50000;
         }
 
         protected override void EnvironmentalEvent()
         {
 
         }
-
-        protected override void Rain()
-        {
-
-        }
+      
     }
 }

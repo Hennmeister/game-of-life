@@ -18,9 +18,9 @@ namespace GameOfLife
         /// <summary>
         /// Create a Rainforest for the simulation's environment
         /// </summary>
-        public Rainforest() : base()
+        public Rainforest() : base(10000, 50000, 50, 50, 30, 50)
         {
-            // Assign unique values for the environmental properties of Rainforest
+            /*             // Assign unique values for the environmental properties of Rainforest
             // Atmospheric composition
             carbonDioxideLevel = 50;
             oxygenLevel = 50;
@@ -31,6 +31,7 @@ namespace GameOfLife
             temperature = 30;
             // Probability of rain as a percent
             probabilityOfRain = 50;
+            */
         }
 
         /// <summary>

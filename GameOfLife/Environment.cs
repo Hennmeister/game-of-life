@@ -93,7 +93,7 @@ namespace GameOfLife
         public double FoodAvailability
         {
             get { return this.foodAvailability; }
-            set { this.carbonDioxideLevel = value; }
+            set { this.foodAvailability = value; }
         }
 
         // get and set oxyegen level 

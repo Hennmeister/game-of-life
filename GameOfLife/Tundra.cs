@@ -8,23 +8,11 @@ namespace GameOfLife
 {
     class Tundra : Environment
     {
-        public Tundra()
+        public Tundra() : base(10000, 250000, 75, 25, 15, 15)
         {
-            // assign environmental property values for tundra
-            carbonDioxideLevel = 50;
-            foodAvailability = 10000;
-            oxygenLevel = 75;
-            probabilityOfRain = 15;
-            temperature = 25;
-            waterAvailability = 25000;
         }
 
         protected override void EnvironmentalEvent()
-        {
-
-        }
-
-        protected override void Rain()
         {
 
         }
