@@ -1,6 +1,6 @@
 ﻿/*
  * Nicole Beri
- * Januray 15, 2019
+ * January 15, 2019
  * Base class for the environments (subclasses --> tundra, rainforest, greenhouse, desert)
  */
 using System;
@@ -8,32 +8,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing; //document
+// Used for drawing graphics in the Environment
+using System.Drawing; 
 
 namespace GameOfLife
 {
     public abstract class Environment
     {
+        // **** ENVIRONMENTAL PARAMETERS ****/
+        // Atmospheric composition -- used to determine evolution into animal or plant
         protected int carbonDioxideLevel;
-        protected int eventGenerationsLeft;
-        protected bool eventOccurring;
-        protected double foodAvailability;
         protected int oxygenLevel;
-        protected int probabilityOfRain;
-        protected int temperature;
-        protected int waterAvailability;
-        public const int PROBABILITY_OF_EVENT = 2;
-
-        // (Rudy) default food and water values of each biome
-        // read-only; can be initialized in the constructor but nowhere else
+        // (Rudy) the default amount of food and water initially available in the environment
+        // read-only -- can be initialized in the constructor but nowhere else
         public virtual double DefaultFood { get; }
-        public virtual int DefaultWater { get; } 
+        public virtual int DefaultWater { get; }
+        // the amount of food and water in the environment during the simulation
+        protected double foodAvailability;
+        protected int waterAvailability;
+        // the current temperature of the environment
+        protected int temperature;
+        // visual indicator for the environment
+        private Image environmentImage;
 
-        Random numberGenerator = new Random();
-
+        // **** EVENT INFORMATION ****
+        // the chance of rain as a percent
+        protected int probabilityOfRain;
+        // the chance of an event occurring as a percent
+        public const int PROBABILITY_OF_EVENT = 2;
+        // state variable for if an event is occurring
+        protected bool eventOccurring;
+        // determines how many generations left for an occurring event
+        protected int eventGenerationsLeft;
+        // images for various events
         private Image eventImage;
         private Image rainImage;
-        private Image environmentImage;
+
+        // generates random numbers to determine if probabalistic events occur
+        Random numberGenerator = new Random();
 
         /// <summary>
         /// (Tiffanie) Create a new Environment with the given values unique to a chosen type of Environment
@@ -111,7 +123,7 @@ namespace GameOfLife
         }
 
         // get and set water availability
-        public int WaterAvailabilty
+        public int WaterAvailability
         {
             get { return this.waterAvailability; }
             set { this.waterAvailability = value; }
@@ -131,21 +143,21 @@ namespace GameOfLife
         /// </summary>
         protected void Rain()
         {
-            // Increase water availab
-            this.waterAvailability += 10 * waterAvailability;
+            // Increase water availability in the environment by 10% of the default amount 
+            WaterAvailability += 10 * DefaultWater;
         }
 
         /// <summary>
-        /// Process the consumption of water in the Environment by a Unit
+        /// Increase the amount of food in the Environment
         /// </summary>
-        /// <param name="consumed"> The amount of water being consumed </param>
-        public void DecreaseWater(int consumed)
+        /// <param name="toAdd"> The amount of food being returned to the environment </param>
+        public void IncreaseFood(int toAdd)
         {
-            WaterAvailabilty -= consumed;
+            FoodAvailability += toAdd;
         }
 
         /// <summary>
-        /// Process the consumption of food in the Environment by a Unit
+        /// Decrease the amount of food in the Environment after being consumed by a Unit
         /// </summary>
         /// <param name="consumed"> The amount of food being consumed </param>
         public void DecreaseFood(double consumed)
@@ -153,6 +165,15 @@ namespace GameOfLife
             FoodAvailability -= consumed;
         }
 
+        /// <summary>
+        /// Decrease the amount of water in the Environment after being consumed by a Unit
+        /// </summary>
+        /// <param name="consumed"> The amount of water being consumed </param>
+        public void DecreaseWater(int consumed)
+        {
+            WaterAvailability -= consumed;
+        }
+   
     }
 }
 
