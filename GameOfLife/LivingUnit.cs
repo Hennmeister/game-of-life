@@ -1,4 +1,8 @@
-﻿// Tiffanie
+﻿/* 
+ * Tiffanie Truong
+ * January 19, 2018
+ * Base class for all living lifeforms in the simulation (Cells, Viruses, Multicellular Organisms)
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,32 +14,31 @@ namespace GameOfLife
     abstract class LivingUnit : Unit
     {
         // Complexity information
-        protected int age = 0;
-        public int Age { get { return this.age; } }
-        protected int Senescence { get; }
-        protected int SpeciesComplexity { get; }
+        public int Age { get; }
+        public int Senescence { get; }
+        public int SpeciesComplexity { get; }
 
         // Temperature information
-        protected int IdealTemperature { get; }
+        public int IdealTemperature { get; }
 
         // Food and water information
-        protected int FoodRequirement { get; }
-        protected int WaterRequirement { get; }
+        public int FoodRequirement { get; }
+        public int WaterRequirement { get; }
 
         // Breathing information
-        protected int GasRequirement { get; }
-        protected Enums.GasType InputGas { get; }
-        protected Enums.GasType OutputGas { get; }
+        public int GasRequirement { get; }
+        public Enums.GasType InputGas { get; }
+        public Enums.GasType OutputGas { get; }
 
         // Infection information
-        protected double InfectionResistance { get; }
-        protected bool Infected { get; }
+        public double InfectionResistance { get; }
+        public bool Infected { get; }
 
 
         public LivingUnit(int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, Enums.GasType inputGas,
                           Enums.GasType outputGas, int idealTemperature, double infectionResistance,
-                          double decompositionValue, System.Drawing.Color baselineColor) : base(decompositionValue, baselineColor)
+                          double decompositionValue) : base(decompositionValue)
         {
             SpeciesComplexity = speciesComplexity;
             Senescence = senescence;

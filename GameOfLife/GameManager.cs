@@ -23,7 +23,10 @@ namespace GameOfLife
 
         public void CreateEnvironment(Enums.EnvironmentType envType)
         {
-            currentState.GameEnvironment = EnvironmentFactory.CreateEnvironment(envType);
+            if (currentState != null)
+            {
+                currentState.GameEnvironment = EnvironmentFactory.CreateEnvironment(envType);
+            }
         }
 
         public Unit[,] CreateGrid()
@@ -130,7 +133,12 @@ namespace GameOfLife
 
         public bool IsEnvironmentCreated()
         {
-            return currentState.IsEnvironmentCreated();
+            bool bEnvironmentCreated = false;
+            if (currentState != null)
+            {
+                bEnvironmentCreated = currentState.IsEnvironmentCreated();
+            }
+            return bEnvironmentCreated;
         }
     }
 }
