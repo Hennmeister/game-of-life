@@ -32,6 +32,7 @@ namespace GameOfLife
 
         private void CreateToolbar()
         {
+            
             for (int i = 0; i < TOOLBAR_SIZE; i++)
             {
                 toolbar[i] = new Rectangle(CELL_SIZE * i, ClientSize.Height - (CELL_SIZE / 2), CELL_SIZE, CELL_SIZE);

@@ -25,7 +25,7 @@ namespace GameOfLife
         public virtual int DefaultWater { get; }
         // the amount of food and water in the environment during the simulation
         protected double foodAvailability;
-        protected int waterAvailability;
+        protected double waterAvailability;
         // the current temperature of the environment
         protected int temperature;
         // visual indicator for the environment
@@ -123,29 +123,13 @@ namespace GameOfLife
         }
 
         // get and set water availability
-        public int WaterAvailability
+        public double WaterAvailability
         {
             get { return this.waterAvailability; }
             set { this.waterAvailability = value; }
         }
 
-        // return true if an event occurs in the environment
-        public bool EventOccurs()
-        {
-            // to be changed
-            return true;
-        }
-
-        abstract protected void EnvironmentalEvent();
-
-        /// <summary>
-        /// (Tiffanie) Enact raining in the environment
-        /// </summary>
-        protected void Rain()
-        {
-            // Increase water availability in the environment by 10% of the default amount 
-            WaterAvailability += 10 * DefaultWater;
-        }
+        // **** FOOD AND WATER PROCESSING **** //
 
         /// <summary>
         /// Increase the amount of food in the Environment
@@ -173,7 +157,46 @@ namespace GameOfLife
         {
             WaterAvailability -= consumed;
         }
-   
+
+
+        // **** EVENT PROCESSING **** //
+
+        // A unique environmental event that changes the parameters or organisms in the environment
+        abstract protected void EnvironmentalEvent(Unit[,] grid);
+
+        /// <summary>
+        /// Determine if an event should occur in the environment
+        /// </summary>
+        /// <returns> True if a new event should start and false otherwise </returns>
+        public bool EventOccurs()
+        {
+            // If an event is already occurring, do not try to start a new event
+            if (eventOccurring)
+            {
+                return false;
+            }
+            // Otherwise generate a random number of 100 possible values (0-99)
+            int randomNumber = numberGenerator.Next(0, 100);
+            // The chance of generating a number less than the percent probability
+            // of an event occuring is equal to the probability of the event occuring
+            // -- (probability of event) favourable cases out of 100
+            // If it meets this condition, start a new event
+            if (randomNumber < PROBABILITY_OF_EVENT)
+            {
+                return true;
+            }
+            // otherwise, an event should occur
+            return false;
+        }
+
+        /// <summary>
+        /// (Tiffanie) Enact raining in the environment
+        /// </summary>
+        protected void Rain()
+        {
+            // Increase water availability in the environment by 10% of the default amount 
+            WaterAvailability += 10 * DefaultWater;
+        }
     }
 }
 
