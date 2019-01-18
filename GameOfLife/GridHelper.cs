@@ -10,10 +10,11 @@ namespace GameOfLife
     {
         // Directions are arranged in the order used by viruses to infect neighbours
         public static readonly Tuple<int, int>[] directions = new Tuple<int, int>[]
-        {Tuple.Create(-1, 0),
-         Tuple.Create(0, 1),
-         Tuple.Create(0, -1),
-         Tuple.Create(1, 0)
+        {
+            Tuple.Create(-1, 0),
+            Tuple.Create(0, 1),
+            Tuple.Create(0, -1),
+            Tuple.Create(1, 0)
         };
 
         public static bool InGridBounds(this Unit[,] grid, int row, int col)

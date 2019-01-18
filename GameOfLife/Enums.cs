@@ -14,7 +14,7 @@ namespace GameOfLife
         }
         public enum UnitType
         {
-            None = -1, Virus, Cell, Colony, Animal, Plant 
+            None, Virus, Cell, Colony, Animal, Plant 
         }
 
         public enum EnvironmentType

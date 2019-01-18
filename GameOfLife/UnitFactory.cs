@@ -11,6 +11,7 @@ namespace GameOfLife
 
         private static Unit[] modelUnits = new Unit[]
         {
+            null,
             new Virus(),
             new Cell(),
             new Colony(),
@@ -20,7 +21,7 @@ namespace GameOfLife
 
         public static Unit CreateUnit(Enums.UnitType type)
         {
-            return modelUnits.ElementAtOrDefault((int)type);
+            return modelUnits?.ElementAtOrDefault((int)type);
         }
         
     }

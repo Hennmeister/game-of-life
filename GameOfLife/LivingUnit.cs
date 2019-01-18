@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    abstract class LivingUnit : Unit
+    public class LivingUnit : Unit
     {
         // Complexity information
         public int Age { get; private set; }
@@ -19,19 +19,19 @@ namespace GameOfLife
         public int SpeciesComplexity { get; }
 
         // Temperature information
-        public int IdealTemperature { get; }
+        public int IdealTemperature { get; protected set; }
 
         // Food and water information
-        public int FoodRequirement { get; }
-        public int WaterRequirement { get; }
+        public int FoodRequirement { get; protected set; }
+        public int WaterRequirement { get; protected set; }
 
         // Breathing information
-        public int GasRequirement { get; }
+        public int GasRequirement { get; protected set; }
         public Enums.GasType InputGas { get; }
         public Enums.GasType OutputGas { get; }
 
         // Infection information
-        public double InfectionResistance { get; }
+        public double InfectionResistance { get; protected set; }
         private static double MaxResistance { get; set; }
         private bool Infected { get; set; }
         private int CuredGenerationsLeft { get; set; }
@@ -56,25 +56,35 @@ namespace GameOfLife
             CuredGenerationsLeft = 0;
         }
 
-        // rudy
-        public override void Update(Unit[,] grid, Environment gameEnv, int row, int col)
+
+        protected void UniveralUpdateMechanism(Unit[,] grid, Environment gameEnv, int row, int col)
         {
+            if (Infected)
+            {
+                CuredGenerationsLeft--;
+            }
             // Check if the unit is dead
             if (IsDead())
             {
                 // Indicate death by deleting the unit from the grid
-                grid[row,col] = null;
+                grid[row, col] = null;
             }
+            // Eat
+            Eat(gameEnv, FoodRequirement);
+            Drink(gameEnv, WaterRequirement);
 
             if (ShouldAge(gameEnv))
             {
                 AgeUp();
             }
-            if (Infected)
-            {
-                CuredGenerationsLeft--;
+        }
 
-            }
+        // rudy
+        public override void Update(Unit[,] grid, Environment gameEnv, int row, int col)
+        {
+            
+            
+
         }
 
         // TODO: check if there's anything else to do here
@@ -129,12 +139,12 @@ namespace GameOfLife
             double prob = 1 - temperatureTerm - foodTerm - waterTerm;
             return prob;
         }
+        
 
         private bool TryCure()
         {
-            double prob = InfectionResistance / MaxResistance;
             // If cured
-            if (ProbabilityHelper.IndependentPredicate(prob))
+            if (ProbabilityHelper.IndependentPredicate(CureProbabillity()))
             {
                 Infected = false;
                 CuredGenerationsLeft = 0;
@@ -143,23 +153,23 @@ namespace GameOfLife
             return false;
         }
 
-        public double CureProbabillity()
+        private double CureProbabillity()
         {
-            throw new NotImplementedException();
+            return InfectionResistance / MaxResistance;
         }
 
-        public int Drink(int waterAvailability)
+        protected void Drink(Environment gameEnv, int toDrink)
         {
-            throw new NotImplementedException();
+            gameEnv.DecreaseWater(toDrink);
         }
 
-        public double Eat(double foodAvailability)
+        protected void Eat(Environment gameEnv, double toEat)
         {
-            throw new NotImplementedException();
+            gameEnv.DecreaseFood(toEat);
         }
 
         // Should have a pair return type
-        public virtual void Respire(int inputGasLevel, int outputGasLevel)
+        public virtual void Respire(Environment gameEnv)
         {
 
         }
