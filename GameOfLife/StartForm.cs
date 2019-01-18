@@ -100,8 +100,8 @@ namespace GameOfLife
         {
             string userSelection = cbEnvironmentSelection.SelectedText;
 
-            // No environment selected
-            if (userSelection == "")
+            // No environment selected 
+            if (cbEnvironmentSelection.SelectedItem == null)
             {
                 // Error
                 MessageBox.Show("Please select an environment.");
@@ -174,8 +174,8 @@ namespace GameOfLife
 
         private void btnLoadExample_Click(object sender, EventArgs e)
         {
-            // Check that the user has selected an example
-            if(cbExamples.SelectedText == "")
+            // Check that the user has selected an example 
+            if (cbExamples.SelectedItem == null)
             {
                 MessageBox.Show("Please select an example.");
             }
