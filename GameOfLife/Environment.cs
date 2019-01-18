@@ -25,7 +25,7 @@ namespace GameOfLife
         public virtual int DefaultWater { get; }
         // the amount of food and water in the environment during the simulation
         protected double foodAvailability;
-        protected int waterAvailability;
+        protected double waterAvailability;
         // the current temperature of the environment
         protected int temperature;
         // visual indicator for the environment
@@ -123,7 +123,7 @@ namespace GameOfLife
         }
 
         // get and set water availability
-        public int WaterAvailability
+        public double WaterAvailability
         {
             get { return this.waterAvailability; }
             set { this.waterAvailability = value; }
@@ -161,8 +161,8 @@ namespace GameOfLife
 
         // **** EVENT PROCESSING **** //
 
-        // A unique environmental event that changes the environmental parameters
-        abstract protected void EnvironmentalEvent();
+        // A unique environmental event that changes the parameters or organisms in the environment
+        abstract protected void EnvironmentalEvent(Unit[,] grid);
 
         /// <summary>
         /// Determine if an event should occur in the environment
