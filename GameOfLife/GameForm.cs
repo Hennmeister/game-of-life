@@ -29,7 +29,7 @@ namespace GameOfLife
 
         private void CreateToolbar()
         {
-
+            
         }
 
         /// <summary>
