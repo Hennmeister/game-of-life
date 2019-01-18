@@ -130,7 +130,12 @@ namespace GameOfLife
 
         public bool IsEnvironmentCreated()
         {
-            return currentState.IsEnvironmentCreated();
+            bool bEnvironmentCreated = false;
+            if (currentState != null)
+            {
+                bEnvironmentCreated = currentState.IsEnvironmentCreated();
+            }
+            return bEnvironmentCreated;
         }
     }
 }

@@ -180,5 +180,15 @@ namespace GameOfLife
                 MessageBox.Show("Please select an example.");
             }
         }
+
+        private void sldFoodAvailability_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sldFoodAvailability_CursorChanged(object sender, EventArgs e)
+        {
+            int i = sldFoodAvailability.Value;
+        }
     }
 }
