@@ -34,6 +34,7 @@
             this.lblCurrScore = new System.Windows.Forms.Label();
             this.lblHighestConcurrentScore = new System.Windows.Forms.Label();
             this.lblEnvParams = new System.Windows.Forms.Label();
+            this.tmrRefresh = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // tmrGeneration
@@ -45,7 +46,7 @@
             // lblGenNum
             // 
             this.lblGenNum.AutoSize = true;
-            this.lblGenNum.Location = new System.Drawing.Point(663, 454);
+            this.lblGenNum.Location = new System.Drawing.Point(663, 457);
             this.lblGenNum.Name = "lblGenNum";
             this.lblGenNum.Size = new System.Drawing.Size(68, 13);
             this.lblGenNum.TabIndex = 0;
@@ -78,6 +79,12 @@
             this.lblEnvParams.TabIndex = 3;
             this.lblEnvParams.Text = "Env Params";
             // 
+            // tmrRefresh
+            // 
+            this.tmrRefresh.Enabled = true;
+            this.tmrRefresh.Interval = 50;
+            this.tmrRefresh.Tick += new System.EventHandler(this.tmrRefresh_Tick);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -90,6 +97,8 @@
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "GameForm";
             this.Text = "Form1";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseMove);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,6 +111,7 @@
         private System.Windows.Forms.Label lblCurrScore;
         private System.Windows.Forms.Label lblHighestConcurrentScore;
         private System.Windows.Forms.Label lblEnvParams;
+        private System.Windows.Forms.Timer tmrRefresh;
     }
 }
 
