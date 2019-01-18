@@ -19,11 +19,11 @@ namespace GameOfLife
         /// <summary>
         /// Create a new Cell object
         /// </summary>
-        public Cell() : base(speciesComplexity: 2, senescence: 16,
+        public Cell(int row = -1, int col = -1) : base(speciesComplexity: 2, senescence: 16,
                                foodRequirement: 1, waterRequirement: 1,
                                gasRequirement: 1, inputGas: Enums.GasType.Oxygen,
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
-                               infectionResistance: 3, decompositionValue: 0.5)
+                               infectionResistance: 3, decompositionValue: 0.5, row: row, col: col)
         {
         }
 
@@ -31,9 +31,9 @@ namespace GameOfLife
         /// Used by the UnitFactory to create a new Cell
         /// </summary>
         /// <returns> A new Cell object </returns>
-        public override Unit Create()
+        public override Unit Create(int row = -1, int col = -1)
         {
-            return new Cell();
+            return new Cell(row, col);
         }
 
         /// <summary>
@@ -42,12 +42,12 @@ namespace GameOfLife
         /// <param name="grid"> The grid of Units currently in the simulation </param>
         /// <param name="row"> The row of the grid that this Cell resides in </param>
         /// <param name="col"> The column of the grid that this Cell resides in </param>
-        public override void Update(Unit[,] grid, int row, int col)
+        public override void Update(Unit[,] grid, Environment gameEnv)
         {
             // If the Cell is in a position to merge into a colony with other cells, do the merge
-            if (ShouldMerge(grid, row, col))
+            if (ShouldMerge(grid))
             {
-                Merge(grid, row, col);
+                Merge(grid);
             }
         }
 
@@ -59,8 +59,9 @@ namespace GameOfLife
         /// <param name="col"> The column of the grid that this Cell resides in </param>
         /// <returns> True if the Cell is the top left of a 2x2 square with other Cells
         ///           and should merge into a colony, and false otherwise </returns>
-        public bool ShouldMerge(Unit[,] grid, int row, int col)
+        public bool ShouldMerge(Unit[,] grid)
         {
+            int row = Location.r, col = Location.c;
             // if the cell is not in a space capable of forming a 2x2 square, it cannot merge
             if (row + 1 >= grid.GetLength(ROW) || col + 1 >= grid.GetLength(COLUMN))
             {
@@ -84,15 +85,16 @@ namespace GameOfLife
         /// <param name="grid"> The grid of Units currently in the simulation </param>
         /// <param name="row"> The row of the grid that this Cell resides in </param>
         /// <param name="col"> The column of the grid that this Cell resides in </param>
-        public void Merge(Unit[,] grid, int row, int col)
+        public void Merge(Unit[,] grid)
         {
+            int row = Location.r, col = Location.c;
             // Delete references to the 3 other Cells in the 2x2 block 
             // so they are deleted by the garbage collector
             grid[row, col + 1] = null;
             grid[row + 1, col] = null;
             grid[row + 1, col + 1] = null;
             // Replace the current Cell with a newly created Colony
-            grid[row, col] = UnitFactory.CreateUnit(Enums.UnitType.Colony);
+            grid[row, col] = UnitFactory.CreateUnit(Enums.UnitType.Colony, row, col);
         }
     }
 }

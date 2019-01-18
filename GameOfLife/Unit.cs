@@ -12,6 +12,7 @@ namespace GameOfLife
         // Specifies the dimension used for GetLength()
         public const int ROW = 0;
         public const int COLUMN = 1;
+        public (int r, int c) Location { get; }
         
         protected double DecompositionValue { get; set; }
 
@@ -20,14 +21,20 @@ namespace GameOfLife
             DecompositionValue = decompositionValue;
         }
 
-        public void Die(Environment gameEnv, Unit[,] grid, int row, int col)
+        public Unit(double decompositionValue, int row = -1, int col = -1) : this(decompositionValue)
         {
-            grid[row, col] = null;
-            gameEnv.AddFood(decompositionValue);
+            Location = (row, col);
         }
 
-        public abstract Unit Create();
+        
+        public void Die(Unit[,] grid, Environment gameEnv)
+        {
+            grid[Location.r, Location.c] = null;
+            gameEnv.IncreaseFood(DecompositionValue);
+        }
 
-        public abstract void Update(Unit[,] grid, Environment gameEnv, int row, int col);
+        public abstract Unit Create(int row, int col);
+
+        public abstract void Update(Unit[,] grid, Environment gameEnv);
     }
 }

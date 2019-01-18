@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    public class LivingUnit : Unit
+    public abstract class LivingUnit : Unit
     {
         // Complexity information
         public int Age { get; private set; }
@@ -39,7 +39,7 @@ namespace GameOfLife
         public LivingUnit(int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, Enums.GasType inputGas,
                           Enums.GasType outputGas, int idealTemperature, double infectionResistance,
-                          double decompositionValue) : base(decompositionValue)
+                          double decompositionValue, int row = -1, int col = -1) : base(decompositionValue, row, col)
         {
             SpeciesComplexity = speciesComplexity;
             Senescence = senescence;
@@ -57,17 +57,12 @@ namespace GameOfLife
         }
 
 
-        protected void UniveralUpdateMechanism(Unit[,] grid, Environment gameEnv, int row, int col)
+        protected void UpdateBasicLivingUnit(Unit[,] grid, Environment gameEnv)
         {
-            if (Infected)
-            {
-                CuredGenerationsLeft--;
-            }
             // Check if the unit is dead
             if (IsDead())
             {
-                // Indicate death by deleting the unit from the grid
-                grid[row, col] = null;
+                this.Die(grid, gameEnv);
             }
             // Eat
             Eat(gameEnv, FoodRequirement);
@@ -78,20 +73,13 @@ namespace GameOfLife
                 AgeUp();
             }
         }
-
-        // rudy
-        public override void Update(Unit[,] grid, Environment gameEnv, int row, int col)
-        {
-            
-            
-
-        }
+        
 
         // TODO: check if there's anything else to do here
         private bool IsDead()
         {
             UpdateInfection();
-            if(CuredGenerationsLeft <= 0)
+            if(Infected && CuredGenerationsLeft <= 0)
             {
                 return true;
             }
@@ -135,7 +123,7 @@ namespace GameOfLife
         {
             double temperatureTerm = Math.Abs(gameEnv.Temperature - IdealTemperature) / IdealTemperature;
             double foodTerm = FoodRequirement / gameEnv.FoodAvailability;
-            double waterTerm = WaterRequirement / gameEnv.WaterAvailabilty;
+            double waterTerm = WaterRequirement / gameEnv.WaterAvailability;
             double prob = 1 - temperatureTerm - foodTerm - waterTerm;
             return prob;
         }

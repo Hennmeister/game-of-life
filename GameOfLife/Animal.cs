@@ -20,33 +20,34 @@ namespace GameOfLife
         private bool IsHibernating { get; set; }
         private int HibernationGenerationsLeft { get; set; }
 
-        public Animal() : base(senescence: 32,
+        public Animal(int row = -1, int col = -1) : base(senescence: 32,
                                foodRequirement: 8, waterRequirement: 10,
                                gasRequirement: 8, inputGas: Enums.GasType.Oxygen,
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
-                               infectionResistance: 8, decompositionValue: 20)
+                               infectionResistance: 8, decompositionValue: 20, row: row, col: col)
         {
 
         }
 
-        public override Unit Create()
+        public override Unit Create(int row, int col)
         {
-            return new Animal();
+            return new Animal(row, col);
         }
 
-        public override int DecreaseVictualRequirements(Unit[,] grid, int row, int col)
+        public override int DecreaseVictualRequirements(Unit[,] grid)
         {
             throw new NotImplementedException();
         }
 
-        public override int IncreaseVictualRequirements(Unit[,] grid, int row, int col)
+        public override int IncreaseVictualRequirements(Unit[,] grid)
         {
             throw new NotImplementedException();
         }
 
-        // Adds
-        public override void Update(Unit[,] grid, Environment gameEnv, int row, int col)
+        // TODO: check if that's it
+        public override void Update(Unit[,] grid, Environment gameEnv)
         {
+            UpdateBasicLivingUnit(grid, gameEnv);
             // Check if the animal is hibernating
             if (IsHibernating)
             {
@@ -56,27 +57,23 @@ namespace GameOfLife
 
             else
             {
+                // If the animal is starving, try to eat a plant
                 if (IsStarving(gameEnv))
                 {
-                    Enum.Get
+                    CheckPlantsToEat(grid, gameEnv);
                 }
 
                 if (ShouldThermoregulate(gameEnv) && CanThermoregulate(gameEnv))
                 {
                     Thermoregulate(gameEnv);
                 }
-
-                
-
             }
-
-
-            Eat()
         }
         
 
-        private void CheckPlantsToEat(Unit[,] grid, Environment gameEnv, int row, int col)
+        private void CheckPlantsToEat(Unit[,] grid, Environment gameEnv)
         {
+            int row = Location.r, col = Location.c;
             foreach(var dir in GridHelper.directions)
             {
                 int newRow = row + dir.Item1;
@@ -89,17 +86,22 @@ namespace GameOfLife
                 // Check if the neighbour is a plant
                 if(neighbour is Plant && neighbour != null)
                 {
-                    EatPlant(grid, gameEnv, row, col, (Plant)neighbour);
+                    EatPlant(grid, gameEnv, (Plant)neighbour);
                     break;
                 }
             }
         }
 
-        private void EatPlant(Unit[,] grid, Environment gameEnv, int plantRow, int plantCol, Plant toEat)
+        private void EatPlant(Unit[,] grid, Environment gameEnv, Plant toEat)
         {
             NeedToEat = false;
             // Kill the plant
-            toEat.Die(gameEnv, grid, plantRow, plantCol);
+            toEat.Die(grid, gameEnv);
+            // Check if the plant is toxic
+            if (toEat.IsToxic())
+            {
+                this.Die(grid, gameEnv);
+            }
             Hibernate();
         }
 
@@ -145,7 +147,7 @@ namespace GameOfLife
         private bool CanThermoregulate(Environment gameEnv)
         {
             return gameEnv.FoodAvailability >= THERMOREGULATION_FOOD &&
-                   gameEnv.WaterAvailabilty >= THERMOREGULATION_WATER &&
+                   gameEnv.WaterAvailability >= THERMOREGULATION_WATER &&
                    !IsHibernating;
         }
 

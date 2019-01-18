@@ -17,6 +17,9 @@ namespace GameOfLife
             Tuple.Create(1, 0)
         };
 
+        public const int DEFAULT_ROW = -1;
+        public const int DEFAULT_COL = -1;
+
         public static bool InGridBounds(this Unit[,] grid, int row, int col)
         {
             return (row < grid.GetLength(0) && col < grid.GetLength(1) && row >= 0 && col >= 0);
