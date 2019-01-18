@@ -22,6 +22,6 @@ namespace GameOfLife
 
         public abstract Unit Create();
 
-        public abstract void Update(Unit[,] grid, int row, int col);
+        public abstract void Update(Unit[,] grid, Environment gameEnv, int row, int col);
     }
 }
