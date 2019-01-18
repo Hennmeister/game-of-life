@@ -60,16 +60,34 @@ namespace GameOfLife
             {
                 for (int k = 0; k < grid.GetLength(1); k++)
                 {
-           //         SolidBrush brush = new SolidBrush(manager.GetUnit(j, k).BaselineColor);
-             //       e.Graphics.FillRectangle(brush, grid[j, k]);
-               //     brush.Dispose();
+                    Color c = Color.Black;
+                    switch (manager.GetUnit(j, k).GetType().Name)
+                    {
+                        case nameof(Enums.UnitType.Virus):
+                            c = Virus.baselineColor;
+                            break;
+                        case nameof(Enums.UnitType.Plant):
+                            c = Plant.baselineColor;
+                            break;
+                        case nameof(Enums.UnitType.Colony):
+                            c = Colony.baselineColor;
+                            break;
+                        case nameof(Enums.UnitType.Cell):
+                            c = Cell.baselineColor;
+                            break;
+                        case nameof(Enums.UnitType.Animal):
+                            c = Animal.baselineColor;
+                            break;
+                    }
+                    SolidBrush brush = new SolidBrush(c);
+                    e.Graphics.FillRectangle(brush, grid[j, k]);
+                    brush.Dispose();
                 }
             }
             //hide cursor and draw box instead
             for(int i = 0; i < TOOLBAR_SIZE; i++)
             {
-                Virus.
-        //        e.Graphics.DrawImage(Virus.BaselineColor toolbar[i]);
+                e.Graphics.DrawImage(Virus.BaselineColor toolbar[i]);
             }
         }
 
