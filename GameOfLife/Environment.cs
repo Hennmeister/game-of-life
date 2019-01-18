@@ -134,6 +134,25 @@ namespace GameOfLife
             // Increase water availab
             this.waterAvailability += 10 * waterAvailability;
         }
+
+        /// <summary>
+        /// Process the consumption of water in the Environment by a Unit
+        /// </summary>
+        /// <param name="consumed"> The amount of water being consumed </param>
+        public void DecreaseWater(int consumed)
+        {
+            WaterAvailabilty -= consumed;
+        }
+
+        /// <summary>
+        /// Process the consumption of food in the Environment by a Unit
+        /// </summary>
+        /// <param name="consumed"> The amount of food being consumed </param>
+        public void DecreaseFood(double consumed)
+        {
+            FoodAvailability -= consumed;
+        }
+
     }
 }
 
