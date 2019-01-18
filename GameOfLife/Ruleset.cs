@@ -92,13 +92,15 @@ namespace GameOfLife
         // TODO: test
         private static LivingUnit GetModelNeighbour(Dictionary<LivingUnit, double> speciesProbabilities)
         {
-            // Sort the probabilities
-            var sortedProbabilities = 
-                from p in speciesProbabilities
-                orderby p.Value 
-                ascending select p;
+            // Get the probabilities
+            var neighbours = speciesProbabilities.ToList();
+            double[] sortedProbabilities = (double[])neighbours.Select(x => x.Value);
+            LivingUnit[] correspondingSpecies = (LivingUnit[])neighbours.Select(x => x.Key);
+
+
             // Get the first unit to have its predicate be true
-            return sortedProbabilities.First(p => ProbabilityHelper.Predicate(p.Value)).Key;
+            int indexSelected = ProbabilityHelper.DependentPredicate(sortedProbabilities);
+            return correspondingSpecies[indexSelected];
         }
 
         private static List<LivingUnit> GetLivingNeighbours(Unit[,] grid, int row, int col)
@@ -181,7 +183,7 @@ namespace GameOfLife
         {
             // Check if dies because of food deficiency
             double probability = (unit.FoodRequirement - foodAvailability) / unit.FoodRequirement;
-            return ProbabilityHelper.Predicate(probability);
+            return ProbabilityHelper.IndependentPredicate(probability);
         }
 
         private static bool UnitPersists(Unit unit, int liveNeighbours, double foodAvailability = 0)
