@@ -19,9 +19,9 @@ namespace GameOfLife
             new Colony()
         };
 
-        public static Unit CreateUnit(Enums.UnitType type)
+        public static Unit CreateUnit(Enums.UnitType type, int row, int col)
         {
-            return modelUnits?.ElementAtOrDefault((int)type);
+            return modelUnits?.ElementAtOrDefault((int)type).Create(row, col);
         }
         
     }

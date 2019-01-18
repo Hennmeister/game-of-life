@@ -11,27 +11,27 @@ namespace GameOfLife
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.SlateBlue;
 
-        public Virus() : base(0.1)
+        public Virus(int row = -1, int col = -1) : base(0.1, row, col)
         {
 
         }
 
-        public override Unit Create()
+        public override Unit Create(int row, int col)
         {
-            return new Virus();
+            return new Virus(row, col);
         }
 
-        public override void Update(Unit[,] grid, int row, int col)
+        public override void Update(Unit[,] grid, Environment gameEnv)
         {
             
         }
 
-        private void Infect(Unit[,] grid, int row, int col)
+        private void Infect(Unit[,] grid)
         {
             foreach(var dir in GridHelper.directions)
             {
-                int newRow = row + dir.Item1;
-                int newCol = col + dir.Item2;
+                int newRow = Location.r + dir.Item1;
+                int newCol = Location.c + dir.Item2;
                 if(!grid.InGridBounds(newRow, newCol))
                 {
                     continue;

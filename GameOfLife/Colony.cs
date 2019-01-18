@@ -11,34 +11,34 @@ namespace GameOfLife
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.LightSkyBlue;
 
-        public Colony() : base(speciesComplexity : 3, senescence : 16,
-                               foodRequirement : 4, waterRequirement : 4,
-                               gasRequirement: 2, inputGas : Enums.GasType.Oxygen, 
-                               outputGas : Enums.GasType.CarbonDioxide, idealTemperature : 32,
-                               infectionResistance: 5, decompositionValue : 6)
+        public Colony(int row = -1, int col = -1) : base(speciesComplexity: 3, senescence: 16,
+                               foodRequirement: 4, waterRequirement: 4,
+                               gasRequirement: 2, inputGas: Enums.GasType.Oxygen,
+                               outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 32,
+                               infectionResistance: 5, decompositionValue: 6, row: row, col: col)
         { }
 
-        public override Unit Create()
+        public override Unit Create(int row, int col)
         {
-            return new Colony();
+            return new Colony(row, col);
         }
 
-        public override void Update(Unit[,] grid, int row, int col)
+        public override void Update(Unit[,] grid, Environment gameEnv)
         {
 
         }
 
-        public bool CheckMerge(Unit[,] grid, int row, int col)
+        public bool CheckMerge(Unit[,] grid)
         {
             throw new NotImplementedException();
         }
 
-        public void Merge(Unit[,] grid, int row, int col)
+        public void Merge(Unit[,] grid)
         {
 
         }
 
-        public void SplitUp(Unit[,] grid, int row, int col)
+        public void SplitUp(Unit[,] grid)
         {
 
         }
