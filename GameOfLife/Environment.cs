@@ -1,6 +1,6 @@
 ﻿/*
  * Nicole Beri
- * Januray 15, 2019
+ * January 15, 2019
  * Base class for the environments (subclasses --> tundra, rainforest, greenhouse, desert)
  */
 using System;
@@ -8,31 +8,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing; //document
+// Used for drawing graphics in the Environment
+using System.Drawing; 
 
 namespace GameOfLife
 {
     public abstract class Environment
     {
+        // **** ENVIRONMENTAL PARAMETERS ****/
+        // Atmospheric composition -- used to determine evolution into animal or plant
         protected int carbonDioxideLevel;
-        protected int eventGenerationsLeft;
-        protected bool eventOccurring;
-        protected double foodAvailability;
         protected int oxygenLevel;
-        protected int probabilityOfRain;
-        protected int temperature;
+        // (Rudy) the default amount of food and water initially available in the environment
+        // read-only -- can be initialized in the constructor but nowhere else
+        public virtual double DefaultFood { get; }
+        public virtual int DefaultWater { get; }
+        // the amount of food and water in the environment during the simulation
+        protected double foodAvailability;
         protected int waterAvailability;
-        public const int PROBABILITY_OF_EVENT = 2;
-
-        Random numberGenerator = new Random();
-
-        private Image eventImage;
-        private Image rainImage;
+        // the current temperature of the environment
+        protected int temperature;
+        // visual indicator for the environment
         private Image environmentImage;
 
-        public Environment()
-        {
+        // **** EVENT INFORMATION ****
+        // the chance of rain as a percent
+        protected int probabilityOfRain;
+        // the chance of an event occurring as a percent
+        public const int PROBABILITY_OF_EVENT = 2;
+        // state variable for if an event is occurring
+        protected bool eventOccurring;
+        // determines how many generations left for an occurring event
+        protected int eventGenerationsLeft;
+        // images for various events
+        private Image eventImage;
+        private Image rainImage;
 
+        // generates random numbers to determine if probabalistic events occur
+        Random numberGenerator = new Random();
+
+        /// <summary>
+        /// (Tiffanie) Create a new Environment with the given values unique to a chosen type of Environment
+        /// </summary>
+        /// <param name="defaultFood"> The default amount of food in this type of environment </param>
+        /// <param name="defaultWater"> The default amount of water in this type of environment </param>
+        /// <param name="oxygenLevel"> The oxygen level of this environment </param>
+        /// <param name="carbonDioxideLevel"> The carbon dioxide level in this environment </param>
+        /// <param name="temperature"> The temperature of this environment </param>
+        /// <param name="probOfRain"> The probability of rain in this environment </param>
+        public Environment(double defaultFood, int defaultWater,
+                           int oxygenLevel, int carbonDioxideLevel,
+                           int temperature, int probOfRain)
+        {
+            // **** INITIALIZE ENVIRONMENT PARAMETERS BASED ON TYPE OF ENVIRONMENT ****
+            // The default/base amount of food and water in this biome
+            DefaultFood = defaultFood;
+            DefaultWater = defaultWater;
+            // Amount of food and water initially available for the simulation (this can be modified by the user)
+            foodAvailability = DefaultFood;
+            waterAvailability = DefaultWater;
+            // Atmospheric composition
+            CarbonDioxideLevel = carbonDioxideLevel;
+            OxygenLevel = oxygenLevel;
+            // Temperature
+            Temperature = temperature;
+            // Probability of rain as a percent
+            probabilityOfRain = probOfRain;
         }
         
         // getter for event images
@@ -57,35 +98,35 @@ namespace GameOfLife
         public int CarbonDioxideLevel
         {
             get { return this.carbonDioxideLevel; }
-            set { }
+            set { this.carbonDioxideLevel = value; }
         }
 
         // get and set food availability 
         public double FoodAvailability
         {
             get { return this.foodAvailability; }
-            set { }
+            set { this.foodAvailability = value; }
         }
 
         // get and set oxyegen level 
         public int OxygenLevel
         {
             get { return this.oxygenLevel; }
-            set { }
+            set { this.oxygenLevel = value; }
         }
 
         // get and set temperature
         public int Temperature
         {
             get { return this.temperature; }
-            set { }
+            set { this.temperature = value; }
         }
 
         // get and set water availability
-        public int WaterAvailabilty
+        public int WaterAvailability
         {
             get { return this.waterAvailability; }
-            set { }
+            set { this.waterAvailability = value; }
         }
 
         // return true if an event occurs in the environment
@@ -97,7 +138,42 @@ namespace GameOfLife
 
         abstract protected void EnvironmentalEvent();
 
-        abstract protected void Rain();
+        /// <summary>
+        /// (Tiffanie) Enact raining in the environment
+        /// </summary>
+        protected void Rain()
+        {
+            // Increase water availability in the environment by 10% of the default amount 
+            WaterAvailability += 10 * DefaultWater;
+        }
+
+        /// <summary>
+        /// Increase the amount of food in the Environment
+        /// </summary>
+        /// <param name="toAdd"> The amount of food being returned to the environment </param>
+        public void IncreaseFood(int toAdd)
+        {
+            FoodAvailability += toAdd;
+        }
+
+        /// <summary>
+        /// Decrease the amount of food in the Environment after being consumed by a Unit
+        /// </summary>
+        /// <param name="consumed"> The amount of food being consumed </param>
+        public void DecreaseFood(double consumed)
+        {
+            FoodAvailability -= consumed;
+        }
+
+        /// <summary>
+        /// Decrease the amount of water in the Environment after being consumed by a Unit
+        /// </summary>
+        /// <param name="consumed"> The amount of water being consumed </param>
+        public void DecreaseWater(int consumed)
+        {
+            WaterAvailability -= consumed;
+        }
+   
     }
 }
 

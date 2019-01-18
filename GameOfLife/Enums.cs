@@ -8,9 +8,13 @@ namespace GameOfLife
 {
     public static class Enums
     {
+        public static T ToEnum<T>(this string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
+        }
         public enum UnitType
         {
-            Cell, Colony, Animal, Plant, Virus
+            None, Cell, Colony, Animal, Plant, Virus
         }
 
         public enum EnvironmentType
