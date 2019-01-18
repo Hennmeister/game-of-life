@@ -44,9 +44,10 @@ namespace GameOfLife
             throw new NotImplementedException();
         }
 
-        // Adds
+        // TODO: check if that's it
         public override void Update(Unit[,] grid, Environment gameEnv, int row, int col)
         {
+            UpdateBasicLivingUnit(grid, gameEnv, row, col);
             // Check if the animal is hibernating
             if (IsHibernating)
             {
@@ -56,22 +57,17 @@ namespace GameOfLife
 
             else
             {
+                // If the animal is starving, try to eat a plant
                 if (IsStarving(gameEnv))
                 {
-                    Enum.Get
+                    CheckPlantsToEat(grid, gameEnv, row, col);
                 }
 
                 if (ShouldThermoregulate(gameEnv) && CanThermoregulate(gameEnv))
                 {
                     Thermoregulate(gameEnv);
                 }
-
-                
-
             }
-
-
-            Eat()
         }
         
 
@@ -99,7 +95,12 @@ namespace GameOfLife
         {
             NeedToEat = false;
             // Kill the plant
-            toEat.Die(gameEnv, grid, plantRow, plantCol);
+            toEat.Die(grid, gameEnv, plantRow, plantCol);
+            // Check if the plant is toxic
+            if (toEat.IsToxic())
+            {
+                this.Die(grid, gameEnv, )
+            }
             Hibernate();
         }
 
@@ -145,7 +146,7 @@ namespace GameOfLife
         private bool CanThermoregulate(Environment gameEnv)
         {
             return gameEnv.FoodAvailability >= THERMOREGULATION_FOOD &&
-                   gameEnv.WaterAvailabilty >= THERMOREGULATION_WATER &&
+                   gameEnv.WaterAvailability >= THERMOREGULATION_WATER &&
                    !IsHibernating;
         }
 

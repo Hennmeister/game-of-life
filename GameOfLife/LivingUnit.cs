@@ -57,17 +57,12 @@ namespace GameOfLife
         }
 
 
-        protected void UniveralUpdateMechanism(Unit[,] grid, Environment gameEnv, int row, int col)
+        protected void UpdateBasicLivingUnit(Unit[,] grid, Environment gameEnv, int row, int col)
         {
-            if (Infected)
-            {
-                CuredGenerationsLeft--;
-            }
             // Check if the unit is dead
             if (IsDead())
             {
-                // Indicate death by deleting the unit from the grid
-                grid[row, col] = null;
+                this.Die(grid, gameEnv, row, col);
             }
             // Eat
             Eat(gameEnv, FoodRequirement);
@@ -91,7 +86,7 @@ namespace GameOfLife
         private bool IsDead()
         {
             UpdateInfection();
-            if(CuredGenerationsLeft <= 0)
+            if(Infected && CuredGenerationsLeft <= 0)
             {
                 return true;
             }
