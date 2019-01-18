@@ -24,15 +24,44 @@ namespace GameOfLife
         protected int waterAvailability;
         public const int PROBABILITY_OF_EVENT = 2;
 
+        // (Rudy) default food and water values of each biome
+        // read-only; can be initialized in the constructor but nowhere else
+        public virtual double DefaultFood { get; }
+        public virtual int DefaultWater { get; } 
+
         Random numberGenerator = new Random();
 
         private Image eventImage;
         private Image rainImage;
         private Image environmentImage;
 
-        public Environment()
+        /// <summary>
+        /// (Tiffanie) Create a new Environment with the given values unique to a chosen type of Environment
+        /// </summary>
+        /// <param name="defaultFood"> The default amount of food in this type of environment </param>
+        /// <param name="defaultWater"> The default amount of water in this type of environment </param>
+        /// <param name="oxygenLevel"> The oxygen level of this environment </param>
+        /// <param name="carbonDioxideLevel"> The carbon dioxide level in this environment </param>
+        /// <param name="temperature"> The temperature of this environment </param>
+        /// <param name="probOfRain"> The probability of rain in this environment </param>
+        public Environment(double defaultFood, int defaultWater,
+                           int oxygenLevel, int carbonDioxideLevel,
+                           int temperature, int probOfRain)
         {
-
+            // **** INITIALIZE ENVIRONMENT PARAMETERS BASED ON TYPE OF ENVIRONMENT ****
+            // The default/base amount of food and water in this biome
+            DefaultFood = defaultFood;
+            DefaultWater = defaultWater;
+            // Amount of food and water initially available for the simulation (this can be modified by the user)
+            foodAvailability = DefaultFood;
+            waterAvailability = DefaultWater;
+            // Atmospheric composition
+            CarbonDioxideLevel = carbonDioxideLevel;
+            OxygenLevel = oxygenLevel;
+            // Temperature
+            Temperature = temperature;
+            // Probability of rain as a percent
+            probabilityOfRain = probOfRain;
         }
         
         // getter for event images
@@ -57,35 +86,35 @@ namespace GameOfLife
         public int CarbonDioxideLevel
         {
             get { return this.carbonDioxideLevel; }
-            set { }
+            set { this.carbonDioxideLevel = value; }
         }
 
         // get and set food availability 
         public double FoodAvailability
         {
             get { return this.foodAvailability; }
-            set { }
+            set { this.foodAvailability = value; }
         }
 
         // get and set oxyegen level 
         public int OxygenLevel
         {
             get { return this.oxygenLevel; }
-            set { }
+            set { this.oxygenLevel = value; }
         }
 
         // get and set temperature
         public int Temperature
         {
             get { return this.temperature; }
-            set { }
+            set { this.temperature = value; }
         }
 
         // get and set water availability
         public int WaterAvailabilty
         {
             get { return this.waterAvailability; }
-            set { }
+            set { this.waterAvailability = value; }
         }
 
         // return true if an event occurs in the environment
@@ -97,7 +126,33 @@ namespace GameOfLife
 
         abstract protected void EnvironmentalEvent();
 
-        abstract protected void Rain();
+        /// <summary>
+        /// (Tiffanie) Enact raining in the environment
+        /// </summary>
+        protected void Rain()
+        {
+            // Increase water availab
+            this.waterAvailability += 10 * waterAvailability;
+        }
+
+        /// <summary>
+        /// Process the consumption of water in the Environment by a Unit
+        /// </summary>
+        /// <param name="consumed"> The amount of water being consumed </param>
+        public void DecreaseWater(int consumed)
+        {
+            WaterAvailabilty -= consumed;
+        }
+
+        /// <summary>
+        /// Process the consumption of food in the Environment by a Unit
+        /// </summary>
+        /// <param name="consumed"> The amount of food being consumed </param>
+        public void DecreaseFood(double consumed)
+        {
+            FoodAvailability -= consumed;
+        }
+
     }
 }
 
