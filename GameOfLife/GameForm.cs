@@ -68,7 +68,7 @@ namespace GameOfLife
             //hide cursor and draw box instead
             for(int i = 0; i < TOOLBAR_SIZE; i++)
             {
-                Virus.
+                // Virus.
         //        e.Graphics.DrawImage(Virus.BaselineColor toolbar[i]);
             }
         }

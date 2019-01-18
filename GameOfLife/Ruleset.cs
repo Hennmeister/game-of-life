@@ -35,7 +35,7 @@ namespace GameOfLife
                 }
             }
             // Check if existing unit dies
-            else if (!UnitPersists(thisUnit, foodAvailability, liveNeighbours))
+            else if (!UnitPersists(thisUnit, liveNeighbours, foodAvailability))
             {
                 return null;
             }
@@ -184,7 +184,7 @@ namespace GameOfLife
             return ProbabilityHelper.Predicate(probability);
         }
 
-        private static bool UnitPersists(Unit unit, double foodAvailability = 0, int liveNeighbours)
+        private static bool UnitPersists(Unit unit, int liveNeighbours, double foodAvailability = 0)
         {
             if (liveNeighbours < UNDER_POP || liveNeighbours > OVER_POP)
             {
