@@ -26,9 +26,27 @@ namespace GameOfLife
             
         }
 
-        private bool Infect(Unit[,] grid, int row, int col)
+        private void Infect(Unit[,] grid, int row, int col)
         {
-            throw new NotImplementedException();
+            foreach(var dir in GridHelper.directions)
+            {
+                int newRow = row + dir.Item1;
+                int newCol = col + dir.Item2;
+                if(!grid.InGridBounds(newRow, newCol))
+                {
+                    continue;
+                }
+                Unit neighbour = grid[newRow, newCol];
+                // Check if there is a living unit in the cell
+                // Infects a unit even if it is already infected
+                if(neighbour is LivingUnit && neighbour != null)
+                {
+                    // Infect 
+                    (neighbour as LivingUnit).BeInfected();
+                    break;
+                }
+            }
+
         }
     }
 }
