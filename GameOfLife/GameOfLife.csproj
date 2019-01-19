@@ -83,6 +83,7 @@
       <DependentUpon>LeaderboardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LivingUnit.cs" />
+    <Compile Include="MergeableUnit.cs" />
     <Compile Include="Multicellular.cs" />
     <Compile Include="Plant.cs" />
     <Compile Include="ProbabilityHelper.cs" />
