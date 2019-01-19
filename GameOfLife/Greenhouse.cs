@@ -22,16 +22,17 @@ namespace GameOfLife
         {
             // Water availability increases by 5%
             WaterAvailability += 0.5 * WaterAvailability;
-            // All infected plants are removed
-            for (int i = 0; i < units.GetLength(ROW); i++)
+            // Loop through the all rows of the grid to remove all infected plants
+            for (int i = 0; i < units.GetLength(GridHelper.ROW); i++)
             {
-                for (int j = 0; j < units.GetLength(COLUMN); j++)
+                // Loop through the all columns of the grid to remove all infected plants
+                for (int j = 0; j < units.GetLength(GridHelper.COLUMN); j++)
                 {
-                    // If an infected plant is inhabiting this grid cell,
-                    // it is removed from the simulation
-                    if (units[i,j] is Plant && units[i, j].Infected)
+                    // Check if an infected plant is inhabiting the current grid cell
+                    if (units[i,j] is Plant && (units[i, j] as LivingUnit).Infected)
                     {
-                        units[i, j].Die();
+                        // Any infected plant units are removed
+                        units[i, j].Die(units, this);
                     }
                 }
             }

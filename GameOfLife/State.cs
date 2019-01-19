@@ -19,7 +19,7 @@ namespace GameOfLife
         public string Username { get; set; }
         public int GenerationCounter { get; set; }
         public Unit[,] UnitGrid { get; set; }
-        private Environment gameEnvironment;
+        public Environment GameEnvironment { get; set; }
         private List<State> previousStates;
         private static int latestID;
         private int currentID;
@@ -35,24 +35,36 @@ namespace GameOfLife
             UnitGrid[row, col] = newUnit;
         }
 
-        public Environment GameEnvironment
+        public void AddStateToCache()
         {
-            set
+            for (int i = 1; i < previousStates.Count; i++)
             {
-                gameEnvironment = value;
+                previousStates[i] = previousStates[i - 1];
             }
+            previousStates[0] = this;
         }
-        
+
+        public State LoadCachedState(int genNum)
+        {
+            for (int i = 0; i < previousStates.Count; i++)
+            {
+                if (previousStates[i].GenerationCounter == i)
+                {
+                    return previousStates[i];
+                }
+            }
+            return null;
+        }
 
         public int CarbonDioxideLevel
         {
             set
             {
-                gameEnvironment.CarbonDioxideLevel = value;
+                GameEnvironment.CarbonDioxideLevel = value;
             }
             get
             {
-                return gameEnvironment.CarbonDioxideLevel;
+                return GameEnvironment.CarbonDioxideLevel;
             }
         }
 
@@ -60,7 +72,7 @@ namespace GameOfLife
         {
             get
             {
-                return gameEnvironment.EventOccurs();
+                return GameEnvironment.EventOccurs();
             }
         }
 
@@ -68,7 +80,7 @@ namespace GameOfLife
         {
             get
             {
-                return gameEnvironment.EnvironmentImage;
+                return GameEnvironment.EnvironmentImage;
             }
         }
 
@@ -80,7 +92,7 @@ namespace GameOfLife
             }
             get
             {
-                return gameEnvironment.EventImage;
+                return GameEnvironment.EventImage;
             }
         }
 
@@ -92,7 +104,7 @@ namespace GameOfLife
             }
             get
             {
-                return gameEnvironment.RainImage;
+                return GameEnvironment.RainImage;
             }
         }
 
@@ -100,11 +112,11 @@ namespace GameOfLife
         {
             set
             {
-                gameEnvironment.FoodAvailability = value;
+                GameEnvironment.FoodAvailability = value;
             }
             get
             {
-                return gameEnvironment.FoodAvailability;
+                return GameEnvironment.FoodAvailability;
             }
         }
         
@@ -113,11 +125,11 @@ namespace GameOfLife
         {
             set
             {
-                gameEnvironment.WaterAvailability = value;
+                GameEnvironment.WaterAvailability = value;
             }
             get
             {
-                return gameEnvironment.WaterAvailability;
+                return GameEnvironment.WaterAvailability
             }
         }
 
@@ -125,11 +137,11 @@ namespace GameOfLife
         {
             set
             {
-                gameEnvironment.OxygenLevel = value;
+                GameEnvironment.OxygenLevel = value;
             }
             get
             {
-                return gameEnvironment.OxygenLevel;
+                return GameEnvironment.OxygenLevel;
             }
         }
 
@@ -137,17 +149,17 @@ namespace GameOfLife
         {
             set
             {
-                gameEnvironment.Temperature = value;
+                GameEnvironment.Temperature = value;
             }
             get
             {
-                return gameEnvironment.Temperature;
+                return GameEnvironment.Temperature;
             }
         }
 
         public bool IsEnvironmentCreated()
         {
-            return gameEnvironment != null;
+            return GameEnvironment != null;
         }
         
     }

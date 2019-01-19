@@ -16,9 +16,9 @@ namespace GameOfLife
         private string username;
         private TrackBar[] trackBars;
         private const int NUM_ENV_PARAMETERS = 5;
-        private GameManager gameManager;
         //store game actions and data
-        GameManager manager;
+        private GameManager manager;
+        //store game actions and data
 
         public StartForm(GameManager manager)
         {
@@ -28,7 +28,6 @@ namespace GameOfLife
             ToggleTrackBars(enabled: false);
             // Set combobox values
             cbEnvironmentSelection.DataSource = Enum.GetValues(typeof(Enums.EnvironmentType));
-            gameManager = manager;
         }
 
         // Keeps track of the trackbars
@@ -55,16 +54,16 @@ namespace GameOfLife
         // Configures the track bar parameters 
         private void ConfigureTrackBars()
         {
-            sldFoodAvailability.SetRange(EnvironmentHelper.EnvParamLowBound(gameManager.FoodAvailability),
-                                         EnvironmentHelper.EnvParamHighBound(gameManager.FoodAvailability));
-            sldWaterAvailability.SetRange(EnvironmentHelper.EnvParamLowBound(gameManager.WaterAvailability),
-                                          EnvironmentHelper.EnvParamHighBound(gameManager.WaterAvailability));
-            sldTemperature.SetRange(EnvironmentHelper.EnvParamLowBound(gameManager.Temperature),
-                                    EnvironmentHelper.EnvParamHighBound(gameManager.Temperature));
-            sldOxygenLevel.SetRange(EnvironmentHelper.EnvParamLowBound(gameManager.OxygenLevel),
-                                    EnvironmentHelper.EnvParamHighBound(gameManager.OxygenLevel));
-            sldCarbonDioxideLevel.SetRange(EnvironmentHelper.EnvParamLowBound(gameManager.CarbonDioxideLevel),
-                                           EnvironmentHelper.EnvParamHighBound(gameManager.CarbonDioxideLevel));
+            sldFoodAvailability.SetRange(EnvironmentHelper.EnvParamLowBound(manager.FoodAvailability),
+                                         EnvironmentHelper.EnvParamHighBound(manager.FoodAvailability));
+            sldWaterAvailability.SetRange(EnvironmentHelper.EnvParamLowBound(manager.WaterAvailability),
+                                          EnvironmentHelper.EnvParamHighBound(manager.WaterAvailability));
+            sldTemperature.SetRange(EnvironmentHelper.EnvParamLowBound(manager.Temperature),
+                                    EnvironmentHelper.EnvParamHighBound(manager.Temperature));
+            sldOxygenLevel.SetRange(EnvironmentHelper.EnvParamLowBound(manager.OxygenLevel),
+                                    EnvironmentHelper.EnvParamHighBound(manager.OxygenLevel));
+            sldCarbonDioxideLevel.SetRange(EnvironmentHelper.EnvParamLowBound(manager.CarbonDioxideLevel),
+                                           EnvironmentHelper.EnvParamHighBound(manager.CarbonDioxideLevel));
         }
 
         private void btnSaveUsername_Click(object sender, EventArgs e)
@@ -84,7 +83,7 @@ namespace GameOfLife
         private void btnSetEnvParameters_Click(object sender, EventArgs e)
         {
             // Check if an environment has already been set
-            if (gameManager.IsEnvironmentCreated())
+            if (manager.IsEnvironmentCreated())
             {
                 ConfigureTrackBars();
             }
@@ -111,7 +110,7 @@ namespace GameOfLife
                 // Make the environment
                 Enums.EnvironmentType selectedEnvironment;
                 Enum.TryParse(cbEnvironmentSelection.SelectedValue.ToString(), out selectedEnvironment);
-                gameManager.CreateEnvironment(selectedEnvironment);
+                manager.CreateEnvironment(selectedEnvironment);
                 // Configure the environment parameter trackbars according to the environment
             }
         }
@@ -124,13 +123,15 @@ namespace GameOfLife
                 MessageBox.Show("Please enter a username.");
             }
             // Check if an environment has been selected
-            else if (!gameManager.IsEnvironmentCreated())
+            else if (!manager.IsEnvironmentCreated())
             {
                 MessageBox.Show("Please select an environment.");
             }
             // Otherwise, can start the game
             else
             {
+                //set the current state as the starting state
+                manager.SetStartingState();
                 // Create the game form 
                 GameForm gameForm;
                 if(selectedMode == Enums.GameMode.Free)
