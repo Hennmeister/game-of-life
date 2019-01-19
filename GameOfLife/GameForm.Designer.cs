@@ -40,7 +40,7 @@
             // tmrGeneration
             // 
             this.tmrGeneration.Enabled = true;
-            this.tmrGeneration.Interval = 1000;
+            this.tmrGeneration.Interval = 3000;
             this.tmrGeneration.Tick += new System.EventHandler(this.tmrGeneration_Tick);
             // 
             // lblGenNum
@@ -82,7 +82,7 @@
             // tmrRefresh
             // 
             this.tmrRefresh.Enabled = true;
-            this.tmrRefresh.Interval = 50;
+            this.tmrRefresh.Interval = 25;
             this.tmrRefresh.Tick += new System.EventHandler(this.tmrRefresh_Tick);
             // 
             // GameForm
@@ -94,6 +94,7 @@
             this.Controls.Add(this.lblHighestConcurrentScore);
             this.Controls.Add(this.lblCurrScore);
             this.Controls.Add(this.lblGenNum);
+            this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "GameForm";
             this.Text = "Form1";

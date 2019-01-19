@@ -35,6 +35,7 @@ namespace GameOfLife
             return new Unit[UNIT_GRID_SIZE, UNIT_GRID_SIZE];
         }
 
+        //refactor to have some order
         public void CreateUnit(int row, int col, Enums.UnitType UnitType)
         {
             UnitFactory.CreateUnit(UnitType, row, col);
