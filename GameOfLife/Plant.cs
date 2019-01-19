@@ -15,6 +15,9 @@ namespace GameOfLife
         private int ToxicityFactor { get; }
         private const int TOXICITY_FACTOR_LOWER_BOUND = 1;
         private const int TOXICITY_FACTOR_UPPER_BOUND = 100;
+
+        private const int PHOTOSYNTHESIS_RESOURCE_LOWER_BOUND = 1;
+        private const int PHOTOSYNTHESIS_RESOURCE_UPPER_BOUND = 4;
         
 
         public Plant(int row = -1, int col = -1) : base(senescence: 50,
@@ -45,6 +48,8 @@ namespace GameOfLife
         public override void Update(Unit[,] grid, Environment gameEnv)
         {
             ApplyCommunityBenefits(grid);
+            Respire(gameEnv);
+            Photosynthesize(gameEnv);
         }
 
         /// <summary>
@@ -68,12 +73,18 @@ namespace GameOfLife
 
         public override void Respire(Environment gameEnv)
         {
-            // base.Respire(inputGasLevel, outputGasLevel);
+            gameEnv.IncreaseOxygen(GasRequirement);
         }
 
-        public int Photosynthesize()
+        protected void Photosynthesize(Environment gameEnv)
         {
-            throw new NotImplementedException();
+            int resourceUsage = 
+                ProbabilityHelper.RandomInteger(PHOTOSYNTHESIS_RESOURCE_LOWER_BOUND, PHOTOSYNTHESIS_RESOURCE_UPPER_BOUND);
+            if(resourceUsage <= gameEnv.CarbonDioxideLevel && 
+               resourceUsage <= gameEnv.WaterAvailability)
+            {
+                gameEnv.IncreaseFood(resourceUsage);
+            }
         }
     }
 }
