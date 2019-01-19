@@ -96,7 +96,7 @@ namespace GameOfLife
 
 
             // Get the first unit to have its predicate be true
-            int indexSelected = ProbabilityHelper.DependentPredicate(sortedProbabilities);
+            int indexSelected = ProbabilityHelper.EvaluateDependentPredicate(sortedProbabilities);
             return correspondingSpecies[indexSelected];
         }
 
@@ -175,7 +175,7 @@ namespace GameOfLife
         {
             // Check if dies because of food deficiency
             double probability = (unit.FoodRequirement - foodAvailability) / unit.FoodRequirement;
-            return ProbabilityHelper.IndependentPredicate(probability);
+            return ProbabilityHelper.EvaluateIndependentPredicate(probability);
         }
 
         private static bool UnitPersists(Unit unit, int liveNeighbors, double foodAvailability = 0)

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    class Cell : LivingUnit
+    class Cell : MergeableUnit
     {
         public static readonly Color baselineColor = Color.Turquoise;
         /// <summary>
@@ -47,54 +47,22 @@ namespace GameOfLife
             // If the Cell is in a position to merge into a colony with other cells, do the merge
             if (ShouldMerge(grid))
             {
-                Merge(grid);
+                Merge(grid, gameEnv);
             }
         }
-
-        /// <summary>
-        /// Checks if the Cell is in a position to turn into a colony
-        /// </summary>
-        /// <param name="grid"> The grid of Units currently in the simulation </param>
-        /// <param name="row"> The row of the grid that this Cell resides in </param>
-        /// <param name="col"> The column of the grid that this Cell resides in </param>
-        /// <returns> True if the Cell is the top left of a 2x2 square with other Cells
-        ///           and should merge into a colony, and false otherwise </returns>
-        public bool ShouldMerge(Unit[,] grid)
-        {
-            int row = Location.r, col = Location.c;
-            // if the cell is not in a space capable of forming a 2x2 square, it cannot merge
-            if (row + 1 >= grid.GetLength(GridHelper.ROW) || col + 1 >= grid.GetLength(GridHelper.COLUMN))
-            {
-                return false;
-            }
-            // otherwise, if the surrounding 3 grids are Cells, this cell should merge
-            else if (grid[row, col+1] is Cell && grid[row+1, col] is Cell && grid[row+1, col+1] is Cell)
-            {
-                return true;
-            }
-            // otherwise, this Cell does not meet the requirements to form a colony
-            else
-            {
-                return false;
-            }
-        }
-
+        
         /// <summary>
         /// Merges the current Cell with the 3 other Cells in a 2x2 block with this Cell as the top left
         /// </summary>
         /// <param name="grid"> The grid of Units currently in the simulation </param>
         /// <param name="row"> The row of the grid that this Cell resides in </param>
         /// <param name="col"> The column of the grid that this Cell resides in </param>
-        public void Merge(Unit[,] grid)
+        protected override void Merge(Unit[,] grid, Environment gameEnv)
         {
-            int row = Location.r, col = Location.c;
-            // Delete references to the 3 other Cells in the 2x2 block 
-            // so they are deleted by the garbage collector
-            grid[row, col + 1] = null;
-            grid[row + 1, col] = null;
-            grid[row + 1, col + 1] = null;
+            KillMergedUnits(grid, gameEnv);
             // Replace the current Cell with a newly created Colony
-            grid[row, col] = UnitFactory.CreateUnit(Enums.UnitType.Colony, row, col);
+            grid[Location.r, Location.c] = 
+                UnitFactory.CreateUnit(Enums.UnitType.Colony, Location.r, Location.c);
         }
     }
 }
