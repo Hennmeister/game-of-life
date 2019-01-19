@@ -174,7 +174,7 @@ namespace GameOfLife
         /// Increase the amount of food in the Environment
         /// </summary>
         /// <param name="increase"> The amount of food being returned to the environment </param>
-        public void IncreaseFood(int increase)
+        public void IncreaseFood(double increase)
         {
             FoodAvailability += increase;
         }
