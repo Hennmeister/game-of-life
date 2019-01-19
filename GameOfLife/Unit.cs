@@ -30,7 +30,8 @@ namespace GameOfLife
         public void Die(Unit[,] grid, Environment gameEnv)
         {
             grid[Location.r, Location.c] = null;
-            gameEnv.IncreaseFood(DecompositionValue);
+            // TODO: uncomment when IncreaseFood is fixed
+            // gameEnv.IncreaseFood(DecompositionValue);
         }
 
         public abstract Unit Create(int row, int col);

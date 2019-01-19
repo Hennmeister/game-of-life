@@ -32,5 +32,10 @@ namespace GameOfLife
             }
             return matchingIndex;
         }
+
+        public static int RandomInteger(int inclusiveLowerBound, int inclusiveUpperBound)
+        {
+            return rng.Next(inclusiveLowerBound, inclusiveUpperBound + 1);
+        }
     }
 }

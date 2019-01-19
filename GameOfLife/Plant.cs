@@ -9,7 +9,12 @@ namespace GameOfLife
     class Plant : Multicellular
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.YellowGreen;
-        Random numberGenerator = new Random();
+        private const int FOOD_GENERATED_UPON_CREATION = 3;
+
+        private int ToxicityFactor { get; }
+        private const int TOXICITY_FACTOR_LOWER_BOUND = 1;
+        private const int TOXICITY_FACTOR_UPPER_BOUND = 100;
+        
 
         public Plant(int row = -1, int col = -1) : base(senescence: 50,
                        foodRequirement: 5, waterRequirement: 25,
@@ -17,7 +22,12 @@ namespace GameOfLife
                        outputGas: Enums.GasType.Oxygen, idealTemperature: 35,
                        infectionResistance: 7, decompositionValue: 10, row: row, col: col)
         {
+            ToxicityFactor = ProbabilityHelper.RandomInteger(TOXICITY_FACTOR_LOWER_BOUND, TOXICITY_FACTOR_UPPER_BOUND);
+        }
 
+        public Plant(Environment gameEnv, int row = -1, int col = -1) : this(row, col)
+        {
+            gameEnv.IncreaseFood(FOOD_GENERATED_UPON_CREATION);
         }
 
         public override Unit Create(int row, int col)
@@ -40,13 +50,26 @@ namespace GameOfLife
 
         }
 
+        /// <summary>
+        /// Find whether or not the plant is currently toxic. Toxicity can change
+        /// and is a semi-random property. 
+        /// The plant is toxic with probability (t/100) * (a/50), where:
+        ///     t: toxicity factor of the plant, determined upon creation,
+        ///     100: the maximum toxicity factor of a plant,
+        ///     a: the age of the plant,
+        ///     50: the maximum age of a plant.
+        /// </summary>
+        /// <returns>True if the plant is toxic, false otherwise.</returns>
         public bool IsToxic()
         {
-            throw new NotImplementedException();
-
+            // Calculate the toxicity probability according to the formula above
+            double prob = (((double)ToxicityFactor) / TOXICITY_FACTOR_UPPER_BOUND) * 
+                          (((double)Age) / Senescence);
+            // Use the probability to determine whether the plant is toxic or not
+            return ProbabilityHelper.IndependentPredicate(prob);
         }
 
-        public override void Respire(int inputGasLevel, int outputGasLevel)
+        public override void Respire(Environment gameEnv)
         {
             // base.Respire(inputGasLevel, outputGasLevel);
         }

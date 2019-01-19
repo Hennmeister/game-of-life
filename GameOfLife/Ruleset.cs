@@ -65,7 +65,7 @@ namespace GameOfLife
                 modelNeighbour = GetModelNeighbour(CalculateSpeciesProbabilities(speciesComplexitySum, livingNeighbours));
             }
             // Create the unit
-            return (LivingUnit)modelNeighbour.Create();
+            return (LivingUnit)modelNeighbour.Create(row, col);
         }
 
         private static Dictionary<LivingUnit, double> CalculateSpeciesProbabilities(int complexitySum, List<LivingUnit> neighbours)
