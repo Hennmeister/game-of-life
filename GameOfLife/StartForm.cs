@@ -66,20 +66,6 @@ namespace GameOfLife
                                            EnvironmentHelper.EnvParamHighBound(manager.CarbonDioxideLevel));
         }
 
-        private void btnSaveUsername_Click(object sender, EventArgs e)
-        {
-            // Check if the username entered is valid 
-            if(txtUsername.Text == "")
-            {
-                // Notify the user
-                MessageBox.Show("Please enter a valid username.");
-            }
-            else
-            {
-                username = txtUsername.Text;
-            }
-        }
-
         private void btnSetEnvParameters_Click(object sender, EventArgs e)
         {
             // Check if an environment has already been set
@@ -94,31 +80,10 @@ namespace GameOfLife
             }
         }
 
-
-        private void btnSelectEnvironment_Click(object sender, EventArgs e)
-        {
-            string userSelection = cbEnvironmentSelection.SelectedText;
-
-            // No environment selected 
-            if (cbEnvironmentSelection.SelectedItem == null)
-            {
-                // Error
-                MessageBox.Show("Please select an environment.");
-            }
-            else
-            {
-                // Make the environment
-                Enums.EnvironmentType selectedEnvironment;
-                Enum.TryParse(cbEnvironmentSelection.SelectedValue.ToString(), out selectedEnvironment);
-                manager.CreateEnvironment(selectedEnvironment);
-                // Configure the environment parameter trackbars according to the environment
-            }
-        }
-
         private void StartGame(Enums.GameMode selectedMode)
         {
             // Check if username has been set
-            if (username == "")
+            if (txtUsername.Text == "")
             {
                 MessageBox.Show("Please enter a username.");
             }
@@ -190,6 +155,12 @@ namespace GameOfLife
         private void sldFoodAvailability_CursorChanged(object sender, EventArgs e)
         {
             int i = sldFoodAvailability.Value;
+        }
+
+        private void cbEnvironmentSelection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Enum.TryParse(cbEnvironmentSelection.SelectedValue.ToString(), out Enums.EnvironmentType env);
+            manager.CreateEnvironment(env);
         }
     }
 }
