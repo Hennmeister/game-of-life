@@ -35,6 +35,15 @@
             this.lblHighestConcurrentScore = new System.Windows.Forms.Label();
             this.lblEnvParams = new System.Windows.Forms.Label();
             this.tmrRefresh = new System.Windows.Forms.Timer(this.components);
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblEnvironmentType = new System.Windows.Forms.Label();
+            this.lblCurrentEvent = new System.Windows.Forms.Label();
+            this.lblErase = new System.Windows.Forms.Label();
+            this.lblCellTool = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblAnimalTool = new System.Windows.Forms.Label();
+            this.lblPlantTool = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tmrGeneration
@@ -46,16 +55,16 @@
             // lblGenNum
             // 
             this.lblGenNum.AutoSize = true;
-            this.lblGenNum.Location = new System.Drawing.Point(663, 457);
+            this.lblGenNum.Location = new System.Drawing.Point(22, 331);
             this.lblGenNum.Name = "lblGenNum";
-            this.lblGenNum.Size = new System.Drawing.Size(68, 13);
+            this.lblGenNum.Size = new System.Drawing.Size(70, 13);
             this.lblGenNum.TabIndex = 0;
-            this.lblGenNum.Text = "GEN number";
+            this.lblGenNum.Text = "GEN Number";
             // 
             // lblCurrScore
             // 
             this.lblCurrScore.AutoSize = true;
-            this.lblCurrScore.Location = new System.Drawing.Point(663, 479);
+            this.lblCurrScore.Location = new System.Drawing.Point(22, 353);
             this.lblCurrScore.Name = "lblCurrScore";
             this.lblCurrScore.Size = new System.Drawing.Size(55, 13);
             this.lblCurrScore.TabIndex = 1;
@@ -64,7 +73,7 @@
             // lblHighestConcurrentScore
             // 
             this.lblHighestConcurrentScore.AutoSize = true;
-            this.lblHighestConcurrentScore.Location = new System.Drawing.Point(663, 505);
+            this.lblHighestConcurrentScore.Location = new System.Drawing.Point(22, 379);
             this.lblHighestConcurrentScore.Name = "lblHighestConcurrentScore";
             this.lblHighestConcurrentScore.Size = new System.Drawing.Size(126, 13);
             this.lblHighestConcurrentScore.TabIndex = 2;
@@ -73,7 +82,7 @@
             // lblEnvParams
             // 
             this.lblEnvParams.AutoSize = true;
-            this.lblEnvParams.Location = new System.Drawing.Point(663, 529);
+            this.lblEnvParams.Location = new System.Drawing.Point(28, 204);
             this.lblEnvParams.Name = "lblEnvParams";
             this.lblEnvParams.Size = new System.Drawing.Size(64, 13);
             this.lblEnvParams.TabIndex = 3;
@@ -85,11 +94,102 @@
             this.tmrRefresh.Interval = 25;
             this.tmrRefresh.Tick += new System.EventHandler(this.tmrRefresh_Tick);
             // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(15, 20);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(310, 55);
+            this.lblTitle.TabIndex = 4;
+            this.lblTitle.Text = "Game of Life";
+            // 
+            // lblEnvironmentType
+            // 
+            this.lblEnvironmentType.AutoSize = true;
+            this.lblEnvironmentType.Location = new System.Drawing.Point(28, 173);
+            this.lblEnvironmentType.Name = "lblEnvironmentType";
+            this.lblEnvironmentType.Size = new System.Drawing.Size(96, 13);
+            this.lblEnvironmentType.TabIndex = 5;
+            this.lblEnvironmentType.Text = "Environment Type ";
+            // 
+            // lblCurrentEvent
+            // 
+            this.lblCurrentEvent.AutoSize = true;
+            this.lblCurrentEvent.Location = new System.Drawing.Point(198, 173);
+            this.lblCurrentEvent.Name = "lblCurrentEvent";
+            this.lblCurrentEvent.Size = new System.Drawing.Size(72, 13);
+            this.lblCurrentEvent.TabIndex = 6;
+            this.lblCurrentEvent.Text = "Current Event";
+            // 
+            // lblErase
+            // 
+            this.lblErase.AutoSize = true;
+            this.lblErase.Location = new System.Drawing.Point(12, 428);
+            this.lblErase.Name = "lblErase";
+            this.lblErase.Size = new System.Drawing.Size(58, 13);
+            this.lblErase.TabIndex = 7;
+            this.lblErase.Text = "Erase Tool";
+            // 
+            // lblCellTool
+            // 
+            this.lblCellTool.AutoSize = true;
+            this.lblCellTool.Location = new System.Drawing.Point(146, 428);
+            this.lblCellTool.Name = "lblCellTool";
+            this.lblCellTool.Size = new System.Drawing.Size(24, 13);
+            this.lblCellTool.TabIndex = 8;
+            this.lblCellTool.Text = "Cell";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(202, 428);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Colony";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(86, 428);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Virus";
+            // 
+            // lblAnimalTool
+            // 
+            this.lblAnimalTool.AutoSize = true;
+            this.lblAnimalTool.Location = new System.Drawing.Point(264, 428);
+            this.lblAnimalTool.Name = "lblAnimalTool";
+            this.lblAnimalTool.Size = new System.Drawing.Size(38, 13);
+            this.lblAnimalTool.TabIndex = 11;
+            this.lblAnimalTool.Text = "Animal";
+            // 
+            // lblPlantTool
+            // 
+            this.lblPlantTool.AutoSize = true;
+            this.lblPlantTool.Location = new System.Drawing.Point(321, 428);
+            this.lblPlantTool.Name = "lblPlantTool";
+            this.lblPlantTool.Size = new System.Drawing.Size(31, 13);
+            this.lblPlantTool.TabIndex = 12;
+            this.lblPlantTool.Text = "Plant";
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 586);
+            this.ClientSize = new System.Drawing.Size(913, 514);
+            this.Controls.Add(this.lblPlantTool);
+            this.Controls.Add(this.lblAnimalTool);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblCellTool);
+            this.Controls.Add(this.lblErase);
+            this.Controls.Add(this.lblCurrentEvent);
+            this.Controls.Add(this.lblEnvironmentType);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblEnvParams);
             this.Controls.Add(this.lblHighestConcurrentScore);
             this.Controls.Add(this.lblCurrScore);
@@ -113,6 +213,15 @@
         private System.Windows.Forms.Label lblHighestConcurrentScore;
         private System.Windows.Forms.Label lblEnvParams;
         private System.Windows.Forms.Timer tmrRefresh;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblEnvironmentType;
+        private System.Windows.Forms.Label lblCurrentEvent;
+        private System.Windows.Forms.Label lblErase;
+        private System.Windows.Forms.Label lblCellTool;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblAnimalTool;
+        private System.Windows.Forms.Label lblPlantTool;
     }
 }
 

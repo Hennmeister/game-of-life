@@ -130,7 +130,7 @@ namespace GameOfLife
             }
             get
             {
-                return GameEnvironment.WaterAvailability
+                return GameEnvironment.WaterAvailability;
             }
         }
 
