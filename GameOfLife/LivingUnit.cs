@@ -159,7 +159,7 @@ namespace GameOfLife
         // Should have a pair return type
         public virtual void Respire(Environment gameEnv)
         {
-            
+            gameEnv.IncreaseCarbonDioxide(GasRequirement);
         }
     }
 }
