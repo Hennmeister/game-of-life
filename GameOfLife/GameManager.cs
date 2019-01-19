@@ -53,7 +53,8 @@ namespace GameOfLife
         
         public void LoadCachedState(int genNum)
         {
-            currentState.LoadCachedState(genNum);
+            //extension method? static :(
+            currentState = currentState.LoadCachedState(genNum);
         }
 
         public void NextGeneration()

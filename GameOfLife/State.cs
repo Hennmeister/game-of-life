@@ -44,7 +44,7 @@ namespace GameOfLife
             previousStates[0] = this;
         }
 
-        public State LoadCachedState(this int genNum)
+        public State LoadCachedState(int genNum)
         {
             for (int i = 0; i < previousStates.Count; i++)
             {
