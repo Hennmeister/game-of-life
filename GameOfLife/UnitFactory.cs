@@ -16,7 +16,7 @@ namespace GameOfLife
             new Cell(),
             new Colony(),
             new Animal(),
-            new Colony()
+            new Plant()
         };
 
 
