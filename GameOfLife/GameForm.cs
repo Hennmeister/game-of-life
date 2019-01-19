@@ -182,18 +182,17 @@ namespace GameOfLife
                     {
                         if (grid[j, k].Contains(e.Location))
                         {
-                            // TO DO: This would need the unit grid, but idk if we have it or it is created at this point?
-                            /* CASE 1: user is trying to erase a unit at the clicked location
-                            if (units[j,k] != null && eraseToolSelected)
+                            //CASE 1: user is trying to erase a unit at the clicked location
+                            if (manager.GetUnit(j,k) != null && eraseToolSelected)
                             {
-                                units[j, k].Die();
+                                manager.KillUnit(j, k);
                             }
-                            */
+                            
                             // NOT ACTUALLY CODE JUST PREVENTING CRASHING FOR NOW
-                            if (eraseToolSelected)
-                            {
-                                return;
-                            }
+                   //         if (eraseToolSelected)
+                     //       {
+                       //         return;
+                         //   }
                             // CASE 2: user is trying to create a new unit
                             manager.CreateUnit(j, k, toolbarSelection);
                             return;

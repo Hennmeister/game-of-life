@@ -126,6 +126,11 @@ namespace GameOfLife
             return currentState.UnitGrid[row, col];
         }
 
+        public void KillUnit(int row, int col)
+        {
+            currentState.UnitGrid[row, col].Die(currentState.UnitGrid, currentState.GameEnvironment);
+        }
+
         public State LoadState() { throw new NotImplementedException(); }
         public void SaveState() { }
 
