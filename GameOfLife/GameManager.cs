@@ -19,6 +19,7 @@ namespace GameOfLife
 
         public GameManager()
         {
+            CreateState();
         }
 
         public void CreateEnvironment(Enums.EnvironmentType envType)
@@ -33,20 +34,87 @@ namespace GameOfLife
         {
             return new Unit[UNIT_GRID_SIZE, UNIT_GRID_SIZE];
         }
-        public void CreateUnit(int row, int col, Enums.UnitType Unittype) { }
 
-        public void CreateState(Environment env)
+        public void CreateUnit(int row, int col, Enums.UnitType UnitType)
+        {
+            UnitFactory.CreateUnit(UnitType, row, col);
+        }
+
+        public void CreateState()
         {
             currentState = new State();
-            currentState.GameEnvironment = env;
             currentState.UnitGrid = CreateGrid();
         }
 
-        public void NextGeneration() { }
-        public void ApplyRuleset() { }
-        public void CalculateScore() { }
-        public void UpdateAllUnits() { }
-        public void ShowLeaderBoard() { }
+        public void SetStartingState()
+        {
+            startingState = currentState;
+        }
+        
+        public void LoadCachedState(int genNum)
+        {
+            currentState.LoadCachedState(genNum);
+        }
+
+        public void NextGeneration()
+        {
+            CalculateScore();
+            ApplyRuleset();
+            UpdateAllUnits();
+            currentState.AddStateToCache();
+        }
+
+        public void ApplyRuleset()
+        {
+            //loop through grid and apply the ruleset to each block
+            Unit[,] grid = currentState.UnitGrid;
+            for (int j = 0; j < grid.GetLength(Unit.ROW); j++)
+            {
+                for (int k = 0; k < grid.GetLength(Unit.COLUMN); k++)
+                {
+                    grid[j, k] = Ruleset.NewBlockState(grid, currentState.FoodAvailability, j, k);
+                }
+            }
+        }
+
+        public void CalculateScore()
+        {
+            Unit[,] grid = currentState.UnitGrid;
+            int gridScore = 0;
+            for (int j = 0; j < grid.GetLength(Unit.ROW); j++)
+            {
+                for (int k = 0; k < grid.GetLength(Unit.COLUMN); k++)
+                {
+                    //check if block is a virus or not a cell - if so, add the block's species complexity to the total
+                    if(!(grid[j,k] is Virus) && grid[j,k] != null)
+                        //add the product of the units 
+                        gridScore += (grid[j, k] as LivingUnit).SpeciesComplexity * (grid[j, k] as LivingUnit).Age;
+                }
+            }
+            //if the current score of the board is higher than the highest recorded concurrent score, it becomes the new highest concurrent score
+            if (gridScore > HighestConcurrentScore) HighestConcurrentScore = gridScore;
+            //add the score of the board 
+            CurrentScore += gridScore;
+        }
+
+        public void UpdateAllUnits()
+        {
+            Unit[,] grid = currentState.UnitGrid;
+            for (int j = 0; j < grid.GetLength(Unit.ROW); j++)
+            {
+                for (int k = 0; k < grid.GetLength(Unit.COLUMN); k++)
+                {
+                    grid[j, k].Update(grid, currentState.GameEnvironment);
+                }
+            }
+        }
+        
+        //create a new leaderBoard form and show it
+        public void ShowLeaderBoard()
+        {
+            LeaderboardForm f = new LeaderboardForm();
+            f.ShowDialog();
+        }
 
         public Unit GetUnit(int row, int col)
         {
@@ -99,7 +167,8 @@ namespace GameOfLife
             get { return currentState.HighestConcurrentScore; }
             set { currentState.HighestConcurrentScore = value; }
         }
-        public int WaterAvailability
+
+        public double WaterAvailability
         {
             get { return currentState.WaterAvailability; }
             set { currentState.WaterAvailability = value; }
