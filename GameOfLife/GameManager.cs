@@ -50,6 +50,11 @@ namespace GameOfLife
         {
             startingState = currentState;
         }
+        
+        public void LoadCachedState(int genNum)
+        {
+            currentState.LoadCachedState(genNum);
+        }
 
         public void NextGeneration()
         {

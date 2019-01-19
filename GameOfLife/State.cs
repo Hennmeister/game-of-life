@@ -35,6 +35,27 @@ namespace GameOfLife
             UnitGrid[row, col] = newUnit;
         }
 
+        public void AddStateToCache()
+        {
+            for (int i = 1; i < previousStates.Count; i++)
+            {
+                previousStates[i] = previousStates[i - 1];
+            }
+            previousStates[0] = this;
+        }
+
+        public State LoadCachedState(this int genNum)
+        {
+            for (int i = 0; i < previousStates.Count; i++)
+            {
+                if (previousStates[i].GenerationCounter == i)
+                {
+                    return previousStates[i];
+                }
+            }
+            return null;
+        }
+
         public int CarbonDioxideLevel
         {
             set
