@@ -36,13 +36,13 @@ namespace GameOfLife
                 {
                     continue;
                 }
-                Unit neighbour = grid[newRow, newCol];
+                Unit neighbor = grid[newRow, newCol];
                 // Check if there is a living unit in the cell
                 // Infects a unit even if it is already infected
-                if(neighbour is LivingUnit && neighbour != null)
+                if(neighbor is LivingUnit && neighbor != null)
                 {
                     // Infect 
-                    (neighbour as LivingUnit).BeInfected();
+                    (neighbor as LivingUnit).BeInfected();
                     break;
                 }
             }

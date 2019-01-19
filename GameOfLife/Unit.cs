@@ -9,9 +9,6 @@ namespace GameOfLife
 {
     public abstract class Unit
     {
-        // Specifies the dimension used for GetLength()
-        public const int ROW = 0;
-        public const int COLUMN = 1;
         public (int r, int c) Location { get; }
         
         protected double DecompositionValue { get; set; }
@@ -30,7 +27,8 @@ namespace GameOfLife
         public void Die(Unit[,] grid, Environment gameEnv)
         {
             grid[Location.r, Location.c] = null;
-            gameEnv.IncreaseFood(DecompositionValue);
+            // TODO: uncomment when IncreaseFood is fixed
+            // gameEnv.IncreaseFood(DecompositionValue);
         }
 
         public abstract Unit Create(int row, int col);
