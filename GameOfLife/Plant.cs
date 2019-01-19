@@ -10,6 +10,7 @@ namespace GameOfLife
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.YellowGreen;
         private const int FOOD_GENERATED_UPON_CREATION = 3;
+        protected int BaselineWaterRequirement { get; }
 
         private int ToxicityFactor { get; }
         private const int TOXICITY_FACTOR_LOWER_BOUND = 1;
@@ -23,6 +24,7 @@ namespace GameOfLife
                        infectionResistance: 7, decompositionValue: 10, row: row, col: col)
         {
             ToxicityFactor = ProbabilityHelper.RandomInteger(TOXICITY_FACTOR_LOWER_BOUND, TOXICITY_FACTOR_UPPER_BOUND);
+            BaselineWaterRequirement = WaterRequirement;
         }
 
         public Plant(Environment gameEnv, int row = -1, int col = -1) : this(row, col)
@@ -35,19 +37,14 @@ namespace GameOfLife
             return new Plant(row, col);
         }
 
-        public override int DecreaseVictualRequirements(Unit[,] grid)
+        protected override void UpdateVictualRequirements(int numNeighbors)
         {
-            throw new NotImplementedException();
-        }
-
-        public override int IncreaseVictualRequirements(Unit[,] grid)
-        {
-            throw new NotImplementedException();
+            FoodRequirement -= (int)(BaselineWaterRequirement * numNeighbors * VICTUAL_BENEFIT_FOR_COMMUNITY);
         }
 
         public override void Update(Unit[,] grid, Environment gameEnv)
         {
-
+            ApplyCommunityBenefits(grid);
         }
 
         /// <summary>

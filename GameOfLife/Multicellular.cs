@@ -1,4 +1,5 @@
-﻿using System;
+﻿// rudy
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace GameOfLife
 {
     abstract class Multicellular : LivingUnit
     {  
-        protected int BaselineFoodRequirement { get; }
-        protected int BaselineWaterRequirement { get; }
         private const int EXTENDED_NEIGHBORHOOD_SIZE = 5;
+        protected const double VICTUAL_BENEFIT_FOR_COMMUNITY = 0.05;
+        protected const double INFECTION_RESISTANCE_BENEFIT_FOR_COMMUNITY = 0.5;
 
         public Multicellular(int senescence, int foodRequirement, int waterRequirement, int gasRequirement, 
                              Enums.GasType inputGas, Enums.GasType outputGas, int idealTemperature, 
@@ -18,19 +19,28 @@ namespace GameOfLife
                                     : base(4, senescence, foodRequirement, waterRequirement, gasRequirement, 
                                       inputGas, outputGas, idealTemperature, infectionResistance, decompositionValue, row, col)
         {
-            BaselineFoodRequirement = foodRequirement;
-            BaselineWaterRequirement = waterRequirement;
+
+        }
+
+
+        protected void ApplyCommunityBenefits(Unit[,] grid)
+        {
+            int numNeighbors = NumberOfSameSpeciesNeighbors(grid);
+            UpdateVictualRequirements(numNeighbors);
+            UpdateInfectionResistance(numNeighbors);
+
         }
 
         /// <summary>
         /// Updates the victu
         /// </summary>
         /// <param name="grid"></param>
-        protected void UpdateVictualRequirements(Unit[,] grid, )
+        protected abstract void UpdateVictualRequirements(int sameSpeciesNeighbors);
+
+        protected void UpdateInfectionResistance(int sameSpeciesNeighbors)
         {
-
+            InfectionResistance += sameSpeciesNeighbors * INFECTION_RESISTANCE_BENEFIT_FOR_COMMUNITY;
         }
-
 
         /// <summary>
         /// Gets the number of neighbors of the same type as this Multicellular
@@ -40,7 +50,21 @@ namespace GameOfLife
         /// <returns></returns>
         protected int NumberOfSameSpeciesNeighbors(Unit[,] grid)
         {
-            for(int i = )
+            int numNeighbors = 0;
+            int rowLowerBound = Math.Max(0, Location.r - EXTENDED_NEIGHBORHOOD_SIZE / 2),
+                colLowerBound = Math.Max(0, Location.c - EXTENDED_NEIGHBORHOOD_SIZE / 2);
+            int rowUpperBound = Math.Min(grid.GetLength(ROW), Location.r + EXTENDED_NEIGHBORHOOD_SIZE / 2 + 1),
+                colUpperBound = Math.Min(grid.GetLength(COLUMN), Location.c + EXTENDED_NEIGHBORHOOD_SIZE / 2 + 1);
+            for(int i = rowLowerBound; i < rowUpperBound; i++)
+            {
+                for(int j = colLowerBound; j < colUpperBound; j++)
+                {
+                    numNeighbors += grid[i, j].GetType() == this.GetType() ? 1 : 0;
+                }
+            }
+            return numNeighbors;
         }
+
+        
     }
 }

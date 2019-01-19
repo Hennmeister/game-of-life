@@ -16,6 +16,8 @@ namespace GameOfLife
         private const double HIBERNATION_START_SCALE_FACTOR = 0.5;
         private const double HIBERNATION_END_SCALE_FACTOR = 2.0;
 
+        protected int BaselineFoodRequirement { get; }
+
         private bool NeedToEat { get; set; }
         private bool IsHibernating { get; set; }
         private int HibernationGenerationsLeft { get; set; }
@@ -26,7 +28,7 @@ namespace GameOfLife
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
                                infectionResistance: 8, decompositionValue: 20, row: row, col: col)
         {
-
+            BaselineFoodRequirement = FoodRequirement;
         }
 
         public override Unit Create(int row, int col)
@@ -34,19 +36,16 @@ namespace GameOfLife
             return new Animal(row, col);
         }
 
-        public override int DecreaseVictualRequirements(Unit[,] grid)
+        protected override void UpdateVictualRequirements(int numNeighbors)
         {
-            
+            FoodRequirement -= (int)(BaselineFoodRequirement * numNeighbors * VICTUAL_BENEFIT_FOR_COMMUNITY);
         }
-
-        public override int IncreaseVictualRequirements(Unit[,] grid)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         // TODO: check if that's it
         public override void Update(Unit[,] grid, Environment gameEnv)
         {
+            ApplyCommunityBenefits(grid);
             UpdateBasicLivingUnit(grid, gameEnv);
             // Check if the animal is hibernating
             if (IsHibernating)
