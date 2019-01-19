@@ -39,7 +39,7 @@ namespace GameOfLife
         // state variable for if an event is occurring
         protected bool eventOccurring;
         // determines how many generations left for an occurring event
-        protected int eventGenerationsLeft;
+        public int EventGenerationsLeft { get; set; }
         // images for various events
         private Image eventImage;
         private Image rainImage;
@@ -211,6 +211,7 @@ namespace GameOfLife
             return false;
         }
 
+        
         /// <summary>
         /// (Tiffanie) Enact raining in the environment
         /// </summary>

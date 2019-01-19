@@ -23,12 +23,12 @@ namespace GameOfLife
         public Environment GameEnvironment { get; set; }
         private State[] previousStates = new State[NUMBER_OF_PREV_STATES];
         private static int latestID;
-        private int currentID;
+        public int CurrentID { get; }
 
         public State()
         {
             GenerationCounter = 0;
-            currentID = ++latestID;
+            CurrentID = ++latestID;
         }
 
         public void UpdateBlock(Unit newUnit, int row, int col)
@@ -57,6 +57,14 @@ namespace GameOfLife
             return null;
         }
 
+        public Type EnvironmentType
+        {
+            get
+            {
+                return GameEnvironment.GetType();
+            }
+        }
+
         public int CarbonDioxideLevel
         {
             set
@@ -77,6 +85,13 @@ namespace GameOfLife
             }
         }
 
+        public int EventGenerationsLeft
+        {
+            get
+            {
+                return GameEnvironment.EventGenerationsLeft;
+            }
+        }
         public Image EnvironmentalImage
         {
             get
@@ -121,6 +136,21 @@ namespace GameOfLife
             }
         }
         
+        public double DefaultFood
+        {
+            get
+            {
+                return GameEnvironment.DefaultFood;
+            }
+        }
+
+        public double DefaultWater
+        {
+            get
+            {
+                return GameEnvironment.DefaultWater;
+            }
+        }
 
         public double WaterAvailability
         {
