@@ -44,11 +44,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblAnimalTool = new System.Windows.Forms.Label();
             this.lblPlantTool = new System.Windows.Forms.Label();
+            this.btnStart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tmrGeneration
             // 
-            this.tmrGeneration.Enabled = true;
             this.tmrGeneration.Interval = 3000;
             this.tmrGeneration.Tick += new System.EventHandler(this.tmrGeneration_Tick);
             // 
@@ -176,11 +176,23 @@
             this.lblPlantTool.TabIndex = 12;
             this.lblPlantTool.Text = "Plant";
             // 
+            // btnStart
+            // 
+            this.btnStart.AutoEllipsis = true;
+            this.btnStart.Location = new System.Drawing.Point(74, 91);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(182, 32);
+            this.btnStart.TabIndex = 13;
+            this.btnStart.Text = "Start Sim!";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 514);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblPlantTool);
             this.Controls.Add(this.lblAnimalTool);
             this.Controls.Add(this.label2);
@@ -222,6 +234,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblAnimalTool;
         private System.Windows.Forms.Label lblPlantTool;
+        private System.Windows.Forms.Button btnStart;
     }
 }
 

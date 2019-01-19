@@ -100,7 +100,7 @@ namespace GameOfLife
                         }
                     }
                     SolidBrush brush = new SolidBrush(c);
-                    e.Graphics.FillRectangle(brush, grid[j, k]);
+                    e.Graphics.FillRectangle(brush, grid[j,k]);
                     brush.Dispose();
                     e.Graphics.DrawRectangle(new Pen(Color.Black, 1), grid[j, k]);
                 }
@@ -187,12 +187,6 @@ namespace GameOfLife
                             {
                                 manager.KillUnit(j, k);
                             }
-                            
-                            // NOT ACTUALLY CODE JUST PREVENTING CRASHING FOR NOW
-                   //         if (eraseToolSelected)
-                     //       {
-                       //         return;
-                         //   }
                             // CASE 2: user is trying to create a new unit
                             manager.CreateUnit(j, k, toolbarSelection);
                             return;
@@ -233,6 +227,11 @@ namespace GameOfLife
             toolbarSelection = Enums.UnitType.None;
             eraseToolSelected = false;
             Refresh();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            tmrGeneration.Enabled = true;
         }
     }
 }
