@@ -53,8 +53,8 @@ namespace GameOfLife
             int numNeighbors = 0;
             int rowLowerBound = Math.Max(0, Location.r - EXTENDED_NEIGHBORHOOD_SIZE / 2),
                 colLowerBound = Math.Max(0, Location.c - EXTENDED_NEIGHBORHOOD_SIZE / 2);
-            int rowUpperBound = Math.Min(grid.GetLength(ROW), Location.r + EXTENDED_NEIGHBORHOOD_SIZE / 2 + 1),
-                colUpperBound = Math.Min(grid.GetLength(COLUMN), Location.c + EXTENDED_NEIGHBORHOOD_SIZE / 2 + 1);
+            int rowUpperBound = Math.Min(grid.GetLength(GridHelper.ROW), Location.r + EXTENDED_NEIGHBORHOOD_SIZE / 2 + 1),
+                colUpperBound = Math.Min(grid.GetLength(GridHelper.COLUMN), Location.c + EXTENDED_NEIGHBORHOOD_SIZE / 2 + 1);
             for(int i = rowLowerBound; i < rowUpperBound; i++)
             {
                 for(int j = colLowerBound; j < colUpperBound; j++)

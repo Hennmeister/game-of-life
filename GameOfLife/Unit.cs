@@ -9,9 +9,6 @@ namespace GameOfLife
 {
     public abstract class Unit
     {
-        // Specifies the dimension used for GetLength()
-        public const int ROW = 0;
-        public const int COLUMN = 1;
         public (int r, int c) Location { get; }
         
         protected double DecompositionValue { get; set; }
