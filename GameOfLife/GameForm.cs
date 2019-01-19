@@ -181,19 +181,25 @@ namespace GameOfLife
             // Only attempt to interact with the grid if toolbar selection was made
             if (toolbarSelection != Enums.UnitType.None || eraseToolSelected)
             {
+                // Loop through all rows in the grid to see if the user clicked in this one
                 for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
                 {
+                    // Loop through all columns in the grid to see if the user clicked in this one
                     for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                     {
+                        // Check if the user clicked the current grid cell to process an action here
                         if (grid[j, k].Contains(e.Location))
                         {
                             //CASE 1: user is trying to erase a unit at the clicked location
-                            if (manager.GetUnit(j,k) != null && eraseToolSelected)
+                            if (manager.GetUnit(j, k) != null && eraseToolSelected)
                             {
                                 manager.KillUnit(j, k);
                             }
                             // CASE 2: user is trying to create a new unit
-                            manager.CreateUnit(j, k, toolbarSelection);
+                            else
+                            {
+                                manager.CreateUnit(j, k, toolbarSelection);
+                            }
                             return;
                         }
                     }
@@ -217,13 +223,17 @@ namespace GameOfLife
                     {
                         eraseToolSelected = true;
                     }
+                    else
+                    {
+                        eraseToolSelected = false;
+                    }
                     // Store the current location for a new 'colored' cursor
                     imageDragBox.Location = e.Location;
                     // Stop processing possible mouse down cases
                     return;
                 }
             }
-            // Show the cursor if it is currently hidden (user has a currently selected Unit)
+            // Show the cursor if it is currently hidden (user has something currently selected)
             if (toolbarSelection != Enums.UnitType.None || eraseToolSelected)
             {
                 Cursor.Show();
