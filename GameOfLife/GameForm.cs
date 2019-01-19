@@ -75,16 +75,18 @@ namespace GameOfLife
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
             //draw the units into the grid
             for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     //potentially refactor later
+                    // Set initial grid colour to white to represent no unit
                     Color c = Color.White;
+                    // Check if for a unit in this grid cell that needs to be drawn
                     if (manager.GetUnit(j, k) != null)
                     {
+                        // Determine what type of unit it is to get its corresponding colour
                         switch (manager.GetUnit(j, k).GetType().Name)
                         {
                             case nameof(Enums.UnitType.Virus):
@@ -104,9 +106,11 @@ namespace GameOfLife
                                 break;
                         }
                     }
+                    // Fill the grid with the colour of empty space or the unit as previously determined
                     SolidBrush brush = new SolidBrush(c);
-                    e.Graphics.FillRectangle(brush, grid[j,k]);
+                    e.Graphics.FillRectangle(brush, grid[j, k]);
                     brush.Dispose();
+                    // Draw the rectangle around the grid
                     e.Graphics.DrawRectangle(new Pen(Color.Black, 1), grid[j, k]);
                 }
             }
