@@ -14,13 +14,14 @@ namespace GameOfLife
 {
     public class State
     {
+        private const int NUMBER_OF_PREV_STATES = 5;
         public int CurrentScore { get; set; }
         public int HighestConcurrentScore { get; set; }
         public string Username { get; set; }
         public int GenerationCounter { get; set; }
         public Unit[,] UnitGrid { get; set; }
         public Environment GameEnvironment { get; set; }
-        private List<State> previousStates;
+        private State[] previousStates = new State[NUMBER_OF_PREV_STATES];
         private static int latestID;
         private int currentID;
 
@@ -37,7 +38,7 @@ namespace GameOfLife
 
         public void AddStateToCache()
         {
-            for (int i = 1; i < previousStates.Count; i++)
+            for (int i = 1; i < NUMBER_OF_PREV_STATES; i++)
             {
                 previousStates[i] = previousStates[i - 1];
             }
@@ -46,7 +47,7 @@ namespace GameOfLife
 
         public State LoadCachedState(int genNum)
         {
-            for (int i = 0; i < previousStates.Count; i++)
+            for (int i = 0; i < NUMBER_OF_PREV_STATES; i++)
             {
                 if (previousStates[i].GenerationCounter == i)
                 {
@@ -129,7 +130,7 @@ namespace GameOfLife
             }
             get
             {
-                return GameEnvironment.WaterAvailability
+                return GameEnvironment.WaterAvailability;
             }
         }
 
