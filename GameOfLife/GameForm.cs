@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace GameOfLife
 {
-    public abstract partial class GameForm : Form
+    public partial class GameForm : Form
     {
         //store game actions and data
         GameManager manager;
@@ -19,13 +19,19 @@ namespace GameOfLife
         protected const int CELL_SIZE = 10;
         protected const int TOOLBAR_SIZE = 6;
         protected const int TOOLBAR_SQUARE_LENGTH = 8;
-        protected Rectangle[,] grid;
+        protected Rectangle[,] grid = new Rectangle[50, 50];
         protected Rectangle[] toolbar = new Rectangle[TOOLBAR_SIZE];
         protected Color[] toolbarColors;
         protected Rectangle imageDragBox;
 
         // State variable to differentiate between choosing to erase units and clicking away from the toolbar
-        private bool eraseToolSelected = false;
+        protected bool eraseToolSelected = false;
+
+        //need to overload constructor to allow for child classes to call constructor
+        public GameForm()
+        {
+            InitializeComponent();
+        }
 
         public GameForm(GameManager manager)
         {
@@ -61,9 +67,8 @@ namespace GameOfLife
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    //CENTER
                     grid[j, k] = new Rectangle(((ClientSize.Width/2) - CELL_SIZE * 5) + CELL_SIZE * j, CELL_SIZE*k, CELL_SIZE, CELL_SIZE);
-                }
+                }                      
             }
         }
 
