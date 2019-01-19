@@ -109,15 +109,15 @@ namespace GameOfLife
         }
         
 
-        public int WaterAvailability
+        public double WaterAvailability
         {
             set
             {
-                gameEnvironment.WaterAvailabilty = value;
+                gameEnvironment.WaterAvailability = value;
             }
             get
             {
-                return gameEnvironment.WaterAvailabilty;
+                return gameEnvironment.WaterAvailability;
             }
         }
 
