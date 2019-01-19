@@ -21,7 +21,7 @@ namespace GameOfLife
 
         public static Unit CreateUnit(Enums.UnitType type, int row, int col)
         {
-            return modelUnits?.ElementAtOrDefault((int)type).Create(row, col);
+            return modelUnits.ElementAtOrDefault((int)type)?.Create(row, col);
         }
         
     }
