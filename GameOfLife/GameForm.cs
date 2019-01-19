@@ -61,9 +61,9 @@ namespace GameOfLife
             base.OnPaint(e);
 
             //draw the units into the grid
-            for (int j = 0; j < grid.GetLength(Unit.ROW); j++)
+            for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
-                for (int k = 0; k < grid.GetLength(Unit.COLUMN); k++)
+                for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     //potentially refactor later
                     Color c = Color.Black;
@@ -154,9 +154,9 @@ namespace GameOfLife
 
         protected virtual void GameForm_MouseDown(object sender, MouseEventArgs e)
         {
-            for (int j = 0; j < grid.GetLength(Unit.ROW); j++)
+            for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
-                for (int k = 0; k < grid.GetLength(Unit.COLUMN); k++)
+                for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     if(grid[j, k].Contains(e.Location))
                     {

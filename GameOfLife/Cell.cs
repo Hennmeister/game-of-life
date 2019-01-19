@@ -63,7 +63,7 @@ namespace GameOfLife
         {
             int row = Location.r, col = Location.c;
             // if the cell is not in a space capable of forming a 2x2 square, it cannot merge
-            if (row + 1 >= grid.GetLength(ROW) || col + 1 >= grid.GetLength(COLUMN))
+            if (row + 1 >= grid.GetLength(GridHelper.ROW) || col + 1 >= grid.GetLength(GridHelper.COLUMN))
             {
                 return false;
             }

@@ -68,9 +68,9 @@ namespace GameOfLife
         {
             //loop through grid and apply the ruleset to each block
             Unit[,] grid = currentState.UnitGrid;
-            for (int j = 0; j < grid.GetLength(Unit.ROW); j++)
+            for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
-                for (int k = 0; k < grid.GetLength(Unit.COLUMN); k++)
+                for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     grid[j, k] = Ruleset.NewBlockState(grid, currentState.FoodAvailability, j, k);
                 }
@@ -81,9 +81,9 @@ namespace GameOfLife
         {
             Unit[,] grid = currentState.UnitGrid;
             int gridScore = 0;
-            for (int j = 0; j < grid.GetLength(Unit.ROW); j++)
+            for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
-                for (int k = 0; k < grid.GetLength(Unit.COLUMN); k++)
+                for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     //check if block is a virus or not a cell - if so, add the block's species complexity to the total
                     if(!(grid[j,k] is Virus) && grid[j,k] != null)
@@ -100,9 +100,9 @@ namespace GameOfLife
         public void UpdateAllUnits()
         {
             Unit[,] grid = currentState.UnitGrid;
-            for (int j = 0; j < grid.GetLength(Unit.ROW); j++)
+            for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
-                for (int k = 0; k < grid.GetLength(Unit.COLUMN); k++)
+                for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     grid[j, k].Update(grid, currentState.GameEnvironment);
                 }

@@ -23,9 +23,9 @@ namespace GameOfLife
             // Water availability increases by 5%
             WaterAvailability += 0.5 * WaterAvailability;
             // All infected plants are removed
-            for (int i = 0; i < units.GetLength(ROW); i++)
+            for (int i = 0; i < units.GetLength(GridHelper.ROW); i++)
             {
-                for (int j = 0; j < units.GetLength(COLUMN); j++)
+                for (int j = 0; j < units.GetLength(GridHelper.COLUMN); j++)
                 {
                     // If an infected plant is inhabiting this grid cell,
                     // it is removed from the simulation
