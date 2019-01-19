@@ -35,6 +35,7 @@ namespace GameOfLife
             return new Unit[UNIT_GRID_SIZE, UNIT_GRID_SIZE];
         }
 
+        //refactor to have some order
         public void CreateUnit(int row, int col, Enums.UnitType UnitType)
         {
             UnitFactory.CreateUnit(UnitType, row, col);
@@ -105,7 +106,10 @@ namespace GameOfLife
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    grid[j, k].Update(grid, currentState.GameEnvironment);
+                    if (grid[j, k] != null)
+                    {
+                        grid[j, k].Update(grid, currentState.GameEnvironment);
+                    }
                 }
             }
         }

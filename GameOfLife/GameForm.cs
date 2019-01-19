@@ -16,7 +16,7 @@ namespace GameOfLife
         //store game actions and data
         GameManager manager;
         protected Enums.UnitType toolbarSelection = Enums.UnitType.None;
-        protected const int CELL_SIZE = 25;
+        protected const int CELL_SIZE = 10;
         protected const int TOOLBAR_SIZE = 6;
         protected Rectangle[,] grid;
         protected Rectangle[] toolbar = new Rectangle[TOOLBAR_SIZE];
@@ -25,18 +25,19 @@ namespace GameOfLife
 
         public GameForm(GameManager manager)
         {
-            InitializeComponent();
             this.manager = manager;
+            InitializeComponent();
             CreateGrid();
+            CreateToolbar();
+            imageDragBox = new Rectangle(0, 0, CELL_SIZE, CELL_SIZE);
         }
 
         private void CreateToolbar()
-        {
-            
+        {    
             for (int i = 0; i < TOOLBAR_SIZE; i++)
             {
-                toolbar[i] = new Rectangle(CELL_SIZE * i, ClientSize.Height - (CELL_SIZE / 2), CELL_SIZE, CELL_SIZE);
-                toolbarColors = new Color[] { Color.Black, Virus.baselineColor, Cell.baselineColor, Colony.baselineColor, Animal.baselineColor, Plant.baselineColor };
+                toolbar[i] = new Rectangle(CELL_SIZE * 8 * i, ClientSize.Height - CELL_SIZE*8, CELL_SIZE * 8, CELL_SIZE * 8);
+                toolbarColors = new Color[] { Color.White, Virus.baselineColor, Cell.baselineColor, Colony.baselineColor, Animal.baselineColor, Plant.baselineColor };
             }
         }
 
@@ -46,12 +47,13 @@ namespace GameOfLife
         private void CreateGrid()
         {
             // TODO: need to refactor to parameratize?
-            grid = new Rectangle[50, 50];
-            for (int j = 0; j < grid.GetLength(0); j++)
+            grid = new Rectangle[manager.GridSize, manager.GetGridSize];
+            for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
-                for (int k = 0; k < grid.GetLength(1); k++)
+                for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    grid[j, k] = new Rectangle();
+                    //CENTER
+                    grid[j, k] = new Rectangle(((ClientSize.Width/2) - CELL_SIZE * 12) + CELL_SIZE * j, CELL_SIZE*k, CELL_SIZE, CELL_SIZE);
                 }
             }
         }
@@ -66,28 +68,32 @@ namespace GameOfLife
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     //potentially refactor later
-                    Color c = Color.Black;
-                    switch (manager.GetUnit(j, k).GetType().Name)
+                    Color c = Color.White;
+                    if (manager.GetUnit(j, k) != null)
                     {
-                        case nameof(Enums.UnitType.Virus):
-                            c = Virus.baselineColor;
-                            break;
-                        case nameof(Enums.UnitType.Plant):
-                            c = Plant.baselineColor;
-                            break;
-                        case nameof(Enums.UnitType.Colony):
-                            c = Colony.baselineColor;
-                            break;
-                        case nameof(Enums.UnitType.Cell):
-                            c = Cell.baselineColor;
-                            break;
-                        case nameof(Enums.UnitType.Animal):
-                            c = Animal.baselineColor;
-                            break;
+                        switch (manager.GetUnit(j, k).GetType().Name)
+                        {
+                            case nameof(Enums.UnitType.Virus):
+                                c = Virus.baselineColor;
+                                break;
+                            case nameof(Enums.UnitType.Plant):
+                                c = Plant.baselineColor;
+                                break;
+                            case nameof(Enums.UnitType.Colony):
+                                c = Colony.baselineColor;
+                                break;
+                            case nameof(Enums.UnitType.Cell):
+                                c = Cell.baselineColor;
+                                break;
+                            case nameof(Enums.UnitType.Animal):
+                                c = Animal.baselineColor;
+                                break;
+                        }
                     }
                     SolidBrush brush = new SolidBrush(c);
                     e.Graphics.FillRectangle(brush, grid[j, k]);
                     brush.Dispose();
+                    e.Graphics.DrawRectangle(new Pen(Color.Black, 1), grid[j, k]);
                 }
             }
 
@@ -95,6 +101,7 @@ namespace GameOfLife
             for (int i = 0; i < TOOLBAR_SIZE; i++)
             {
                 e.Graphics.FillRectangle(new SolidBrush(toolbarColors[i]), toolbar[i]);
+                e.Graphics.DrawRectangle(new Pen(Color.Black, 1), toolbar[i]);
             }
 
             //draw 'color' cursor
@@ -105,7 +112,6 @@ namespace GameOfLife
                 {
                     if (toolbarSelection == type)
                     {
-                        Cursor.Hide();
                         e.Graphics.FillRectangle(new SolidBrush(toolbarColors[i]), imageDragBox);
                     }
                     ++i;
@@ -171,10 +177,13 @@ namespace GameOfLife
                 if (toolbar[i].Contains(e.Location))
                 {
                     toolbarSelection = (Enums.UnitType)i;
+                    imageDragBox.Location = e.Location;
+                    Cursor.Hide();
                     return;
                 }
             }
-            toolbarSelection = Enums.UnitType.None; 
+            toolbarSelection = Enums.UnitType.None;
+            Cursor.Show();
         }
     }
 }
