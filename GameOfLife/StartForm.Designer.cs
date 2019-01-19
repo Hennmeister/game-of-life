@@ -30,7 +30,6 @@
         {
             this.sldFoodAvailability = new System.Windows.Forms.TrackBar();
             this.btnStartRealistic = new System.Windows.Forms.Button();
-            this.btnSaveUsername = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.sldWaterAvailability = new System.Windows.Forms.TrackBar();
             this.sldTemperature = new System.Windows.Forms.TrackBar();
@@ -41,7 +40,6 @@
             this.lblPromptEnvSelection = new System.Windows.Forms.Label();
             this.lblPromptUsername = new System.Windows.Forms.Label();
             this.lblPromptEnvParameters = new System.Windows.Forms.Label();
-            this.btnSelectEnvironment = new System.Windows.Forms.Button();
             this.btnStartFree = new System.Windows.Forms.Button();
             this.btnDisplayInstructions = new System.Windows.Forms.Button();
             this.lblPromptExample = new System.Windows.Forms.Label();
@@ -56,82 +54,72 @@
             // 
             // sldFoodAvailability
             // 
-            this.sldFoodAvailability.Location = new System.Drawing.Point(641, 120);
-            this.sldFoodAvailability.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.sldFoodAvailability.Location = new System.Drawing.Point(481, 98);
+            this.sldFoodAvailability.Margin = new System.Windows.Forms.Padding(2);
             this.sldFoodAvailability.Name = "sldFoodAvailability";
-            this.sldFoodAvailability.Size = new System.Drawing.Size(129, 56);
+            this.sldFoodAvailability.Size = new System.Drawing.Size(97, 45);
             this.sldFoodAvailability.TabIndex = 0;
             this.sldFoodAvailability.Scroll += new System.EventHandler(this.sldFoodAvailability_Scroll);
             this.sldFoodAvailability.CursorChanged += new System.EventHandler(this.sldFoodAvailability_CursorChanged);
             // 
             // btnStartRealistic
             // 
-            this.btnStartRealistic.Location = new System.Drawing.Point(60, 120);
-            this.btnStartRealistic.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStartRealistic.Location = new System.Drawing.Point(45, 98);
+            this.btnStartRealistic.Margin = new System.Windows.Forms.Padding(2);
             this.btnStartRealistic.Name = "btnStartRealistic";
-            this.btnStartRealistic.Size = new System.Drawing.Size(137, 59);
+            this.btnStartRealistic.Size = new System.Drawing.Size(103, 48);
             this.btnStartRealistic.TabIndex = 1;
             this.btnStartRealistic.Text = "Start Realistic Mode";
             this.btnStartRealistic.UseVisualStyleBackColor = true;
             this.btnStartRealistic.Click += new System.EventHandler(this.btnStartRealistic_Click);
             // 
-            // btnSaveUsername
-            // 
-            this.btnSaveUsername.Location = new System.Drawing.Point(380, 170);
-            this.btnSaveUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnSaveUsername.Name = "btnSaveUsername";
-            this.btnSaveUsername.Size = new System.Drawing.Size(104, 39);
-            this.btnSaveUsername.TabIndex = 2;
-            this.btnSaveUsername.Text = "Save Username";
-            this.btnSaveUsername.UseVisualStyleBackColor = true;
-            this.btnSaveUsername.Click += new System.EventHandler(this.btnSaveUsername_Click);
-            // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(380, 120);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUsername.Location = new System.Drawing.Point(288, 98);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(106, 22);
+            this.txtUsername.Size = new System.Drawing.Size(105, 20);
             this.txtUsername.TabIndex = 3;
+            this.txtUsername.Text = "h";
             // 
             // sldWaterAvailability
             // 
-            this.sldWaterAvailability.Location = new System.Drawing.Point(641, 170);
-            this.sldWaterAvailability.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.sldWaterAvailability.Location = new System.Drawing.Point(481, 138);
+            this.sldWaterAvailability.Margin = new System.Windows.Forms.Padding(2);
             this.sldWaterAvailability.Name = "sldWaterAvailability";
-            this.sldWaterAvailability.Size = new System.Drawing.Size(129, 56);
+            this.sldWaterAvailability.Size = new System.Drawing.Size(97, 45);
             this.sldWaterAvailability.TabIndex = 4;
             // 
             // sldTemperature
             // 
-            this.sldTemperature.Location = new System.Drawing.Point(641, 225);
-            this.sldTemperature.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.sldTemperature.Location = new System.Drawing.Point(481, 183);
+            this.sldTemperature.Margin = new System.Windows.Forms.Padding(2);
             this.sldTemperature.Name = "sldTemperature";
-            this.sldTemperature.Size = new System.Drawing.Size(129, 56);
+            this.sldTemperature.Size = new System.Drawing.Size(97, 45);
             this.sldTemperature.TabIndex = 5;
             // 
             // sldOxygenLevel
             // 
-            this.sldOxygenLevel.Location = new System.Drawing.Point(641, 275);
-            this.sldOxygenLevel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.sldOxygenLevel.Location = new System.Drawing.Point(481, 223);
+            this.sldOxygenLevel.Margin = new System.Windows.Forms.Padding(2);
             this.sldOxygenLevel.Name = "sldOxygenLevel";
-            this.sldOxygenLevel.Size = new System.Drawing.Size(129, 56);
+            this.sldOxygenLevel.Size = new System.Drawing.Size(97, 45);
             this.sldOxygenLevel.TabIndex = 6;
             // 
             // sldCarbonDioxideLevel
             // 
-            this.sldCarbonDioxideLevel.Location = new System.Drawing.Point(641, 337);
-            this.sldCarbonDioxideLevel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.sldCarbonDioxideLevel.Location = new System.Drawing.Point(481, 274);
+            this.sldCarbonDioxideLevel.Margin = new System.Windows.Forms.Padding(2);
             this.sldCarbonDioxideLevel.Name = "sldCarbonDioxideLevel";
-            this.sldCarbonDioxideLevel.Size = new System.Drawing.Size(129, 56);
+            this.sldCarbonDioxideLevel.Size = new System.Drawing.Size(97, 45);
             this.sldCarbonDioxideLevel.TabIndex = 7;
             // 
             // btnSetEnvParameters
             // 
-            this.btnSetEnvParameters.Location = new System.Drawing.Point(641, 394);
-            this.btnSetEnvParameters.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSetEnvParameters.Location = new System.Drawing.Point(481, 320);
+            this.btnSetEnvParameters.Margin = new System.Windows.Forms.Padding(2);
             this.btnSetEnvParameters.Name = "btnSetEnvParameters";
-            this.btnSetEnvParameters.Size = new System.Drawing.Size(122, 54);
+            this.btnSetEnvParameters.Size = new System.Drawing.Size(92, 44);
             this.btnSetEnvParameters.TabIndex = 8;
             this.btnSetEnvParameters.Text = "Set Parameters";
             this.btnSetEnvParameters.UseVisualStyleBackColor = true;
@@ -140,59 +128,49 @@
             // cbEnvironmentSelection
             // 
             this.cbEnvironmentSelection.FormattingEnabled = true;
-            this.cbEnvironmentSelection.Location = new System.Drawing.Point(384, 275);
-            this.cbEnvironmentSelection.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbEnvironmentSelection.Location = new System.Drawing.Point(288, 223);
+            this.cbEnvironmentSelection.Margin = new System.Windows.Forms.Padding(2);
             this.cbEnvironmentSelection.Name = "cbEnvironmentSelection";
-            this.cbEnvironmentSelection.Size = new System.Drawing.Size(62, 24);
+            this.cbEnvironmentSelection.Size = new System.Drawing.Size(105, 21);
             this.cbEnvironmentSelection.TabIndex = 9;
+            this.cbEnvironmentSelection.SelectedIndexChanged += new System.EventHandler(this.cbEnvironmentSelection_SelectedIndexChanged);
             // 
             // lblPromptEnvSelection
             // 
             this.lblPromptEnvSelection.AutoSize = true;
-            this.lblPromptEnvSelection.Location = new System.Drawing.Point(236, 277);
+            this.lblPromptEnvSelection.Location = new System.Drawing.Point(177, 225);
             this.lblPromptEnvSelection.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPromptEnvSelection.Name = "lblPromptEnvSelection";
-            this.lblPromptEnvSelection.Size = new System.Drawing.Size(138, 17);
+            this.lblPromptEnvSelection.Size = new System.Drawing.Size(105, 13);
             this.lblPromptEnvSelection.TabIndex = 10;
             this.lblPromptEnvSelection.Text = "Select Environment: ";
             // 
             // lblPromptUsername
             // 
             this.lblPromptUsername.AutoSize = true;
-            this.lblPromptUsername.Location = new System.Drawing.Point(377, 62);
+            this.lblPromptUsername.Location = new System.Drawing.Point(283, 50);
             this.lblPromptUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPromptUsername.Name = "lblPromptUsername";
-            this.lblPromptUsername.Size = new System.Drawing.Size(111, 17);
+            this.lblPromptUsername.Size = new System.Drawing.Size(83, 13);
             this.lblPromptUsername.TabIndex = 11;
             this.lblPromptUsername.Text = "Enter Username";
             // 
             // lblPromptEnvParameters
             // 
             this.lblPromptEnvParameters.AutoSize = true;
-            this.lblPromptEnvParameters.Location = new System.Drawing.Point(627, 71);
+            this.lblPromptEnvParameters.Location = new System.Drawing.Point(470, 58);
             this.lblPromptEnvParameters.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPromptEnvParameters.Name = "lblPromptEnvParameters";
-            this.lblPromptEnvParameters.Size = new System.Drawing.Size(222, 17);
+            this.lblPromptEnvParameters.Size = new System.Drawing.Size(166, 13);
             this.lblPromptEnvParameters.TabIndex = 12;
             this.lblPromptEnvParameters.Text = "Select Environmental Parameters:";
             // 
-            // btnSelectEnvironment
-            // 
-            this.btnSelectEnvironment.Location = new System.Drawing.Point(384, 321);
-            this.btnSelectEnvironment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnSelectEnvironment.Name = "btnSelectEnvironment";
-            this.btnSelectEnvironment.Size = new System.Drawing.Size(106, 39);
-            this.btnSelectEnvironment.TabIndex = 13;
-            this.btnSelectEnvironment.Text = "Select Environment";
-            this.btnSelectEnvironment.UseVisualStyleBackColor = true;
-            this.btnSelectEnvironment.Click += new System.EventHandler(this.btnSelectEnvironment_Click);
-            // 
             // btnStartFree
             // 
-            this.btnStartFree.Location = new System.Drawing.Point(60, 225);
-            this.btnStartFree.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStartFree.Location = new System.Drawing.Point(45, 183);
+            this.btnStartFree.Margin = new System.Windows.Forms.Padding(2);
             this.btnStartFree.Name = "btnStartFree";
-            this.btnStartFree.Size = new System.Drawing.Size(137, 59);
+            this.btnStartFree.Size = new System.Drawing.Size(103, 48);
             this.btnStartFree.TabIndex = 14;
             this.btnStartFree.Text = "Start Free Mode";
             this.btnStartFree.UseVisualStyleBackColor = true;
@@ -200,10 +178,10 @@
             // 
             // btnDisplayInstructions
             // 
-            this.btnDisplayInstructions.Location = new System.Drawing.Point(248, 167);
-            this.btnDisplayInstructions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDisplayInstructions.Location = new System.Drawing.Point(186, 136);
+            this.btnDisplayInstructions.Margin = new System.Windows.Forms.Padding(2);
             this.btnDisplayInstructions.Name = "btnDisplayInstructions";
-            this.btnDisplayInstructions.Size = new System.Drawing.Size(105, 53);
+            this.btnDisplayInstructions.Size = new System.Drawing.Size(79, 43);
             this.btnDisplayInstructions.TabIndex = 15;
             this.btnDisplayInstructions.Text = "Show Instructions";
             this.btnDisplayInstructions.UseVisualStyleBackColor = true;
@@ -211,10 +189,10 @@
             // lblPromptExample
             // 
             this.lblPromptExample.AutoSize = true;
-            this.lblPromptExample.Location = new System.Drawing.Point(236, 394);
+            this.lblPromptExample.Location = new System.Drawing.Point(177, 320);
             this.lblPromptExample.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPromptExample.Name = "lblPromptExample";
-            this.lblPromptExample.Size = new System.Drawing.Size(101, 17);
+            this.lblPromptExample.Size = new System.Drawing.Size(77, 13);
             this.lblPromptExample.TabIndex = 16;
             this.lblPromptExample.Text = "Load Example:";
             // 
@@ -225,18 +203,18 @@
             "Example 1",
             "Example 2",
             "Example 3"});
-            this.cbExamples.Location = new System.Drawing.Point(384, 394);
-            this.cbExamples.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbExamples.Location = new System.Drawing.Point(288, 320);
+            this.cbExamples.Margin = new System.Windows.Forms.Padding(2);
             this.cbExamples.Name = "cbExamples";
-            this.cbExamples.Size = new System.Drawing.Size(62, 24);
+            this.cbExamples.Size = new System.Drawing.Size(48, 21);
             this.cbExamples.TabIndex = 17;
             // 
             // btnLoadExample
             // 
-            this.btnLoadExample.Location = new System.Drawing.Point(384, 437);
-            this.btnLoadExample.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoadExample.Location = new System.Drawing.Point(288, 355);
+            this.btnLoadExample.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoadExample.Name = "btnLoadExample";
-            this.btnLoadExample.Size = new System.Drawing.Size(106, 39);
+            this.btnLoadExample.Size = new System.Drawing.Size(80, 32);
             this.btnLoadExample.TabIndex = 18;
             this.btnLoadExample.Text = "Load Example";
             this.btnLoadExample.UseVisualStyleBackColor = true;
@@ -244,15 +222,14 @@
             // 
             // StartForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(874, 507);
+            this.ClientSize = new System.Drawing.Size(656, 412);
             this.Controls.Add(this.btnLoadExample);
             this.Controls.Add(this.cbExamples);
             this.Controls.Add(this.lblPromptExample);
             this.Controls.Add(this.btnDisplayInstructions);
             this.Controls.Add(this.btnStartFree);
-            this.Controls.Add(this.btnSelectEnvironment);
             this.Controls.Add(this.lblPromptEnvParameters);
             this.Controls.Add(this.lblPromptUsername);
             this.Controls.Add(this.lblPromptEnvSelection);
@@ -263,10 +240,9 @@
             this.Controls.Add(this.sldTemperature);
             this.Controls.Add(this.sldWaterAvailability);
             this.Controls.Add(this.txtUsername);
-            this.Controls.Add(this.btnSaveUsername);
             this.Controls.Add(this.btnStartRealistic);
             this.Controls.Add(this.sldFoodAvailability);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "StartForm";
             this.Text = "StartForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartForm_FormClosed);
@@ -283,7 +259,6 @@
         #endregion
         private System.Windows.Forms.TrackBar sldFoodAvailability;
         private System.Windows.Forms.Button btnStartRealistic;
-        private System.Windows.Forms.Button btnSaveUsername;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TrackBar sldWaterAvailability;
         private System.Windows.Forms.TrackBar sldTemperature;
@@ -294,7 +269,6 @@
         private System.Windows.Forms.Label lblPromptEnvSelection;
         private System.Windows.Forms.Label lblPromptUsername;
         private System.Windows.Forms.Label lblPromptEnvParameters;
-        private System.Windows.Forms.Button btnSelectEnvironment;
         private System.Windows.Forms.Button btnStartFree;
         private System.Windows.Forms.Button btnDisplayInstructions;
         private System.Windows.Forms.Label lblPromptExample;
