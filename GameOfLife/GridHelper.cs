@@ -8,7 +8,7 @@ namespace GameOfLife
 {
     static class GridHelper
     {
-        // Directions are arranged in the order used by viruses to infect neighbours
+        // Directions are arranged in the order used by viruses to infect neighbors
         public static readonly Tuple<int, int>[] directions = new Tuple<int, int>[]
         {
             Tuple.Create(-1, 0),

@@ -36,7 +36,7 @@ namespace GameOfLife
 
         public override int DecreaseVictualRequirements(Unit[,] grid)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override int IncreaseVictualRequirements(Unit[,] grid)
@@ -82,11 +82,11 @@ namespace GameOfLife
                 {
                     continue;
                 }
-                Unit neighbour = grid[newRow, newCol];
-                // Check if the neighbour is a plant
-                if(neighbour is Plant && neighbour != null)
+                Unit neighbor = grid[newRow, newCol];
+                // Check if the neighbor is a plant
+                if(neighbor is Plant && neighbor != null)
                 {
-                    EatPlant(grid, gameEnv, (Plant)neighbour);
+                    EatPlant(grid, gameEnv, (Plant)neighbor);
                     break;
                 }
             }
