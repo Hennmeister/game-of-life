@@ -17,5 +17,17 @@ namespace GameOfLife
         {
 
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // RealisticModeGameForm
+            // 
+            this.ClientSize = new System.Drawing.Size(918, 416);
+            this.Name = "RealisticModeGameForm";
+            this.ResumeLayout(false);
+
+        }
     }
 }

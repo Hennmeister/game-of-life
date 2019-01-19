@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace GameOfLife
 {
-    public abstract partial class GameForm : Form
+    public partial class GameForm : Form
     {
         //store game actions and data
         GameManager manager;
@@ -19,13 +19,19 @@ namespace GameOfLife
         protected const int CELL_SIZE = 10;
         protected const int TOOLBAR_SIZE = 6;
         protected const int TOOLBAR_SQUARE_LENGTH = 8;
-        protected Rectangle[,] grid;
+        protected Rectangle[,] grid = new Rectangle[50, 50];
         protected Rectangle[] toolbar = new Rectangle[TOOLBAR_SIZE];
         protected Color[] toolbarColors;
         protected Rectangle imageDragBox;
 
         // State variable to differentiate between choosing to erase units and clicking away from the toolbar
-        private bool eraseToolSelected = false;
+        protected bool eraseToolSelected = false;
+
+        //need to overload constructor to allow for child classes to call constructor
+        public GameForm()
+        {
+            InitializeComponent();
+        }
 
         public GameForm(GameManager manager)
         {
@@ -61,25 +67,26 @@ namespace GameOfLife
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    //CENTER
                     grid[j, k] = new Rectangle(((ClientSize.Width/2) - CELL_SIZE * 5) + CELL_SIZE * j, CELL_SIZE*k, CELL_SIZE, CELL_SIZE);
-                }
+                }                      
             }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
             //draw the units into the grid
             for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     //potentially refactor later
+                    // Set initial grid colour to white to represent no unit
                     Color c = Color.White;
+                    // Check if for a unit in this grid cell that needs to be drawn
                     if (manager.GetUnit(j, k) != null)
                     {
+                        // Determine what type of unit it is to get its corresponding colour
                         switch (manager.GetUnit(j, k).GetType().Name)
                         {
                             case nameof(Enums.UnitType.Virus):
@@ -99,9 +106,11 @@ namespace GameOfLife
                                 break;
                         }
                     }
+                    // Fill the grid with the colour of empty space or the unit as previously determined
                     SolidBrush brush = new SolidBrush(c);
                     e.Graphics.FillRectangle(brush, grid[j, k]);
                     brush.Dispose();
+                    // Draw the rectangle around the grid
                     e.Graphics.DrawRectangle(new Pen(Color.Black, 1), grid[j, k]);
                 }
             }
@@ -176,25 +185,25 @@ namespace GameOfLife
             // Only attempt to interact with the grid if toolbar selection was made
             if (toolbarSelection != Enums.UnitType.None || eraseToolSelected)
             {
+                // Loop through all rows in the grid to see if the user clicked in this one
                 for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
                 {
+                    // Loop through all columns in the grid to see if the user clicked in this one
                     for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                     {
+                        // Check if the user clicked the current grid cell to process an action here
                         if (grid[j, k].Contains(e.Location))
                         {
                             //CASE 1: user is trying to erase a unit at the clicked location
-                            if (manager.GetUnit(j,k) != null && eraseToolSelected)
+                            if (manager.GetUnit(j, k) != null && eraseToolSelected)
                             {
                                 manager.KillUnit(j, k);
                             }
-                            
-                            // NOT ACTUALLY CODE JUST PREVENTING CRASHING FOR NOW
-                   //         if (eraseToolSelected)
-                     //       {
-                       //         return;
-                         //   }
                             // CASE 2: user is trying to create a new unit
-                            manager.CreateUnit(j, k, toolbarSelection);
+                            else
+                            {
+                                manager.CreateUnit(j, k, toolbarSelection);
+                            }
                             return;
                         }
                     }
@@ -218,13 +227,17 @@ namespace GameOfLife
                     {
                         eraseToolSelected = true;
                     }
+                    else
+                    {
+                        eraseToolSelected = false;
+                    }
                     // Store the current location for a new 'colored' cursor
                     imageDragBox.Location = e.Location;
                     // Stop processing possible mouse down cases
                     return;
                 }
             }
-            // Show the cursor if it is currently hidden (user has a currently selected Unit)
+            // Show the cursor if it is currently hidden (user has something currently selected)
             if (toolbarSelection != Enums.UnitType.None || eraseToolSelected)
             {
                 Cursor.Show();
@@ -233,6 +246,11 @@ namespace GameOfLife
             toolbarSelection = Enums.UnitType.None;
             eraseToolSelected = false;
             Refresh();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            tmrGeneration.Enabled = true;
         }
     }
 }

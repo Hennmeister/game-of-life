@@ -37,5 +37,19 @@ namespace GameOfLife
         {
 
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FreeModeGameForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(1077, 415);
+            this.Name = "FreeModeGameForm";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
     }
 }

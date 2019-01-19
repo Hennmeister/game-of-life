@@ -105,6 +105,9 @@
     <Compile Include="Unit.cs" />
     <Compile Include="UnitFactory.cs" />
     <Compile Include="Virus.cs" />
+    <EmbeddedResource Include="FreeModeGameForm.resx">
+      <DependentUpon>FreeModeGameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +123,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RealisticGameForm.resx">
+      <DependentUpon>RealisticGameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
     </EmbeddedResource>

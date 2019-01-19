@@ -38,7 +38,7 @@ namespace GameOfLife
         //refactor to have some order
         public void CreateUnit(int row, int col, Enums.UnitType UnitType)
         {
-            UnitFactory.CreateUnit(UnitType, row, col);
+            currentState.UnitGrid[row, col] = UnitFactory.CreateUnit(UnitType, row, col);
         }
 
         public void CreateState()
