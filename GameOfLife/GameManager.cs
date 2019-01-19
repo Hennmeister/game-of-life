@@ -105,7 +105,10 @@ namespace GameOfLife
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    grid[j, k].Update(grid, currentState.GameEnvironment);
+                    if (grid[j, k] != null)
+                    {
+                        grid[j, k].Update(grid, currentState.GameEnvironment);
+                    }
                 }
             }
         }

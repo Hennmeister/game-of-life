@@ -25,9 +25,11 @@ namespace GameOfLife
 
         public GameForm(GameManager manager)
         {
-            InitializeComponent();
             this.manager = manager;
             CreateGrid();
+            CreateToolbar();
+            InitializeComponent();
+
         }
 
         private void CreateToolbar()
@@ -67,23 +69,26 @@ namespace GameOfLife
                 {
                     //potentially refactor later
                     Color c = Color.Black;
-                    switch (manager.GetUnit(j, k).GetType().Name)
+                    if (manager.GetUnit(j, k) != null)
                     {
-                        case nameof(Enums.UnitType.Virus):
-                            c = Virus.baselineColor;
-                            break;
-                        case nameof(Enums.UnitType.Plant):
-                            c = Plant.baselineColor;
-                            break;
-                        case nameof(Enums.UnitType.Colony):
-                            c = Colony.baselineColor;
-                            break;
-                        case nameof(Enums.UnitType.Cell):
-                            c = Cell.baselineColor;
-                            break;
-                        case nameof(Enums.UnitType.Animal):
-                            c = Animal.baselineColor;
-                            break;
+                        switch (manager.GetUnit(j, k).GetType().Name)
+                        {
+                            case nameof(Enums.UnitType.Virus):
+                                c = Virus.baselineColor;
+                                break;
+                            case nameof(Enums.UnitType.Plant):
+                                c = Plant.baselineColor;
+                                break;
+                            case nameof(Enums.UnitType.Colony):
+                                c = Colony.baselineColor;
+                                break;
+                            case nameof(Enums.UnitType.Cell):
+                                c = Cell.baselineColor;
+                                break;
+                            case nameof(Enums.UnitType.Animal):
+                                c = Animal.baselineColor;
+                                break;
+                        }
                     }
                     SolidBrush brush = new SolidBrush(c);
                     e.Graphics.FillRectangle(brush, grid[j, k]);
