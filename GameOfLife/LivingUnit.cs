@@ -31,9 +31,9 @@ namespace GameOfLife
         public Enums.GasType OutputGas { get; }
 
         // Infection information
-        public double InfectionResistance { get; protected set; }
+        protected double InfectionResistance { get; protected set; }
         private static double MaxResistance { get; set; }
-        private bool Infected { get; set; }
+        public bool Infected { get; set; }
         private int CuredGenerationsLeft { get; set; }
 
         public LivingUnit(int speciesComplexity, int senescence, int foodRequirement,
