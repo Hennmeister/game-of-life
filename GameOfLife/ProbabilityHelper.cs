@@ -10,7 +10,7 @@ namespace GameOfLife
     {
         private static Random rng = new Random();
 
-        public static bool IndependentPredicate(double probability)
+        public static bool EvaluateIndependentPredicate(double probability)
         {
             double randomNumber = rng.NextDouble();
             return randomNumber < probability;
@@ -18,7 +18,7 @@ namespace GameOfLife
 
         // Returns an object corresponding to the probability that evaluates true
         // Keys must be unique, values in ascending order
-        public static int DependentPredicate(double[] probabilities)
+        public static int EvaluateDependentPredicate(double[] probabilities)
         {
             double randomNumber = rng.NextDouble();
             int matchingIndex = 0;

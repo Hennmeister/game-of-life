@@ -68,7 +68,7 @@ namespace GameOfLife
             double prob = (((double)ToxicityFactor) / TOXICITY_FACTOR_UPPER_BOUND) * 
                           (((double)Age) / Senescence);
             // Use the probability to determine whether the plant is toxic or not
-            return ProbabilityHelper.IndependentPredicate(prob);
+            return ProbabilityHelper.EvaluateIndependentPredicate(prob);
         }
 
         public override void Respire(Environment gameEnv)

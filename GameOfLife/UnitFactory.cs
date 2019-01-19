@@ -16,8 +16,9 @@ namespace GameOfLife
             new Cell(),
             new Colony(),
             new Animal(),
-            new Colony()
+            new Plant()
         };
+
 
         public static Unit CreateUnit(Enums.UnitType type, int row, int col)
         {

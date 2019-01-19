@@ -115,7 +115,7 @@ namespace GameOfLife
         private bool ShouldAge(Environment gameEnv)
         {
             double ageProbability = AgeProbability(gameEnv);
-            return ProbabilityHelper.IndependentPredicate(ageProbability);
+            return ProbabilityHelper.EvaluateIndependentPredicate(ageProbability);
         }
         
         // rudy
@@ -132,7 +132,7 @@ namespace GameOfLife
         private bool TryCure()
         {
             // If cured
-            if (ProbabilityHelper.IndependentPredicate(CureProbabillity()))
+            if (ProbabilityHelper.EvaluateIndependentPredicate(CureProbabillity()))
             {
                 Infected = false;
                 CuredGenerationsLeft = 0;
@@ -155,8 +155,7 @@ namespace GameOfLife
         {
             gameEnv.DecreaseFood(toEat);
         }
-
-        // Should have a pair return type
+        
         public virtual void Respire(Environment gameEnv)
         {
             gameEnv.IncreaseCarbonDioxide(GasRequirement);
