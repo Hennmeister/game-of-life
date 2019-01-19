@@ -7,24 +7,21 @@ using System.Threading.Tasks;
 namespace GameOfLife
 {
     static class UnitFactory
-    {        
-        public static Unit CreateUnit(Enums.UnitType type)
+    {
+
+        private static Unit[] modelUnits = new Unit[]
         {
-            switch (type)
-            {
-                case Enums.UnitType.Cell:
-                    return new Cell();
-                case Enums.UnitType.Colony:
-                    return new Colony();
-                case Enums.UnitType.Animal:
-                    return new Animal();
-                case Enums.UnitType.Plant:
-                    return new Plant();
-                case Enums.UnitType.Virus:
-                    return new Virus();
-                default:
-                    return null;
-            }
+            null,
+            new Virus(),
+            new Cell(),
+            new Colony(),
+            new Animal(),
+            new Colony()
+        };
+
+        public static Unit CreateUnit(Enums.UnitType type, int row, int col)
+        {
+            return modelUnits?.ElementAtOrDefault((int)type).Create(row, col);
         }
         
     }

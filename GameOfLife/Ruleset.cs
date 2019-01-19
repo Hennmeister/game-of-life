@@ -9,10 +9,7 @@ namespace GameOfLife
 {
     static class Ruleset
     {
-        private static Tuple<int, int>[] directions = new Tuple<int, int>[] {Tuple.Create(-1, 0),
-                                                                             Tuple.Create(1, 0),
-                                                                             Tuple.Create(0, -1),
-                                                                             Tuple.Create(0, 1)};
+        
         private const int UNDER_POP = 2, OVER_POP = 3;
         private static Random rng = new Random();
 
@@ -106,11 +103,11 @@ namespace GameOfLife
         private static List<LivingUnit> GetLivingNeighbours(Unit[,] grid, int row, int col)
         {
             List<LivingUnit> livingNeighbours = new List<LivingUnit>();
-            foreach(var dir in directions)
+            foreach(var dir in GridHelper.directions)
             {
                 int newRow = row + dir.Item1;
                 int newCol = col + dir.Item2;
-                if (InGridBounds(grid, newRow, newCol) && IsLiveUnit(grid[newRow, newCol]))
+                if (grid.InGridBounds(newRow, newCol) && IsLiveUnit(grid[newRow, newCol]))
                 {
                     livingNeighbours.Add((LivingUnit)grid[newRow, newCol]);
                 }
@@ -148,10 +145,7 @@ namespace GameOfLife
             return unit is LivingUnit;
         }
 
-        private static bool InGridBounds(Unit[,] grid, int row, int col)
-        {
-            return (row < grid.GetLength(0) && col < grid.GetLength(1) && row >= 0 && col >= 0);
-        }
+        
 
         private static int CountLiveNeighbours(Unit[,] grid, int row, int col)
         {
@@ -161,11 +155,11 @@ namespace GameOfLife
         private static int CountNeighbours(Unit[,] grid, int row, int col, bool countViral)
         {
             int neighbours = 0;
-            foreach (var dir in directions)
+            foreach (var dir in GridHelper.directions)
             {
                 int newRow = row + dir.Item1;
                 int newCol = col + dir.Item2;
-                if (InGridBounds(grid, newRow, newCol))
+                if (grid.InGridBounds(newRow, newCol))
                 {
                     neighbours += (!countViral == IsLiveUnit(grid[newRow, newCol]) ? 1 : 0);
                 }

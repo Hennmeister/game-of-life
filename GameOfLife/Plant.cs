@@ -11,31 +11,31 @@ namespace GameOfLife
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.YellowGreen;
         Random numberGenerator = new Random();
 
-        public Plant() : base(senescence: 50,
+        public Plant(int row = -1, int col = -1) : base(senescence: 50,
                        foodRequirement: 5, waterRequirement: 25,
                        gasRequirement: 4, inputGas: Enums.GasType.CarbonDioxide,
                        outputGas: Enums.GasType.Oxygen, idealTemperature: 35,
-                       infectionResistance: 7, decompositionValue: 10)
+                       infectionResistance: 7, decompositionValue: 10, row: row, col: col)
         {
 
         }
 
-        public override Unit Create()
+        public override Unit Create(int row, int col)
         {
-            return new Plant();
+            return new Plant(row, col);
         }
 
-        public override int DecreaseVictualRequirements(Unit[,] grid, int row, int col)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override int IncreaseVictualRequirements(Unit[,] grid, int row, int col)
+        public override int DecreaseVictualRequirements(Unit[,] grid)
         {
             throw new NotImplementedException();
         }
 
-        public override void Update(Unit[,] grid, int row, int col)
+        public override int IncreaseVictualRequirements(Unit[,] grid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Update(Unit[,] grid, Environment gameEnv)
         {
 
         }
