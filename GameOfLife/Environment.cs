@@ -129,16 +129,6 @@ namespace GameOfLife
             set { this.waterAvailability = value; }
         }
 
-        // **** FOOD AND WATER PROCESSING **** //
-
-        /// <summary>
-        /// Increase the amount of food in the Environment
-        /// </summary>
-        /// <param name="toAdd"> The amount of food being returned to the environment </param>
-        public void IncreaseFood(int toAdd)
-        {
-            FoodAvailability += toAdd;
-        }
 
         /// <summary>
         /// Decrease the amount of food in the Environment after being consumed by a Unit
@@ -158,8 +148,40 @@ namespace GameOfLife
             WaterAvailability -= consumed;
         }
 
+        /// <summary>
+        /// Tip the balance of atmospheric composition towards oxygen
+        /// </summary>
+        /// <param name="change"> The percent increase in oxygen levels </param>
+        public void IncreaseOxygen(int change)
+        {
+            // TO BE DOCUMENTED
+            OxygenLevel += change;
+            CarbonDioxideLevel -= change;
+        }
 
-        // **** EVENT PROCESSING **** //
+        /// <summary>
+        /// Tip the balance of atmospheric composition towards carbon dioxide
+        /// </summary>
+        /// <param name="change"> The percent increase in carbon dioxide levels </param>
+        public void IncreaseCarbonDioxide(int change)
+        {
+            // TO BE DOCUMENTED
+            CarbonDioxideLevel += change;
+            OxygenLevel -= change;
+        }
+
+        /// <summary>
+        /// Increase the amount of food in the Environment
+        /// </summary>
+        /// <param name="increase"> The amount of food being returned to the environment </param>
+        public void IncreaseFood(int increase)
+        {
+            FoodAvailability += increase;
+        }
+
+
+
+        //**** EVENT PROCESSING ****//
 
         // A unique environmental event that changes the parameters or organisms in the environment
         abstract protected void EnvironmentalEvent(Unit[,] grid);
