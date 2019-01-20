@@ -71,13 +71,17 @@ namespace GameOfLife
         {
             //loop through grid and apply the ruleset to each block
             Unit[,] grid = currentState.UnitGrid;
+            // Grid representing the new state
+            Unit[,] newGrid = new Unit[grid.GetLength(GridHelper.ROW), grid.GetLength(GridHelper.COLUMN)];
             for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    grid[j, k] = Ruleset.NewBlockState(grid, currentState.FoodAvailability, j, k);
+                    newGrid[j, k] = Ruleset.NewBlockState(grid, currentState.FoodAvailability, j, k);
                 }
             }
+            // Update the state's grid
+            currentState.UnitGrid = newGrid;
         }
 
         public void CalculateScore()
