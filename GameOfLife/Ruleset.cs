@@ -1,4 +1,9 @@
-﻿// rudy 
+﻿/*
+ * Rudy Ariaz
+ * January 19, 2019
+ * Applies a modified Conway's Game of Life ruleset to a given unit. Abstracts
+ * the ruleset from the GameManager.
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +14,63 @@ namespace GameOfLife
 {
     static class Ruleset
     {
-        
+        // Constants that define what is considered as "underpopulation" and "overpopulation"
+        // in term of the number of live neighbours of a unit
         private const int UNDER_POP = 2, OVER_POP = 3;
-        private static Random rng = new Random();
 
+
+        /// <summary>
+        /// Computes the state of a given "block" in the grid in the new generation
+        /// given the grid, the block, and the food availability.
+        /// </summary>
+        /// <remarks>
+        /// Uses row and column instead of Unit since the focus is on 
+        /// the location of the Unit, not its parameters.
+        /// </remarks>
+        /// <param name="grid">The grid in which the block to compute is.</param>
+        /// <param name="foodAvailability">The number of food units available
+        /// in the block's environment.</param>
+        /// <param name="row">The row of the block to update.</param>
+        /// <param name="col">The column of the block to update.</param>
+        /// <returns>The new Unit that should occupy the block in this new generation.</returns>
         public static Unit NewBlockState(Unit[,] grid, double foodAvailability, int row, int col)
         {
+            // The current Unit in the block to update
             Unit thisUnit = grid[row, col];
-            // If the unit is a virus
+
+            // Check if the Unit is a Virus
             if (thisUnit is Virus)
             {
+                // Update the Virus with separate Virus-oriented computations
                 return NewVirusState(grid, row, col);
             }
+            // Otherwise, the Unit is a living unit
+            else
+            {
+                // Update the LivingUnit with separate LivingUnit-oriented computations
+                return NewLivingState(grid, foodAvailability, row, col);
+            }            
+        }
+
+        /// <summary>
+        /// Computes the state of a given LivingUnit in the grid in the new generation
+        /// given the grid, the block, and the food availability.
+        /// </summary>
+        /// <param name="grid">The grid in which the LivingUnit to compute is.</param>
+        /// <param name="foodAvailability">The number of food units available
+        /// in the LivingUnit's environment.</param>
+        /// <param name="row">The row of the LivingUnit to update.</param>
+        /// <param name="col">The column of the LivingUnit to update.</param>
+        /// <returns>The new LivingUnit that should occupy the block in this new generation.</returns>
+        private static LivingUnit NewLivingState(Unit[,] grid, double foodAvailability, int row, int col)
+        {
+            // The current Unit in the block to update
+            Unit thisUnit = grid[row, col];
+
+            // Count the number of live neighborus 
             int liveneighbors = CountLiveNeighbors(grid, row, col);
 
-            // Check if new unit is born 
+            // Check if a new unit is born, which can only happen if the current block 
             if (thisUnit == null)
             {
                 if (liveneighbors == 3)
@@ -39,16 +86,15 @@ namespace GameOfLife
             // Otherwise, the unit remains the same
             return thisUnit;
         }
-
         // TODO: test the dictionary stuff
-        private static LivingUnit NewbornUnit(Unit[,] grid, int row, int col)
+        private static Unit NewbornUnit(Unit[,] grid, int row, int col)
         {
             // Get all the living neighbors of the unit
-            List<LivingUnit> livingneighbors = GetLivingNeighbors(grid, row, col);
-            var typeFrequencies = livingneighbors.ToDictionary(x => x, 
-                x => livingneighbors.Count(u => u.GetType() == x.GetType()));
+            List<Unit> neighbors = GetAllNeighbors(grid, row, col);
+            var typeFrequencies = neighbors.ToDictionary(x => x, 
+                x => neighbors.Count(u => u.GetType() == x.GetType()));
             // neighbor with the same type as the new child
-            LivingUnit modelneighbor;
+            Unit modelneighbor = null;
             // Check if any neighbor appears twice
             if (typeFrequencies.ContainsValue(2))
             {
@@ -58,7 +104,7 @@ namespace GameOfLife
             else
             {
                 int speciesComplexitySum = 0;
-                foreach(LivingUnit unit in livingneighbors)
+                foreach(Unit unit in neighbors)
                 {
                     speciesComplexitySum += unit.SpeciesComplexity;
                 }
@@ -100,23 +146,23 @@ namespace GameOfLife
             return correspondingSpecies[indexSelected];
         }
 
-        private static List<LivingUnit> GetLivingNeighbors(Unit[,] grid, int row, int col)
+        private static List<Unit> GetAllNeighbors(Unit[,] grid, int row, int col)
         {
-            List<LivingUnit> livingneighbors = new List<LivingUnit>();
+            List<Unit> neighbors = new List<Unit>();
             foreach(var dir in GridHelper.directions)
             {
                 int newRow = row + dir.Item1;
                 int newCol = col + dir.Item2;
-                if (grid.InGridBounds(newRow, newCol) && IsLiveUnit(grid[newRow, newCol]))
+                if (grid.InGridBounds(newRow, newCol) && grid[newRow, newCol] != null)
                 {
-                    livingneighbors.Add((LivingUnit)grid[newRow, newCol]);
+                    neighbors.Add(grid[newRow, newCol]);
                 }
             }
-            return livingneighbors;
+            return neighbors;
         }
         private static Unit NewVirusState(Unit[,] grid, int row, int col)
         {
-            int liveneighbors = CountLiveNeighbors(grid, row, col);
+            int liveneighbors = CountViralNeighbors(grid, row, col);
             Unit thisUnit = grid[row, col];
             
             // Check if there is no unit in the block  
@@ -168,7 +214,7 @@ namespace GameOfLife
 
         private static int CountViralNeighbors(Unit[,] grid, int row, int col)
         {
-            return NumberOfNeighbors(grid, row, col, countViral: false);
+            return NumberOfNeighbors(grid, row, col, countViral: true);
         }
 
         private static bool HasEnoughFood(LivingUnit unit, double foodAvailability, int liveNeighbors)
