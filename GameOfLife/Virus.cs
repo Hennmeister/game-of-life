@@ -18,6 +18,7 @@ namespace GameOfLife
             unitType = UnitTypeEnum.Virus;
         }
 
+        // (Nicole) --> constructor for reading files
         public Virus(string[] parameters) : base(parameters)
         {
             unitType = UnitTypeEnum.Virus;

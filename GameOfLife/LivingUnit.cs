@@ -1,8 +1,8 @@
 ﻿/* 
  * Tiffanie Truong
+ * Nicole --> added ToString method and constructor to read from file
  * January 19, 2018
  * Base class for all living lifeforms in the simulation (Cells, Viruses, Multicellular Organisms)
- * (Nicole) --> added ToString method
  */
 using System;
 using System.Collections.Generic;
@@ -59,7 +59,32 @@ namespace GameOfLife
         // (Nicole) constructor for living units to load unit
         public LivingUnit(string[] parameters) : base(parameters)
         {
+            // convert all parameters to integer
+            int.TryParse(parameters[5], out int senescence);
 
+            int.TryParse(parameters[6], out int foodRequirement);
+
+            int.TryParse(parameters[7], out int waterRequirement);
+
+            int.TryParse(parameters[8], out int gasRequirement);
+
+            int.TryParse(parameters[9], out int inputGas);
+
+            int.TryParse(parameters[10], out int outputGas);
+
+            int.TryParse(parameters[11], out int idealTemp);
+
+            double.TryParse(parameters[12], out double infectionResistance);
+
+            // initialize with new parameters
+            Senescence = senescence;
+            FoodRequirement = foodRequirement;
+            WaterRequirement = waterRequirement;
+            GasRequirement = gasRequirement;
+            InputGas = (Enums.GasType)inputGas;
+            OutputGas = (Enums.GasType)outputGas;
+            IdealTemperature = idealTemp;
+            InfectionResistance = infectionResistance;
         }
 
 

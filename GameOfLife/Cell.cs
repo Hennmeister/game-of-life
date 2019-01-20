@@ -1,9 +1,9 @@
 ﻿/*
  * Tiffanie Truong
+ * (Nicole) - added unitType and constructor for loading data from file
  * January 15, 2018
  * This class stores information for a Cell, one of the basic
  * lifeforms that can populate the grid in the simulation.
- * // (Nicole) - added unitType
  */
 using System;
 using System.Collections.Generic;
@@ -30,6 +30,7 @@ namespace GameOfLife
             unitType = UnitTypeEnum.Cell;
         }
 
+        // (Nicole) --> constructor for reading files
         public Cell(string[] parameters) : base(parameters)
         {
             unitType = UnitTypeEnum.Cell;

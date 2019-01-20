@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Nicole --> implemented actual saving on top of Rudy's saving framework. 
+// Nicole --> implemented file loading 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +31,7 @@ namespace GameOfLife
             string stateDirectoryPath = generalStatesDirectoryPath + $@"\State-{ state.CurrentID }";
             ReadEnvironmentalParameters(state, stateDirectoryPath);
             LoadAllUnits(state, stateDirectoryPath);
+            LoadGeneralInformation(state, stateDirectoryPath);
         }
 
         private static void SaveEnvironmentalParameters(State state, string statePath)
@@ -122,6 +125,7 @@ namespace GameOfLife
             }
         }
 
+        // (Nicole) refactored code so the file only opens once
         private static void SaveAllUnits(State state, string statePath)
         {
             string unitPath = statePath + @"\Units.txt";
@@ -233,6 +237,37 @@ namespace GameOfLife
                 infoFile.WriteLine(state.HighestConcurrentScore);
             }
 
+        }
+
+        // (Nicole) load general information
+        private static void LoadGeneralInformation(State state, string statePath)
+        {
+            string infoPath = statePath + @"\GeneralInformation.txt";
+            // open the file
+            using (StreamReader infoFile = new StreamReader(infoPath))
+            {
+                // read username
+                state.Username = infoFile.ReadLine();
+
+                int tempInt;
+                // read generation counter
+                if (int.TryParse(infoFile.ReadLine(), out tempInt))
+                {
+                    state.GenerationCounter = tempInt;
+                }
+
+                // read current score
+                if (int.TryParse(infoFile.ReadLine(), out tempInt))
+                {
+                    state.CurrentScore = tempInt;
+                }
+
+                // read highest concurrent score
+                if (int.TryParse(infoFile.ReadLine(), out tempInt))
+                {
+                    state.HighestConcurrentScore = tempInt;
+                }
+            }
         }
 
         public static Dictionary<int, string> LoadHighScores() { return new Dictionary<int, string>(); }

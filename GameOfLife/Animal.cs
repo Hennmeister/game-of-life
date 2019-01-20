@@ -34,6 +34,7 @@ namespace GameOfLife
             unitType = UnitTypeEnum.Animal;
         }
 
+        // (Nicole) --> constructor for reading files
         public Animal(string[] parameters) : base(parameters)
         {
             unitType = UnitTypeEnum.Animal;

@@ -35,20 +35,20 @@ namespace GameOfLife
         }
         
         // (Nicole) constructor for loading from file
-        public Unit(string[] paramaters)
+        public Unit(string[] parameters)
         {
             // convert all parameters to integer
             int r = -1;
-            int.TryParse(paramaters[1], out r);
+            int.TryParse(parameters[1], out r);
 
             int c = -1;
-            int.TryParse(paramaters[2], out c);
+            int.TryParse(parameters[2], out c);
 
             int decomp = 0;
-            int.TryParse(paramaters[3], out decomp);
+            int.TryParse(parameters[3], out decomp);
 
             int complexity = 0;
-            int.TryParse(paramaters[4], out complexity);
+            int.TryParse(parameters[4], out complexity);
 
             // initialize with new parameters
             DecompositionValue = decomp;

@@ -136,6 +136,7 @@ namespace GameOfLife
             currentState.UnitGrid[row, col].Die(currentState.UnitGrid, currentState.GameEnvironment);
         }
 
+        // (Nicole) load current state
         public State LoadState()
         {
             Datastore.LoadState(currentState);

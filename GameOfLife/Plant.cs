@@ -1,4 +1,4 @@
-﻿// (Nicole) - added unitType
+﻿// (Nicole) - added unitType and constructor for reading from file
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +33,7 @@ namespace GameOfLife
             unitType = UnitTypeEnum.Plant;
         }
 
+        // (Nicole) --> constructor for reading files
         public Plant(string[] parameters) : base(parameters)
         {
             unitType = UnitTypeEnum.Plant;

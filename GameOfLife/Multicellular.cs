@@ -1,4 +1,5 @@
 ﻿// rudy
+// Nicole --> constructor for loading data from file
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,7 +72,5 @@ namespace GameOfLife
             }
             return numNeighbors;
         }
-
-        
     }
 }

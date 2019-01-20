@@ -1,5 +1,5 @@
 ﻿// Tiffanie
-// (Nicole) - added unitType
+// (Nicole) - added unitType and constructor for loading data from file
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +22,7 @@ namespace GameOfLife
             unitType = UnitTypeEnum.Colony;
         }
 
+        // (Nicole) constructor for loading data from file
         public Colony(string[] parameters) : base(parameters)
         {
             unitType = UnitTypeEnum.Colony;
