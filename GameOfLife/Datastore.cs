@@ -20,6 +20,7 @@ namespace GameOfLife
             CreateCurrentStateDirectory(state, stateDirectoryPath);
             SaveGeneralInformation(state, stateDirectoryPath);
             SaveEnvironmentalParameters(state, stateDirectoryPath);
+            SaveAllUnits(state, stateDirectoryPath);
         }
 
         // (Nicole) loading state based on current state ID
