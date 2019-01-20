@@ -276,5 +276,13 @@ namespace GameOfLife
                 btnStart.Text = "Unpause";
             }
         }
+
+        public void GameOver()
+        {
+            MessageBox.Show("GAME OVER");
+            LeaderboardForm f = new LeaderboardForm();
+            f.ShowDialog();
+            this.Close();
+        }
     }
 }

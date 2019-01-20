@@ -100,6 +100,18 @@ namespace GameOfLife
             }
             //if the current score of the board is higher than the highest recorded concurrent score, it becomes the new highest concurrent score
             if (gridScore > HighestConcurrentScore) HighestConcurrentScore = gridScore;
+            //check if there are any units left on board
+            if(gridScore == 0)
+            {
+                //if not, call gameover on form
+                var form = System.Windows.Forms.Application.OpenForms.OfType<GameForm>().Single();
+                var timers = form.Controls.OfType<System.Windows.Forms.Timer>();
+                foreach(System.Windows.Forms.Timer t in timers)
+                {
+                    t.Enabled = false; 
+                }
+                form.GameOver();
+            }
             //add the score of the board 
             CurrentScore += gridScore;
         }
@@ -117,13 +129,6 @@ namespace GameOfLife
                     }
                 }
             }
-        }
-        
-        //create a new leaderBoard form and show it
-        public void ShowLeaderBoard()
-        {
-            LeaderboardForm f = new LeaderboardForm();
-            f.ShowDialog();
         }
 
         public Unit GetUnit(int row, int col)
