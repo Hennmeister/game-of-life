@@ -25,7 +25,8 @@ namespace GameOfLife
 
         public override void Update(Unit[,] grid, Environment gameEnv)
         {
-            
+            // Infect neighboring living units
+            Infect(grid);
         }
 
         private void Infect(Unit[,] grid)

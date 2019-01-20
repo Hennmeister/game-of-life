@@ -59,7 +59,10 @@ namespace GameOfLife
             {
                 for(int j = colLowerBound; j < colUpperBound; j++)
                 {
-                    numNeighbors += grid[i, j].GetType() == this.GetType() ? 1 : 0;
+                    if(grid.InGridBounds(i, j) && grid[i,j] != null)
+                    {
+                        numNeighbors += grid[i, j].GetType() == this.GetType() ? 1 : 0;
+                    }
                 }
             }
             return numNeighbors;

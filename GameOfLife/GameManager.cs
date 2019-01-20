@@ -38,7 +38,7 @@ namespace GameOfLife
         //refactor to have some order
         public void CreateUnit(int row, int col, Enums.UnitType UnitType)
         {
-            UnitFactory.CreateUnit(UnitType, row, col);
+            currentState.UnitGrid[row, col] = UnitFactory.CreateUnit(UnitType, row, col);
         }
 
         public void CreateState()
@@ -64,19 +64,24 @@ namespace GameOfLife
             ApplyRuleset();
             UpdateAllUnits();
             currentState.AddStateToCache();
+            ++currentState.GenerationCounter;
         }
 
         public void ApplyRuleset()
         {
             //loop through grid and apply the ruleset to each block
             Unit[,] grid = currentState.UnitGrid;
+            // Grid representing the new state
+            Unit[,] newGrid = new Unit[grid.GetLength(GridHelper.ROW), grid.GetLength(GridHelper.COLUMN)];
             for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    grid[j, k] = Ruleset.NewBlockState(grid, currentState.FoodAvailability, j, k);
+                    newGrid[j, k] = Ruleset.NewBlockState(grid, currentState.FoodAvailability, j, k);
                 }
             }
+            // Update the state's grid
+            currentState.UnitGrid = newGrid;
         }
 
         public void CalculateScore()

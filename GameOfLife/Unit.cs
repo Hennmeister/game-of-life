@@ -25,15 +25,14 @@ namespace GameOfLife
         
         protected double DecompositionValue { get; set; }
 
-        public Unit(double decompositionValue)
+        public int SpeciesComplexity { get; }
+
+        public Unit(double decompositionValue, int speciesComplexity, int row = -1, int col = -1)
         {
             DecompositionValue = decompositionValue;
+            SpeciesComplexity = speciesComplexity;
         }
-
-        public Unit(double decompositionValue, int row = -1, int col = -1) : this(decompositionValue)
-        {
-            Location = (row, col);
-        }
+        
 
         
         public void Die(Unit[,] grid, Environment gameEnv)

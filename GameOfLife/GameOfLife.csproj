@@ -58,9 +58,6 @@
     <Compile Include="Environment.cs" />
     <Compile Include="EnvironmentFactory.cs" />
     <Compile Include="EnvironmentHelper.cs" />
-    <Compile Include="FreeModeGameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,15 +80,13 @@
       <DependentUpon>LeaderboardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LivingUnit.cs" />
+    <Compile Include="MergeableUnit.cs" />
     <Compile Include="Multicellular.cs" />
     <Compile Include="Plant.cs" />
     <Compile Include="ProbabilityHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rainforest.cs" />
-    <Compile Include="RealisticGameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Ruleset.cs" />
     <Compile Include="StartForm.cs">
       <SubType>Form</SubType>

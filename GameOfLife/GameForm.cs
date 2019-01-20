@@ -11,29 +11,33 @@ using System.Windows.Forms;
 
 namespace GameOfLife
 {
-    public abstract partial class GameForm : Form
+    public partial class GameForm : Form
     {
         //store game actions and data
         GameManager manager;
-        protected Enums.UnitType toolbarSelection = Enums.UnitType.None;
-        protected const int CELL_SIZE = 10;
-        protected const int TOOLBAR_SIZE = 6;
-        protected const int TOOLBAR_SQUARE_LENGTH = 8;
-        protected Rectangle[,] grid;
-        protected Rectangle[] toolbar = new Rectangle[TOOLBAR_SIZE];
-        protected Color[] toolbarColors;
-        protected Rectangle imageDragBox;
+        private bool isPaused = true;
+        private Enums.GameMode gameMode;
+        private Enums.UnitType toolbarSelection = Enums.UnitType.None;
+        private const int CELL_SIZE = 10;
+        private const int TOOLBAR_SIZE = 6;
+        private const int TOOLBAR_SQUARE_LENGTH = 8;
+        private Rectangle[,] grid = new Rectangle[50, 50];
+        private Rectangle[] toolbar = new Rectangle[TOOLBAR_SIZE];
+        private Color[] toolbarColors;
+        private Rectangle imageDragBox;
 
         // State variable to differentiate between choosing to erase units and clicking away from the toolbar
         private bool eraseToolSelected = false;
 
-        public GameForm(GameManager manager)
+        public GameForm(GameManager manager, Enums.GameMode gameMode)
         {
+            this.gameMode = gameMode;
             this.manager = manager;
             InitializeComponent();
             CreateGrid();
             CreateToolbar();
             imageDragBox = new Rectangle(0, 0, CELL_SIZE, CELL_SIZE);
+            UpdateDisplayedParameters();
         }
 
         private void CreateToolbar()
@@ -61,25 +65,26 @@ namespace GameOfLife
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    //CENTER
                     grid[j, k] = new Rectangle(((ClientSize.Width/2) - CELL_SIZE * 5) + CELL_SIZE * j, CELL_SIZE*k, CELL_SIZE, CELL_SIZE);
-                }
+                }                      
             }
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
             //draw the units into the grid
             for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     //potentially refactor later
+                    // Set initial grid colour to white to represent no unit
                     Color c = Color.White;
+                    // Check if for a unit in this grid cell that needs to be drawn
                     if (manager.GetUnit(j, k) != null)
                     {
+                        // Determine what type of unit it is to get its corresponding colour
                         switch (manager.GetUnit(j, k).GetType().Name)
                         {
                             case nameof(Enums.UnitType.Virus):
@@ -99,9 +104,11 @@ namespace GameOfLife
                                 break;
                         }
                     }
+                    // Fill the grid with the colour of empty space or the unit as previously determined
                     SolidBrush brush = new SolidBrush(c);
                     e.Graphics.FillRectangle(brush, grid[j, k]);
                     brush.Dispose();
+                    // Draw the rectangle around the grid
                     e.Graphics.DrawRectangle(new Pen(Color.Black, 1), grid[j, k]);
                 }
             }
@@ -132,29 +139,39 @@ namespace GameOfLife
             }
         }
 
+        public void UpdateDisplayedParameters()
+        {
+            DisplayEnvironmentalParameters();
+            DisplayGenerationNumber();
+            DisplayCurrentScore();
+            DisplayConcurrentHighScore();
+        }
         protected void DisplayEnvironmentalParameters()
         {
-
+            lblEnvParams.Text = "Water Availability: " + manager.WaterAvailability.ToString() + "\r\n" + "Food Availability: "
+                + manager.FoodAvailability.ToString() +"\r\n" + "Temperature: " + manager.Temperature.ToString() +"\r\n" 
+                + "Carbon Dioxide Level: " + manager.CarbonDioxideLevel.ToString() + "\r\n" + "Oxygen Level: " + manager.OxygenLevel.ToString();
         }
 
         protected void DisplayGenerationNumber()
         {
-
+            lblGenNum.Text = "Generation: " + manager.GenerationCounter.ToString();
         }
 
         protected void DisplayCurrentScore()
         {
-
+            lblCurrScore.Text = "Score: " + manager.CurrentScore.ToString();
         }
 
         protected void DisplayConcurrentHighScore()
         {
-
+            lblHighestConcurrentScore.Text = "Highest Concurrent Score: " + manager.HighestConcurrentScore.ToString();
         }
 
         protected void tmrGeneration_Tick(object sender, EventArgs e)
         {
             manager.NextGeneration();
+            UpdateDisplayedParameters();
         }
 
         protected void tmrRefresh_Tick(object sender, EventArgs e)
@@ -162,7 +179,7 @@ namespace GameOfLife
             Refresh();
         }
 
-        protected void GameForm_MouseMove(object sender, MouseEventArgs e)
+        private void GameForm_MouseMove(object sender, MouseEventArgs e)
         {
             if (toolbarSelection != Enums.UnitType.None || eraseToolSelected)
             {
@@ -171,30 +188,35 @@ namespace GameOfLife
             }
         }
 
-        protected virtual void GameForm_MouseDown(object sender, MouseEventArgs e)
+        private void GameForm_MouseDown(object sender, MouseEventArgs e)
         {
             // Only attempt to interact with the grid if toolbar selection was made
             if (toolbarSelection != Enums.UnitType.None || eraseToolSelected)
             {
+                // Loop through all rows in the grid to see if the user clicked in this one
                 for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
                 {
+                    // Loop through all columns in the grid to see if the user clicked in this one
                     for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                     {
+                        // Check if the user clicked the current grid cell to process an action here
                         if (grid[j, k].Contains(e.Location))
                         {
+                            if (!isPaused)
+                            {
+                                MessageBox.Show("Pause game to interact with board");
+                                continue;
+                            }
                             //CASE 1: user is trying to erase a unit at the clicked location
-                            if (manager.GetUnit(j,k) != null && eraseToolSelected)
+                            if (manager.GetUnit(j, k) != null && eraseToolSelected)
                             {
                                 manager.KillUnit(j, k);
                             }
-                            
-                            // NOT ACTUALLY CODE JUST PREVENTING CRASHING FOR NOW
-                   //         if (eraseToolSelected)
-                     //       {
-                       //         return;
-                         //   }
                             // CASE 2: user is trying to create a new unit
-                            manager.CreateUnit(j, k, toolbarSelection);
+                            else
+                            {
+                                manager.CreateUnit(j, k, toolbarSelection);
+                            }
                             return;
                         }
                     }
@@ -218,13 +240,17 @@ namespace GameOfLife
                     {
                         eraseToolSelected = true;
                     }
+                    else
+                    {
+                        eraseToolSelected = false;
+                    }
                     // Store the current location for a new 'colored' cursor
                     imageDragBox.Location = e.Location;
                     // Stop processing possible mouse down cases
                     return;
                 }
             }
-            // Show the cursor if it is currently hidden (user has a currently selected Unit)
+            // Show the cursor if it is currently hidden (user has something currently selected)
             if (toolbarSelection != Enums.UnitType.None || eraseToolSelected)
             {
                 Cursor.Show();
@@ -235,14 +261,20 @@ namespace GameOfLife
             Refresh();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void btnStart_Click(object sender, EventArgs e)
         {
-            manager.SaveState();
-        }
-
-        private void btnLoad_Click(object sender, EventArgs e)
-        {
-            manager.LoadState();
+            if (isPaused)
+            {
+                tmrGeneration.Enabled = true;
+                isPaused = false;
+                btnStart.Text = "Pause";
+            }
+            else
+            {
+                tmrGeneration.Enabled = false;
+                isPaused = true;
+                btnStart.Text = "Unpause";
+            }
         }
     }
 }

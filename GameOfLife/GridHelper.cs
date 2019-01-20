@@ -23,7 +23,16 @@ namespace GameOfLife
 
         public static bool InGridBounds(this Unit[,] grid, int row, int col)
         {
-            return (row < grid.GetLength(0) && col < grid.GetLength(1) && row >= 0 && col >= 0);
+            return grid.InDimension(ROW, row) && grid.InDimension(COLUMN, col);
+        }
+
+        public static bool InDimension(this Unit[,] grid, int dimension, int coordinate)
+        {
+            if(dimension != ROW && dimension != COLUMN)
+            {
+                return false;
+            }
+            return coordinate < grid.GetLength(dimension) && coordinate >= 0;
         }
     }
 }
