@@ -23,8 +23,8 @@ namespace GameOfLife
         protected int oxygenLevel;
         // (Rudy) the default amount of food and water initially available in the environment
         // read-only -- can be initialized in the constructor but nowhere else
-        public virtual double DefaultFood { get; }
-        public virtual int DefaultWater { get; }
+        public virtual double DefaultFood { get; set; }
+        public virtual int DefaultWater { get; set; }
         // the amount of food and water in the environment during the simulation
         protected double foodAvailability;
         protected double waterAvailability;
@@ -35,10 +35,11 @@ namespace GameOfLife
         // (Nicole) environment type 
         protected EnvironmentTypeEnum environmentType;
 
-        // (Nicole) getter for environment type
+        // (Nicole) getter and setter for environment type
         public EnvironmentTypeEnum EnvironmentType
         {
             get { return environmentType; }
+            set { environmentType = value; }
         }
 
         // **** EVENT INFORMATION ****

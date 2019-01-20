@@ -64,6 +64,10 @@ namespace GameOfLife
             {
                 return GameEnvironment.EnvironmentType;
             }
+            set
+            {
+                GameEnvironment.EnvironmentType = value;
+            }
         }
 
         public int CarbonDioxideLevel
@@ -91,6 +95,10 @@ namespace GameOfLife
             get
             {
                 return GameEnvironment.EventGenerationsLeft;
+            }
+            set
+            {
+                GameEnvironment.EventGenerationsLeft = value;
             }
         }
         public Image EnvironmentalImage
@@ -143,13 +151,22 @@ namespace GameOfLife
             {
                 return GameEnvironment.DefaultFood;
             }
+            set
+            {
+                GameEnvironment.DefaultFood = value;
+            }
         }
 
-        public double DefaultWater
+        // (Nicole) changed double to int to reflect the defaultWater property type
+        public int DefaultWater
         {
             get
             {
                 return GameEnvironment.DefaultWater;
+            }
+            set
+            {
+                GameEnvironment.DefaultWater = value;
             }
         }
 

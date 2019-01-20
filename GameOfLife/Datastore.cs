@@ -22,6 +22,13 @@ namespace GameOfLife
             SaveEnvironmentalParameters(state, stateDirectoryPath);
         }
 
+        // (Nicole) loading state based on current state ID
+        public static void LoadState(State state)
+        {
+            string stateDirectoryPath = generalStatesDirectoryPath + $@"\State-{ state.CurrentID }";
+            ReadEnvironmentalParameters(state, stateDirectoryPath);
+        }
+
         private static void SaveEnvironmentalParameters(State state, string statePath)
         {
             string envPath = statePath + @"\EnvironmentalParameters.txt";
@@ -29,7 +36,7 @@ namespace GameOfLife
             {
                 // Save environment type
                 // TODO: check if this displays properly 
-                envFile.WriteLine(state.EnvironmentType);
+                envFile.WriteLine((int)state.EnvironmentType);
 
                 // Save atmospheric parameters
                 envFile.WriteLine(state.CarbonDioxideLevel);
@@ -47,39 +54,70 @@ namespace GameOfLife
                 envFile.WriteLine(state.Temperature);
 
                 // Save event parameters
-                envFile.WriteLine(state.EnvironmentalEventOccurs);
+                //envFile.WriteLine(state.EnvironmentalEventOccurs); // (Nicole) cannot save a value returned by a function, can only save properties
                 envFile.WriteLine(state.EventGenerationsLeft);
             }
         }
 
-        // (Nicole) work in progress
+        // (Nicole) reading environmental parameters
         private static void ReadEnvironmentalParameters (State state, string statePath)
         {
-            //string envPath = statePath + @"\EnvironmentalParameters.txt";
-            //using (StreamReader envFile = new StreamReader(envPath))
-            //{
-            //    // Read environment type
-            //    state.EnvironmentType = envFile.ReadLine();
+            string envPath = statePath + @"\EnvironmentalParameters.txt";
+            using (StreamReader envFile = new StreamReader(envPath))
+            {
+                // temporary variable for reading
+                int tempInt;
+                // Read environment type
+                if (int.TryParse(envFile.ReadLine(), out tempInt))
+                {
+                    state.EnvironmentType = (EnvironmentTypeEnum)tempInt;
+                }
 
-            //    // Read atmospheric parameters
-            //    envFile.ReadLine(state.CarbonDioxideLevel);
-            //    envFile.ReadLine(state.OxygenLevel);
+                // Read atmospheric parameters
+                if (int.TryParse(envFile.ReadLine(), out tempInt))
+                {
+                    state.CarbonDioxideLevel = tempInt;
+                }
 
-            //    // Read default food/water parameters
-            //    envFile.ReadLine(state.DefaultFood);
-            //    envFile.ReadLine(state.DefaultWater);
+                if (int.TryParse(envFile.ReadLine(), out tempInt))
+                {
+                    state.OxygenLevel = tempInt;
+                }
 
-            //    // Read food/water parameters
-            //    envFile.ReadLine(state.FoodAvailability);
-            //    envFile.ReadLine(state.WaterAvailability);
+                // Read default food/water parameters
+                double tempDouble;
+                if (double.TryParse(envFile.ReadLine(), out tempDouble))
+                {
+                    state.DefaultFood = tempDouble;
+                }
 
-            //    // Read temperature
-            //    envFile.ReadLine(state.Temperature);
+                if (int.TryParse(envFile.ReadLine(), out tempInt))
+                {
+                    state.DefaultWater = tempInt;
+                }
 
-            //    // Read event parameters
-            //    envFile.ReadLine(state.EnvironmentalEventOccurs);
-            //    envFile.ReadLine(state.EventGenerationsLeft);
-            //}
+                // Read food/water parameters
+                if (double.TryParse(envFile.ReadLine(), out tempDouble))
+                {
+                    state.FoodAvailability = tempDouble;
+                }
+                if (double.TryParse(envFile.ReadLine(), out tempDouble))
+                {
+                    state.WaterAvailability = tempDouble;
+                }
+
+                // Read temperature
+                if (int.TryParse(envFile.ReadLine(), out tempInt))
+                {
+                    state.Temperature = tempInt;
+                }
+
+                // Read event parameters
+                if (int.TryParse(envFile.ReadLine(), out tempInt))
+                {
+                    state.EventGenerationsLeft = tempInt;
+                }
+            }
         }
 
         private static void SaveUnit(Unit unit, string unitPath)
@@ -93,6 +131,11 @@ namespace GameOfLife
 
                 // 
             }
+        }
+
+        private static void LoadUnit (Unit unit, string unitPath)
+        {
+
         }
 
         private static void SaveAllUnits(State state, string statePath)
@@ -134,8 +177,6 @@ namespace GameOfLife
             }
 
         }
-
-        public static State LoadState(State state) { return state; }
 
         public static Dictionary<int, string> LoadHighScores() { return new Dictionary<int, string>(); }
 

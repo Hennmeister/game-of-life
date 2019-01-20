@@ -131,7 +131,11 @@ namespace GameOfLife
             currentState.UnitGrid[row, col].Die(currentState.UnitGrid, currentState.GameEnvironment);
         }
 
-        public State LoadState() { throw new NotImplementedException(); }
+        public State LoadState()
+        {
+            Datastore.LoadState(currentState);
+            return currentState;
+        }
 
         // save the current state of the game
         public void SaveState()
