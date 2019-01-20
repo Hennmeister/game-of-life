@@ -16,7 +16,7 @@ namespace GameOfLife
         // Complexity information
         public int Age { get; private set; }
         public int Senescence { get; }
-        public int SpeciesComplexity { get; }
+        
 
         // Temperature information
         public int IdealTemperature { get; protected set; }
@@ -39,9 +39,8 @@ namespace GameOfLife
         public LivingUnit(int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, Enums.GasType inputGas,
                           Enums.GasType outputGas, int idealTemperature, double infectionResistance,
-                          double decompositionValue, int row = -1, int col = -1) : base(decompositionValue, row, col)
+                          double decompositionValue, int row = -1, int col = -1) : base(decompositionValue, speciesComplexity, row, col )
         {
-            SpeciesComplexity = speciesComplexity;
             Senescence = senescence;
             FoodRequirement = foodRequirement;
             WaterRequirement = waterRequirement;
