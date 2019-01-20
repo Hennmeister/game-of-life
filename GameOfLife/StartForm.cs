@@ -141,6 +141,7 @@ namespace GameOfLife
                 // Create the game form 
                 GameForm gameForm = new GameForm(manager, selectedMode);
                 // Display the new game form
+                this.Hide();
                 gameForm.ShowDialog();
                 // Close this form
                 this.Close();

@@ -64,6 +64,7 @@ namespace GameOfLife
             ApplyRuleset();
             UpdateAllUnits();
             currentState.AddStateToCache();
+            ++currentState.GenerationCounter;
         }
 
         public void ApplyRuleset()

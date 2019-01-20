@@ -15,6 +15,7 @@ namespace GameOfLife
     {
         //store game actions and data
         GameManager manager;
+        private bool isPaused = true;
         private Enums.GameMode gameMode;
         private Enums.UnitType toolbarSelection = Enums.UnitType.None;
         private const int CELL_SIZE = 10;
@@ -201,6 +202,11 @@ namespace GameOfLife
                         // Check if the user clicked the current grid cell to process an action here
                         if (grid[j, k].Contains(e.Location))
                         {
+                            if (!isPaused)
+                            {
+                                MessageBox.Show("Pause game to interact with board");
+                                continue;
+                            }
                             //CASE 1: user is trying to erase a unit at the clicked location
                             if (manager.GetUnit(j, k) != null && eraseToolSelected)
                             {
@@ -257,7 +263,18 @@ namespace GameOfLife
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            tmrGeneration.Enabled = true;
+            if (isPaused)
+            {
+                tmrGeneration.Enabled = true;
+                isPaused = false;
+                btnStart.Text = "Pause";
+            }
+            else
+            {
+                tmrGeneration.Enabled = false;
+                isPaused = true;
+                btnStart.Text = "Unpause";
+            }
         }
     }
 }
