@@ -20,6 +20,10 @@ namespace GameOfLife
         {
         }
 
+        public MergeableUnit(string[] parameters) : base(parameters)
+        {
+        }
+
         /// <summary>
         /// Checks if the MergeableUnit is in a position to merge (into a Colony if it 
         /// is a cell, or into a Plant or Animal if it is a Colony).

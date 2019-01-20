@@ -33,6 +33,11 @@ namespace GameOfLife
             unitType = UnitTypeEnum.Plant;
         }
 
+        public Plant(string[] parameters) : base(parameters)
+        {
+            unitType = UnitTypeEnum.Plant;
+        }
+
         public Plant(Environment gameEnv, int row = -1, int col = -1) : this(row, col)
         {
             gameEnv.IncreaseFood(FOOD_GENERATED_UPON_CREATION);

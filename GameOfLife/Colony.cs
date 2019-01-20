@@ -22,6 +22,11 @@ namespace GameOfLife
             unitType = UnitTypeEnum.Colony;
         }
 
+        public Colony(string[] parameters) : base(parameters)
+        {
+            unitType = UnitTypeEnum.Colony;
+        }
+
         public override Unit Create(int row, int col)
         {
             return new Colony(row, col);

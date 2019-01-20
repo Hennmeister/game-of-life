@@ -56,6 +56,12 @@ namespace GameOfLife
             CuredGenerationsLeft = 0;
         }
 
+        // (Nicole) constructor for living units to load unit
+        public LivingUnit(string[] parameters) : base(parameters)
+        {
+
+        }
+
 
         protected void UpdateBasicLivingUnit(Unit[,] grid, Environment gameEnv)
         {
@@ -161,9 +167,18 @@ namespace GameOfLife
             gameEnv.IncreaseCarbonDioxide(GasRequirement);
         }
 
+        // (Nicole) ToString method to serialize properties to string to be saved to file
+        // 5: senescence
+        // 6: food requirement
+        // 7: water requirement
+        // 8: gas requirement
+        // 9: input gas
+        // 10: output gas
+        // 11: ideal temp
+        // 12: infection resistence
         public override string ToString()
         {
-            return base.ToString() + ";" + SpeciesComplexity + ";" + Senescence + ";" + FoodRequirement
+            return base.ToString() + ";" + ";" + Senescence + ";" + FoodRequirement
                 + ";" + WaterRequirement + ";" + GasRequirement + ";" + (int)InputGas + ";" + (int)OutputGas
                 + ";" + IdealTemperature + ";" + InfectionResistance;
         }

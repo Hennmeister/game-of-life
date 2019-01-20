@@ -31,9 +31,30 @@ namespace GameOfLife
         {
             DecompositionValue = decompositionValue;
             SpeciesComplexity = speciesComplexity;
+            Location = (row, col);
         }
         
+        // (Nicole) constructor for loading from file
+        public Unit(string[] paramaters)
+        {
+            // convert all parameters to integer
+            int r = -1;
+            int.TryParse(paramaters[1], out r);
 
+            int c = -1;
+            int.TryParse(paramaters[2], out c);
+
+            int decomp = 0;
+            int.TryParse(paramaters[3], out decomp);
+
+            int complexity = 0;
+            int.TryParse(paramaters[4], out complexity);
+
+            // initialize with new parameters
+            DecompositionValue = decomp;
+            SpeciesComplexity = complexity;
+            Location = (r, c);
+        }
         
         public void Die(Unit[,] grid, Environment gameEnv)
         {
@@ -54,10 +75,15 @@ namespace GameOfLife
             unitFile.WriteLine(ToString());
         }
 
-        // (Nicole) return a string from class properties
+        // (Nicole) ToString method to serialize properties to string to be saved to file
+        // 0: unitType
+        // 1: row
+        // 2: column
+        // 3: decomp value
+        // 4: species complexity
         public override string ToString()
         {
-            return (int)unitType + ";" + Location.r + ";" + Location.c + ";" + DecompositionValue;
+            return (int)unitType + ";" + Location.r + ";" + Location.c + ";" + DecompositionValue + ";" + SpeciesComplexity;
         }
     }
 }

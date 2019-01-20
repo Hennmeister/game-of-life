@@ -30,6 +30,11 @@ namespace GameOfLife
             unitType = UnitTypeEnum.Cell;
         }
 
+        public Cell(string[] parameters) : base(parameters)
+        {
+            unitType = UnitTypeEnum.Cell;
+        }
+
         /// <summary>
         /// Used by the UnitFactory to create a new Cell
         /// </summary>

@@ -18,6 +18,11 @@ namespace GameOfLife
             unitType = UnitTypeEnum.Virus;
         }
 
+        public Virus(string[] parameters) : base(parameters)
+        {
+            unitType = UnitTypeEnum.Virus;
+        }
+
         public override Unit Create(int row, int col)
         {
             return new Virus(row, col);

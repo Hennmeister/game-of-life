@@ -28,6 +28,7 @@ namespace GameOfLife
         {
             string stateDirectoryPath = generalStatesDirectoryPath + $@"\State-{ state.CurrentID }";
             ReadEnvironmentalParameters(state, stateDirectoryPath);
+            LoadAllUnits(state, stateDirectoryPath);
         }
 
         private static void SaveEnvironmentalParameters(State state, string statePath)
@@ -158,28 +159,54 @@ namespace GameOfLife
                     // check that the unitString is not null
                     if (unitString != null)
                     {
-                        
+                        // check that there is a unit and put it in the grid
+                        Unit newUnit = LoadUnit(unitString);
+                        if (newUnit != null)
+                        {
+                            int r = newUnit.Location.r;
+                            int c = newUnit.Location.c;
+                            if (r != -1 && c != -1)
+                            {
+                                state.UnitGrid[r, c] = newUnit;
+                            }
+                        }
                     }
                 } while (unitString != null);
             }
         }
 
+        // (Nicole) load unit
         private static Unit LoadUnit(string unitString)
         {
+            Unit newUnit = null;
+            // split the string that it reads
             string[] unitArray = unitString.Split(';');
 
-            int r = -1;
-            int c = -1;
-            double decomp = 0.0;
-            int.TryParse(unitArray[0], out r);
-            int.TryParse(unitArray[1], out c);
-            double.TryParse(unitArray[2], out decomp);
+            // retrieve unitType 
+            int u;
+            int.TryParse(unitArray[0], out u);
+            UnitTypeEnum unitType = (UnitTypeEnum)u;
 
-            if (r > -1 && c > -1 && decomp > 0.0)
+            switch (unitType)
             {
-                //Unit newUnit = new Unit(decomp, r, c);
+                case UnitTypeEnum.Virus:
+                    newUnit = new Virus(unitArray);
+                    break;
+                case UnitTypeEnum.Cell:
+                    newUnit = new Cell(unitArray);
+                    break;
+                case UnitTypeEnum.Colony:
+                    newUnit = new Colony(unitArray);
+                    break;
+                case UnitTypeEnum.Animal:
+                    newUnit = new Animal(unitArray);
+                    break;
+                case UnitTypeEnum.Plant:
+                    newUnit = new Plant(unitArray);
+                    break;
             }
-            return null;
+
+            return newUnit;
         }
 
         /// <summary>

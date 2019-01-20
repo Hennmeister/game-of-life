@@ -34,6 +34,11 @@ namespace GameOfLife
             unitType = UnitTypeEnum.Animal;
         }
 
+        public Animal(string[] parameters) : base(parameters)
+        {
+            unitType = UnitTypeEnum.Animal;
+        }
+
         public override Unit Create(int row, int col)
         {
             return new Animal(row, col);

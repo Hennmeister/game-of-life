@@ -22,6 +22,10 @@ namespace GameOfLife
 
         }
 
+        public Multicellular(string[] parameters) : base(parameters)
+        {
+
+        }
 
         protected void ApplyCommunityBenefits(Unit[,] grid)
         {
