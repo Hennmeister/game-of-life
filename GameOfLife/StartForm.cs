@@ -223,25 +223,30 @@ namespace GameOfLife
 
         private void sldOxygenLevel_Scroll(object sender, EventArgs e)
         {
+            // Update user output to their newly assigned oxygen level
             lblCurrOxygen.Text = sldOxygenLevel.Value.ToString() + "%";
             // Calculate difference between previous and new oxygen level
             int difference = oxygenLevel - sldOxygenLevel.Value;
             // Apply difference to carbon dioxide level in the opposite direction to ensure they sum to 100%
             sldCarbonDioxideLevel.Value += difference;
             lblCurrCarbonDioxide.Text = sldCarbonDioxideLevel.Value.ToString() + "%";
-            // Update current oxygen level
+            // Update trackers to new oxygen and carbon dioxide levels
             oxygenLevel = sldOxygenLevel.Value;
+            carbonDioxideLevel = sldCarbonDioxideLevel.Value;
         }
 
         private void sldCarbonDioxideLevel_Scroll(object sender, EventArgs e)
         {
+            // Update user output to their newly assigned carbon dioxide level
+            lblCurrCarbonDioxide.Text = sldCarbonDioxideLevel.Value.ToString() + "%";
             // Calculate difference between previous and new carbon dioxide level
             int difference = carbonDioxideLevel - sldCarbonDioxideLevel.Value;
             // Apply difference to carbon dioxide level in the opposite direction to ensure they sum to 100%
             sldOxygenLevel.Value += difference;
-            lblCurrOxygen.Text = sldCarbonDioxideLevel.Value.ToString() + "%";
-            // Update current carbon dioxide level
+            lblCurrOxygen.Text = sldOxygenLevel.Value.ToString() + "%";
+            // Update trackers to new oxygen and carbon dioxide levels
             carbonDioxideLevel = sldCarbonDioxideLevel.Value;
+            oxygenLevel = sldOxygenLevel.Value;
         }
     }
 }
