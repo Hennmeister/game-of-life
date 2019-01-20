@@ -12,13 +12,26 @@ namespace GameOfLife
 {
     public partial class LeaderboardForm : Form
     {
-        public LeaderboardForm()
-        {
+        private GameManager manger;
+        public LeaderboardForm(GameManager manager)
+        {           
+            this.manger = manager;
             InitializeComponent();
         }
 
-        private void DisplayScores() { }
-        private void ReturnToGame() { }
-        private void SelectScoreState() { }
+        private void DisplayScores()
+        {
+            //LOAD HIGH SCORES
+        }
+
+        private void SelectScoreState()
+        {
+            //LOAD A STATE ASSOCIATED WITH A HIGH SCORE
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
