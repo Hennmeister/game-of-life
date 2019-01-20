@@ -276,5 +276,10 @@ namespace GameOfLife
                 btnStart.Text = "Unpause";
             }
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            manager.SaveState();
+        }
     }
 }

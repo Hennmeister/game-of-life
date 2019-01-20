@@ -57,7 +57,7 @@ namespace GameOfLife
         // (Nicole) return a string from class properties
         public override string ToString()
         {
-            return unitType + ";" + Location.r + ";" + Location.c + ";" + DecompositionValue + ";";
+            return (int)unitType + ";" + Location.r + ";" + Location.c + ";" + DecompositionValue;
         }
     }
 }

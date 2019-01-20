@@ -2,6 +2,7 @@
  * Tiffanie Truong
  * January 19, 2018
  * Base class for all living lifeforms in the simulation (Cells, Viruses, Multicellular Organisms)
+ * (Nicole) --> added ToString method
  */
 using System;
 using System.Collections.Generic;
@@ -158,6 +159,13 @@ namespace GameOfLife
         public virtual void Respire(Environment gameEnv)
         {
             gameEnv.IncreaseCarbonDioxide(GasRequirement);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + ";" + SpeciesComplexity + ";" + Senescence + ";" + FoodRequirement
+                + ";" + WaterRequirement + ";" + GasRequirement + ";" + (int)InputGas + ";" + (int)OutputGas
+                + ";" + IdealTemperature + ";" + InfectionResistance;
         }
     }
 }
