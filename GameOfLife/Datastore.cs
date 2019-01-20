@@ -121,36 +121,65 @@ namespace GameOfLife
             }
         }
 
-        private static void SaveUnit(Unit unit, string unitPath)
-        {
-            // Append onto the existing units
-            using (StreamWriter unitFile = new StreamWriter(unitPath, true))
-            {
-                // Save location information
-                unitFile.WriteLine(unit.Location.r);
-                unitFile.WriteLine(unit.Location.c);
-
-                // 
-            }
-        }
-
-        private static void LoadUnit (Unit unit, string unitPath)
-        {
-
-        }
-
         private static void SaveAllUnits(State state, string statePath)
         {
             string unitPath = statePath + @"\Units.txt";
             // Iterate through the entire unit grid, from top left to bottom right
-            for (int i = 0; i < state.UnitGrid.GetLength(GridHelper.ROW); i++)
+            using (StreamWriter unitFile = new StreamWriter(unitPath, false))
             {
-                for(int j = 0; j < state.UnitGrid.GetLength(GridHelper.COLUMN); j++)
+                for (int i = 0; i < state.UnitGrid.GetLength(GridHelper.ROW); i++)
                 {
-                    // Save each unit
-                    SaveUnit(state.UnitGrid[i, j], unitPath);
+                    for (int j = 0; j < state.UnitGrid.GetLength(GridHelper.COLUMN); j++)
+                    {
+                        // Save each unit
+                        Unit currUnit = state.UnitGrid[i, j];
+                        if (currUnit != null)
+                        {
+                            currUnit.SaveUnit(unitFile);
+                        }
+                    }
                 }
             }
+        }
+
+        // (Nicole) load all of the units from the file
+        private static void LoadAllUnits(State state, string statePath)
+        { 
+            string unitPath = statePath + @"\Units.txt";
+            // open the file
+            using (StreamReader unitFile = new StreamReader(unitPath))
+            {
+                // variable to store what is read from the file
+                string unitString;
+                // iterate through the file and save what it reads until ReadLine returns null
+                do
+                {
+                    unitString = unitFile.ReadLine();
+                    // check that the unitString is not null
+                    if (unitString != null)
+                    {
+                        
+                    }
+                } while (unitString != null);
+            }
+        }
+
+        private static Unit LoadUnit(string unitString)
+        {
+            string[] unitArray = unitString.Split(';');
+
+            int r = -1;
+            int c = -1;
+            double decomp = 0.0;
+            int.TryParse(unitArray[0], out r);
+            int.TryParse(unitArray[1], out c);
+            double.TryParse(unitArray[2], out decomp);
+
+            if (r > -1 && c > -1 && decomp > 0.0)
+            {
+                //Unit newUnit = new Unit(decomp, r, c);
+            }
+            return null;
         }
 
         /// <summary>

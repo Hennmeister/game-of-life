@@ -3,6 +3,7 @@
  * January 15, 2018
  * This class stores information for a Cell, one of the basic
  * lifeforms that can populate the grid in the simulation.
+ * // (Nicole) - added unitType
  */
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace GameOfLife
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
                                infectionResistance: 3, decompositionValue: 0.5, row: row, col: col)
         {
+            // (Nicole) - added unitType
+            unitType = UnitTypeEnum.Cell;
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿// Tiffanie
+// Nicole --> added unitType
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace GameOfLife
 
         public Virus(int row = -1, int col = -1) : base(0.1, row, col)
         {
-
+            // (Nicole) - added unitType
+            unitType = UnitTypeEnum.Virus;
         }
 
         public override Unit Create(int row, int col)

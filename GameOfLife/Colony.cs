@@ -1,4 +1,5 @@
 ﻿// Tiffanie
+// (Nicole) - added unitType
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,10 @@ namespace GameOfLife
                                gasRequirement: 2, inputGas: Enums.GasType.Oxygen,
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 32,
                                infectionResistance: 5, decompositionValue: 6, row: row, col: col)
-        { }
+        {
+            // (Nicole) - added unitType
+            unitType = UnitTypeEnum.Colony;
+        }
 
         public override Unit Create(int row, int col)
         {

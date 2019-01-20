@@ -1,4 +1,5 @@
 ﻿// Tiffanie & Rudy
+// (Nicole) --> added unitType
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,8 @@ namespace GameOfLife
                                infectionResistance: 8, decompositionValue: 20, row: row, col: col)
         {
             BaselineFoodRequirement = FoodRequirement;
+            // (Nicole) --> added unitType
+            unitType = UnitTypeEnum.Animal;
         }
 
         public override Unit Create(int row, int col)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿// (Nicole) - added unitType
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,8 @@ namespace GameOfLife
         {
             ToxicityFactor = ProbabilityHelper.RandomInteger(TOXICITY_FACTOR_LOWER_BOUND, TOXICITY_FACTOR_UPPER_BOUND);
             BaselineWaterRequirement = WaterRequirement;
+            // (Nicole) - added unitType
+            unitType = UnitTypeEnum.Plant;
         }
 
         public Plant(Environment gameEnv, int row = -1, int col = -1) : this(row, col)
