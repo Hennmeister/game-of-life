@@ -139,15 +139,7 @@ namespace GameOfLife
                 //set the current state as the starting state
                 manager.SetStartingState();
                 // Create the game form 
-                GameForm gameForm;
-                if(selectedMode == Enums.GameMode.Free)
-                {
-                    gameForm = new FreeModeGameForm(manager);
-                }
-                else
-                {
-                    gameForm = new RealisticModeGameForm(manager);
-                }
+                GameForm gameForm = new GameForm(manager, selectedMode);
                 // Display the new game form
                 gameForm.ShowDialog();
                 // Close this form

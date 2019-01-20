@@ -15,25 +15,19 @@ namespace GameOfLife
     {
         //store game actions and data
         GameManager manager;
-        protected Enums.UnitType toolbarSelection = Enums.UnitType.None;
-        protected const int CELL_SIZE = 10;
-        protected const int TOOLBAR_SIZE = 6;
-        protected const int TOOLBAR_SQUARE_LENGTH = 8;
-        protected Rectangle[,] grid = new Rectangle[50, 50];
-        protected Rectangle[] toolbar = new Rectangle[TOOLBAR_SIZE];
-        protected Color[] toolbarColors;
-        protected Rectangle imageDragBox;
+        private Enums.UnitType toolbarSelection = Enums.UnitType.None;
+        private const int CELL_SIZE = 10;
+        private const int TOOLBAR_SIZE = 6;
+        private const int TOOLBAR_SQUARE_LENGTH = 8;
+        private Rectangle[,] grid = new Rectangle[50, 50];
+        private Rectangle[] toolbar = new Rectangle[TOOLBAR_SIZE];
+        private Color[] toolbarColors;
+        private Rectangle imageDragBox;
 
         // State variable to differentiate between choosing to erase units and clicking away from the toolbar
-        protected bool eraseToolSelected = false;
+        private bool eraseToolSelected = false;
 
-        //need to overload constructor to allow for child classes to call constructor
-        public GameForm()
-        {
-            InitializeComponent();
-        }
-
-        public GameForm(GameManager manager)
+        public GameForm(GameManager manager, Enums.GameMode gameMode)
         {
             this.manager = manager;
             InitializeComponent();
@@ -171,7 +165,7 @@ namespace GameOfLife
             Refresh();
         }
 
-        protected void GameForm_MouseMove(object sender, MouseEventArgs e)
+        private void GameForm_MouseMove(object sender, MouseEventArgs e)
         {
             if (toolbarSelection != Enums.UnitType.None || eraseToolSelected)
             {
@@ -180,7 +174,7 @@ namespace GameOfLife
             }
         }
 
-        protected virtual void GameForm_MouseDown(object sender, MouseEventArgs e)
+        private void GameForm_MouseDown(object sender, MouseEventArgs e)
         {
             // Only attempt to interact with the grid if toolbar selection was made
             if (toolbarSelection != Enums.UnitType.None || eraseToolSelected)
