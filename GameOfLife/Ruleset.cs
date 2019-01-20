@@ -38,6 +38,20 @@ namespace GameOfLife
             // The current Unit in the block to update
             Unit thisUnit = grid[row, col];
 
+            int allNeighbors = CountAllNeighbors(grid, row, col);
+
+            // Check if the current block is empty
+            if(thisUnit == null)
+            {
+                // Check if a new unit should be born (which happens only
+                // if the block has exactly 3 neighbours)
+                if(allNeighbors == OVER_POP)
+                {
+                    // Birth the new unit
+                    return NewbornUnit(grid, row, col);
+                }
+            }
+
             // Check if the Unit is a Virus
             if (thisUnit is Virus)
             {
@@ -62,24 +76,16 @@ namespace GameOfLife
         /// <param name="row">The row of the LivingUnit to update.</param>
         /// <param name="col">The column of the LivingUnit to update.</param>
         /// <returns>The new LivingUnit that should occupy the block in this new generation.</returns>
-        private static LivingUnit NewLivingState(Unit[,] grid, double foodAvailability, int row, int col)
+        private static Unit NewLivingState(Unit[,] grid, double foodAvailability, int row, int col)
         {
             // The current Unit in the block to update
             Unit thisUnit = grid[row, col];
 
             // Count the number of live neighborus 
-            int liveneighbors = CountLiveNeighbors(grid, row, col);
-
-            // Check if a new unit is born, which can only happen if the current block 
-            if (thisUnit == null)
-            {
-                if (liveneighbors == 3)
-                {
-                    return NewbornUnit(grid, row, col);
-                }
-            }
+            int liveNeighbors = CountLiveNeighbors(grid, row, col);
+            
             // Check if existing unit dies
-            else if (!UnitPersists(thisUnit, liveneighbors, foodAvailability))
+            else if (!UnitPersists(thisUnit, liveNeighbors, foodAvailability))
             {
                 return null;
             }
@@ -108,20 +114,20 @@ namespace GameOfLife
                 {
                     speciesComplexitySum += unit.SpeciesComplexity;
                 }
-                modelneighbor = GetModelNeighbor(CalculateSpeciesProbabilities(speciesComplexitySum, livingneighbors));
+                modelneighbor = GetModelNeighbor(CalculateSpeciesProbabilities(speciesComplexitySum, neighbors));
             }
             // Create the unit
-            return (LivingUnit)modelneighbor.Create(row, col);
+            return modelneighbor.Create(row, col);
         }
 
-        private static Dictionary<LivingUnit, double> CalculateSpeciesProbabilities(int complexitySum, List<LivingUnit> neighbors)
+        private static Dictionary<Unit, double> CalculateSpeciesProbabilities(int complexitySum, List<Unit> neighbors)
         {
-            Dictionary<LivingUnit, double> speciesProbabilities = 
-                new Dictionary<LivingUnit, double>();
+            Dictionary<Unit, double> speciesProbabilities = 
+                new Dictionary<Unit, double>();
             // Iterate through all the neighbors, and calculate their cumulative probabilities
             for(int i = 0; i < neighbors.Count; i++)
             {
-                LivingUnit unit = neighbors[i];
+                Unit unit = neighbors[i];
                 // Unit probability 
                 double prob = 1 - (2 * unit.SpeciesComplexity) / complexitySum;
                 double cumulativeProb = i > 0 ? speciesProbabilities[neighbors[i - 1]] : 0;
@@ -133,12 +139,12 @@ namespace GameOfLife
 
         // Gets the neighbor to model a new child on given species probabilities
         // TODO: test
-        private static LivingUnit GetModelNeighbor(Dictionary<LivingUnit, double> speciesProbabilities)
+        private static Unit GetModelNeighbor(Dictionary<Unit, double> speciesProbabilities)
         {
             // Get the probabilities
             var neighbors = speciesProbabilities.ToList();
             double[] sortedProbabilities = (double[])neighbors.Select(x => x.Value);
-            LivingUnit[] correspondingSpecies = (LivingUnit[])neighbors.Select(x => x.Key);
+            Unit[] correspondingSpecies = (Unit[])neighbors.Select(x => x.Key);
 
 
             // Get the first unit to have its predicate be true
@@ -160,16 +166,21 @@ namespace GameOfLife
             }
             return neighbors;
         }
+
+        private static int CountAllNeighbors(Unit[,] grid, int row, int col)
+        {
+            return CountLiveNeighbors(grid, row, col) + CountViralNeighbors(grid, row, col);
+        }
         private static Unit NewVirusState(Unit[,] grid, int row, int col)
         {
-            int liveneighbors = CountViralNeighbors(grid, row, col);
+            int liveNeighbors = CountViralNeighbors(grid, row, col);
             Unit thisUnit = grid[row, col];
             
             // Check if there is no unit in the block  
             if(thisUnit == null)
             {
                 // Unit is born
-                if(liveneighbors == OVER_POP)
+                if(liveNeighbors == OVER_POP)
                 {
                     return new Virus();
                 }
@@ -177,7 +188,7 @@ namespace GameOfLife
             }
 
             // Virus dies
-            if (!UnitPersists(thisUnit, liveNeighbors : liveneighbors))
+            if (!UnitPersists(thisUnit, liveNeighbors : liveNeighbors))
             {
                 return null;
             }
