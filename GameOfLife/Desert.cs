@@ -13,7 +13,8 @@ namespace GameOfLife
         /// </summary>
         public Desert() : base(3000, 1500, 50, 50, 45, 5)
         {
-
+            // (Nicole) assign the specific environment type
+            environmentType = EnvironmentTypeEnum.Desert;
         }
 
         /// <summary>

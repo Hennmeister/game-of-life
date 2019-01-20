@@ -12,6 +12,7 @@ using System.Drawing;
 
 namespace GameOfLife
 {
+   
     public class State
     {
         private const int NUMBER_OF_PREV_STATES = 5;
@@ -57,11 +58,11 @@ namespace GameOfLife
             return null;
         }
 
-        public Type EnvironmentType
+        public EnvironmentTypeEnum EnvironmentType
         {
             get
             {
-                return GameEnvironment.GetType();
+                return GameEnvironment.EnvironmentType;
             }
         }
 
@@ -195,3 +196,5 @@ namespace GameOfLife
         
     }
 }
+
+

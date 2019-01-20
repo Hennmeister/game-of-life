@@ -234,5 +234,10 @@ namespace GameOfLife
             eraseToolSelected = false;
             Refresh();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            manager.SaveState();
+        }
     }
 }

@@ -13,6 +13,8 @@ using System.Drawing;
 
 namespace GameOfLife
 {
+    public enum EnvironmentTypeEnum { Rainforest, Tundra, Greenhouse, Desert };
+
     public abstract class Environment
     {
         // **** ENVIRONMENTAL PARAMETERS ****/
@@ -30,6 +32,14 @@ namespace GameOfLife
         protected int temperature;
         // visual indicator for the environment
         private Image environmentImage;
+        // (Nicole) environment type 
+        protected EnvironmentTypeEnum environmentType;
+
+        // (Nicole) getter for environment type
+        public EnvironmentTypeEnum EnvironmentType
+        {
+            get { return environmentType; }
+        }
 
         // **** EVENT INFORMATION ****
         // the chance of rain as a percent

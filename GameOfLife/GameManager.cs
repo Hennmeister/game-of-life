@@ -132,7 +132,12 @@ namespace GameOfLife
         }
 
         public State LoadState() { throw new NotImplementedException(); }
-        public void SaveState() { }
+
+        // save the current state of the game
+        public void SaveState()
+        {
+            Datastore.SaveState(currentState);
+        }
 
         public int CarbonDioxideLevel
         {
@@ -212,6 +217,7 @@ namespace GameOfLife
 
         public bool IsEnvironmentCreated()
         {
+            // (Nicole) checking for object existence before accessing it
             bool bEnvironmentCreated = false;
             if (currentState != null)
             {

@@ -52,6 +52,36 @@ namespace GameOfLife
             }
         }
 
+        // (Nicole) work in progress
+        private static void ReadEnvironmentalParameters (State state, string statePath)
+        {
+            //string envPath = statePath + @"\EnvironmentalParameters.txt";
+            //using (StreamReader envFile = new StreamReader(envPath))
+            //{
+            //    // Read environment type
+            //    state.EnvironmentType = envFile.ReadLine();
+
+            //    // Read atmospheric parameters
+            //    envFile.ReadLine(state.CarbonDioxideLevel);
+            //    envFile.ReadLine(state.OxygenLevel);
+
+            //    // Read default food/water parameters
+            //    envFile.ReadLine(state.DefaultFood);
+            //    envFile.ReadLine(state.DefaultWater);
+
+            //    // Read food/water parameters
+            //    envFile.ReadLine(state.FoodAvailability);
+            //    envFile.ReadLine(state.WaterAvailability);
+
+            //    // Read temperature
+            //    envFile.ReadLine(state.Temperature);
+
+            //    // Read event parameters
+            //    envFile.ReadLine(state.EnvironmentalEventOccurs);
+            //    envFile.ReadLine(state.EventGenerationsLeft);
+            //}
+        }
+
         private static void SaveUnit(Unit unit, string unitPath)
         {
             // Append onto the existing units
@@ -92,8 +122,8 @@ namespace GameOfLife
             string infoPath = statePath + @"\GeneralInformation.txt";
             using (StreamWriter infoFile = new StreamWriter(infoPath))
             {
-                // Write the username
-                infoFile.WriteLine(state.Username);
+                // Write the username. If username is null, save it is an empty string.
+                infoFile.WriteLine(state.Username != null ? state.Username : string.Empty);
 
                 // Write the generation counter
                 infoFile.WriteLine(state.GenerationCounter);
