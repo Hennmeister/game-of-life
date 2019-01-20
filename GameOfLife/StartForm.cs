@@ -85,10 +85,10 @@ namespace GameOfLife
                 lblMaxOxygen.Text = EnvironmentHelper.EnvParamHighBound(manager.OxygenLevel).ToString() + "%";
 
                 // Set the possible values for the carbon dioxide slider
-                sldCarbonDioxideLevel.SetRange(EnvironmentHelper.EnvParamLowBound(manager.CarbonDioxideLevel),
-                                               EnvironmentHelper.EnvParamHighBound(manager.CarbonDioxideLevel));
-                lblMinCarbonDioxide.Text = EnvironmentHelper.EnvParamLowBound(manager.CarbonDioxideLevel).ToString() + "%";
-                lblMaxCarbonDioxide.Text = EnvironmentHelper.EnvParamHighBound(manager.CarbonDioxideLevel).ToString() + "%";
+                sldCarbonDioxideLevel.SetRange(100 - EnvironmentHelper.EnvParamHighBound(manager.OxygenLevel),
+                                               100 - EnvironmentHelper.EnvParamLowBound(manager.OxygenLevel));
+                lblMinCarbonDioxide.Text = (100 - EnvironmentHelper.EnvParamHighBound(manager.OxygenLevel)).ToString() + "%";
+                lblMaxCarbonDioxide.Text = (100 - EnvironmentHelper.EnvParamLowBound(manager.OxygenLevel)).ToString() + "%";
 
                 // Update the current value of all sliders to the default middle value
                 sldFoodAvailability.Value = (int)manager.FoodAvailability;
