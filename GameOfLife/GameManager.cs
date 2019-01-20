@@ -61,8 +61,8 @@ namespace GameOfLife
         public void NextGeneration()
         {
             CalculateScore();
-            ApplyRuleset();
             UpdateAllUnits();
+            ApplyRuleset();
             currentState.AddStateToCache();
             ++currentState.GenerationCounter;
         }
