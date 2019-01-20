@@ -53,7 +53,7 @@ namespace GameOfLife
             }
 
             // Check if the Unit is a Virus
-            if (thisUnit is Virus)
+            if (!IsLiveUnit(thisUnit))
             {
                 // Update the Virus with separate Virus-oriented computations
                 return NewVirusState(grid, row, col);
@@ -85,39 +85,29 @@ namespace GameOfLife
             int liveNeighbors = CountLiveNeighbors(grid, row, col);
             
             // Check if existing unit dies
-            else if (!UnitPersists(thisUnit, liveNeighbors, foodAvailability))
+            if (!UnitPersists(thisUnit, liveNeighbors, foodAvailability))
             {
                 return null;
             }
             // Otherwise, the unit remains the same
             return thisUnit;
         }
-        // TODO: test the dictionary stuff
+        // TODO: test this thoroughly
         private static Unit NewbornUnit(Unit[,] grid, int row, int col)
         {
             // Get all the living neighbors of the unit
             List<Unit> neighbors = GetAllNeighbors(grid, row, col);
-            var typeFrequencies = neighbors.ToDictionary(x => x, 
-                x => neighbors.Count(u => u.GetType() == x.GetType()));
+
             // neighbor with the same type as the new child
             Unit modelneighbor = null;
-            // Check if any neighbor appears twice
-            if (typeFrequencies.ContainsValue(2))
+            int speciesComplexitySum = 0;
+            foreach(Unit unit in neighbors)
             {
-                modelneighbor = typeFrequencies.FirstOrDefault(x => x.Value == 2).Key;
+                speciesComplexitySum += unit.SpeciesComplexity;
             }
-            // Otherwise, probabilistic approach is used
-            else
-            {
-                int speciesComplexitySum = 0;
-                foreach(Unit unit in neighbors)
-                {
-                    speciesComplexitySum += unit.SpeciesComplexity;
-                }
-                modelneighbor = GetModelNeighbor(CalculateSpeciesProbabilities(speciesComplexitySum, neighbors));
-            }
+            modelneighbor = GetModelNeighbor(CalculateSpeciesProbabilities(speciesComplexitySum, neighbors));
             // Create the unit
-            return modelneighbor.Create(row, col);
+            return modelneighbor?.Create(row, col);
         }
 
         private static Dictionary<Unit, double> CalculateSpeciesProbabilities(int complexitySum, List<Unit> neighbors)
@@ -143,8 +133,8 @@ namespace GameOfLife
         {
             // Get the probabilities
             var neighbors = speciesProbabilities.ToList();
-            double[] sortedProbabilities = (double[])neighbors.Select(x => x.Value);
-            Unit[] correspondingSpecies = (Unit[])neighbors.Select(x => x.Key);
+            double[] sortedProbabilities = neighbors.Select(x => x.Value).ToArray();
+            Unit[] correspondingSpecies = neighbors.Select(x => x.Key).ToArray();
 
 
             // Get the first unit to have its predicate be true
@@ -155,13 +145,15 @@ namespace GameOfLife
         private static List<Unit> GetAllNeighbors(Unit[,] grid, int row, int col)
         {
             List<Unit> neighbors = new List<Unit>();
-            foreach(var dir in GridHelper.directions)
+            // Iterate through the Moore neighborhood
+            for(int i = row - 1; i <= row + 1; i++)
             {
-                int newRow = row + dir.Item1;
-                int newCol = col + dir.Item2;
-                if (grid.InGridBounds(newRow, newCol) && grid[newRow, newCol] != null)
+                for(int j = col - 1; j <= col + 1; j++)
                 {
-                    neighbors.Add(grid[newRow, newCol]);
+                    if ((i != row || j != col) && grid.InGridBounds(i, j) && grid[i, j] != null)
+                    {
+                        neighbors.Add(grid[i, j]);
+                    }
                 }
             }
             return neighbors;
@@ -210,15 +202,16 @@ namespace GameOfLife
         private static int NumberOfNeighbors(Unit[,] grid, int row, int col, bool countViral)
         {
             int neighbors = 0;
-            foreach (var dir in GridHelper.directions)
+            // Iterate through the Moore neighborhood
+            for (int i = row - 1; i <= row + 1; i++)
             {
-                int newRow = row + dir.Item1;
-                int newCol = col + dir.Item2;
-                if (grid.InGridBounds(newRow, newCol))
+                for (int j = col - 1; j <= col + 1; j++)
                 {
-                    neighbors += (!countViral == IsLiveUnit(grid[newRow, newCol]) ? 1 : 0);
+                    if ((i != row || j != col) && grid.InGridBounds(i, j) && grid[i, j] != null)
+                    {
+                        neighbors += (!countViral == IsLiveUnit(grid[i, j]) ? 1 : 0);
+                    }
                 }
-
             }
             return neighbors;
         }

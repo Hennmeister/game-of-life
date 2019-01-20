@@ -40,9 +40,9 @@ namespace GameOfLife
                 return false;
             }
             // otherwise, if the surrounding 3 grids are Cells, this cell should merge
-            else if (grid[row, col + 1].GetType() == curType && 
-                     grid[row + 1, col].GetType() == curType && 
-                     grid[row + 1, col + 1].GetType() == curType)
+            else if (grid[row, col + 1]?.GetType() == curType && 
+                     grid[row + 1, col]?.GetType() == curType && 
+                     grid[row + 1, col + 1]?.GetType() == curType)
             {
                 return true;
             }
