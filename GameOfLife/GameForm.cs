@@ -15,6 +15,7 @@ namespace GameOfLife
     {
         //store game actions and data
         GameManager manager;
+        private Enums.GameMode gameMode;
         private Enums.UnitType toolbarSelection = Enums.UnitType.None;
         private const int CELL_SIZE = 10;
         private const int TOOLBAR_SIZE = 6;
@@ -29,11 +30,13 @@ namespace GameOfLife
 
         public GameForm(GameManager manager, Enums.GameMode gameMode)
         {
+            this.gameMode = gameMode;
             this.manager = manager;
             InitializeComponent();
             CreateGrid();
             CreateToolbar();
             imageDragBox = new Rectangle(0, 0, CELL_SIZE, CELL_SIZE);
+            UpdateDisplayedParameters();
         }
 
         private void CreateToolbar()
@@ -135,29 +138,39 @@ namespace GameOfLife
             }
         }
 
+        public void UpdateDisplayedParameters()
+        {
+            DisplayEnvironmentalParameters();
+            DisplayGenerationNumber();
+            DisplayCurrentScore();
+            DisplayConcurrentHighScore();
+        }
         protected void DisplayEnvironmentalParameters()
         {
-
+            lblEnvParams.Text = "Water Availability: " + manager.WaterAvailability.ToString() + "\r\n" + "Food Availability: "
+                + manager.FoodAvailability.ToString() +"\r\n" + "Temperature: " + manager.Temperature.ToString() +"\r\n" 
+                + "Carbon Dioxide Level: " + manager.CarbonDioxideLevel.ToString() + "\r\n" + "Oxygen Level: " + manager.OxygenLevel.ToString();
         }
 
         protected void DisplayGenerationNumber()
         {
-
+            lblGenNum.Text = "Generation: " + manager.GenerationCounter.ToString();
         }
 
         protected void DisplayCurrentScore()
         {
-
+            lblCurrScore.Text = "Score: " + manager.CurrentScore.ToString();
         }
 
         protected void DisplayConcurrentHighScore()
         {
-
+            lblHighestConcurrentScore.Text = "Highest Concurrent Score: " + manager.HighestConcurrentScore.ToString();
         }
 
         protected void tmrGeneration_Tick(object sender, EventArgs e)
         {
             manager.NextGeneration();
+            UpdateDisplayedParameters();
         }
 
         protected void tmrRefresh_Tick(object sender, EventArgs e)
