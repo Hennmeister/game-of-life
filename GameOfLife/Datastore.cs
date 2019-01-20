@@ -192,7 +192,7 @@ namespace GameOfLife
             Directory.CreateDirectory(statePath);
         }
 
-        /// <summary>
+        /// <summary> 
         /// Creates a directory to store any state of the game, if such
         /// a directory does not already exist. The directory has multiple
         /// child directories, one for each state. The directory path is 
