@@ -1,4 +1,5 @@
 ﻿// rudy <-- is this dude serious 
+// Updated* UI - Nicole
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -306,11 +307,19 @@ namespace GameOfLife
             f.ShowDialog();
         }
 
+        //Nicole
         private void btnSave_Click(object sender, EventArgs e)
         {
             manager.SaveState();
         }
 
+        //Nicole
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            manager.LoadState();
+        }
+
+        //HENNING
         private void btnLoadPrevGen_Click(object sender, EventArgs e)
         {
             if (cbGenNums.SelectedItem != null)

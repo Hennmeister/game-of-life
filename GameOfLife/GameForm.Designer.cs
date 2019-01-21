@@ -1,4 +1,6 @@
-﻿namespace GameOfLife
+﻿using System;
+
+namespace GameOfLife
 {
     partial class GameForm
     {
@@ -48,6 +50,7 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.cbGenNums = new System.Windows.Forms.ComboBox();
             this.btnLoadPrevGen = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tmrGeneration
@@ -85,7 +88,7 @@
             // lblEnvParams
             // 
             this.lblEnvParams.AutoSize = true;
-            this.lblEnvParams.Location = new System.Drawing.Point(28, 221);
+            this.lblEnvParams.Location = new System.Drawing.Point(28, 204);
             this.lblEnvParams.Name = "lblEnvParams";
             this.lblEnvParams.Size = new System.Drawing.Size(64, 13);
             this.lblEnvParams.TabIndex = 3;
@@ -119,7 +122,7 @@
             // lblCurrentEvent
             // 
             this.lblCurrentEvent.AutoSize = true;
-            this.lblCurrentEvent.Location = new System.Drawing.Point(28, 198);
+            this.lblCurrentEvent.Location = new System.Drawing.Point(198, 173);
             this.lblCurrentEvent.Name = "lblCurrentEvent";
             this.lblCurrentEvent.Size = new System.Drawing.Size(72, 13);
             this.lblCurrentEvent.TabIndex = 6;
@@ -182,9 +185,9 @@
             // btnStart
             // 
             this.btnStart.AutoEllipsis = true;
-            this.btnStart.Location = new System.Drawing.Point(211, 93);
+            this.btnStart.Location = new System.Drawing.Point(143, 72);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(151, 50);
+            this.btnStart.Size = new System.Drawing.Size(182, 32);
             this.btnStart.TabIndex = 13;
             this.btnStart.Text = "Start Sim!";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -192,11 +195,12 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(73, 132);
+            this.btnSave.Location = new System.Drawing.Point(305, 286);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(106, 26);
+            this.btnSave.Size = new System.Drawing.Size(56, 31);
             this.btnSave.TabIndex = 14;
-            this.btnSave.Text = "Save State";
+            this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -209,21 +213,34 @@
             "0",
             "0",
             "0"});
-            this.cbGenNums.Location = new System.Drawing.Point(11, 91);
+            this.cbGenNums.Location = new System.Drawing.Point(8, 74);
+            this.cbGenNums.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbGenNums.MaxDropDownItems = 5;
             this.cbGenNums.Name = "cbGenNums";
-            this.cbGenNums.Size = new System.Drawing.Size(56, 21);
+            this.cbGenNums.Size = new System.Drawing.Size(43, 21);
             this.cbGenNums.TabIndex = 15;
             // 
             // btnLoadPrevGen
             // 
-            this.btnLoadPrevGen.Location = new System.Drawing.Point(73, 91);
+            this.btnLoadPrevGen.Location = new System.Drawing.Point(55, 74);
+            this.btnLoadPrevGen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLoadPrevGen.Name = "btnLoadPrevGen";
-            this.btnLoadPrevGen.Size = new System.Drawing.Size(106, 35);
+            this.btnLoadPrevGen.Size = new System.Drawing.Size(80, 28);
             this.btnLoadPrevGen.TabIndex = 16;
             this.btnLoadPrevGen.Text = "Load Previous Generation";
             this.btnLoadPrevGen.UseVisualStyleBackColor = true;
             this.btnLoadPrevGen.Click += new System.EventHandler(this.btnLoadPrevGen_Click);
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(305, 322);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(56, 31);
+            this.btnLoad.TabIndex = 15;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // GameForm
             // 
@@ -232,6 +249,7 @@
             this.ClientSize = new System.Drawing.Size(937, 508);
             this.Controls.Add(this.btnLoadPrevGen);
             this.Controls.Add(this.cbGenNums);
+            this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblPlantTool);
@@ -279,6 +297,7 @@
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox cbGenNums;
         private System.Windows.Forms.Button btnLoadPrevGen;
+        private System.Windows.Forms.Button btnLoad;
     }
 }
 
