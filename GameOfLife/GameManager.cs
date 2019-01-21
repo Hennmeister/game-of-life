@@ -77,7 +77,16 @@ namespace GameOfLife
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    newGrid[j, k] = Ruleset.NewBlockState(grid, currentState.FoodAvailability, j, k);
+                    Unit newUnit = Ruleset.NewBlockState(grid, j, k);
+                    // If the new unit is null, it should die
+                    if(newUnit == null && newGrid[j,k] != null)
+                    {
+                        newGrid[j, k].Die(grid, currentState.GameEnvironment);
+                    }
+                    else
+                    {
+                        newGrid[j, k] = newUnit;
+                    }
                 }
             }
             // Update the state's grid
