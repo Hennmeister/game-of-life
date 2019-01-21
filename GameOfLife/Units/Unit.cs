@@ -16,6 +16,7 @@ namespace GameOfLife
     [Serializable]
     public abstract class Unit
     {
+        // The type of the Unit
         protected Enums.UnitType UnitType { get; set; }
         // A tuple representing the location of a Unit
         public (int r, int c) Location { get; }
@@ -33,15 +34,25 @@ namespace GameOfLife
         /// <param name="col">Optional: the column of the Unit.</param>
         public Unit(Enums.UnitType type, double decompositionValue, int speciesComplexity, int row = -1, int col = -1)
         {
+            // Set the Unit type
             UnitType = type;
             // Set the decomposition value
             DecompositionValue = decompositionValue;
             // Set the species complexity
             SpeciesComplexity = speciesComplexity;
+            // Set the location
             Location = (row, col);
         }
         
         // (Nicole) constructor for loading from file
+        /// <summary>
+        /// Constructor used by child classes to create a new instance of a child class, given
+        /// parameters used to save a given Unit.
+        /// </summary>
+        /// <remarks>
+        /// Author: Nicole
+        /// </remarks>
+        /// <param name="parameters">An array of parameters describing the Unit in string form.</param>
         public Unit(string[] parameters)
         {
             // convert all parameters to integer
@@ -86,6 +97,16 @@ namespace GameOfLife
         /// <param name="col">The column of the new Unit.</param>
         /// <returns>The new Unit, with the given row and column as the location.</returns>
         public abstract Unit Create(int row, int col);
+
+        /// <summary>
+        /// Returns a new Unit of the same type as this Unit, given parameters
+        /// that represent a saved Unit. 
+        /// </summary>
+        /// <remarks>
+        /// Abstract.
+        /// </remarks>
+        /// <param name="parameters"></param>
+        /// <returns>An array of parameters describing the Unit in string form.</returns>
         public abstract Unit Create(string[] parameters);
 
         /// <summary>
