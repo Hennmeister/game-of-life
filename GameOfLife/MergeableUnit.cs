@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
+    [Serializable]
     abstract class MergeableUnit : LivingUnit
     {
         /// <summary>

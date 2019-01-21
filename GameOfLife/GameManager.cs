@@ -54,15 +54,17 @@ namespace GameOfLife
         
         public void LoadCachedState(int genNum)
         {
-            //extension method? static :(
-            currentState = currentState.LoadCachedState(genNum);
+            if (currentState.LoadCachedState(genNum) != null)
+            {
+                currentState = currentState.LoadCachedState(genNum);
+            }
         }
 
         public void NextGeneration()
         {
-            CalculateScore();
-            UpdateAllUnits();
             ApplyRuleset();
+            UpdateAllUnits();
+            CalculateScore();
             currentState.AddStateToCache();
             ++currentState.GenerationCounter;
         }
@@ -77,16 +79,7 @@ namespace GameOfLife
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    Unit newUnit = Ruleset.NewBlockState(grid, j, k);
-                    // If the new unit is null, it should die
-                    if(newUnit == null && newGrid[j,k] != null)
-                    {
-                        newGrid[j, k].Die(grid, currentState.GameEnvironment);
-                    }
-                    else
-                    {
-                        newGrid[j, k] = newUnit;
-                    }
+                    newGrid[j, k] = Ruleset.NewBlockState(grid, j, k);
                 }
             }
             // Update the state's grid
@@ -102,13 +95,22 @@ namespace GameOfLife
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     //check if block is a virus or not a cell - if so, add the block's species complexity to the total
-                    if(!(grid[j,k] is Virus) && grid[j,k] != null)
+                    if (!(grid[j, k] is Virus) && grid[j, k] != null)
+                    {
                         //add the product of the units 
-                        gridScore += (grid[j, k] as LivingUnit).SpeciesComplexity * (grid[j, k] as LivingUnit).Age;
+                        gridScore += Math.Max((grid[j, k] as LivingUnit).SpeciesComplexity * (grid[j, k] as LivingUnit).Age, (grid[j, k] as LivingUnit).SpeciesComplexity);
+                    }
                 }
             }
             //if the current score of the board is higher than the highest recorded concurrent score, it becomes the new highest concurrent score
             if (gridScore > HighestConcurrentScore) HighestConcurrentScore = gridScore;
+            //check if there are any units left on board or if the score has not changed in 5 generations
+            if (gridScore == 0 || currentState.isScoreStable(gridScore))
+            {
+                //if either are true, call gameOver in form and end the current simulation
+                var form = System.Windows.Forms.Application.OpenForms.OfType<GameForm>().Single();
+                form.GameOver();
+            }
             //add the score of the board 
             CurrentScore += gridScore;
         }
@@ -126,13 +128,6 @@ namespace GameOfLife
                     }
                 }
             }
-        }
-        
-        //create a new leaderBoard form and show it
-        public void ShowLeaderBoard()
-        {
-            LeaderboardForm f = new LeaderboardForm();
-            f.ShowDialog();
         }
 
         public Unit GetUnit(int row, int col)

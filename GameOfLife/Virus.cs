@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
+    [Serializable]
     class Virus : Unit
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.SlateBlue;

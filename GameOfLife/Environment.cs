@@ -15,6 +15,7 @@ namespace GameOfLife
 {
     public enum EnvironmentTypeEnum { Rainforest, Tundra, Greenhouse, Desert };
 
+    [Serializable]
     public abstract class Environment
     {
         // **** ENVIRONMENTAL PARAMETERS ****/

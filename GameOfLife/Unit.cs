@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-
+    [Serializable]
     public abstract class Unit
     {
         protected Enums.UnitType UnitType { get; set; }

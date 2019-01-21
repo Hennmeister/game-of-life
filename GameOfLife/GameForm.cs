@@ -1,5 +1,5 @@
-﻿// rudy
-// updated UI - Nicole
+﻿// rudy <-- is this dude serious 
+// Updated* UI - Nicole
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +12,7 @@ using System.Windows.Forms;
 
 namespace GameOfLife
 {
+    //CHANGE EVERYTHING FROM PROTECTED TO PRIVATE
     public partial class GameForm : Form
     {
         //store game actions and data
@@ -127,7 +128,7 @@ namespace GameOfLife
             //draw 'color' cursor
             if (eraseToolSelected)
             {
-                e.Graphics.FillRectangle(new SolidBrush(Color.White), imageDragBox);
+                e.Graphics.FillRectangle(new SolidBrush(System.Drawing.Color.White), imageDragBox);
             }
             else if (toolbarSelection != Enums.UnitType.None)
             {
@@ -149,7 +150,9 @@ namespace GameOfLife
             DisplayGenerationNumber();
             DisplayCurrentScore();
             DisplayConcurrentHighScore();
+            DisplayPreviousGens();
         }
+
         protected void DisplayEnvironmentalParameters()
         {
             lblEnvParams.Text = "Water Availability: " + manager.WaterAvailability.ToString() + "\r\n" + "Food Availability: "
@@ -170,6 +173,21 @@ namespace GameOfLife
         protected void DisplayConcurrentHighScore()
         {
             lblHighestConcurrentScore.Text = "Highest Concurrent Score: " + manager.HighestConcurrentScore.ToString();
+        }
+
+        private void DisplayPreviousGens()
+        {
+            int cbLength = cbGenNums.Items.Count;
+            cbGenNums.Items.Clear();
+            for (int i = 0; i < cbLength; i++)
+            {
+                //-i +1 ???
+                if (manager.GenerationCounter - i  >= 0)
+                {
+                    cbGenNums.Items.Add(manager.GenerationCounter - i);
+                }
+                else cbGenNums.Items.Add(0);
+            }
         }
 
         protected void tmrGeneration_Tick(object sender, EventArgs e)
@@ -212,12 +230,9 @@ namespace GameOfLife
                                 continue;
                             }
                             //CASE 1: user is trying to erase a unit at the clicked location
-                            if (eraseToolSelected)
+                            if (manager.GetUnit(j, k) != null && eraseToolSelected)
                             {
-                                if(manager.GetUnit(j, k) != null)
-                                {
-                                    manager.KillUnit(j, k);
-                                }                                
+                                manager.KillUnit(j, k);
                             }
                             // CASE 2: user is trying to create a new unit
                             else
@@ -284,15 +299,38 @@ namespace GameOfLife
             }
         }
 
-        // (Nicole) buttons for saving and loading
+        public void GameOver()
+        {
+            tmrGeneration.Enabled = false;
+            tmrRefresh.Enabled = false;
+            Refresh();
+            MessageBox.Show("GAME OVER");
+            LeaderboardForm f = new LeaderboardForm();
+            this.Close();
+            f.ShowDialog();
+        }
+
+        //Nicole
         private void btnSave_Click(object sender, EventArgs e)
         {
             manager.SaveState();
         }
 
+        //Nicole
         private void btnLoad_Click(object sender, EventArgs e)
         {
             manager.LoadState();
+        }
+
+        //HENNING
+        private void btnLoadPrevGen_Click(object sender, EventArgs e)
+        {
+            if (cbGenNums.SelectedItem != null)
+            {
+                manager.LoadCachedState((int)cbGenNums.SelectedItem);
+                UpdateDisplayedParameters();
+                Refresh();
+            }
         }
     }
 }

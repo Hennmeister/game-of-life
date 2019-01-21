@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
+    [Serializable]
     class Rainforest : Environment
     {
         /// <summary>

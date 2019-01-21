@@ -1,4 +1,6 @@
-﻿namespace GameOfLife
+﻿using System;
+
+namespace GameOfLife
 {
     partial class GameForm
     {
@@ -46,6 +48,8 @@
             this.lblPlantTool = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.cbGenNums = new System.Windows.Forms.ComboBox();
+            this.btnLoadPrevGen = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
             this.picEvent = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picEvent)).BeginInit();
@@ -53,6 +57,7 @@
             // 
             // tmrGeneration
             // 
+            this.tmrGeneration.Interval = 200;
             this.tmrGeneration.Tick += new System.EventHandler(this.tmrGeneration_Tick);
             // 
             // lblGenNum
@@ -201,6 +206,33 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // cbGenNums
+            // 
+            this.cbGenNums.FormattingEnabled = true;
+            this.cbGenNums.Items.AddRange(new object[] {
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"});
+            this.cbGenNums.Location = new System.Drawing.Point(8, 74);
+            this.cbGenNums.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbGenNums.MaxDropDownItems = 5;
+            this.cbGenNums.Name = "cbGenNums";
+            this.cbGenNums.Size = new System.Drawing.Size(43, 21);
+            this.cbGenNums.TabIndex = 15;
+            // 
+            // btnLoadPrevGen
+            // 
+            this.btnLoadPrevGen.Location = new System.Drawing.Point(55, 74);
+            this.btnLoadPrevGen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoadPrevGen.Name = "btnLoadPrevGen";
+            this.btnLoadPrevGen.Size = new System.Drawing.Size(80, 28);
+            this.btnLoadPrevGen.TabIndex = 16;
+            this.btnLoadPrevGen.Text = "Load Previous Generation";
+            this.btnLoadPrevGen.UseVisualStyleBackColor = true;
+            this.btnLoadPrevGen.Click += new System.EventHandler(this.btnLoadPrevGen_Click);
+            // 
             // btnLoad
             // 
             this.btnLoad.Location = new System.Drawing.Point(305, 322);
@@ -227,6 +259,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 508);
             this.Controls.Add(this.picEvent);
+            this.Controls.Add(this.btnLoadPrevGen);
+            this.Controls.Add(this.cbGenNums);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnStart);
@@ -274,6 +308,8 @@
         private System.Windows.Forms.Label lblPlantTool;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ComboBox cbGenNums;
+        private System.Windows.Forms.Button btnLoadPrevGen;
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.PictureBox picEvent;
     }
