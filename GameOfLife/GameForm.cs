@@ -177,16 +177,15 @@ namespace GameOfLife
 
         private void DisplayPreviousGens()
         {
-            int cbLength = cbGenNums.Items.Count;
+            State[] states = manager.CachedStates;
             cbGenNums.Items.Clear();
-            for (int i = 0; i < cbLength; i++)
-            {
-                //-i +1 ???
-                if (manager.GenerationCounter - i  >= 0)
+            for (int i = 0; i < states.Length; i++)
+            {                
+                if (states[i] != null)
                 {
-                    cbGenNums.Items.Add(manager.GenerationCounter - i);
+                    cbGenNums.Items.Add(states[i].GenerationCounter);
                 }
-                else cbGenNums.Items.Add(0);
+                else cbGenNums.Items.Add("Not Available");
             }
         }
 
@@ -325,8 +324,9 @@ namespace GameOfLife
         //HENNING
         private void btnLoadPrevGen_Click(object sender, EventArgs e)
         {
-            if (cbGenNums.SelectedItem != null)
+            if (cbGenNums.SelectedItem != null && cbGenNums.SelectedItem != "Not Available");
             {
+
                 manager.LoadCachedState((int)cbGenNums.SelectedItem);
                 UpdateDisplayedParameters();
                 Refresh();

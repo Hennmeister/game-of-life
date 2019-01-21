@@ -24,7 +24,21 @@ namespace GameOfLife
         public int GenerationCounter { get; set; }
         public Unit[,] UnitGrid { get; set; }
         public Environment GameEnvironment { get; set; }
+        [NonSerialized()]
         private State[] cachedStates = new State[NUMBER_OF_CACHED_STATES];
+        public State[] CachedStates
+        {
+            get
+            {
+                if (cachedStates != null)
+                {
+                    return cachedStates;
+                }
+                else return new State[NUMBER_OF_CACHED_STATES];
+            }
+            set { cachedStates = value; }
+        }
+
         private static int latestID;
         public int CurrentID { get; }
 
@@ -47,21 +61,21 @@ namespace GameOfLife
             {
                 if (cachedStates[i -1] != null)
                 {
-                    cachedStates[i] = DeepClone(cachedStates[i - 1]);
+                    cachedStates[i] = DeepCopy(cachedStates[i - 1]);
                 }
             }
-            cachedStates[0] = DeepClone(this);
+            cachedStates[0] = DeepCopy(this);
         }
 
-        private static T DeepClone<T>(T obj)
+        //creates a deep copy of the state
+        private static State DeepCopy<State>(State state)
         {
             using (var ms = new MemoryStream())
             {
                 var formatter = new BinaryFormatter();
-                formatter.Serialize(ms, obj);
+                formatter.Serialize(ms, state);
                 ms.Position = 0;
-
-                return (T) formatter.Deserialize(ms);
+                return (State) formatter.Deserialize(ms);
             }
         }
 

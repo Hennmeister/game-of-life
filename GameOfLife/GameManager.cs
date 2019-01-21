@@ -57,6 +57,7 @@ namespace GameOfLife
             if (currentState.LoadCachedState(genNum) != null)
             {
                 currentState = currentState.LoadCachedState(genNum);
+                currentState.CachedStates = new State[5];
             }
         }
 
@@ -129,6 +130,9 @@ namespace GameOfLife
                 }
             }
         }
+
+        //get cached states in consistent with rest of code
+        public State[] CachedStates => currentState.CachedStates;
 
         public Unit GetUnit(int row, int col)
         {

@@ -124,7 +124,7 @@ namespace GameOfLife
             // lblCurrentEvent
             // 
             this.lblCurrentEvent.AutoSize = true;
-            this.lblCurrentEvent.Location = new System.Drawing.Point(280, 150);
+            this.lblCurrentEvent.Location = new System.Drawing.Point(330, 137);
             this.lblCurrentEvent.Name = "lblCurrentEvent";
             this.lblCurrentEvent.Size = new System.Drawing.Size(72, 13);
             this.lblCurrentEvent.TabIndex = 6;
@@ -187,9 +187,9 @@ namespace GameOfLife
             // btnStart
             // 
             this.btnStart.AutoEllipsis = true;
-            this.btnStart.Location = new System.Drawing.Point(59, 87);
+            this.btnStart.Location = new System.Drawing.Point(140, 78);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(182, 32);
+            this.btnStart.Size = new System.Drawing.Size(150, 32);
             this.btnStart.TabIndex = 13;
             this.btnStart.Text = "Start Sim!";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -198,7 +198,7 @@ namespace GameOfLife
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(305, 286);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(56, 31);
             this.btnSave.TabIndex = 14;
@@ -215,8 +215,8 @@ namespace GameOfLife
             "0",
             "0",
             "0"});
-            this.cbGenNums.Location = new System.Drawing.Point(8, 74);
-            this.cbGenNums.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbGenNums.Location = new System.Drawing.Point(8, 85);
+            this.cbGenNums.Margin = new System.Windows.Forms.Padding(2);
             this.cbGenNums.MaxDropDownItems = 5;
             this.cbGenNums.Name = "cbGenNums";
             this.cbGenNums.Size = new System.Drawing.Size(43, 21);
@@ -224,8 +224,8 @@ namespace GameOfLife
             // 
             // btnLoadPrevGen
             // 
-            this.btnLoadPrevGen.Location = new System.Drawing.Point(55, 74);
-            this.btnLoadPrevGen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoadPrevGen.Location = new System.Drawing.Point(55, 80);
+            this.btnLoadPrevGen.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoadPrevGen.Name = "btnLoadPrevGen";
             this.btnLoadPrevGen.Size = new System.Drawing.Size(80, 28);
             this.btnLoadPrevGen.TabIndex = 16;
@@ -236,7 +236,7 @@ namespace GameOfLife
             // btnLoad
             // 
             this.btnLoad.Location = new System.Drawing.Point(305, 322);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(56, 31);
             this.btnLoad.TabIndex = 15;
@@ -246,7 +246,7 @@ namespace GameOfLife
             // 
             // picEvent
             // 
-            this.picEvent.Location = new System.Drawing.Point(267, 87);
+            this.picEvent.Location = new System.Drawing.Point(305, 74);
             this.picEvent.Name = "picEvent";
             this.picEvent.Size = new System.Drawing.Size(111, 60);
             this.picEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
