@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
+    [Serializable]
     class Desert : Environment
     {
         /// <summary>

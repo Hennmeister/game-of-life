@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
+    [Serializable]
     class Cell : MergeableUnit
     {
         public static readonly Color baselineColor = Color.Turquoise;

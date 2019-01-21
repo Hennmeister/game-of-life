@@ -9,10 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace GameOfLife
 {
-   
+    [Serializable]
     public class State
     {
         private const int NUMBER_OF_CACHED_STATES = 5;
@@ -43,12 +45,24 @@ namespace GameOfLife
         {
             for (int i = 4; i > 0; i--)
             {
-                if (cachedStates[i] != null)
+                if (cachedStates[i -1] != null)
                 {
-                    cachedStates[i] = cachedStates[i - 1];
+                    cachedStates[i] = DeepClone(cachedStates[i - 1]);
                 }
             }
-            cachedStates[0] = this;
+            cachedStates[0] = DeepClone(this);
+        }
+
+        private static T DeepClone<T>(T obj)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, obj);
+                ms.Position = 0;
+
+                return (T) formatter.Deserialize(ms);
+            }
         }
 
         //Henning

@@ -54,8 +54,10 @@ namespace GameOfLife
         
         public void LoadCachedState(int genNum)
         {
-            //extension method? static :(
-            currentState = currentState.LoadCachedState(genNum);
+            if (currentState.LoadCachedState(genNum) != null)
+            {
+                currentState = currentState.LoadCachedState(genNum);
+            }
         }
 
         public void NextGeneration()
@@ -77,7 +79,7 @@ namespace GameOfLife
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    newGrid[j, k] = Ruleset.NewBlockState(grid, currentState.FoodAvailability, j, k);
+                    newGrid[j, k] = Ruleset.NewBlockState(grid, j, k);
                 }
             }
             // Update the state's grid
