@@ -140,7 +140,7 @@ namespace GameOfLife
                         Unit currUnit = state.UnitGrid[i, j];
                         if (currUnit != null)
                         {
-                            currUnit.SaveUnit(unitFile);
+                            unitFile.WriteLine(currUnit);
                         }
                     }
                 }
@@ -182,35 +182,15 @@ namespace GameOfLife
         // (Nicole) load unit
         private static Unit LoadUnit(string unitString)
         {
-            Unit newUnit = null;
             // split the string that it reads
             string[] unitArray = unitString.Split(';');
 
             // retrieve unitType 
             int u;
             int.TryParse(unitArray[0], out u);
-            UnitTypeEnum unitType = (UnitTypeEnum)u;
+            Enums.UnitType unitType = (Enums.UnitType)u;
 
-            switch (unitType)
-            {
-                case UnitTypeEnum.Virus:
-                    newUnit = new Virus(unitArray);
-                    break;
-                case UnitTypeEnum.Cell:
-                    newUnit = new Cell(unitArray);
-                    break;
-                case UnitTypeEnum.Colony:
-                    newUnit = new Colony(unitArray);
-                    break;
-                case UnitTypeEnum.Animal:
-                    newUnit = new Animal(unitArray);
-                    break;
-                case UnitTypeEnum.Plant:
-                    newUnit = new Plant(unitArray);
-                    break;
-            }
-
-            return newUnit;
+            return UnitFactory.CreateUnit(unitType, unitArray);
         }
 
         /// <summary>

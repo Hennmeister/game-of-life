@@ -12,25 +12,28 @@ namespace GameOfLife
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.LightSkyBlue;
 
-        public Colony(int row = -1, int col = -1) : base(speciesComplexity: 3, senescence: 16,
+        public Colony(int row = -1, int col = -1) : base(Enums.UnitType.Colony, speciesComplexity: 3, senescence: 16,
                                foodRequirement: 4, waterRequirement: 4,
                                gasRequirement: 2, inputGas: Enums.GasType.Oxygen,
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 32,
                                infectionResistance: 5, decompositionValue: 6, row: row, col: col)
         {
-            // (Nicole) - added unitType
-            unitType = UnitTypeEnum.Colony;
         }
 
         // (Nicole) constructor for loading data from file
         public Colony(string[] parameters) : base(parameters)
         {
-            unitType = UnitTypeEnum.Colony;
+            UnitType = Enums.UnitType.Colony;
         }
 
         public override Unit Create(int row, int col)
         {
             return new Colony(row, col);
+        }
+
+        public override Unit Create(string[] parameters)
+        {
+            return new Colony(parameters);
         }
 
         public override void Update(Unit[,] grid, Environment gameEnv)

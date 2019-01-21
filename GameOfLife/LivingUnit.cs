@@ -37,10 +37,11 @@ namespace GameOfLife
         public bool Infected { get; set; }
         private int CuredGenerationsLeft { get; set; }
 
-        public LivingUnit(int speciesComplexity, int senescence, int foodRequirement,
+        public LivingUnit(Enums.UnitType type, int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, Enums.GasType inputGas,
                           Enums.GasType outputGas, int idealTemperature, double infectionResistance,
-                          double decompositionValue, int row = -1, int col = -1) : base(decompositionValue, speciesComplexity, row, col )
+                          double decompositionValue, int row = -1, int col = -1) : base(type, decompositionValue, 
+                          speciesComplexity, row, col )
         {
             Senescence = senescence;
             FoodRequirement = foodRequirement;

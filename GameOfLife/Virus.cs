@@ -12,16 +12,14 @@ namespace GameOfLife
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.SlateBlue;
 
-        public Virus(int row = -1, int col = -1) : base(0.1, row, col)
+        public Virus(int row = -1, int col = -1) : base(Enums.UnitType.Virus, 0.1, row, col)
         {
-            // (Nicole) - added unitType
-            unitType = UnitTypeEnum.Virus;
         }
 
         // (Nicole) --> constructor for reading files
         public Virus(string[] parameters) : base(parameters)
         {
-            unitType = UnitTypeEnum.Virus;
+            UnitType = Enums.UnitType.Virus;
         }
 
         public override Unit Create(int row, int col)
@@ -29,6 +27,10 @@ namespace GameOfLife
             return new Virus(row, col);
         }
 
+        public override Unit Create(string[] parameters)
+        {
+            return new Virus(parameters);
+        }
         public override void Update(Unit[,] grid, Environment gameEnv)
         {
             // Infect neighboring living units

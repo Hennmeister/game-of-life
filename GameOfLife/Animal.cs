@@ -23,26 +23,29 @@ namespace GameOfLife
         private bool IsHibernating { get; set; }
         private int HibernationGenerationsLeft { get; set; }
 
-        public Animal(int row = -1, int col = -1) : base(senescence: 32,
+        public Animal(int row = -1, int col = -1) : base(Enums.UnitType.Animal, senescence: 32,
                                foodRequirement: 8, waterRequirement: 10,
                                gasRequirement: 8, inputGas: Enums.GasType.Oxygen,
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
                                infectionResistance: 8, decompositionValue: 20, row: row, col: col)
         {
             BaselineFoodRequirement = FoodRequirement;
-            // (Nicole) --> added unitType
-            unitType = UnitTypeEnum.Animal;
         }
 
         // (Nicole) --> constructor for reading files
         public Animal(string[] parameters) : base(parameters)
         {
-            unitType = UnitTypeEnum.Animal;
+            UnitType = Enums.UnitType.Animal;
         }
 
         public override Unit Create(int row, int col)
         {
             return new Animal(row, col);
+        }
+
+        public override Unit Create(string[] parameters)
+        {
+            return new Animal(parameters);
         }
 
         protected override void UpdateVictualRequirements(int numNeighbors)

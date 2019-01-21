@@ -9,17 +9,11 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
-    public enum UnitTypeEnum { Virus, Cell, Colony, Animal, Plant };
 
     public abstract class Unit
     {
         // (Nicole) --> unitType
-        protected UnitTypeEnum unitType;
-
-        public UnitTypeEnum UnitType
-        {
-            get { return unitType; }
-        }
+        protected Enums.UnitType UnitType { get; set; }
 
         public (int r, int c) Location { get; }
         
@@ -27,8 +21,9 @@ namespace GameOfLife
 
         public int SpeciesComplexity { get; }
 
-        public Unit(double decompositionValue, int speciesComplexity, int row = -1, int col = -1)
+        public Unit(Enums.UnitType type, double decompositionValue, int speciesComplexity, int row = -1, int col = -1)
         {
+            UnitType = type;
             DecompositionValue = decompositionValue;
             SpeciesComplexity = speciesComplexity;
             Location = (row, col);
@@ -63,17 +58,10 @@ namespace GameOfLife
         }
 
         public abstract Unit Create(int row, int col);
+        public abstract Unit Create(string[] parameters);
 
         public abstract void Update(Unit[,] grid, Environment gameEnv);
-
-        // (Nicole) refactored code so the file is only opened once. 
-        // (Nicole) moved SaveUnit to Unit class.
-        // (Nicole) save one line into the file
-        public void SaveUnit(StreamWriter unitFile)
-        {
-            // Save location information
-            unitFile.WriteLine(ToString());
-        }
+        
 
         // (Nicole) ToString method to serialize properties to string to be saved to file
         // 0: unitType
@@ -83,7 +71,7 @@ namespace GameOfLife
         // 4: species complexity
         public override string ToString()
         {
-            return (int)unitType + ";" + Location.r + ";" + Location.c + ";" + DecompositionValue + ";" + SpeciesComplexity;
+            return (int)UnitType + ";" + Location.r + ";" + Location.c + ";" + DecompositionValue + ";" + SpeciesComplexity;
         }
     }
 }

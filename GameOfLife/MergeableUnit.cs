@@ -10,10 +10,11 @@ namespace GameOfLife
     abstract class MergeableUnit : LivingUnit
     {
 
-        public MergeableUnit(int speciesComplexity, int senescence, int foodRequirement,
+        public MergeableUnit(Enums.UnitType type, int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, Enums.GasType inputGas,
                           Enums.GasType outputGas, int idealTemperature, double infectionResistance,
-                          double decompositionValue, int row = -1, int col = -1) : base(speciesComplexity: 2, senescence: 16,
+                          double decompositionValue, int row = -1, int col = -1) : base(type, 
+                          speciesComplexity: 2, senescence: 16,
                           foodRequirement: 1, waterRequirement: 1,
                           gasRequirement: 1, inputGas: Enums.GasType.Oxygen,
                           outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
