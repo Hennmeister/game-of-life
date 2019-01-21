@@ -2,7 +2,7 @@
  * Rudy Ariaz
  * January 19, 2019
  * Applies a modified Conway's Game of Life ruleset to a given unit. Abstracts
- * the ruleset from the GameManager.
+ * the ruleset from the GameManager. Does not apply the units' individual functions.
  */
 using System;
 using System.Collections.Generic;
@@ -30,9 +30,10 @@ namespace GameOfLife
         /// <param name="grid">The grid in which the block to compute is.</param>
         /// <param name="foodAvailability">The number of food units available
         /// in the block's environment.</param>
-        /// <param name="row">The row of the block to update.</param>
-        /// <param name="col">The column of the block to update.</param>
-        /// <returns>The new Unit that should occupy the block in this new generation.</returns>
+        /// <param name="row">The row (within the grid) of the block to update.</param>
+        /// <param name="col">The column (within the grid) of the block to update.</param>
+        /// <returns>The new Unit that should occupy the block in this new generation. Null if no unit
+        /// should occupy the block.</returns>
         public static Unit NewBlockState(Unit[,] grid, double foodAvailability, int row, int col)
         {
             // The current Unit in the block to update
@@ -70,77 +71,168 @@ namespace GameOfLife
         /// Computes the state of a given LivingUnit in the grid in the new generation
         /// given the grid, the block, and the food availability.
         /// </summary>
+        /// <remarks>
+        /// The grid block to update should be non-null.
+        /// </remarks>
         /// <param name="grid">The grid in which the LivingUnit to compute is.</param>
         /// <param name="foodAvailability">The number of food units available
         /// in the LivingUnit's environment.</param>
-        /// <param name="row">The row of the LivingUnit to update.</param>
-        /// <param name="col">The column of the LivingUnit to update.</param>
-        /// <returns>The new LivingUnit that should occupy the block in this new generation.</returns>
-        private static Unit NewLivingState(Unit[,] grid, double foodAvailability, int row, int col)
+        /// <param name="row">The row (within the grid) of the LivingUnit to update.</param>
+        /// <param name="col">The column (within the grid) of the LivingUnit to update.</param>
+        /// <returns>The new LivingUnit that should occupy the block in this new generation. Null if
+        /// no unit should occupy the block.</returns>
+        private static LivingUnit NewLivingState(Unit[,] grid, double foodAvailability, int row, int col)
         {
             // The current Unit in the block to update
             Unit thisUnit = grid[row, col];
 
-            // Count the number of live neighborus 
+            // Count the number of live neighbors 
             int liveNeighbors = CountLiveNeighbors(grid, row, col);
             
-            // Check if existing unit dies
+            // Check if the existing unit should die next generation
             if (!UnitPersists(thisUnit, liveNeighbors, foodAvailability))
             {
+                // Null represents a dead unit
                 return null;
             }
             // Otherwise, the unit remains the same
-            return thisUnit;
+            return (LivingUnit)thisUnit;
         }
-        // TODO: test this thoroughly
+
+        /// <summary>
+        /// Computes the state of a given Virus in the grid in the new generation
+        /// given the grid and the block.
+        /// </summary>
+        /// <remarks>
+        /// The grid block to update should be non-null.
+        /// </remarks>
+        /// <param name="grid">The grid in which the Virus to compute is.</param>
+        /// <param name="row">The row (within the grid) of the Virus to update.</param>
+        /// <param name="col">The column (within the grid) of the Virus to update.</param>
+        /// <returns>The new Virus that should occupy the block in this new generation. Null if
+        /// no unit should occupy the block.</returns>
+        private static Virus NewVirusState(Unit[,] grid, int row, int col)
+        {
+            // The current Unit in the block to update
+            Unit thisUnit = grid[row, col];
+
+            // Count the number of viral neighbors 
+            int liveNeighbors = CountViralNeighbors(grid, row, col);
+
+            // Check if the existing unit should die next generation
+            if (!UnitPersists(thisUnit, liveNeighbors: liveNeighbors))
+            {
+                // Null represents a dead unit
+                return null;
+            }
+            // Otherwise, the unit remains the same
+            return (Virus)thisUnit;
+        }
+
+        /// <summary>
+        /// Computes the Unit that should occupy an empty block in the next generation of the game,
+        /// due to the rule stating that any empty block with exactly 3 neighbors should contain
+        /// a non-null Unit in the next generation.
+        /// </summary>
+        /// <param name="grid">The grid to use for computations.</param>
+        /// <param name="row">The row (within the grid) of the empty block.</param>
+        /// <param name="col">The column (within the grid) of the empty block.</param>
+        /// <returns>The non-null Unit that should occupy the block.</returns>
         private static Unit NewbornUnit(Unit[,] grid, int row, int col)
         {
-            // Get all the living neighbors of the unit
+            // Get all the neighbors of the block (in the 3x3 square centered on the block - 
+            // the Moore neighborhood
             List<Unit> neighbors = GetAllNeighbors(grid, row, col);
+            // Will store the neighbor with the same type of the Unit to occupy this empty block
+            Unit modelNeighbor = null;
 
-            // neighbor with the same type as the new child
-            Unit modelneighbor = null;
-            int speciesComplexitySum = 0;
-            foreach(Unit unit in neighbors)
-            {
-                speciesComplexitySum += unit.SpeciesComplexity;
-            }
-            modelneighbor = GetModelNeighbor(CalculateSpeciesProbabilities(speciesComplexitySum, neighbors));
-            // Create the unit
-            return modelneighbor?.Create(row, col);
+            // Find the neighbor to base the new Unit on 
+            modelNeighbor = GetModelNeighbor(CalculateNeighborProbabilities(neighbors));
+            // Return the new non-null Unit that should occupy the block in the next generation
+            return modelNeighbor.Create(row, col);
+        }
+        
+        /// <summary>
+        /// Given probabilities for a new child Unit (a Unit occupying a previously-empty block)
+        /// to be of each of its neighbors' species, find the neighbor with the same species as the child Unit.
+        /// </summary>
+        /// <param name="neighborProbabilities">A mapping between a block's neighbors, and the cumulative probabilities
+        /// that each of them will be selected as a model neighbor.</param>
+        /// <returns>The non-null Unit (one of the block's neighbors) whose type is the same
+        /// as the child Unit's type.</returns>
+        private static Unit GetModelNeighbor(Dictionary<Unit, double> neighborProbabilities)
+        {
+            // Convert the dictionary into an iterable list of key-value pairs, sorted in ascending order
+            // since the probabilities are cumulative
+            var neighbors =
+                (from neighbor
+                in neighborProbabilities
+                orderby neighbor.Value
+                ascending
+                select neighbor).ToList();
+            // Get just the probabilities of each neighbor being selected as the model neighbor
+            double[] sortedProbabilities = neighbors.Select(x => x.Value).ToArray();
+            // Keep, in a parallel array, the neighbors corresponding to each probability
+            Unit[] correspondingSpecies = neighbors.Select(x => x.Key).ToArray();
+            
+            // Get the index of the neighbor probabilistically selected to serve as a model neighbor
+            int indexSelected = ProbabilityHelper.EvaluateDependentPredicate(sortedProbabilities);
+            // Return the model neighbor
+            return correspondingSpecies[indexSelected];
         }
 
-        private static Dictionary<Unit, double> CalculateSpeciesProbabilities(int complexitySum, List<Unit> neighbors)
+        /// <summary>
+        /// Calculates the probabilities that each of an empty block's Unit neighbors will be 
+        /// selected as a model neighbor for the creation of a new Unit in the empty block. Probabilities
+        /// are weighted towards favoring the creation of Units with a lower species complexity (e.g. a Cell
+        /// is more likely to be formed than an Animal).
+        /// </summary>
+        /// <param name="neighbors">The list of all unique non-null neighbors in the Moore's neighborhood
+        /// of the empty block. The neighbors can be in any order.</param>
+        /// <returns>A mapping between each neighbor and its cumulative probability of being selected as 
+        /// a model neighbor. The order of cumulative probabilities is on average irrelevant.</returns>
+        private static Dictionary<Unit, double> CalculateNeighborProbabilities(List<Unit> neighbors)
         {
-            Dictionary<Unit, double> speciesProbabilities = 
-                new Dictionary<Unit, double>();
+            // The sum of all the species complexities of Units in the block's Moore neighborhood.
+            // Will be used to calculate probabilities for which species to birth, since 
+            // the ruleset prioritizes simpler Units.
+            int speciesComplexitySum = 0;
+
+            // Iterate through all the block's neighbors
+            foreach (Unit unit in neighbors)
+            {
+                // Add the Unit's species complexity to the sum
+                speciesComplexitySum += unit.SpeciesComplexity;
+            }
+
+            // Prefix sum array to store all the cumulative probabilities of the neighbors
+            double[] probs = new double[neighbors.Count];
+
             // Iterate through all the neighbors, and calculate their cumulative probabilities
             for(int i = 0; i < neighbors.Count; i++)
             {
+                // Get the current neighbor
                 Unit unit = neighbors[i];
-                // Unit probability 
-                double prob = 1 - (2 * unit.SpeciesComplexity) / complexitySum;
-                double cumulativeProb = i > 0 ? speciesProbabilities[neighbors[i - 1]] : 0;
-                speciesProbabilities.Add(unit, prob + cumulativeProb);
+                // Calculate the current probability that this neighbor will be selected
+                // as a model neighbor. Since it weighs species complexity negatively, 
+                // the species complexity term is negated; the probabilities of all 
+                // neighbors sum to 1.
+                double prob = 1 - (2 * unit.SpeciesComplexity) / speciesComplexitySum;
+                // The cumulative probability up to and excluding the current neighbor.
+                // Checks if there is a previous neighbor in the list; if not, the initial cumulative
+                // probability must be 0.
+                double cumulativeProb = i > 0 ? probs[i-1] : 0;
+                // The cumulative probability up to and including this neighbor is the sum
+                // of the neighbor's individual probability and previous cumulative probabilities
+                probs[i] = prob + cumulativeProb;
             }
-            // Return the cumulative probabilities
-            return speciesProbabilities;
+
+            // Return a mapping between the neighbors and their cumulative probabilities
+            return neighbors.Zip(probs, (k, v) => new { k, v })
+                            .ToDictionary(x => x.k, x => x.v);
         }
 
-        // Gets the neighbor to model a new child on given species probabilities
-        // TODO: test
-        private static Unit GetModelNeighbor(Dictionary<Unit, double> speciesProbabilities)
-        {
-            // Get the probabilities
-            var neighbors = speciesProbabilities.ToList();
-            double[] sortedProbabilities = neighbors.Select(x => x.Value).ToArray();
-            Unit[] correspondingSpecies = neighbors.Select(x => x.Key).ToArray();
-
-
-            // Get the first unit to have its predicate be true
-            int indexSelected = ProbabilityHelper.EvaluateDependentPredicate(sortedProbabilities);
-            return correspondingSpecies[indexSelected];
-        }
+        
 
         private static List<Unit> GetAllNeighbors(Unit[,] grid, int row, int col)
         {
@@ -163,30 +255,7 @@ namespace GameOfLife
         {
             return CountLiveNeighbors(grid, row, col) + CountViralNeighbors(grid, row, col);
         }
-        private static Unit NewVirusState(Unit[,] grid, int row, int col)
-        {
-            int liveNeighbors = CountViralNeighbors(grid, row, col);
-            Unit thisUnit = grid[row, col];
-            
-            // Check if there is no unit in the block  
-            if(thisUnit == null)
-            {
-                // Unit is born
-                if(liveNeighbors == OVER_POP)
-                {
-                    return new Virus();
-                }
-                return null;
-            }
-
-            // Virus dies
-            if (!UnitPersists(thisUnit, liveNeighbors : liveNeighbors))
-            {
-                return null;
-            }
-            // Otherwise, the unit persists
-            return thisUnit;
-        }
+       
 
         // TODO: check if null objects don't count
         private static bool IsLiveUnit(Unit unit)
@@ -223,6 +292,10 @@ namespace GameOfLife
 
         private static bool HasEnoughFood(LivingUnit unit, double foodAvailability, int liveNeighbors)
         {
+            if(foodAvailability >= unit.FoodRequirement)
+            {
+                return true;
+            }
             // Check if dies because of food deficiency
             double probability = (unit.FoodRequirement - foodAvailability) / unit.FoodRequirement;
             return ProbabilityHelper.EvaluateIndependentPredicate(probability);
