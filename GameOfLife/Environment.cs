@@ -70,7 +70,8 @@ namespace GameOfLife
         /// <param name="probOfRain"> The probability of rain in this environment </param>
         public Environment(double defaultFood, int defaultWater,
                            int oxygenLevel, int carbonDioxideLevel,
-                           int temperature, int probOfRain)
+                           int temperature, int probOfRain, 
+                           Image envImage, Image eventPic)
         {
             // **** INITIALIZE ENVIRONMENT PARAMETERS BASED ON TYPE OF ENVIRONMENT ****
             // The default/base amount of food and water in this biome
@@ -86,6 +87,14 @@ namespace GameOfLife
             Temperature = temperature;
             // Probability of rain as a percent
             probabilityOfRain = probOfRain;
+
+            // IMAGES
+            // Background of the environment
+            environmentImage = envImage;
+            // Image for the unique environmental event
+            eventImage = eventPic;
+            // Image for rain event
+            rainImage = Properties.Resources.Rain;
         }
         
         // getter for event images

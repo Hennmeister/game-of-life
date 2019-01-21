@@ -113,6 +113,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
@@ -130,6 +131,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Desert.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Greenhouse.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rainforest.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tundra.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Caretaker.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Deforestation.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Rain.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sandstorm.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Snowstorm.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

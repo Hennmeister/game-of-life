@@ -174,6 +174,11 @@ namespace GameOfLife
             get { return currentState.RainImage; }
         }
 
+        public Image EventImage
+        {
+            get { return currentState.EventImage; }
+        }
+
         public double FoodAvailability
         {
             get { return currentState.FoodAvailability; }

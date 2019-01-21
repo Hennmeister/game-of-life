@@ -51,6 +51,8 @@ namespace GameOfLife
             this.cbGenNums = new System.Windows.Forms.ComboBox();
             this.btnLoadPrevGen = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
+            this.picEvent = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picEvent)).BeginInit();
             this.SuspendLayout();
             // 
             // tmrGeneration
@@ -122,7 +124,7 @@ namespace GameOfLife
             // lblCurrentEvent
             // 
             this.lblCurrentEvent.AutoSize = true;
-            this.lblCurrentEvent.Location = new System.Drawing.Point(198, 173);
+            this.lblCurrentEvent.Location = new System.Drawing.Point(280, 150);
             this.lblCurrentEvent.Name = "lblCurrentEvent";
             this.lblCurrentEvent.Size = new System.Drawing.Size(72, 13);
             this.lblCurrentEvent.TabIndex = 6;
@@ -185,7 +187,7 @@ namespace GameOfLife
             // btnStart
             // 
             this.btnStart.AutoEllipsis = true;
-            this.btnStart.Location = new System.Drawing.Point(143, 72);
+            this.btnStart.Location = new System.Drawing.Point(59, 87);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(182, 32);
             this.btnStart.TabIndex = 13;
@@ -242,11 +244,21 @@ namespace GameOfLife
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
+            // picEvent
+            // 
+            this.picEvent.Location = new System.Drawing.Point(267, 87);
+            this.picEvent.Name = "picEvent";
+            this.picEvent.Size = new System.Drawing.Size(111, 60);
+            this.picEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picEvent.TabIndex = 16;
+            this.picEvent.TabStop = false;
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 508);
+            this.Controls.Add(this.picEvent);
             this.Controls.Add(this.btnLoadPrevGen);
             this.Controls.Add(this.cbGenNums);
             this.Controls.Add(this.btnLoad);
@@ -271,6 +283,7 @@ namespace GameOfLife
             this.Text = "Form1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseMove);
+            ((System.ComponentModel.ISupportInitialize)(this.picEvent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -298,6 +311,7 @@ namespace GameOfLife
         private System.Windows.Forms.ComboBox cbGenNums;
         private System.Windows.Forms.Button btnLoadPrevGen;
         private System.Windows.Forms.Button btnLoad;
+        private System.Windows.Forms.PictureBox picEvent;
     }
 }
 

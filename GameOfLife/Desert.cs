@@ -12,7 +12,7 @@ namespace GameOfLife
         /// <summary>
         /// Create a Desert with its unique environmental parameters for the simulation's environment
         /// </summary>
-        public Desert() : base(3000, 1500, 50, 50, 45, 5)
+        public Desert() : base(3000, 1500, 50, 50, 45, 5, Properties.Resources.Desert, Properties.Resources.Sandstorm)
         {
             // (Nicole) assign the specific environment type
             environmentType = EnvironmentTypeEnum.Desert;

@@ -12,7 +12,7 @@ namespace GameOfLife
         /// <summary>
         /// Create a Greenhouse with its unique environmental parameters for the simulation's environment
         /// </summary>
-        public Greenhouse() : base(3000, 50000, 25, 75, 35, 30)
+        public Greenhouse() : base(3000, 50000, 25, 75, 35, 30, Properties.Resources.Greenhouse, Properties.Resources.Caretaker)
         {
             // (Nicole) assign the specific environment type
             environmentType = EnvironmentTypeEnum.Greenhouse;

@@ -13,7 +13,7 @@ namespace GameOfLife
         /// <summary>
         /// Create a Tundra with its unique environmental parameters for the simulation's environment
         /// </summary>
-        public Tundra() : base(10000, 250000, 75, 25, 15, 15)
+        public Tundra() : base(10000, 250000, 75, 25, 15, 15, Properties.Resources.Tundra, Properties.Resources.Snowstorm)
         {
             // (Nicole) assign the specific environment type
             environmentType = EnvironmentTypeEnum.Tundra;
