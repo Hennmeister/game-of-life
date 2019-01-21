@@ -34,6 +34,10 @@ namespace GameOfLife
             {
                 Merge(grid, gameEnv);
             }
+            else
+            {
+                UpdateBasicLivingUnit(grid, gameEnv);
+            }
         }
         
 

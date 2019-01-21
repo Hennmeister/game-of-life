@@ -49,6 +49,15 @@ namespace GameOfLife
             {
                 Merge(grid, gameEnv);
             }
+            else
+            {
+                bool initiallyInfected = Infected;
+                UpdateBasicLivingUnit(grid, gameEnv);
+                if(!Infected && initiallyInfected)
+                {
+                    InfectionResistance += 0.5;
+                }
+            }
         }
         
         /// <summary>

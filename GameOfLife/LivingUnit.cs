@@ -66,6 +66,7 @@ namespace GameOfLife
             // Eat
             Eat(gameEnv, FoodRequirement);
             Drink(gameEnv, WaterRequirement);
+            Respire(gameEnv);
 
             if (ShouldAge(gameEnv))
             {
@@ -89,9 +90,15 @@ namespace GameOfLife
         private void UpdateInfection()
         {
             // Try to cure the infection
-            if (!TryCure())
+            if (!IsCured())
             {
                 CuredGenerationsLeft--;
+            }
+            // Otherwise, the infection is cured
+            else
+            {
+                Infected = false;
+                CuredGenerationsLeft = 0;
             }
         }
         
@@ -128,16 +135,9 @@ namespace GameOfLife
         }
         
 
-        private bool TryCure()
+        protected bool IsCured()
         {
-            // If cured
-            if (ProbabilityHelper.EvaluateIndependentPredicate(CureProbabillity()))
-            {
-                Infected = false;
-                CuredGenerationsLeft = 0;
-                return true;
-            }
-            return false;
+            return ProbabilityHelper.EvaluateIndependentPredicate(CureProbabillity());
         }
 
         private double CureProbabillity()
