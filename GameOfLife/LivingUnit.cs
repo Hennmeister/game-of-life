@@ -185,32 +185,15 @@ namespace GameOfLife
 
         protected bool Drink(Environment gameEnv, int toDrink)
         {
-            // If the unit cannot drink as much as it requires, it dies
-            if (gameEnv.DecreaseWater(toDrink) == false)
-            {
-                // Indicate that the unit cannot drink as much as it needs
-                return false;
-            }
-            else
-            {
-                // Indicate that the unit can drink as much as it needs
-                return true;
-            }
+            // Return whether the lifeform was able to drink as much water as it needs to survive
+            return gameEnv.DecreaseWater(toDrink);
+
         }
 
         protected bool Eat(Environment gameEnv, double toEat)
         {
-            // If the unit cannot eat as much as it requires, it dies
-            if (gameEnv.DecreaseFood(toEat) == false)
-            {
-                // Indicate that the unit cannot eat as much as it needs
-                return false;
-            }
-            else
-            {
-                // Indicate that the unit can eat as much as it needs
-                return true;
-            }
+            // Return whether the lifeform was able to eat as much food as it needs to survive
+            return gameEnv.DecreaseFood(toEat);
         }
         
         // 

@@ -133,14 +133,6 @@ namespace GameOfLife
             }
         }
 
-        public bool EnvironmentalEventOccurs
-        {
-            get
-            {
-                return GameEnvironment.EventOccurs();
-            }
-        }
-
         public int EventGenerationsLeft
         {
             get

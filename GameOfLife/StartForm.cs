@@ -19,11 +19,6 @@ namespace GameOfLife
         //store game actions and data
         private GameManager manager;
 
-        // Used to adjust changes in the oxygen level and carbon dioxide level sliders
-        // Needed to calculate change and apply to other slider (balance out to 100%)
-        private int oxygenLevel;
-        private int carbonDioxideLevel;
-
         public StartForm(GameManager manager)
         {
             this.manager = manager;
@@ -102,9 +97,6 @@ namespace GameOfLife
                 lblCurrTemp.Text = sldTemperature.Value.ToString() + "°C";
                 lblCurrOxygen.Text = sldOxygenLevel.Value.ToString() + "%";
                 lblCurrCarbonDioxide.Text = sldCarbonDioxideLevel.Value.ToString() + "%";
-                // Keep track of the current oxygen and carbon dioxide levels
-                oxygenLevel = sldOxygenLevel.Value;
-                carbonDioxideLevel = sldCarbonDioxideLevel.Value;
             }
         }
 
@@ -206,36 +198,35 @@ namespace GameOfLife
         private void sldWaterAvailability_Scroll(object sender, EventArgs e)
         {
             lblCurrWater.Text = sldWaterAvailability.Value.ToString();
-
+            manager.WaterAvailability = sldWaterAvailability.Value;
         }
 
         private void sldTemperature_Scroll(object sender, EventArgs e)
         {
             lblCurrTemp.Text = sldTemperature.Value.ToString() + "°C";
-
+            manager.Temperature = sldTemperature.Value;
         }
 
         private void sldOxygenLevel_Scroll(object sender, EventArgs e)
         {
+            // Update new oxygen and carbon dioxide levels
+            manager.OxygenLevel = sldOxygenLevel.Value;
+            sldCarbonDioxideLevel.Value = 100 - manager.OxygenLevel;
+            manager.CarbonDioxideLevel = 100 - manager.OxygenLevel;
+            // Output new oxygen and carbon dioxide levels
             lblCurrOxygen.Text = sldOxygenLevel.Value.ToString() + "%";
-            // Calculate difference between previous and new oxygen level
-            int difference = oxygenLevel - sldOxygenLevel.Value;
-            // Apply difference to carbon dioxide level in the opposite direction to ensure they sum to 100%
-            sldCarbonDioxideLevel.Value += difference;
             lblCurrCarbonDioxide.Text = sldCarbonDioxideLevel.Value.ToString() + "%";
-            // Update current oxygen level
-            oxygenLevel = sldOxygenLevel.Value;
         }
 
         private void sldCarbonDioxideLevel_Scroll(object sender, EventArgs e)
         {
-            // Calculate difference between previous and new carbon dioxide level
-            int difference = carbonDioxideLevel - sldCarbonDioxideLevel.Value;
-            // Apply difference to carbon dioxide level in the opposite direction to ensure they sum to 100%
-            sldOxygenLevel.Value += difference;
-            lblCurrOxygen.Text = sldCarbonDioxideLevel.Value.ToString() + "%";
-            // Update current carbon dioxide level
-            carbonDioxideLevel = sldCarbonDioxideLevel.Value;
+            // Update new carbon dioxide and oxygen levels
+            manager.CarbonDioxideLevel = sldCarbonDioxideLevel.Value;
+            manager.OxygenLevel = 100 - sldCarbonDioxideLevel.Value;
+            sldOxygenLevel.Value = 100 - sldCarbonDioxideLevel.Value;
+            // Output new carbon dioxide and oxygen levels
+            lblCurrCarbonDioxide.Text = sldCarbonDioxideLevel.Value.ToString() + "%";
+            lblCurrOxygen.Text = sldOxygenLevel.Value.ToString() + "%";
         }
 
         private void btnLoadState_Click(object sender, EventArgs e)

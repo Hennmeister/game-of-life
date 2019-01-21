@@ -157,6 +157,7 @@ namespace GameOfLife
             DisplayCurrentScore();
             DisplayConcurrentHighScore();
             DisplayPreviousGens();
+            DisplayEvent();
         }
 
         protected void DisplayEnvironmentalParameters()
@@ -192,6 +193,28 @@ namespace GameOfLife
                     cbGenNums.Items.Add(states[i].GenerationCounter);
                 }
                 else cbGenNums.Items.Add("Not Available");
+            }
+        }
+
+        /// <summary>
+        /// Provide user output on what event is occuring in the environment
+        /// </summary>
+        private void DisplayEvent()
+        {
+            if (manager.IsRaining)
+            {
+                picEvent.Image = manager.RainImage;
+                lblCurrentEvent.Text = "It is raining!";
+            }
+            else if (manager.EnvEventOccurring)
+            {
+                picEvent.Image = manager.EventImage;
+                lblCurrentEvent.Text = "The environmental event is occurring!";
+            }
+            else
+            {
+                picEvent.Image = null;
+                lblCurrentEvent.Text = "No event is occurring.";
             }
         }
 
@@ -341,9 +364,8 @@ namespace GameOfLife
         private void btnLoadPrevGen_Click(object sender, EventArgs e)
         {
             //Make sure the game is paused, a generation number is selected and that the selected value is a number
-            if (isPaused && cbGenNums.SelectedItem != null && cbGenNums.SelectedText != "Not Available");
+            if (isPaused && cbGenNums.SelectedItem != null && cbGenNums.SelectedText != "Not Available")
             {
-
                 manager.LoadCachedState((int)cbGenNums.SelectedItem);
                 UpdateDisplayedParameters();
                 Refresh();
