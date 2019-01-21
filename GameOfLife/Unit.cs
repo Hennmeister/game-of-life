@@ -19,10 +19,9 @@ namespace GameOfLife
         {
             DecompositionValue = decompositionValue;
             SpeciesComplexity = speciesComplexity;
+            Location = (row, col);
         }
-        
-
-        
+               
         public void Die(Unit[,] grid, Environment gameEnv)
         {
             grid[Location.r, Location.c] = null;
