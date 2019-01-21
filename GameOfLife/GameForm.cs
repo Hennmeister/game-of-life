@@ -124,7 +124,7 @@ namespace GameOfLife
             //draw 'color' cursor
             if (eraseToolSelected)
             {
-                e.Graphics.FillRectangle(new SolidBrush(System.Drawing.Color.White), imageDragBox);
+                e.Graphics.FillRectangle(new SolidBrush(Color.White), imageDragBox);
             }
             else if (toolbarSelection != Enums.UnitType.None)
             {
@@ -209,9 +209,12 @@ namespace GameOfLife
                                 continue;
                             }
                             //CASE 1: user is trying to erase a unit at the clicked location
-                            if (manager.GetUnit(j, k) != null && eraseToolSelected)
+                            if (eraseToolSelected)
                             {
-                                manager.KillUnit(j, k);
+                                if(manager.GetUnit(j, k) != null)
+                                {
+                                    manager.KillUnit(j, k);
+                                }                                
                             }
                             // CASE 2: user is trying to create a new unit
                             else

@@ -12,7 +12,7 @@ namespace GameOfLife
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.SlateBlue;
 
-        public Virus(int row = -1, int col = -1) : base(Enums.UnitType.Virus, 0.1, row, col)
+        public Virus(int row = -1, int col = -1) : base(Enums.UnitType.Virus, 0.1, 1, row, col)
         {
         }
 
