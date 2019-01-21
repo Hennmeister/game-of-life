@@ -12,6 +12,7 @@ namespace GameOfLife
     static class Datastore
     {
         private const string STATES_DIRECTORY_SUFFIX = @"\PastStates";
+        private const int HIGHEST_CONCURRENT_SCORE_INDEX = 3;
         private static bool generalStatesDirectoryExists;
         public static string GeneralStatesDirectoryPath { get; } = 
             Directory.GetCurrentDirectory() + STATES_DIRECTORY_SUFFIX;
@@ -286,9 +287,10 @@ namespace GameOfLife
             foreach(string statePath in allStates)
             {
                 string infoPath = statePath + @"\GeneralInformation.txt";
+                string sessionName = statePath.Substring(GeneralStatesDirectoryPath.Length + 1);
                 string[] generalInfo = File.ReadAllLines(infoPath);
                 // The first line of the file is the username, the last one is the highest concurrent score
-                allScores.Add(generalInfo[0], int.Parse(generalInfo[3]));
+                allScores.Add(sessionName, int.Parse(generalInfo[HIGHEST_CONCURRENT_SCORE_INDEX]));
             }
             return allScores;
         }

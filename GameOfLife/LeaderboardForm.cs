@@ -46,11 +46,5 @@ namespace GameOfLife
             }
         }
         
-
-        private void LeaderboardForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            StartForm startForm = new StartForm(new GameManager());
-            startForm.ShowDialog();
-        }
     }
 }

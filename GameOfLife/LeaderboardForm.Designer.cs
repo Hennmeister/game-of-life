@@ -103,10 +103,8 @@
             this.Controls.Add(this.lblScore1);
             this.Name = "LeaderboardForm";
             this.Text = "LeaderboardForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LeaderboardForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
