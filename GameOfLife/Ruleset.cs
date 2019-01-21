@@ -292,6 +292,10 @@ namespace GameOfLife
 
         private static bool HasEnoughFood(LivingUnit unit, double foodAvailability, int liveNeighbors)
         {
+            if(foodAvailability >= unit.FoodRequirement)
+            {
+                return true;
+            }
             // Check if dies because of food deficiency
             double probability = (unit.FoodRequirement - foodAvailability) / unit.FoodRequirement;
             return ProbabilityHelper.EvaluateIndependentPredicate(probability);
