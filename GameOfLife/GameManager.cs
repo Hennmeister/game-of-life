@@ -63,8 +63,39 @@ namespace GameOfLife
 
         public void NextGeneration()
         {
+            // **** UPDATE UNITS **** 
             ApplyRuleset();
             UpdateAllUnits();
+            // **** UPDATE ENVIRONMENT **** 
+            // case 1: it is currently raining in the environment
+            if (currentState.GameEnvironment.IsRaining)
+            {
+                // Process the next generation of rain
+                currentState.GameEnvironment.Rain();
+            }
+            // case 2: the environment's unique event is currently happening
+            else if (currentState.GameEnvironment.EnvEventOccurring)
+            {
+                // Process the next generation of the environmental event
+                currentState.GameEnvironment.EnvironmentalEvent(currentState.UnitGrid);
+            }
+            // case 3: none of the two events are occurring, so see if an event should start
+            else
+            {
+                // case 3.1: check if probability determines raining to start
+                if (currentState.GameEnvironment.WillRain())
+                {
+                    // Process the first generation with rain
+                    currentState.GameEnvironment.Rain();
+                }
+                // case 3.2: check if probability determines that the environmental event will start
+                else if (currentState.GameEnvironment.EventStarts())
+                {
+                    // Process the first generation with the environmental event
+                    currentState.GameEnvironment.EnvironmentalEvent(currentState.UnitGrid);
+                }
+            }
+            // **** UPDATE LOGISTICS **** 
             CalculateScore();
             currentState.AddStateToCache();
             ++currentState.GenerationCounter;
@@ -162,11 +193,6 @@ namespace GameOfLife
             set { currentState.CarbonDioxideLevel = value;  }
         }
 
-        public bool EnvironmentalEventOccurs
-        {
-            get { return currentState.EnvironmentalEventOccurs; }
-        }
-
         public Image EnvironmentImage
         {
             get { return currentState.EnvironmentalImage;  }
@@ -230,7 +256,17 @@ namespace GameOfLife
             get { return currentState.Username; }
             set { currentState.Username = value; }
         }
-        
+
+        public bool IsRaining
+        {
+            get { return currentState.GameEnvironment.IsRaining; }
+        }
+
+        public bool EnvEventOccurring
+        {
+            get { return currentState.GameEnvironment.EnvEventOccurring; }
+        }
+
         //Returns the grid size
         public int GetGridSize
         {

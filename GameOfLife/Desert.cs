@@ -21,12 +21,17 @@ namespace GameOfLife
         /// <summary>
         /// Enacts the Desert's unique environmental event of a sandstorm
         /// </summary>
-        protected override void EnvironmentalEvent(Unit[,] units)
+        public override void EnvironmentalEvent(Unit[,] units)
         {
             // Wind decreases temperature by 5℃
             Temperature -= 5;
             // Lose access to 5% of available food
             FoodAvailability -= 0.10 * FoodAvailability;
+            // Indicate that the event has stopped once it should not continue for the next generation
+            if (--EventGenerationsLeft == 0)
+            {
+                EnvEventOccurring = false;
+            }
         }
     }
 }

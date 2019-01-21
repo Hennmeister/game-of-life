@@ -119,7 +119,7 @@ namespace GameOfLife
             // lblCurrentEvent
             // 
             this.lblCurrentEvent.AutoSize = true;
-            this.lblCurrentEvent.Location = new System.Drawing.Point(330, 137);
+            this.lblCurrentEvent.Location = new System.Drawing.Point(186, 189);
             this.lblCurrentEvent.Name = "lblCurrentEvent";
             this.lblCurrentEvent.Size = new System.Drawing.Size(72, 13);
             this.lblCurrentEvent.TabIndex = 6;
@@ -194,7 +194,7 @@ namespace GameOfLife
             // 
             this.btnSave.AutoSize = true;
             this.btnSave.Location = new System.Drawing.Point(305, 286);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(56, 31);
             this.btnSave.TabIndex = 14;
@@ -212,7 +212,7 @@ namespace GameOfLife
             "0",
             "0"});
             this.cbGenNums.Location = new System.Drawing.Point(8, 85);
-            this.cbGenNums.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbGenNums.Margin = new System.Windows.Forms.Padding(2);
             this.cbGenNums.MaxDropDownItems = 5;
             this.cbGenNums.Name = "cbGenNums";
             this.cbGenNums.Size = new System.Drawing.Size(43, 21);
@@ -221,7 +221,7 @@ namespace GameOfLife
             // btnLoadPrevGen
             // 
             this.btnLoadPrevGen.Location = new System.Drawing.Point(55, 80);
-            this.btnLoadPrevGen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLoadPrevGen.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoadPrevGen.Name = "btnLoadPrevGen";
             this.btnLoadPrevGen.Size = new System.Drawing.Size(80, 36);
             this.btnLoadPrevGen.TabIndex = 16;
@@ -231,7 +231,7 @@ namespace GameOfLife
             // 
             // picEvent
             // 
-            this.picEvent.Location = new System.Drawing.Point(305, 74);
+            this.picEvent.Location = new System.Drawing.Point(226, 126);
             this.picEvent.Name = "picEvent";
             this.picEvent.Size = new System.Drawing.Size(111, 60);
             this.picEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -241,7 +241,7 @@ namespace GameOfLife
             // txtSessionName
             // 
             this.txtSessionName.Location = new System.Drawing.Point(290, 331);
-            this.txtSessionName.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.txtSessionName.Margin = new System.Windows.Forms.Padding(1);
             this.txtSessionName.Name = "txtSessionName";
             this.txtSessionName.Size = new System.Drawing.Size(74, 20);
             this.txtSessionName.TabIndex = 17;
@@ -259,7 +259,7 @@ namespace GameOfLife
             // 
             this.btnConfirmSave.AutoSize = true;
             this.btnConfirmSave.Location = new System.Drawing.Point(305, 361);
-            this.btnConfirmSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnConfirmSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmSave.Name = "btnConfirmSave";
             this.btnConfirmSave.Size = new System.Drawing.Size(56, 31);
             this.btnConfirmSave.TabIndex = 19;
@@ -303,7 +303,7 @@ namespace GameOfLife
             this.Controls.Add(this.lblCurrScore);
             this.Controls.Add(this.lblGenNum);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(950, 550);
             this.MinimumSize = new System.Drawing.Size(950, 550);

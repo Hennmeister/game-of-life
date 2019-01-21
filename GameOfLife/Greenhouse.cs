@@ -21,10 +21,10 @@ namespace GameOfLife
         /// <summary>
         /// Enacts the Greenhouse's unique event of a caretaker coming in
         /// </summary>
-        protected override void EnvironmentalEvent(Unit[,] units)
+        public override void EnvironmentalEvent(Unit[,] units)
         {
-            // Water availability increases by 5%
-            WaterAvailability += 0.5 * WaterAvailability;
+            // Water availability increases by 5% (rounded to 1 decimal place)
+            WaterAvailability += Math.Round(0.5 * WaterAvailability, 1);
             // Loop through the all rows of the grid to remove all infected plants
             for (int i = 0; i < units.GetLength(GridHelper.ROW); i++)
             {
@@ -38,6 +38,11 @@ namespace GameOfLife
                         units[i, j].Die(units, this);
                     }
                 }
+            }
+            // Indicate that the event has stopped once it should not continue for the next generation
+            if (--EventGenerationsLeft == 0)
+            {
+                EnvEventOccurring = false;
             }
         }
     }

@@ -28,13 +28,18 @@ namespace GameOfLife
         /// <summary>
         /// Enacts the Rainforest's unique environmental event of deforestation
         /// </summary>
-        protected override void EnvironmentalEvent(Unit[,] units)
+        public override void EnvironmentalEvent(Unit[,] units)
         {
             // Oxygen level decreases by 5% and carbon dioxide level increases by 5% as trees are removed
-            this.oxygenLevel -= 5; 
-            this.carbonDioxideLevel += 5;
-            // Lose access to 10% of the available food
-            FoodAvailability -= 0.10 * FoodAvailability;
+            OxygenLevel -= 5;
+            CarbonDioxideLevel = 100 - OxygenLevel;
+            // Lose access to 10% of the available food -- the result is rounded to 1 decimal place
+            FoodAvailability -= Math.Round(0.10 * FoodAvailability, 1);
+            // Indicate that the event has stopped once it should not continue for the next generation
+            if (--EventGenerationsLeft == 0)
+            {
+                EnvEventOccurring = false;
+            }
         }
     }
 }
