@@ -39,6 +39,9 @@ namespace GameOfLife
             CreateToolbar();
             imageDragBox = new Rectangle(0, 0, CELL_SIZE, CELL_SIZE);
             UpdateDisplayedParameters();
+            // Show the environment in the background
+            BackgroundImage = manager.EnvironmentImage;
+            BackgroundImageLayout = ImageLayout.Stretch;
         }
 
         private void CreateToolbar()

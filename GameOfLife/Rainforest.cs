@@ -18,7 +18,7 @@ namespace GameOfLife
         /// <summary>
         /// Create a Rainforest with its unique environmental parameters for the simulation's environment
         /// </summary>
-        public Rainforest() : base(10000, 50000, 50, 50, 30, 50)
+        public Rainforest() : base(10000, 50000, 50, 50, 30, 50, Properties.Resources.Rainforest, Properties.Resources.Deforestation)
         {
             // (Nicole) assign the specific environment type
             environmentType = EnvironmentTypeEnum.Rainforest;
