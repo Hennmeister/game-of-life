@@ -18,6 +18,7 @@ namespace GameOfLife
         //store game actions and data
         GameManager manager;
         private bool isPaused = true;
+        // TODO: remove
         private Enums.GameMode gameMode;
         private Enums.UnitType toolbarSelection = Enums.UnitType.None;
         private const int CELL_SIZE = 10;
@@ -31,10 +32,10 @@ namespace GameOfLife
         // State variable to differentiate between choosing to erase units and clicking away from the toolbar
         private bool eraseToolSelected = false;
 
-        public GameForm(GameManager manager, Enums.GameMode gameMode)
+        public GameForm(GameManager manager)
         {
-            this.gameMode = gameMode;
             this.manager = manager;
+            WindowState = FormWindowState.Maximized;
             InitializeComponent();
             CreateGrid();
             CreateToolbar();
@@ -43,6 +44,7 @@ namespace GameOfLife
             // Show the environment in the background
             BackgroundImage = manager.EnvironmentImage;
             BackgroundImageLayout = ImageLayout.Stretch;
+            ToggleSavingUIVisibility(shown: false);
         }
 
         private void CreateToolbar()
@@ -292,16 +294,19 @@ namespace GameOfLife
         {
             if (isPaused)
             {
-                tmrGeneration.Enabled = true;
-                isPaused = false;
-                btnStart.Text = "Pause";
+                ChangePauseState(pause: false);
             }
             else
             {
-                tmrGeneration.Enabled = false;
-                isPaused = true;
-                btnStart.Text = "Unpause";
+                ChangePauseState(pause: true);
             }
+        }
+
+        private void ChangePauseState(bool pause)
+        {
+            tmrGeneration.Enabled = !pause;
+            isPaused = pause;
+            btnStart.Text = pause ? "Unpause" : "pause";
         }
 
         public void GameOver()
@@ -315,29 +320,55 @@ namespace GameOfLife
             f.ShowDialog();
         }
 
-        //Nicole
-        private void btnSave_Click(object sender, EventArgs e)
+        private void ToggleSavingUIVisibility(bool shown)
         {
-            manager.SaveState();
+            txtSessionName.Visible = shown;
+            lblPromptSessionName.Visible = shown;
+            btnConfirmSave.Visible = shown;
         }
 
         //Nicole
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            manager.LoadState();
+            // Pause the session
+            ChangePauseState(pause: true);
+            // Show the tools available for session saving
+            ToggleSavingUIVisibility(shown: true);
+            
         }
+        
 
         //HENNING
         private void btnLoadPrevGen_Click(object sender, EventArgs e)
         {
             //Make sure the game is paused, a generation number is selected and that the selected value is a number
-            if (isPaused && cbGenNums.SelectedItem != null && cbGenNums.SelectedItem != "Not Available");
+            if (isPauseed && cbGenNums.SelectedItem != null && cbGenNums.SelectedText != "Not Available");
             {
 
                 manager.LoadCachedState((int)cbGenNums.SelectedItem);
                 UpdateDisplayedParameters();
                 Refresh();
             }
+        }
+
+        // rudy
+        private void btnConfirmSave_Click(object sender, EventArgs e)
+        {
+            // Check if the user has inputted a name for the session
+            if(txtSessionName.Text == "")
+            {
+                MessageBox.Show("Please input a session name.");
+            }
+            else
+            {
+                // save the state 
+                manager.SaveState(txtSessionName.Text);
+                // Hide the saving UI
+                ToggleSavingUIVisibility(shown: false);
+                // Unpause the simulation
+                ChangePauseState(pause: false);
+            }
+            
         }
     }
 }
