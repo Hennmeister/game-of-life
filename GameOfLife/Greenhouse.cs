@@ -13,6 +13,8 @@ namespace GameOfLife
         /// </summary>
         public Greenhouse() : base(3000, 50000, 25, 75, 35, 30)
         {
+            // (Nicole) assign the specific environment type
+            environmentType = EnvironmentTypeEnum.Greenhouse;
         }
 
         /// <summary>

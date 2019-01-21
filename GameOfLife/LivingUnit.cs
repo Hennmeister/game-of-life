@@ -1,5 +1,6 @@
 ﻿/* 
  * Tiffanie Truong
+ * Nicole --> added ToString method and constructor to read from file
  * January 19, 2018
  * Base class for all living lifeforms in the simulation (Cells, Viruses, Multicellular Organisms)
  */
@@ -36,10 +37,11 @@ namespace GameOfLife
         public bool Infected { get; set; }
         private int CuredGenerationsLeft { get; set; }
 
-        public LivingUnit(int speciesComplexity, int senescence, int foodRequirement,
+        public LivingUnit(Enums.UnitType type, int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, Enums.GasType inputGas,
                           Enums.GasType outputGas, int idealTemperature, double infectionResistance,
-                          double decompositionValue, int row = -1, int col = -1) : base(decompositionValue, speciesComplexity, row, col )
+                          double decompositionValue, int row = -1, int col = -1) : base(type, decompositionValue, 
+                          speciesComplexity, row, col )
         {
             Senescence = senescence;
             FoodRequirement = foodRequirement;
@@ -55,6 +57,37 @@ namespace GameOfLife
             CuredGenerationsLeft = 0;
         }
 
+        // (Nicole) constructor for living units to load unit
+        public LivingUnit(string[] parameters) : base(parameters)
+        {
+            // convert all parameters to integer
+            int.TryParse(parameters[5], out int senescence);
+
+            int.TryParse(parameters[6], out int foodRequirement);
+
+            int.TryParse(parameters[7], out int waterRequirement);
+
+            int.TryParse(parameters[8], out int gasRequirement);
+
+            int.TryParse(parameters[9], out int inputGas);
+
+            int.TryParse(parameters[10], out int outputGas);
+
+            int.TryParse(parameters[11], out int idealTemp);
+
+            double.TryParse(parameters[12], out double infectionResistance);
+
+            // initialize with new parameters
+            Senescence = senescence;
+            FoodRequirement = foodRequirement;
+            WaterRequirement = waterRequirement;
+            GasRequirement = gasRequirement;
+            InputGas = (Enums.GasType)inputGas;
+            OutputGas = (Enums.GasType)outputGas;
+            IdealTemperature = idealTemp;
+            InfectionResistance = infectionResistance;
+        }
+
 
         protected void UpdateBasicLivingUnit(Unit[,] grid, Environment gameEnv)
         {
@@ -66,6 +99,7 @@ namespace GameOfLife
             // Eat
             Eat(gameEnv, FoodRequirement);
             Drink(gameEnv, WaterRequirement);
+            Respire(gameEnv);
 
             if (ShouldAge(gameEnv))
             {
@@ -89,9 +123,15 @@ namespace GameOfLife
         private void UpdateInfection()
         {
             // Try to cure the infection
-            if (!TryCure())
+            if (!IsCured())
             {
                 CuredGenerationsLeft--;
+            }
+            // Otherwise, the infection is cured
+            else
+            {
+                Infected = false;
+                CuredGenerationsLeft = 0;
             }
         }
         
@@ -128,16 +168,9 @@ namespace GameOfLife
         }
         
 
-        private bool TryCure()
+        protected bool IsCured()
         {
-            // If cured
-            if (ProbabilityHelper.EvaluateIndependentPredicate(CureProbabillity()))
-            {
-                Infected = false;
-                CuredGenerationsLeft = 0;
-                return true;
-            }
-            return false;
+            return ProbabilityHelper.EvaluateIndependentPredicate(CureProbabillity());
         }
 
         private double CureProbabillity()
@@ -158,6 +191,22 @@ namespace GameOfLife
         public virtual void Respire(Environment gameEnv)
         {
             gameEnv.IncreaseCarbonDioxide(GasRequirement);
+        }
+
+        // (Nicole) ToString method to serialize properties to string to be saved to file
+        // 5: senescence
+        // 6: food requirement
+        // 7: water requirement
+        // 8: gas requirement
+        // 9: input gas
+        // 10: output gas
+        // 11: ideal temp
+        // 12: infection resistence
+        public override string ToString()
+        {
+            return base.ToString() + ";" + ";" + Senescence + ";" + FoodRequirement
+                + ";" + WaterRequirement + ";" + GasRequirement + ";" + (int)InputGas + ";" + (int)OutputGas
+                + ";" + IdealTemperature + ";" + InfectionResistance;
         }
     }
 }

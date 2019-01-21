@@ -13,7 +13,7 @@ namespace GameOfLife
         public static bool EvaluateIndependentPredicate(double probability)
         {
             double randomNumber = rng.NextDouble();
-            return randomNumber < probability;
+            return randomNumber <= probability;
         }
 
         // Returns an object corresponding to the probability that evaluates true
@@ -24,7 +24,7 @@ namespace GameOfLife
             int matchingIndex = 0;
             for(int i = 0; i < probabilities.Length; i++)
             {
-                if(randomNumber < probabilities[i])
+                if(randomNumber <= probabilities[i])
                 {
                     matchingIndex = i;
                     break;

@@ -13,6 +13,8 @@ using System.Drawing;
 
 namespace GameOfLife
 {
+    public enum EnvironmentTypeEnum { Rainforest, Tundra, Greenhouse, Desert };
+
     public abstract class Environment
     {
         // **** ENVIRONMENTAL PARAMETERS ****/
@@ -21,8 +23,8 @@ namespace GameOfLife
         protected int oxygenLevel;
         // (Rudy) the default amount of food and water initially available in the environment
         // read-only -- can be initialized in the constructor but nowhere else
-        public virtual double DefaultFood { get; }
-        public virtual int DefaultWater { get; }
+        public virtual double DefaultFood { get; set; }
+        public virtual int DefaultWater { get; set; }
         // the amount of food and water in the environment during the simulation
         protected double foodAvailability;
         protected double waterAvailability;
@@ -30,6 +32,15 @@ namespace GameOfLife
         protected int temperature;
         // visual indicator for the environment
         private Image environmentImage;
+        // (Nicole) environment type 
+        protected EnvironmentTypeEnum environmentType;
+
+        // (Nicole) getter and setter for environment type
+        public EnvironmentTypeEnum EnvironmentType
+        {
+            get { return environmentType; }
+            set { environmentType = value; }
+        }
 
         // **** EVENT INFORMATION ****
         // the chance of rain as a percent
@@ -39,7 +50,7 @@ namespace GameOfLife
         // state variable for if an event is occurring
         protected bool eventOccurring;
         // determines how many generations left for an occurring event
-        protected int eventGenerationsLeft;
+        public int EventGenerationsLeft { get; set; }
         // images for various events
         private Image eventImage;
         private Image rainImage;
@@ -222,20 +233,14 @@ namespace GameOfLife
             {
                 return false;
             }
-            // Otherwise generate a random number of 100 possible values (0-99)
-            int randomNumber = numberGenerator.Next(0, 100);
-            // The chance of generating a number less than the percent probability
-            // of an event occuring is equal to the probability of the event occuring
-            // -- (probability of event) favourable cases out of 100
-            // If it meets this condition, start a new event
-            if (randomNumber < PROBABILITY_OF_EVENT)
+            // Otherwise, probabilistically evaluate whether an event occurs
+            else
             {
-                return true;
+                return ProbabilityHelper.EvaluateIndependentPredicate(PROBABILITY_OF_EVENT / 100.0);
             }
-            // otherwise, an event should occur
-            return false;
         }
 
+        
         /// <summary>
         /// (Tiffanie) Enact raining in the environment
         /// </summary>

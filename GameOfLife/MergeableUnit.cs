@@ -1,4 +1,10 @@
-﻿using System;
+/*
+ * Tiffanie Truong, Rudy Ariaz, Nicole Beri (constructor for loading data from file)
+ * January 20, 2019
+ * The abstract MergeableUnit class represents a Unit that has a merge operation; that is, a Cell
+ * or a Colony. These Units are similar in function and therefore inherit from MergeableUnit.
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +14,35 @@ namespace GameOfLife
 {
     abstract class MergeableUnit : LivingUnit
     {
-
-        public MergeableUnit(int speciesComplexity, int senescence, int foodRequirement,
+        /// <summary>
+        /// Constructor used by child classes to create new instances of the clases. Uses
+        /// base constructor of LivingUnit to assign all values.
+        /// </summary>
+        /// <param name="speciesComplexity">The species complexity of the Unit.</param>
+        /// <param name="senescence">The senescence value of the Unit.</param>
+        /// <param name="foodRequirement">The food requirement of the Unit.</param>
+        /// <param name="waterRequirement">The water requirement of the Unit.</param>
+        /// <param name="gasRequirement">The amount of gas requirement of the Unit.</param>
+        /// <param name="inputGas">The input gas of the Unit.</param>
+        /// <param name="outputGas">The output gas of the Unit.</param>
+        /// <param name="idealTemperature">The ideal temperature of the Unit.</param>
+        /// <param name="infectionResistance">The infection resistance of the Unit.</param>
+        /// <param name="decompositionValue">The decomposition value of the Unit.</param>
+        /// <param name="row">The row of the Unit (within the grid).</param>
+        /// <param name="col">The column of the Unit (within the grid).</param>
+        public MergeableUnit(Enums.UnitType type, int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, Enums.GasType inputGas,
                           Enums.GasType outputGas, int idealTemperature, double infectionResistance,
-                          double decompositionValue, int row = -1, int col = -1) : base(speciesComplexity: 2, senescence: 16,
+                          double decompositionValue, int row = -1, int col = -1) : base(type, 
+                          speciesComplexity: 2, senescence: 16,
                           foodRequirement: 1, waterRequirement: 1,
                           gasRequirement: 1, inputGas: Enums.GasType.Oxygen,
                           outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
                           infectionResistance: 3, decompositionValue: 0.5, row: row, col: col)
+        {
+        }
+
+        public MergeableUnit(string[] parameters) : base(parameters)
         {
         }
 

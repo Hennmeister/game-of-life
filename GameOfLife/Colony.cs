@@ -1,4 +1,5 @@
 ﻿// Tiffanie
+// (Nicole) - added unitType and constructor for loading data from file
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace GameOfLife
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.LightSkyBlue;
 
-        public Colony(int row = -1, int col = -1) : base(speciesComplexity: 3, senescence: 16,
+        public Colony(int row = -1, int col = -1) : base(Enums.UnitType.Colony, speciesComplexity: 3, senescence: 16,
                                foodRequirement: 4, waterRequirement: 4,
                                gasRequirement: 2, inputGas: Enums.GasType.Oxygen,
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 32,
@@ -19,9 +20,20 @@ namespace GameOfLife
         {
         }
 
+        // (Nicole) constructor for loading data from file
+        public Colony(string[] parameters) : base(parameters)
+        {
+            UnitType = Enums.UnitType.Colony;
+        }
+
         public override Unit Create(int row, int col)
         {
             return new Colony(row, col);
+        }
+
+        public override Unit Create(string[] parameters)
+        {
+            return new Colony(parameters);
         }
 
         public override void Update(Unit[,] grid, Environment gameEnv)
@@ -33,6 +45,10 @@ namespace GameOfLife
             else if (ShouldMerge(grid))
             {
                 Merge(grid, gameEnv);
+            }
+            else
+            {
+                UpdateBasicLivingUnit(grid, gameEnv);
             }
         }
         

@@ -1,4 +1,5 @@
 ﻿// Tiffanie & Rudy
+// (Nicole) --> added unitType
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace GameOfLife
         private bool IsHibernating { get; set; }
         private int HibernationGenerationsLeft { get; set; }
 
-        public Animal(int row = -1, int col = -1) : base(senescence: 32,
+        public Animal(int row = -1, int col = -1) : base(Enums.UnitType.Animal, senescence: 32,
                                foodRequirement: 8, waterRequirement: 10,
                                gasRequirement: 8, inputGas: Enums.GasType.Oxygen,
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
@@ -31,9 +32,20 @@ namespace GameOfLife
             BaselineFoodRequirement = FoodRequirement;
         }
 
+        // (Nicole) --> constructor for reading files
+        public Animal(string[] parameters) : base(parameters)
+        {
+            UnitType = Enums.UnitType.Animal;
+        }
+
         public override Unit Create(int row, int col)
         {
             return new Animal(row, col);
+        }
+
+        public override Unit Create(string[] parameters)
+        {
+            return new Animal(parameters);
         }
 
         protected override void UpdateVictualRequirements(int numNeighbors)
