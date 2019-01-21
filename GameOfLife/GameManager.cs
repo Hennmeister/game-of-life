@@ -1,6 +1,5 @@
 ﻿/*
  * Henning Lindig
- * RUDY DID THIS FIRST WITH STATES 
  * 
  */
 using System;
@@ -141,6 +140,7 @@ namespace GameOfLife
             {
                 //if either are true, call gameOver in form and end the current simulation
                 var form = System.Windows.Forms.Application.OpenForms.OfType<GameForm>().Single();
+                SaveState(currentState.CurrentID.ToString());
                 form.GameOver();
             }
             //add the score of the board 

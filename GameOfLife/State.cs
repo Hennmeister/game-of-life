@@ -9,8 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+//ADD DOCUMENTATION
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Collections;
 
 namespace GameOfLife
 {
@@ -24,21 +26,9 @@ namespace GameOfLife
         public int GenerationCounter { get; set; }
         public Unit[,] UnitGrid { get; set; }
         public Environment GameEnvironment { get; set; }
+        public Queue<int> gridScores { get; set; } = new Queue<int>();
         [NonSerialized()]
         private State[] cachedStates = new State[NUMBER_OF_CACHED_STATES];
-        public State[] CachedStates
-        {
-            get
-            {
-                if (cachedStates != null)
-                {
-                    return cachedStates;
-                }
-                else return new State[NUMBER_OF_CACHED_STATES];
-            }
-            set { cachedStates = value; }
-        }
-
         private static int latestID;
         public int CurrentID { get; }
 
@@ -94,20 +84,29 @@ namespace GameOfLife
         }
 
         //Henning
-        //Checks if the score has stayed the same in all cached states
+        //Checks if the score has stayed the same in the last 5 generations
         public bool isScoreStable(int score)
         {
-            //prob refactor
-            foreach (State s in cachedStates)
+            if (gridScores.Count == 5)
             {
-                if (s == null || s.GenerationCounter != score)
-                {
-                    return false;
-                }
+                gridScores.Dequeue();
             }
-            return true;
-            //    return new[] {cachedStates[0].GenerationCounter, cachedStates[1].GenerationCounter, cachedStates[2].GenerationCounter,
-            //     cachedStates[3].GenerationCounter, cachedStates[4].GenerationCounter }.All(x => x == score);
+            gridScores.Enqueue(score);
+            if (gridScores.Count != 5) return false;
+            return (gridScores.ToArray().All(x => x == gridScores.Peek()));
+        }
+
+        public State[] CachedStates
+        {
+            get
+            {
+                if (cachedStates != null)
+                {
+                    return cachedStates;
+                }
+                else return new State[NUMBER_OF_CACHED_STATES];
+            }
+            set { cachedStates = value; }
         }
 
         public EnvironmentTypeEnum EnvironmentType

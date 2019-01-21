@@ -18,8 +18,6 @@ namespace GameOfLife
         //store game actions and data
         GameManager manager;
         private bool isPaused = true;
-        // TODO: remove
-        private Enums.GameMode gameMode;
         private Enums.UnitType toolbarSelection = Enums.UnitType.None;
         private const int CELL_SIZE = 10;
         private const int TOOLBAR_SIZE = 6;
