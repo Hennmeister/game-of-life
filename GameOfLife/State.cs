@@ -40,9 +40,12 @@ namespace GameOfLife
         //Shifts the list of cached states and adds the current state to the front
         public void AddStateToCache()
         {
-            for (int i = 1; i < NUMBER_OF_CACHED_STATES; i++)
+            for (int i = 4; i > 0; i--)
             {
-                cachedStates[i] = cachedStates[i - 1];
+                if (cachedStates[i] != null)
+                {
+                    cachedStates[i] = cachedStates[i - 1];
+                }
             }
             cachedStates[0] = this;
         }
@@ -53,7 +56,7 @@ namespace GameOfLife
         {
             for (int i = 0; i < NUMBER_OF_CACHED_STATES; i++)
             {
-                if (cachedStates[i].GenerationCounter == genNum)
+                if (cachedStates[i] != null && cachedStates[i].GenerationCounter == genNum)
                 {
                     return cachedStates[i];
                 }

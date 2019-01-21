@@ -178,7 +178,7 @@ namespace GameOfLife
             for (int i = 0; i < cbLength; i++)
             {
                 //-i +1 ???
-                if (manager.GenerationCounter - i >= 0)
+                if (manager.GenerationCounter - i  >= 0)
                 {
                     cbGenNums.Items.Add(manager.GenerationCounter - i);
                 }
@@ -313,8 +313,12 @@ namespace GameOfLife
 
         private void btnLoadPrevGen_Click(object sender, EventArgs e)
         {
-            manager.LoadCachedState((int)cbGenNums.SelectedItem);
-            Refresh();
+            if (cbGenNums.SelectedItem != null)
+            {
+                manager.LoadCachedState((int)cbGenNums.SelectedItem);
+                UpdateDisplayedParameters();
+                Refresh();
+            }
         }
     }
 }

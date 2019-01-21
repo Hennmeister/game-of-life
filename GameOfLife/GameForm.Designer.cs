@@ -52,6 +52,7 @@
             // 
             // tmrGeneration
             // 
+            this.tmrGeneration.Interval = 200;
             this.tmrGeneration.Tick += new System.EventHandler(this.tmrGeneration_Tick);
             // 
             // lblGenNum
