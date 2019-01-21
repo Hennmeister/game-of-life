@@ -65,40 +65,36 @@ namespace GameOfLife
             // lblGenNum
             // 
             this.lblGenNum.AutoSize = true;
-            this.lblGenNum.Location = new System.Drawing.Point(59, 789);
-            this.lblGenNum.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblGenNum.Location = new System.Drawing.Point(22, 331);
             this.lblGenNum.Name = "lblGenNum";
-            this.lblGenNum.Size = new System.Drawing.Size(183, 32);
+            this.lblGenNum.Size = new System.Drawing.Size(70, 13);
             this.lblGenNum.TabIndex = 0;
             this.lblGenNum.Text = "GEN Number";
             // 
             // lblCurrScore
             // 
             this.lblCurrScore.AutoSize = true;
-            this.lblCurrScore.Location = new System.Drawing.Point(59, 842);
-            this.lblCurrScore.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblCurrScore.Location = new System.Drawing.Point(22, 353);
             this.lblCurrScore.Name = "lblCurrScore";
-            this.lblCurrScore.Size = new System.Drawing.Size(145, 32);
+            this.lblCurrScore.Size = new System.Drawing.Size(55, 13);
             this.lblCurrScore.TabIndex = 1;
             this.lblCurrScore.Text = "Curr score";
             // 
             // lblHighestConcurrentScore
             // 
             this.lblHighestConcurrentScore.AutoSize = true;
-            this.lblHighestConcurrentScore.Location = new System.Drawing.Point(59, 904);
-            this.lblHighestConcurrentScore.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblHighestConcurrentScore.Location = new System.Drawing.Point(22, 379);
             this.lblHighestConcurrentScore.Name = "lblHighestConcurrentScore";
-            this.lblHighestConcurrentScore.Size = new System.Drawing.Size(329, 32);
+            this.lblHighestConcurrentScore.Size = new System.Drawing.Size(126, 13);
             this.lblHighestConcurrentScore.TabIndex = 2;
             this.lblHighestConcurrentScore.Text = "Highest concurrent score";
             // 
             // lblEnvParams
             // 
             this.lblEnvParams.AutoSize = true;
-            this.lblEnvParams.Location = new System.Drawing.Point(75, 486);
-            this.lblEnvParams.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblEnvParams.Location = new System.Drawing.Point(28, 204);
             this.lblEnvParams.Name = "lblEnvParams";
-            this.lblEnvParams.Size = new System.Drawing.Size(168, 32);
+            this.lblEnvParams.Size = new System.Drawing.Size(64, 13);
             this.lblEnvParams.TabIndex = 3;
             this.lblEnvParams.Text = "Env Params";
             // 
@@ -112,100 +108,90 @@ namespace GameOfLife
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(40, 48);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblTitle.Location = new System.Drawing.Point(15, 20);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(754, 135);
+            this.lblTitle.Size = new System.Drawing.Size(310, 55);
             this.lblTitle.TabIndex = 4;
             this.lblTitle.Text = "Game of Life";
             // 
             // lblEnvironmentType
             // 
             this.lblEnvironmentType.AutoSize = true;
-            this.lblEnvironmentType.Location = new System.Drawing.Point(75, 413);
-            this.lblEnvironmentType.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblEnvironmentType.Location = new System.Drawing.Point(28, 173);
             this.lblEnvironmentType.Name = "lblEnvironmentType";
-            this.lblEnvironmentType.Size = new System.Drawing.Size(252, 32);
+            this.lblEnvironmentType.Size = new System.Drawing.Size(96, 13);
             this.lblEnvironmentType.TabIndex = 5;
             this.lblEnvironmentType.Text = "Environment Type ";
             // 
             // lblCurrentEvent
             // 
             this.lblCurrentEvent.AutoSize = true;
-            this.lblCurrentEvent.Location = new System.Drawing.Point(880, 327);
-            this.lblCurrentEvent.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblCurrentEvent.Location = new System.Drawing.Point(330, 137);
             this.lblCurrentEvent.Name = "lblCurrentEvent";
-            this.lblCurrentEvent.Size = new System.Drawing.Size(189, 32);
+            this.lblCurrentEvent.Size = new System.Drawing.Size(72, 13);
             this.lblCurrentEvent.TabIndex = 6;
             this.lblCurrentEvent.Text = "Current Event";
             // 
             // lblErase
             // 
             this.lblErase.AutoSize = true;
-            this.lblErase.Location = new System.Drawing.Point(32, 1021);
-            this.lblErase.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblErase.Location = new System.Drawing.Point(12, 428);
             this.lblErase.Name = "lblErase";
-            this.lblErase.Size = new System.Drawing.Size(152, 32);
+            this.lblErase.Size = new System.Drawing.Size(58, 13);
             this.lblErase.TabIndex = 7;
             this.lblErase.Text = "Erase Tool";
             // 
             // lblCellTool
             // 
             this.lblCellTool.AutoSize = true;
-            this.lblCellTool.Location = new System.Drawing.Point(389, 1021);
-            this.lblCellTool.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblCellTool.Location = new System.Drawing.Point(146, 428);
             this.lblCellTool.Name = "lblCellTool";
-            this.lblCellTool.Size = new System.Drawing.Size(65, 32);
+            this.lblCellTool.Size = new System.Drawing.Size(24, 13);
             this.lblCellTool.TabIndex = 8;
             this.lblCellTool.Text = "Cell";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(539, 1021);
-            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.label1.Location = new System.Drawing.Point(202, 428);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 32);
+            this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Colony";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(229, 1021);
-            this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.label2.Location = new System.Drawing.Point(86, 428);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 32);
+            this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "Virus";
             // 
             // lblAnimalTool
             // 
             this.lblAnimalTool.AutoSize = true;
-            this.lblAnimalTool.Location = new System.Drawing.Point(704, 1021);
-            this.lblAnimalTool.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblAnimalTool.Location = new System.Drawing.Point(264, 428);
             this.lblAnimalTool.Name = "lblAnimalTool";
-            this.lblAnimalTool.Size = new System.Drawing.Size(103, 32);
+            this.lblAnimalTool.Size = new System.Drawing.Size(38, 13);
             this.lblAnimalTool.TabIndex = 11;
             this.lblAnimalTool.Text = "Animal";
             // 
             // lblPlantTool
             // 
             this.lblPlantTool.AutoSize = true;
-            this.lblPlantTool.Location = new System.Drawing.Point(856, 1021);
-            this.lblPlantTool.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblPlantTool.Location = new System.Drawing.Point(321, 428);
             this.lblPlantTool.Name = "lblPlantTool";
-            this.lblPlantTool.Size = new System.Drawing.Size(81, 32);
+            this.lblPlantTool.Size = new System.Drawing.Size(31, 13);
             this.lblPlantTool.TabIndex = 12;
             this.lblPlantTool.Text = "Plant";
             // 
             // btnStart
             // 
             this.btnStart.AutoEllipsis = true;
-            this.btnStart.Location = new System.Drawing.Point(373, 186);
-            this.btnStart.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.btnStart.Location = new System.Drawing.Point(140, 78);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(400, 76);
+            this.btnStart.Size = new System.Drawing.Size(150, 32);
             this.btnStart.TabIndex = 13;
             this.btnStart.Text = "Start Sim!";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -214,10 +200,10 @@ namespace GameOfLife
             // btnSave
             // 
             this.btnSave.AutoSize = true;
-            this.btnSave.Location = new System.Drawing.Point(813, 682);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(5);
+            this.btnSave.Location = new System.Drawing.Point(305, 286);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(149, 74);
+            this.btnSave.Size = new System.Drawing.Size(56, 31);
             this.btnSave.TabIndex = 14;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -232,19 +218,20 @@ namespace GameOfLife
             "0",
             "0",
             "0"});
-            this.cbGenNums.Location = new System.Drawing.Point(21, 203);
-            this.cbGenNums.Margin = new System.Windows.Forms.Padding(5);
+            this.cbGenNums.Location = new System.Drawing.Point(8, 85);
+            this.cbGenNums.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbGenNums.MaxDropDownItems = 5;
             this.cbGenNums.Name = "cbGenNums";
-            this.cbGenNums.Size = new System.Drawing.Size(108, 39);
+            this.cbGenNums.Size = new System.Drawing.Size(43, 21);
             this.cbGenNums.TabIndex = 15;
             // 
             // btnLoadPrevGen
             // 
-            this.btnLoadPrevGen.Location = new System.Drawing.Point(147, 191);
-            this.btnLoadPrevGen.Margin = new System.Windows.Forms.Padding(5);
+            this.btnLoadPrevGen.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoadPrevGen.Location = new System.Drawing.Point(55, 80);
+            this.btnLoadPrevGen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLoadPrevGen.Name = "btnLoadPrevGen";
-            this.btnLoadPrevGen.Size = new System.Drawing.Size(213, 85);
+            this.btnLoadPrevGen.Size = new System.Drawing.Size(80, 39);
             this.btnLoadPrevGen.TabIndex = 16;
             this.btnLoadPrevGen.Text = "Load Previous Generation";
             this.btnLoadPrevGen.UseVisualStyleBackColor = true;
@@ -252,38 +239,37 @@ namespace GameOfLife
             // 
             // picEvent
             // 
-            this.picEvent.Location = new System.Drawing.Point(813, 176);
-            this.picEvent.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.picEvent.Location = new System.Drawing.Point(305, 74);
             this.picEvent.Name = "picEvent";
-            this.picEvent.Size = new System.Drawing.Size(296, 143);
+            this.picEvent.Size = new System.Drawing.Size(111, 60);
             this.picEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picEvent.TabIndex = 16;
             this.picEvent.TabStop = false;
             // 
             // txtSessionName
             // 
-            this.txtSessionName.Location = new System.Drawing.Point(772, 789);
+            this.txtSessionName.Location = new System.Drawing.Point(290, 331);
+            this.txtSessionName.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.txtSessionName.Name = "txtSessionName";
-            this.txtSessionName.Size = new System.Drawing.Size(190, 38);
+            this.txtSessionName.Size = new System.Drawing.Size(74, 20);
             this.txtSessionName.TabIndex = 17;
             // 
             // lblPromptSessionName
             // 
             this.lblPromptSessionName.AutoSize = true;
-            this.lblPromptSessionName.Location = new System.Drawing.Point(539, 792);
-            this.lblPromptSessionName.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblPromptSessionName.Location = new System.Drawing.Point(202, 332);
             this.lblPromptSessionName.Name = "lblPromptSessionName";
-            this.lblPromptSessionName.Size = new System.Drawing.Size(207, 32);
+            this.lblPromptSessionName.Size = new System.Drawing.Size(78, 13);
             this.lblPromptSessionName.TabIndex = 18;
             this.lblPromptSessionName.Text = "Session Name:";
             // 
             // btnConfirmSave
             // 
             this.btnConfirmSave.AutoSize = true;
-            this.btnConfirmSave.Location = new System.Drawing.Point(813, 862);
-            this.btnConfirmSave.Margin = new System.Windows.Forms.Padding(5);
+            this.btnConfirmSave.Location = new System.Drawing.Point(305, 361);
+            this.btnConfirmSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnConfirmSave.Name = "btnConfirmSave";
-            this.btnConfirmSave.Size = new System.Drawing.Size(149, 74);
+            this.btnConfirmSave.Size = new System.Drawing.Size(56, 31);
             this.btnConfirmSave.TabIndex = 19;
             this.btnConfirmSave.Text = "OK";
             this.btnConfirmSave.UseVisualStyleBackColor = true;
@@ -291,9 +277,9 @@ namespace GameOfLife
             // 
             // GameForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2499, 1211);
+            this.ClientSize = new System.Drawing.Size(718, 442);
             this.Controls.Add(this.btnConfirmSave);
             this.Controls.Add(this.lblPromptSessionName);
             this.Controls.Add(this.txtSessionName);
@@ -316,7 +302,7 @@ namespace GameOfLife
             this.Controls.Add(this.lblCurrScore);
             this.Controls.Add(this.lblGenNum);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Name = "GameForm";
             this.Text = "Form1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseDown);
