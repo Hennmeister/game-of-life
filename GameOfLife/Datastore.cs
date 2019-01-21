@@ -13,12 +13,13 @@ namespace GameOfLife
     {
         private const string STATES_DIRECTORY_SUFFIX = @"\PastStates";
         private static bool generalStatesDirectoryExists;
-        private static readonly string generalStatesDirectoryPath =
+        public static string GeneralStatesDirectoryPath { get; } = 
             Directory.GetCurrentDirectory() + STATES_DIRECTORY_SUFFIX;
+        
 
-        public static void SaveState(State state)
+        public static void SaveState(State state, string sessionName)
         {
-            string stateDirectoryPath = generalStatesDirectoryPath + $@"\State-{ state.CurrentID }";
+            string stateDirectoryPath = GeneralStatesDirectoryPath + $@"\{sessionName}";
             CreateCurrentStateDirectory(state, stateDirectoryPath);
             SaveGeneralInformation(state, stateDirectoryPath);
             SaveEnvironmentalParameters(state, stateDirectoryPath);
@@ -26,12 +27,11 @@ namespace GameOfLife
         }
 
         // (Nicole) loading state based on current state ID
-        public static void LoadState(State state)
+        public static void LoadState(State state, string statePath)
         {
-            string stateDirectoryPath = generalStatesDirectoryPath + $@"\State-{ state.CurrentID }";
-            ReadEnvironmentalParameters(state, stateDirectoryPath);
-            LoadAllUnits(state, stateDirectoryPath);
-            LoadGeneralInformation(state, stateDirectoryPath);
+            ReadEnvironmentalParameters(state, statePath);
+            LoadAllUnits(state, statePath);
+            LoadGeneralInformation(state, statePath);
         }
 
         private static void SaveEnvironmentalParameters(State state, string statePath)
@@ -260,7 +260,6 @@ namespace GameOfLife
         /// <param name="state"> The state to store. </param>
         private static void CreateCurrentStateDirectory(State state, string statePath)
         {
-            CreateGeneralStateDirectory();
             Directory.CreateDirectory(statePath);
         }
 
@@ -273,11 +272,11 @@ namespace GameOfLife
         /// <remarks>
         /// To be called whenever part of the state is saved.
         /// </remarks>
-        private static void CreateGeneralStateDirectory()
+        public static void CreateGeneralStateDirectory()
         {
             if (!generalStatesDirectoryExists)
             {
-                Directory.CreateDirectory(generalStatesDirectoryPath);
+                Directory.CreateDirectory(GeneralStatesDirectoryPath);
                 generalStatesDirectoryExists = true;
             }
         }

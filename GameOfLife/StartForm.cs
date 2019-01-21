@@ -27,6 +27,7 @@ namespace GameOfLife
         public StartForm(GameManager manager)
         {
             this.manager = manager;
+            WindowState = FormWindowState.Maximized;
             InitializeComponent();
             AddTrackBars();
             // ToggleTrackBars(enabled: false);
@@ -139,7 +140,7 @@ namespace GameOfLife
                 //set the current state as the starting state
                 manager.SetStartingState();
                 // Create the game form 
-                GameForm gameForm = new GameForm(manager, selectedMode);
+                GameForm gameForm = new GameForm(manager);
                 // Display the new game form
                 this.Hide();
                 gameForm.ShowDialog();
@@ -147,7 +148,7 @@ namespace GameOfLife
                 this.Close();
             }
         }
-
+        
 
         private void btnStartRealistic_Click(object sender, EventArgs e)
         {
@@ -235,6 +236,27 @@ namespace GameOfLife
             lblCurrOxygen.Text = sldCarbonDioxideLevel.Value.ToString() + "%";
             // Update current carbon dioxide level
             carbonDioxideLevel = sldCarbonDioxideLevel.Value;
+        }
+
+        private void btnLoadState_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog browser = new FolderBrowserDialog())
+            {
+                browser.SelectedPath = Datastore.GeneralStatesDirectoryPath;
+                if (browser.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(browser.SelectedPath))
+                {
+                    manager.LoadState(browser.SelectedPath);
+                    //set the current state as the starting state
+                    manager.SetStartingState();
+                    // Create the game form 
+                    GameForm gameForm = new GameForm(manager);
+                    // Display the new game form
+                    this.Hide();
+                    gameForm.ShowDialog();
+                    // Close this form
+                    this.Close();
+                }
+            }
         }
     }
 }

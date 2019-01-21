@@ -17,7 +17,7 @@ namespace GameOfLife
     [Serializable]
     public class State
     {
-        private const int NUMBER_OF_CACHED_STATES = 5;
+        public const int NUMBER_OF_CACHED_STATES = 5;
         public int CurrentScore { get; set; }
         public int HighestConcurrentScore { get; set; }
         public string Username { get; set; }

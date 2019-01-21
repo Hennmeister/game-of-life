@@ -145,16 +145,15 @@ namespace GameOfLife
         }
 
         // (Nicole) load current state
-        public State LoadState()
+        public void LoadState(string statePath)
         {
-            Datastore.LoadState(currentState);
-            return currentState;
+            Datastore.LoadState(currentState, statePath);
         }
 
         // save the current state of the game
-        public void SaveState()
+        public void SaveState(string name)
         {
-            Datastore.SaveState(currentState);
+            Datastore.SaveState(currentState, name);
         }
 
         public int CarbonDioxideLevel

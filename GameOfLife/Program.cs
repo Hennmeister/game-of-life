@@ -16,6 +16,8 @@ namespace GameOfLife
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            // Initialize the states directory
+            Datastore.CreateGeneralStateDirectory();
             //creates the application's game manager
             Application.Run(new StartForm(new GameManager()));
         }
