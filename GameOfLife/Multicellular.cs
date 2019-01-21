@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
+    [Serializable]
     abstract class Multicellular : LivingUnit
     {  
         private const int EXTENDED_NEIGHBORHOOD_SIZE = 5;

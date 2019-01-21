@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
+    [Serializable]
     class Animal : Multicellular
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.LightCoral;

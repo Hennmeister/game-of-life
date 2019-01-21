@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
+    [Serializable]
     public abstract class LivingUnit : Unit
     {
         // Complexity information

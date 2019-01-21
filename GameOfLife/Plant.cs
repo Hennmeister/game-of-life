@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
+    [Serializable]
     class Plant : Multicellular
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.YellowGreen;

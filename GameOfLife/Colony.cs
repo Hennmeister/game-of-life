@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameOfLife
 {
+    [Serializable]
     class Colony : MergeableUnit
     {
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.LightSkyBlue;

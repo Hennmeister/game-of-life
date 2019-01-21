@@ -9,20 +9,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace GameOfLife
 {
-   
+    [Serializable]
     public class State
     {
-        private const int NUMBER_OF_PREV_STATES = 5;
+        private const int NUMBER_OF_CACHED_STATES = 5;
         public int CurrentScore { get; set; }
         public int HighestConcurrentScore { get; set; }
         public string Username { get; set; }
         public int GenerationCounter { get; set; }
         public Unit[,] UnitGrid { get; set; }
         public Environment GameEnvironment { get; set; }
-        private State[] previousStates = new State[NUMBER_OF_PREV_STATES];
+        private State[] cachedStates = new State[NUMBER_OF_CACHED_STATES];
         private static int latestID;
         public int CurrentID { get; }
 
@@ -37,25 +39,61 @@ namespace GameOfLife
             UnitGrid[row, col] = newUnit;
         }
 
+        //Henning
+        //Shifts the list of cached states and adds the current state to the front
         public void AddStateToCache()
         {
-            for (int i = 1; i < NUMBER_OF_PREV_STATES; i++)
+            for (int i = 4; i > 0; i--)
             {
-                previousStates[i] = previousStates[i - 1];
+                if (cachedStates[i -1] != null)
+                {
+                    cachedStates[i] = DeepClone(cachedStates[i - 1]);
+                }
             }
-            previousStates[0] = this;
+            cachedStates[0] = DeepClone(this);
         }
 
+        private static T DeepClone<T>(T obj)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, obj);
+                ms.Position = 0;
+
+                return (T) formatter.Deserialize(ms);
+            }
+        }
+
+        //Henning
+        //gets a cached state based off the generation number
         public State LoadCachedState(int genNum)
         {
-            for (int i = 0; i < NUMBER_OF_PREV_STATES; i++)
+            for (int i = 0; i < NUMBER_OF_CACHED_STATES; i++)
             {
-                if (previousStates[i].GenerationCounter == i)
+                if (cachedStates[i] != null && cachedStates[i].GenerationCounter == genNum)
                 {
-                    return previousStates[i];
+                    return cachedStates[i];
                 }
             }
             return null;
+        }
+
+        //Henning
+        //Checks if the score has stayed the same in all cached states
+        public bool isScoreStable(int score)
+        {
+            //prob refactor
+            foreach (State s in cachedStates)
+            {
+                if (s == null || s.GenerationCounter != score)
+                {
+                    return false;
+                }
+            }
+            return true;
+            //    return new[] {cachedStates[0].GenerationCounter, cachedStates[1].GenerationCounter, cachedStates[2].GenerationCounter,
+            //     cachedStates[3].GenerationCounter, cachedStates[4].GenerationCounter }.All(x => x == score);
         }
 
         public EnvironmentTypeEnum EnvironmentType
