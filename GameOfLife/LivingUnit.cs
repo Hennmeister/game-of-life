@@ -155,6 +155,7 @@ namespace GameOfLife
         private bool ShouldAge(Environment gameEnv)
         {
             double ageProbability = AgeProbability(gameEnv);
+            if (Age == Senescence) return false; 
             return ProbabilityHelper.EvaluateIndependentPredicate(ageProbability);
         }
         
