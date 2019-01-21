@@ -45,6 +45,9 @@
             this.lblAnimalTool = new System.Windows.Forms.Label();
             this.lblPlantTool = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.cbGenNums = new System.Windows.Forms.ComboBox();
+            this.btnLoadPrevGen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tmrGeneration
@@ -81,7 +84,7 @@
             // lblEnvParams
             // 
             this.lblEnvParams.AutoSize = true;
-            this.lblEnvParams.Location = new System.Drawing.Point(28, 204);
+            this.lblEnvParams.Location = new System.Drawing.Point(28, 221);
             this.lblEnvParams.Name = "lblEnvParams";
             this.lblEnvParams.Size = new System.Drawing.Size(64, 13);
             this.lblEnvParams.TabIndex = 3;
@@ -115,7 +118,7 @@
             // lblCurrentEvent
             // 
             this.lblCurrentEvent.AutoSize = true;
-            this.lblCurrentEvent.Location = new System.Drawing.Point(198, 173);
+            this.lblCurrentEvent.Location = new System.Drawing.Point(28, 198);
             this.lblCurrentEvent.Name = "lblCurrentEvent";
             this.lblCurrentEvent.Size = new System.Drawing.Size(72, 13);
             this.lblCurrentEvent.TabIndex = 6;
@@ -178,19 +181,57 @@
             // btnStart
             // 
             this.btnStart.AutoEllipsis = true;
-            this.btnStart.Location = new System.Drawing.Point(74, 91);
+            this.btnStart.Location = new System.Drawing.Point(211, 93);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(182, 32);
+            this.btnStart.Size = new System.Drawing.Size(151, 50);
             this.btnStart.TabIndex = 13;
             this.btnStart.Text = "Start Sim!";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(73, 132);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(106, 26);
+            this.btnSave.TabIndex = 14;
+            this.btnSave.Text = "Save State";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // cbGenNums
+            // 
+            this.cbGenNums.FormattingEnabled = true;
+            this.cbGenNums.Items.AddRange(new object[] {
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"});
+            this.cbGenNums.Location = new System.Drawing.Point(11, 91);
+            this.cbGenNums.MaxDropDownItems = 5;
+            this.cbGenNums.Name = "cbGenNums";
+            this.cbGenNums.Size = new System.Drawing.Size(56, 21);
+            this.cbGenNums.TabIndex = 15;
+            // 
+            // btnLoadPrevGen
+            // 
+            this.btnLoadPrevGen.Location = new System.Drawing.Point(73, 91);
+            this.btnLoadPrevGen.Name = "btnLoadPrevGen";
+            this.btnLoadPrevGen.Size = new System.Drawing.Size(106, 35);
+            this.btnLoadPrevGen.TabIndex = 16;
+            this.btnLoadPrevGen.Text = "Load Previous Generation";
+            this.btnLoadPrevGen.UseVisualStyleBackColor = true;
+            this.btnLoadPrevGen.Click += new System.EventHandler(this.btnLoadPrevGen_Click);
             // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 508);
+            this.Controls.Add(this.btnLoadPrevGen);
+            this.Controls.Add(this.cbGenNums);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblPlantTool);
             this.Controls.Add(this.lblAnimalTool);
@@ -206,7 +247,7 @@
             this.Controls.Add(this.lblCurrScore);
             this.Controls.Add(this.lblGenNum);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "GameForm";
             this.Text = "Form1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseDown);
@@ -234,6 +275,9 @@
         private System.Windows.Forms.Label lblAnimalTool;
         private System.Windows.Forms.Label lblPlantTool;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ComboBox cbGenNums;
+        private System.Windows.Forms.Button btnLoadPrevGen;
     }
 }
 

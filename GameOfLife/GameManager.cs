@@ -60,9 +60,9 @@ namespace GameOfLife
 
         public void NextGeneration()
         {
-            CalculateScore();
             ApplyRuleset();
             UpdateAllUnits();
+            CalculateScore();
             currentState.AddStateToCache();
             ++currentState.GenerationCounter;
         }
@@ -93,23 +93,20 @@ namespace GameOfLife
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
                     //check if block is a virus or not a cell - if so, add the block's species complexity to the total
-                    if(!(grid[j,k] is Virus) && grid[j,k] != null)
+                    if (!(grid[j, k] is Virus) && grid[j, k] != null)
+                    {
                         //add the product of the units 
-                        gridScore += (grid[j, k] as LivingUnit).SpeciesComplexity * (grid[j, k] as LivingUnit).Age;
+                        gridScore += Math.Max((grid[j, k] as LivingUnit).SpeciesComplexity * (grid[j, k] as LivingUnit).Age, (grid[j, k] as LivingUnit).SpeciesComplexity);
+                    }
                 }
             }
             //if the current score of the board is higher than the highest recorded concurrent score, it becomes the new highest concurrent score
             if (gridScore > HighestConcurrentScore) HighestConcurrentScore = gridScore;
-            //check if there are any units left on board
-            if(gridScore == 0)
+            //check if there are any units left on board or if the score has not changed in 5 generations
+            if (gridScore == 0 || currentState.isScoreStable(gridScore))
             {
-                //if not, call gameover on form
+                //if either are true, call gameOver in form and end the current simulation
                 var form = System.Windows.Forms.Application.OpenForms.OfType<GameForm>().Single();
-                var timers = form.Controls.OfType<System.Windows.Forms.Timer>();
-                foreach(System.Windows.Forms.Timer t in timers)
-                {
-                    t.Enabled = false; 
-                }
                 form.GameOver();
             }
             //add the score of the board 

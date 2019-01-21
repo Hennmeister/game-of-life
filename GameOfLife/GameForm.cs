@@ -1,4 +1,4 @@
-﻿// rudy 
+﻿// rudy <-- is this dude serious 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace GameOfLife
 {
+    //CHANGE EVERYTHING FROM PROTECTED TO PRIVATE
     public partial class GameForm : Form
     {
         //store game actions and data
@@ -145,7 +146,9 @@ namespace GameOfLife
             DisplayGenerationNumber();
             DisplayCurrentScore();
             DisplayConcurrentHighScore();
+            DisplayPreviousGens();
         }
+
         protected void DisplayEnvironmentalParameters()
         {
             lblEnvParams.Text = "Water Availability: " + manager.WaterAvailability.ToString() + "\r\n" + "Food Availability: "
@@ -166,6 +169,21 @@ namespace GameOfLife
         protected void DisplayConcurrentHighScore()
         {
             lblHighestConcurrentScore.Text = "Highest Concurrent Score: " + manager.HighestConcurrentScore.ToString();
+        }
+
+        private void DisplayPreviousGens()
+        {
+            int cbLength = cbGenNums.Items.Count;
+            cbGenNums.Items.Clear();
+            for (int i = 0; i < cbLength; i++)
+            {
+                //-i +1 ???
+                if (manager.GenerationCounter - i >= 0)
+                {
+                    cbGenNums.Items.Add(manager.GenerationCounter - i);
+                }
+                else cbGenNums.Items.Add(0);
+            }
         }
 
         protected void tmrGeneration_Tick(object sender, EventArgs e)
@@ -279,10 +297,24 @@ namespace GameOfLife
 
         public void GameOver()
         {
+            tmrGeneration.Enabled = false;
+            tmrRefresh.Enabled = false;
+            Refresh();
             MessageBox.Show("GAME OVER");
             LeaderboardForm f = new LeaderboardForm();
-            f.ShowDialog();
             this.Close();
+            f.ShowDialog();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            manager.SaveState();
+        }
+
+        private void btnLoadPrevGen_Click(object sender, EventArgs e)
+        {
+            manager.LoadCachedState((int)cbGenNums.SelectedItem);
+            Refresh();
         }
     }
 }
