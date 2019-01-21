@@ -233,18 +233,11 @@ namespace GameOfLife
             {
                 return false;
             }
-            // Otherwise generate a random number of 100 possible values (0-99)
-            int randomNumber = numberGenerator.Next(0, 100);
-            // The chance of generating a number less than the percent probability
-            // of an event occuring is equal to the probability of the event occuring
-            // -- (probability of event) favourable cases out of 100
-            // If it meets this condition, start a new event
-            if (randomNumber < PROBABILITY_OF_EVENT)
+            // Otherwise, probabilistically evaluate whether an event occurs
+            else
             {
-                return true;
+                return ProbabilityHelper.EvaluateIndependentPredicate(PROBABILITY_OF_EVENT / 100.0);
             }
-            // otherwise, an event should occur
-            return false;
         }
 
         
