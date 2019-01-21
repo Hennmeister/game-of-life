@@ -34,7 +34,7 @@ namespace GameOfLife
             this.oxygenLevel -= 5; 
             this.carbonDioxideLevel += 5;
             // Lose access to 10% of the available food
-            this.foodAvailability -= 0.10 * foodAvailability;
+            FoodAvailability -= 0.10 * FoodAvailability;
         }
     }
 }
