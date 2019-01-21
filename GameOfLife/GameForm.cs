@@ -342,7 +342,7 @@ namespace GameOfLife
         private void btnLoadPrevGen_Click(object sender, EventArgs e)
         {
             //Make sure the game is paused, a generation number is selected and that the selected value is a number
-            if (isPauseed && cbGenNums.SelectedItem != null && cbGenNums.SelectedText != "Not Available");
+            if (isPaused && cbGenNums.SelectedItem != null && cbGenNums.SelectedText != "Not Available");
             {
 
                 manager.LoadCachedState((int)cbGenNums.SelectedItem);

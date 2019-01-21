@@ -243,6 +243,7 @@ namespace GameOfLife
             using (FolderBrowserDialog browser = new FolderBrowserDialog())
             {
                 browser.SelectedPath = Datastore.GeneralStatesDirectoryPath;
+                browser.ShowNewFolderButton = false;
                 if (browser.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(browser.SelectedPath))
                 {
                     manager.LoadState(browser.SelectedPath);

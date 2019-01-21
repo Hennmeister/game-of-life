@@ -18,7 +18,10 @@ namespace GameOfLife
         }
 
         private void DisplayScores() { }
-        private void ReturnToGame() { }
+        private void ReturnToStart()
+        {
+
+        }
         private void SelectScoreState() { }
     }
 }
