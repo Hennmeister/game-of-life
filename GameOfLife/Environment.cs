@@ -154,9 +154,34 @@ namespace GameOfLife
         /// Decrease the amount of water in the Environment after being consumed by a Unit
         /// </summary>
         /// <param name="consumed"> The amount of water being consumed </param>
-        public void DecreaseWater(int consumed)
+        public void DecreaseWater(double consumed)
         {
             WaterAvailability -= consumed;
+        }
+
+        /// <summary>
+        /// Check whether there is enough water for a certain amount to be consumed.
+        /// </summary>
+        /// <param name="consumed"> The amount to be consumed. </param>
+        /// <returns> True if the amount consumed is less than or equal to the water availability,
+        /// false otherwise. </returns>
+        // TODO: delete if not used
+        public bool EnoughWater(double consumed)
+        {
+            return WaterAvailability >= consumed;
+        }
+
+
+        /// <summary>
+        /// Check whether there is enough food for a certain amount to be consumed.
+        /// </summary>
+        /// <param name="consumed"> The amount to be consumed. </param>
+        /// <returns> True if the amount consumed is less than or equal to the food availability,
+        /// false otherwise. </returns>
+        // TODO: delete if not used
+        public bool EnoughFood(double consumed)
+        {
+            return FoodAvailability >= consumed;
         }
 
         /// <summary>
