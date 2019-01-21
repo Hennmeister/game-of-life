@@ -12,6 +12,7 @@ using System.Drawing;
 
 namespace GameOfLife
 {
+   
     public class State
     {
         private const int NUMBER_OF_CACHED_STATES = 5;
@@ -23,12 +24,12 @@ namespace GameOfLife
         public Environment GameEnvironment { get; set; }
         private State[] cachedStates = new State[NUMBER_OF_CACHED_STATES];
         private static int latestID;
-        private int currentID;
+        public int CurrentID { get; }
 
         public State()
         {
             GenerationCounter = 0;
-            currentID = ++latestID;
+            CurrentID = ++latestID;
         }
 
         public void UpdateBlock(Unit newUnit, int row, int col)
@@ -69,16 +70,28 @@ namespace GameOfLife
         public bool isScoreStable(int score)
         {
             //prob refactor
-            foreach(State s in cachedStates)
+            foreach (State s in cachedStates)
             {
-                if(s == null || s.GenerationCounter != score)
+                if (s == null || s.GenerationCounter != score)
                 {
                     return false;
                 }
             }
             return true;
-         //    return new[] {cachedStates[0].GenerationCounter, cachedStates[1].GenerationCounter, cachedStates[2].GenerationCounter,
-           //     cachedStates[3].GenerationCounter, cachedStates[4].GenerationCounter }.All(x => x == score);
+            //    return new[] {cachedStates[0].GenerationCounter, cachedStates[1].GenerationCounter, cachedStates[2].GenerationCounter,
+            //     cachedStates[3].GenerationCounter, cachedStates[4].GenerationCounter }.All(x => x == score);
+        }
+
+        public EnvironmentTypeEnum EnvironmentType
+        {
+            get
+            {
+                return GameEnvironment.EnvironmentType;
+            }
+            set
+            {
+                GameEnvironment.EnvironmentType = value;
+            }
         }
 
         public int CarbonDioxideLevel
@@ -101,6 +114,17 @@ namespace GameOfLife
             }
         }
 
+        public int EventGenerationsLeft
+        {
+            get
+            {
+                return GameEnvironment.EventGenerationsLeft;
+            }
+            set
+            {
+                GameEnvironment.EventGenerationsLeft = value;
+            }
+        }
         public Image EnvironmentalImage
         {
             get
@@ -145,6 +169,30 @@ namespace GameOfLife
             }
         }
         
+        public double DefaultFood
+        {
+            get
+            {
+                return GameEnvironment.DefaultFood;
+            }
+            set
+            {
+                GameEnvironment.DefaultFood = value;
+            }
+        }
+
+        // (Nicole) changed double to int to reflect the defaultWater property type
+        public int DefaultWater
+        {
+            get
+            {
+                return GameEnvironment.DefaultWater;
+            }
+            set
+            {
+                GameEnvironment.DefaultWater = value;
+            }
+        }
 
         public double WaterAvailability
         {
@@ -189,3 +237,5 @@ namespace GameOfLife
         
     }
 }
+
+
