@@ -59,7 +59,7 @@ namespace GameOfLife
         public override void Update(Unit[,] grid, Environment gameEnv)
         {
             ApplyCommunityBenefits(grid);
-            UpdateBasicLivingUnit(grid, gameEnv);
+            UpdateLivingUnit(grid, gameEnv);
             // Check if the animal is hibernating
             if (IsHibernating)
             {
