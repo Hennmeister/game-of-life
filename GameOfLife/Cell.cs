@@ -64,7 +64,7 @@ namespace GameOfLife
             else
             {
                 bool initiallyInfected = Infected;
-                UpdateBasicLivingUnit(grid, gameEnv);
+                UpdateLivingUnit(grid, gameEnv);
                 if(!Infected && initiallyInfected)
                 {
                     InfectionResistance += 0.5;

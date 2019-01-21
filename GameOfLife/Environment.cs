@@ -68,6 +68,8 @@ namespace GameOfLife
         /// <param name="carbonDioxideLevel"> The carbon dioxide level in this environment </param>
         /// <param name="temperature"> The temperature of this environment </param>
         /// <param name="probOfRain"> The probability of rain in this environment </param>
+        /// /// <param name="envImage"> The background image for this environment </param>
+        /// <param name="eventPic"> The image for the unique event of this environment </param>
         public Environment(double defaultFood, int defaultWater,
                            int oxygenLevel, int carbonDioxideLevel,
                            int temperature, int probOfRain, 
@@ -119,21 +121,53 @@ namespace GameOfLife
         public int CarbonDioxideLevel
         {
             get { return this.carbonDioxideLevel; }
-            set { this.carbonDioxideLevel = value; }
+            set
+            {
+                if (value < 0)
+                {
+                    this.carbonDioxideLevel = 0;
+                    this.oxygenLevel = 100;
+                }
+                else
+                {
+                    this.carbonDioxideLevel = value;
+                    this.oxygenLevel = 100 - carbonDioxideLevel;
+                }
+            }
         }
 
         // get and set food availability 
         public double FoodAvailability
         {
             get { return this.foodAvailability; }
-            set { this.foodAvailability = value; }
+            set {
+                if (value < 0) {
+                    this.foodAvailability = 0;
+                }
+                else
+                {
+                    this.foodAvailability = value;
+                }
+            }
         }
 
-        // get and set oxyegen level 
+        // get and set oxygen level 
         public int OxygenLevel
         {
             get { return this.oxygenLevel; }
-            set { this.oxygenLevel = value; }
+            set
+            {
+                if (value < 0)
+                {
+                    this.oxygenLevel = 0;
+                    this.carbonDioxideLevel = 100;
+                }
+                else
+                {
+                    this.oxygenLevel = value;
+                    this.carbonDioxideLevel = 100 - carbonDioxideLevel;
+                }
+            }
         }
 
         // get and set temperature
@@ -147,26 +181,64 @@ namespace GameOfLife
         public double WaterAvailability
         {
             get { return this.waterAvailability; }
-            set { this.waterAvailability = value; }
+            set
+            {
+                if (value < 0)
+                {
+                    this.waterAvailability = 0;
+                }
+                else
+                {
+                    this.waterAvailability = value;
+                }
+            }
         }
 
 
         /// <summary>
         /// Decrease the amount of food in the Environment after being consumed by a Unit
         /// </summary>
-        /// <param name="consumed"> The amount of food being consumed </param>
-        public void DecreaseFood(double consumed)
+        /// <param name="required"> The amount of food being consumed </param>
+        public bool DecreaseFood(double required)
         {
-            FoodAvailability -= consumed;
+            // Check if there is not enough food for the unit to consume
+            if (FoodAvailability - required < 0)
+            {
+                // The unit consumes all remaining food, reducing food availability to 0
+                FoodAvailability = 0;
+                // Indicate that the unit cannot get enough food to sustain itself
+                return false;
+            }
+            // Otherwise, there is enough food in the environment for the unit to eat
+            else
+            {
+                // Consume as much food as required and indicate that the unit has enough to eat
+                FoodAvailability -= required;
+                return true;
+            }
         }
 
         /// <summary>
         /// Decrease the amount of water in the Environment after being consumed by a Unit
         /// </summary>
         /// <param name="consumed"> The amount of water being consumed </param>
-        public void DecreaseWater(double consumed)
+        public bool DecreaseWater(double required)
         {
-            WaterAvailability -= consumed;
+            // Check if there is not enough water for the unit to consume
+            if (WaterAvailability - required < 0)
+            {
+                // The unit consumes all remaining water, reducing water availability to 0
+                WaterAvailability = 0;
+                // Indicate that the unit cannot get water food to sustain itself
+                return false;
+            }
+            // Otherwise, there is enough water in the environment for the unit to drink
+            else
+            {
+                // Consume as much water as required and indicate that the unit has enough to drink
+                WaterAvailability -= required;
+                return true;
+            }
         }
 
         /// <summary>
