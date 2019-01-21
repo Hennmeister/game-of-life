@@ -21,20 +21,18 @@ namespace GameOfLife
 
         /// <summary>
         /// Computes the state of a given "block" in the grid in the new generation
-        /// given the grid, the block, and the food availability.
+        /// given the grid and the block.
         /// </summary>
         /// <remarks>
         /// Uses row and column instead of Unit since the focus is on 
         /// the location of the Unit, not its parameters.
         /// </remarks>
         /// <param name="grid">The grid in which the block to compute is.</param>
-        /// <param name="foodAvailability">The number of food units available
-        /// in the block's environment.</param>
         /// <param name="row">The row (within the grid) of the block to update.</param>
         /// <param name="col">The column (within the grid) of the block to update.</param>
         /// <returns>The new Unit that should occupy the block in this new generation. Null if no unit
         /// should occupy the block.</returns>
-        public static Unit NewBlockState(Unit[,] grid, double foodAvailability, int row, int col)
+        public static Unit NewBlockState(Unit[,] grid, int row, int col)
         {
             // The current Unit in the block to update
             Unit thisUnit = grid[row, col];
@@ -54,7 +52,7 @@ namespace GameOfLife
             }
 
             // Check if the Unit is a Virus
-            if (!IsLiveUnit(thisUnit))
+            if (!(thisUnit is LivingUnit))
             {
                 // Update the Virus with separate Virus-oriented computations
                 return NewVirusState(grid, row, col);
@@ -63,25 +61,23 @@ namespace GameOfLife
             else
             {
                 // Update the LivingUnit with separate LivingUnit-oriented computations
-                return NewLivingState(grid, foodAvailability, row, col);
+                return NewLivingState(grid, row, col);
             }            
         }
 
         /// <summary>
         /// Computes the state of a given LivingUnit in the grid in the new generation
-        /// given the grid, the block, and the food availability.
+        /// given the grid and the block.
         /// </summary>
         /// <remarks>
         /// The grid block to update should be non-null.
         /// </remarks>
         /// <param name="grid">The grid in which the LivingUnit to compute is.</param>
-        /// <param name="foodAvailability">The number of food units available
-        /// in the LivingUnit's environment.</param>
         /// <param name="row">The row (within the grid) of the LivingUnit to update.</param>
         /// <param name="col">The column (within the grid) of the LivingUnit to update.</param>
         /// <returns>The new LivingUnit that should occupy the block in this new generation. Null if
         /// no unit should occupy the block.</returns>
-        private static LivingUnit NewLivingState(Unit[,] grid, double foodAvailability, int row, int col)
+        private static LivingUnit NewLivingState(Unit[,] grid, int row, int col)
         {
             // The current Unit in the block to update
             Unit thisUnit = grid[row, col];
@@ -90,7 +86,7 @@ namespace GameOfLife
             int liveNeighbors = CountLiveNeighbors(grid, row, col);
             
             // Check if the existing unit should die next generation
-            if (!UnitPersists(thisUnit, liveNeighbors, foodAvailability))
+            if (!UnitPersists(thisUnit, liveNeighbors))
             {
                 // Null represents a dead unit
                 return null;
@@ -117,10 +113,10 @@ namespace GameOfLife
             Unit thisUnit = grid[row, col];
 
             // Count the number of viral neighbors 
-            int liveNeighbors = CountViralNeighbors(grid, row, col);
+            int viralNeighbours = CountViralNeighbors(grid, row, col);
 
             // Check if the existing unit should die next generation
-            if (!UnitPersists(thisUnit, liveNeighbors: liveNeighbors))
+            if (!UnitPersists(thisUnit, viralNeighbours))
             {
                 // Null represents a dead unit
                 return null;
@@ -232,90 +228,145 @@ namespace GameOfLife
                             .ToDictionary(x => x.k, x => x.v);
         }
 
-        
-
+        /// <summary>
+        /// Gets a list of all the non-null Unit neighbors of a block in the grid.
+        /// </summary>
+        /// <param name="grid">Grid to use for finding neighbors.</param>
+        /// <param name="row">Row (within the grid) of the block whose neighbors are found.</param>
+        /// <param name="col">Column (within the grid) of the block whose neighbors are found.</param>
+        /// <returns>A List of non-null Units which are neighbors of the block at (row, col).</returns>
         private static List<Unit> GetAllNeighbors(Unit[,] grid, int row, int col)
         {
+            // List that will store all the neighbors
             List<Unit> neighbors = new List<Unit>();
+
             // Iterate through the Moore neighborhood
+            // Iterate row by row, starting from the row above the block and ending at the row
+            // below the block.
             for(int i = row - 1; i <= row + 1; i++)
             {
+                // Iterate column by column, starting from the column to the left of the block
+                // and ending at the column to the right of the block.
                 for(int j = col - 1; j <= col + 1; j++)
                 {
+                    // Check if the current block is not the original block at (row, col),
+                    // that it is inside the grid bounds, and that the Unit stored in the block is not null
                     if ((i != row || j != col) && grid.InGridBounds(i, j) && grid[i, j] != null)
                     {
+                        // Store this neighbor
                         neighbors.Add(grid[i, j]);
                     }
                 }
             }
+            // Return all the neighbors
             return neighbors;
-        }
-
-        private static int CountAllNeighbors(Unit[,] grid, int row, int col)
-        {
-            return CountLiveNeighbors(grid, row, col) + CountViralNeighbors(grid, row, col);
-        }
-       
-
-        // TODO: check if null objects don't count
-        private static bool IsLiveUnit(Unit unit)
-        {
-            return unit is LivingUnit;
         }
         
-        private static int CountLiveNeighbors(Unit[,] grid, int row, int col)
+        /// <summary>
+        /// Returns the number of non-null Unit neighbors of the block at (row, col).
+        /// </summary>
+        /// <param name="grid">Grid to use for counting neighbors.</param>
+        /// <param name="row">Row (within the grid) of the block whose neighbors are counted.</param>
+        /// <param name="col">Column (within the grid) of the block whose neighbors are counted.</param>
+        /// <returns>The number of non-null Unit neighbors of the block at (row, col).</returns>
+        private static int CountAllNeighbors(Unit[,] grid, int row, int col)
         {
-            return NumberOfNeighbors(grid, row, col, countViral: false);
+            // The number of neighbors is the sum of the number of LivingUnit and Viral neighbors
+            return CountLiveNeighbors(grid, row, col) + CountViralNeighbors(grid, row, col);
         }
 
-        private static int NumberOfNeighbors(Unit[,] grid, int row, int col, bool countViral)
-        {
-            int neighbors = 0;
-            // Iterate through the Moore neighborhood
-            for (int i = row - 1; i <= row + 1; i++)
-            {
-                for (int j = col - 1; j <= col + 1; j++)
-                {
-                    if ((i != row || j != col) && grid.InGridBounds(i, j) && grid[i, j] != null)
-                    {
-                        neighbors += (!countViral == IsLiveUnit(grid[i, j]) ? 1 : 0);
-                    }
-                }
-            }
-            return neighbors;
-        }
-
+        /// <summary>
+        /// Returns the number of non-null Virus neighbors of the block at (row, col).
+        /// </summary>
+        /// <param name="grid">Grid to use for counting neighbors.</param>
+        /// <param name="row">Row (within the grid) of the block whose neighbors are counted.</param>
+        /// <param name="col">Column (within the grid) of the block whose neighbors are counted.</param>
+        /// <returns>The number of non-null Virus neighbors of the block at (row, col).</returns>
         private static int CountViralNeighbors(Unit[,] grid, int row, int col)
         {
+            // Return the number of non-null Virus neighbors of the block
             return NumberOfNeighbors(grid, row, col, countViral: true);
         }
 
-        private static bool HasEnoughFood(LivingUnit unit, double foodAvailability, int liveNeighbors)
+        /// <summary>
+        /// Returns the number of non-null LivingUnit neighbors of the block at (row, col).
+        /// </summary>
+        /// <param name="grid">Grid to use for counting neighbors.</param>
+        /// <param name="row">Row (within the grid) of the block whose neighbors are counted.</param>
+        /// <param name="col">Column (within the grid) of the block whose neighbors are counted.</param>
+        /// <returns>The number of non-null LivingUnit neighbors of the block at (row, col).</returns>
+        private static int CountLiveNeighbors(Unit[,] grid, int row, int col)
         {
-            if(foodAvailability >= unit.FoodRequirement)
-            {
-                return true;
-            }
-            // Check if dies because of food deficiency
-            double probability = (unit.FoodRequirement - foodAvailability) / unit.FoodRequirement;
-            return ProbabilityHelper.EvaluateIndependentPredicate(probability);
+            // Return the number of non-null LivingUnit (non-Virus) neighbors of the block
+            return NumberOfNeighbors(grid, row, col, countViral: false);
         }
 
-        private static bool UnitPersists(Unit unit, int liveNeighbors, double foodAvailability = 0)
+        /// <summary>
+        /// Returns the number of non-null Unit neighbors, either all Virus or all LivingUnit,
+        /// of the block at (row, col).
+        /// </summary>
+        /// <remarks>
+        /// Reusable method for both Virus counting and LivingUnit counting.
+        /// </remarks>
+        /// <param name="grid">Grid to use for counting neighbors.</param>
+        /// <param name="row">Row (within the grid) of the block whose neighbors are counted.</param>
+        /// <param name="col">Column (within the grid) of the block whose neighbors are counted.</param>
+        /// <param name="countViral">Whether to count Viruses as neighbors (in which case LivingUnit
+        /// neighbors are not counted), or not count them as neighbors (in which case only LivingUnit
+        /// neighbors are counted).</param>
+        /// <returns>The number of non-null Virus neighbors if "countViral" is true, or the number
+        /// of non-null LivingUnit neighbors if "countViral" is false. Neighbors are in the Moore neighborhood.</returns>
+        private static int NumberOfNeighbors(Unit[,] grid, int row, int col, bool countViral)
         {
-            if (liveNeighbors < UNDER_POP || liveNeighbors > OVER_POP)
+            // Will store the number of neighbors
+            int neighbors = 0;
+
+            // Iterate through the Moore neighborhood
+            // Iterate row by row, starting from the row above the block and ending at the row
+            // below the block.
+            for (int i = row - 1; i <= row + 1; i++)
             {
+                // Iterate column by column, starting from the column to the left of the block
+                // and ending at the column to the right of the block.
+                for (int j = col - 1; j <= col + 1; j++)
+                {
+                    // Check if the current block is not the original block at (row, col),
+                    // that it is inside the grid bounds, and that the Unit stored in the block is not null
+                    if ((i != row || j != col) && grid.InGridBounds(i, j) && grid[i, j] != null)
+                    {
+                        // Count the current neighbor only if Viruses should be counted and the neighbor is
+                        // not a LivingUnit, or if Viruses should not be counted and the neighbour is a LivingUnit
+                        neighbors += (!countViral == grid[i, j] is LivingUnit ? 1 : 0);
+                    }
+                }
+            }
+            // Return the number of neighbors corresponding to the criterion of Virus counting or not counting
+            return neighbors;
+        }
+
+        /// <summary>
+        /// Checks whether a non-null Unit can persist to the next generation given
+        /// the unit and the number of neighbors of the same type (LivingUnit if the unit is a LivingUnit,
+        /// Virus if the unit is a Virus).
+        /// </summary>
+        /// <remarks>
+        /// A Unit does not persist to the next generation only if it has less than 2 
+        /// "neighbors" (underpopulation), or more than 3 "neighbors" (overpopulation) in its Moore neighborhood.
+        /// </remarks>
+        /// <param name="unit">The Unit to check for persistence.</param>
+        /// <param name="neighbors">The number of neighbors of the same type as the Unit
+        /// (LivingUnit if the unit is a LivingUnit, Virus if the unit is a Virus).</param>
+        /// <returns>True if the Unit persists, false otherwise.</returns>
+        private static bool UnitPersists(Unit unit, int neighbors)
+        {
+            // Check if underpopulation or overpopulation is occuring
+            if (neighbors < UNDER_POP || neighbors > OVER_POP)
+            {
+                // The Unit does not persist under these conditions
                 return false;
             }
-
-            if(unit is LivingUnit)
-            {
-                return HasEnoughFood((LivingUnit)unit, foodAvailability, liveNeighbors);
-            }
-
+            // Otherwise, the Unit persists to the next generation
             return true;
-            
         }
-        
     }
 }
