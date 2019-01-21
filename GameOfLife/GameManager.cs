@@ -79,7 +79,7 @@ namespace GameOfLife
                 {
                     Unit newUnit = Ruleset.NewBlockState(grid, j, k);
                     // If the new unit is null, it should die
-                    if(newUnit == null)
+                    if(newUnit == null && newGrid[j,k] != null)
                     {
                         newGrid[j, k].Die(grid, currentState.GameEnvironment);
                     }
