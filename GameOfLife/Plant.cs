@@ -1,4 +1,5 @@
-﻿using System;
+﻿// (Nicole) - added unitType and constructor for reading from file
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace GameOfLife
         private const int PHOTOSYNTHESIS_RESOURCE_UPPER_BOUND = 4;
         
 
-        public Plant(int row = -1, int col = -1) : base(senescence: 50,
+        public Plant(int row = -1, int col = -1) : base(Enums.UnitType.Plant, senescence: 50,
                        foodRequirement: 5, waterRequirement: 25,
                        gasRequirement: 4, inputGas: Enums.GasType.CarbonDioxide,
                        outputGas: Enums.GasType.Oxygen, idealTemperature: 35,
@@ -28,6 +29,12 @@ namespace GameOfLife
         {
             ToxicityFactor = ProbabilityHelper.RandomInteger(TOXICITY_FACTOR_LOWER_BOUND, TOXICITY_FACTOR_UPPER_BOUND);
             BaselineWaterRequirement = WaterRequirement;
+        }
+
+        // (Nicole) --> constructor for reading files
+        public Plant(string[] parameters) : base(parameters)
+        {
+            UnitType = Enums.UnitType.Plant;
         }
 
         public Plant(Environment gameEnv, int row = -1, int col = -1) : this(row, col)
@@ -38,6 +45,11 @@ namespace GameOfLife
         public override Unit Create(int row, int col)
         {
             return new Plant(row, col);
+        }
+
+        public override Unit Create(string[] parameters)
+        {
+            return new Plant(parameters);
         }
 
         protected override void UpdateVictualRequirements(int numNeighbors)

@@ -14,6 +14,8 @@ namespace GameOfLife
         /// </summary>
         public Tundra() : base(10000, 250000, 75, 25, 15, 15)
         {
+            // (Nicole) assign the specific environment type
+            environmentType = EnvironmentTypeEnum.Tundra;
         }
 
         /// <summary>

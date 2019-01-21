@@ -20,6 +20,8 @@ namespace GameOfLife
         /// </summary>
         public Rainforest() : base(10000, 50000, 50, 50, 30, 50)
         {
+            // (Nicole) assign the specific environment type
+            environmentType = EnvironmentTypeEnum.Rainforest;
         }
 
         /// <summary>

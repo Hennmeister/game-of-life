@@ -24,6 +24,12 @@ namespace GameOfLife
         {
             return modelUnits.ElementAtOrDefault((int)type)?.Create(row, col);
         }
+
+        // rudy
+        public static Unit CreateUnit(Enums.UnitType type, string[] parameters)
+        {
+            return modelUnits.ElementAtOrDefault((int)type)?.Create(parameters);
+        }
         
     }
 }

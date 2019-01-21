@@ -1,5 +1,6 @@
 ﻿/*
  * Tiffanie Truong
+ * (Nicole) - added unitType and constructor for loading data from file
  * January 15, 2018
  * This class stores information for a Cell, one of the basic
  * lifeforms that can populate the grid in the simulation.
@@ -19,12 +20,18 @@ namespace GameOfLife
         /// <summary>
         /// Create a new Cell object
         /// </summary>
-        public Cell(int row = -1, int col = -1) : base(speciesComplexity: 2, senescence: 16,
+        public Cell(int row = -1, int col = -1) : base(Enums.UnitType.Cell, speciesComplexity: 2, senescence: 16,
                                foodRequirement: 1, waterRequirement: 1,
                                gasRequirement: 1, inputGas: Enums.GasType.Oxygen,
                                outputGas: Enums.GasType.CarbonDioxide, idealTemperature: 30,
                                infectionResistance: 3, decompositionValue: 0.5, row: row, col: col)
         {
+        }
+
+        // (Nicole) --> constructor for reading files
+        public Cell(string[] parameters) : base(parameters)
+        {
+            UnitType = Enums.UnitType.Cell;
         }
 
         /// <summary>
@@ -36,6 +43,10 @@ namespace GameOfLife
             return new Cell(row, col);
         }
 
+        public override Unit Create(string[] parameters)
+        {
+            return new Cell(parameters);
+        }
         /// <summary>
         /// 
         /// </summary>

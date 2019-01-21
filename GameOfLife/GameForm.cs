@@ -1,4 +1,5 @@
-﻿// rudy 
+﻿// rudy
+// updated UI - Nicole
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -275,6 +276,17 @@ namespace GameOfLife
                 isPaused = true;
                 btnStart.Text = "Unpause";
             }
+        }
+
+        // (Nicole) buttons for saving and loading
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            manager.SaveState();
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            manager.LoadState();
         }
     }
 }

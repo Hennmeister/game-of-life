@@ -12,6 +12,7 @@ using System.Drawing;
 
 namespace GameOfLife
 {
+   
     public class State
     {
         private const int NUMBER_OF_PREV_STATES = 5;
@@ -23,12 +24,12 @@ namespace GameOfLife
         public Environment GameEnvironment { get; set; }
         private State[] previousStates = new State[NUMBER_OF_PREV_STATES];
         private static int latestID;
-        private int currentID;
+        public int CurrentID { get; }
 
         public State()
         {
             GenerationCounter = 0;
-            currentID = ++latestID;
+            CurrentID = ++latestID;
         }
 
         public void UpdateBlock(Unit newUnit, int row, int col)
@@ -57,6 +58,18 @@ namespace GameOfLife
             return null;
         }
 
+        public EnvironmentTypeEnum EnvironmentType
+        {
+            get
+            {
+                return GameEnvironment.EnvironmentType;
+            }
+            set
+            {
+                GameEnvironment.EnvironmentType = value;
+            }
+        }
+
         public int CarbonDioxideLevel
         {
             set
@@ -77,6 +90,17 @@ namespace GameOfLife
             }
         }
 
+        public int EventGenerationsLeft
+        {
+            get
+            {
+                return GameEnvironment.EventGenerationsLeft;
+            }
+            set
+            {
+                GameEnvironment.EventGenerationsLeft = value;
+            }
+        }
         public Image EnvironmentalImage
         {
             get
@@ -121,6 +145,30 @@ namespace GameOfLife
             }
         }
         
+        public double DefaultFood
+        {
+            get
+            {
+                return GameEnvironment.DefaultFood;
+            }
+            set
+            {
+                GameEnvironment.DefaultFood = value;
+            }
+        }
+
+        // (Nicole) changed double to int to reflect the defaultWater property type
+        public int DefaultWater
+        {
+            get
+            {
+                return GameEnvironment.DefaultWater;
+            }
+            set
+            {
+                GameEnvironment.DefaultWater = value;
+            }
+        }
 
         public double WaterAvailability
         {
@@ -165,3 +213,5 @@ namespace GameOfLife
         
     }
 }
+
+
