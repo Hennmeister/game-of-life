@@ -29,7 +29,7 @@ namespace GameOfLife
         // (Nicole) loading state based on current state ID
         public static void LoadState(State state, string statePath)
         {
-            ReadEnvironmentalParameters(state, statePath);
+            LoadEnvironmentalParameters(state, statePath);
             LoadAllUnits(state, statePath);
             LoadGeneralInformation(state, statePath);
         }
@@ -65,7 +65,7 @@ namespace GameOfLife
         }
 
         // (Nicole) reading environmental parameters
-        private static void ReadEnvironmentalParameters (State state, string statePath)
+        private static void LoadEnvironmentalParameters (State state, string statePath)
         {
             string envPath = statePath + @"\EnvironmentalParameters.txt";
             using (StreamReader envFile = new StreamReader(envPath))
@@ -207,7 +207,7 @@ namespace GameOfLife
             using (StreamWriter infoFile = new StreamWriter(infoPath))
             {
                 // Write the username. If username is null, save it is an empty string.
-                infoFile.WriteLine(state.Username != null ? state.Username : string.Empty);
+                infoFile.WriteLine(state.Username);
 
                 // Write the generation counter
                 infoFile.WriteLine(state.GenerationCounter);
@@ -274,11 +274,23 @@ namespace GameOfLife
         /// </remarks>
         public static void CreateGeneralStateDirectory()
         {
-            if (!generalStatesDirectoryExists)
+             Directory.CreateDirectory(GeneralStatesDirectoryPath);
+        }
+
+
+        public static Dictionary<string, int> GetAllHighestConcurrentScores()
+        {
+            Dictionary<string, int> allScores = new Dictionary<string, int>();
+            // Get all states
+            string[] allStates = Directory.GetDirectories(GeneralStatesDirectoryPath);
+            foreach(string statePath in allStates)
             {
-                Directory.CreateDirectory(GeneralStatesDirectoryPath);
-                generalStatesDirectoryExists = true;
+                string infoPath = statePath + @"\GeneralInformation.txt";
+                string[] generalInfo = File.ReadAllLines(infoPath);
+                // The first line of the file is the username, the last one is the highest concurrent score
+                allScores.Add(generalInfo[0], int.Parse(generalInfo[3]));
             }
+            return allScores;
         }
     }
 }
