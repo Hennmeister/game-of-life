@@ -85,14 +85,14 @@ namespace GameOfLife
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    //potentially refactor later
+                    Unit u = manager.GetUnit(j, k);
                     // Set initial grid colour to white to represent no unit
                     Color c = Color.White;
                     // Check if for a unit in this grid cell that needs to be drawn
-                    if (manager.GetUnit(j, k) != null)
+                    if (u != null)
                     {
                         // Determine what type of unit it is to get its corresponding colour
-                        switch (manager.GetUnit(j, k).GetType().Name)
+                        switch (u.GetType().Name)
                         {
                             case nameof(Enums.UnitType.Virus):
                                 c = Virus.baselineColor;
@@ -115,8 +115,14 @@ namespace GameOfLife
                     SolidBrush brush = new SolidBrush(c);
                     e.Graphics.FillRectangle(brush, grid[j, k]);
                     brush.Dispose();
+                    //Check if there is a unit, that it is not a virus and if it is infected
+                    if(u != null && !(u is Virus) && (u as LivingUnit).Infected)
+                    {
+                        //draw a green rectangle around the unit to indicate it is infected
+                        e.Graphics.DrawRectangle(new Pen(Color.DarkGreen, 2), grid[j, k]);
+                    }
                     // Draw the rectangle around the grid
-                    e.Graphics.DrawRectangle(new Pen(Color.Black, 1), grid[j, k]);
+                    else e.Graphics.DrawRectangle(new Pen(Color.Black, 1), grid[j, k]);
                 }
             }
 
@@ -335,7 +341,8 @@ namespace GameOfLife
         //HENNING
         private void btnLoadPrevGen_Click(object sender, EventArgs e)
         {
-            if (cbGenNums.SelectedItem != null && cbGenNums.SelectedText != "Not Available");
+            //Make sure the game is paused, a generation number is selected and that the selected value is a number
+            if (isPauseed && cbGenNums.SelectedItem != null && cbGenNums.SelectedText != "Not Available");
             {
 
                 manager.LoadCachedState((int)cbGenNums.SelectedItem);
