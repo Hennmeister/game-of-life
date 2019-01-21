@@ -49,7 +49,7 @@ namespace GameOfLife
             }
             else
             {
-                UpdateBasicLivingUnit(grid, gameEnv);
+                UpdateLivingUnit(grid, gameEnv);
             }
         }
         

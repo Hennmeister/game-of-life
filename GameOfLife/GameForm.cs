@@ -309,6 +309,7 @@ namespace GameOfLife
 
         public void GameOver()
         {
+            Cursor.Show();
             tmrGeneration.Enabled = false;
             tmrRefresh.Enabled = false;
             Refresh();

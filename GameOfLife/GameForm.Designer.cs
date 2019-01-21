@@ -38,7 +38,6 @@ namespace GameOfLife
             this.lblEnvParams = new System.Windows.Forms.Label();
             this.tmrRefresh = new System.Windows.Forms.Timer(this.components);
             this.lblTitle = new System.Windows.Forms.Label();
-            this.lblEnvironmentType = new System.Windows.Forms.Label();
             this.lblCurrentEvent = new System.Windows.Forms.Label();
             this.lblErase = new System.Windows.Forms.Label();
             this.lblCellTool = new System.Windows.Forms.Label();
@@ -54,6 +53,7 @@ namespace GameOfLife
             this.txtSessionName = new System.Windows.Forms.TextBox();
             this.lblPromptSessionName = new System.Windows.Forms.Label();
             this.btnConfirmSave = new System.Windows.Forms.Button();
+            this.lblEnvironmentType = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picEvent)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,21 +107,14 @@ namespace GameOfLife
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.Black;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.SystemColors.Window;
             this.lblTitle.Location = new System.Drawing.Point(15, 20);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(310, 55);
             this.lblTitle.TabIndex = 4;
             this.lblTitle.Text = "Game of Life";
-            // 
-            // lblEnvironmentType
-            // 
-            this.lblEnvironmentType.AutoSize = true;
-            this.lblEnvironmentType.Location = new System.Drawing.Point(28, 173);
-            this.lblEnvironmentType.Name = "lblEnvironmentType";
-            this.lblEnvironmentType.Size = new System.Drawing.Size(96, 13);
-            this.lblEnvironmentType.TabIndex = 5;
-            this.lblEnvironmentType.Text = "Environment Type ";
             // 
             // lblCurrentEvent
             // 
@@ -227,11 +220,10 @@ namespace GameOfLife
             // 
             // btnLoadPrevGen
             // 
-            this.btnLoadPrevGen.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLoadPrevGen.Location = new System.Drawing.Point(55, 80);
             this.btnLoadPrevGen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLoadPrevGen.Name = "btnLoadPrevGen";
-            this.btnLoadPrevGen.Size = new System.Drawing.Size(80, 39);
+            this.btnLoadPrevGen.Size = new System.Drawing.Size(80, 36);
             this.btnLoadPrevGen.TabIndex = 16;
             this.btnLoadPrevGen.Text = "Load Previous Generation";
             this.btnLoadPrevGen.UseVisualStyleBackColor = true;
@@ -275,11 +267,20 @@ namespace GameOfLife
             this.btnConfirmSave.UseVisualStyleBackColor = true;
             this.btnConfirmSave.Click += new System.EventHandler(this.btnConfirmSave_Click);
             // 
+            // lblEnvironmentType
+            // 
+            this.lblEnvironmentType.AutoSize = true;
+            this.lblEnvironmentType.Location = new System.Drawing.Point(28, 173);
+            this.lblEnvironmentType.Name = "lblEnvironmentType";
+            this.lblEnvironmentType.Size = new System.Drawing.Size(96, 13);
+            this.lblEnvironmentType.TabIndex = 5;
+            this.lblEnvironmentType.Text = "Environment Type ";
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(718, 442);
+            this.ClientSize = new System.Drawing.Size(934, 511);
             this.Controls.Add(this.btnConfirmSave);
             this.Controls.Add(this.lblPromptSessionName);
             this.Controls.Add(this.txtSessionName);
@@ -303,6 +304,9 @@ namespace GameOfLife
             this.Controls.Add(this.lblGenNum);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(950, 550);
+            this.MinimumSize = new System.Drawing.Size(950, 550);
             this.Name = "GameForm";
             this.Text = "Form1";
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseDown);
@@ -322,7 +326,6 @@ namespace GameOfLife
         private System.Windows.Forms.Label lblEnvParams;
         private System.Windows.Forms.Timer tmrRefresh;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label lblEnvironmentType;
         private System.Windows.Forms.Label lblCurrentEvent;
         private System.Windows.Forms.Label lblErase;
         private System.Windows.Forms.Label lblCellTool;
@@ -338,6 +341,7 @@ namespace GameOfLife
         private System.Windows.Forms.TextBox txtSessionName;
         private System.Windows.Forms.Label lblPromptSessionName;
         private System.Windows.Forms.Button btnConfirmSave;
+        private System.Windows.Forms.Label lblEnvironmentType;
     }
 }
 

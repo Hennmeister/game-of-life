@@ -188,7 +188,7 @@
             this.btnStartFree.Name = "btnStartFree";
             this.btnStartFree.Size = new System.Drawing.Size(110, 40);
             this.btnStartFree.TabIndex = 14;
-            this.btnStartFree.Text = "Start Game!";
+            this.btnStartFree.Text = "Start Free Mode";
             this.btnStartFree.UseVisualStyleBackColor = true;
             this.btnStartFree.Click += new System.EventHandler(this.btnStartFree_Click);
             // 
@@ -467,7 +467,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 464);
+            this.ClientSize = new System.Drawing.Size(719, 486);
             this.Controls.Add(this.btnLoadState);
             this.Controls.Add(this.lblMaxCarbonDioxide);
             this.Controls.Add(this.lblMaxOxygen);
@@ -507,6 +507,9 @@
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.sldFoodAvailability);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(735, 525);
+            this.MinimumSize = new System.Drawing.Size(735, 525);
             this.Name = "StartForm";
             this.Text = "StartForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartForm_FormClosed);

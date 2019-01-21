@@ -90,18 +90,14 @@ namespace GameOfLife
         }
 
 
-        protected void UpdateBasicLivingUnit(Unit[,] grid, Environment gameEnv)
+        protected void UpdateLivingUnit(Unit[,] grid, Environment gameEnv)
         {
-            // Check if the unit is dead
-            if (IsDead())
+            // If the unit is dying from infection, cannot eat enough, or cannot drink enough, it dies
+            if (WillDie() || !Eat(gameEnv, FoodRequirement) || !Drink(gameEnv, WaterRequirement))
             {
                 this.Die(grid, gameEnv);
             }
-            // Eat
-            Eat(gameEnv, FoodRequirement);
-            Drink(gameEnv, WaterRequirement);
             Respire(gameEnv);
-
             if (ShouldAge(gameEnv))
             {
                 AgeUp();
@@ -110,14 +106,21 @@ namespace GameOfLife
         
 
         // TODO: check if there's anything else to do here
-        private bool IsDead()
+        private bool WillDie()
         {
-            UpdateInfection();
-            if(Infected && CuredGenerationsLeft <= 0)
+            if (!Infected)
             {
-                return true;
+                return false;
             }
-            return false;
+            else
+            {
+                UpdateInfection();
+                if (CuredGenerationsLeft <= 0)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
 
         // Updates the infection status every turn
@@ -180,16 +183,37 @@ namespace GameOfLife
             return InfectionResistance / MaxResistance;
         }
 
-        protected void Drink(Environment gameEnv, int toDrink)
+        protected bool Drink(Environment gameEnv, int toDrink)
         {
-            gameEnv.DecreaseWater(toDrink);
+            // If the unit cannot drink as much as it requires, it dies
+            if (gameEnv.DecreaseWater(toDrink) == false)
+            {
+                // Indicate that the unit cannot drink as much as it needs
+                return false;
+            }
+            else
+            {
+                // Indicate that the unit can drink as much as it needs
+                return true;
+            }
         }
 
-        protected void Eat(Environment gameEnv, double toEat)
+        protected bool Eat(Environment gameEnv, double toEat)
         {
-            gameEnv.DecreaseFood(toEat);
+            // If the unit cannot eat as much as it requires, it dies
+            if (gameEnv.DecreaseFood(toEat) == false)
+            {
+                // Indicate that the unit cannot eat as much as it needs
+                return false;
+            }
+            else
+            {
+                // Indicate that the unit can eat as much as it needs
+                return true;
+            }
         }
         
+        // 
         public virtual void Respire(Environment gameEnv)
         {
             gameEnv.IncreaseCarbonDioxide(GasRequirement);
