@@ -44,10 +44,9 @@ namespace GameOfLife
             Location = (row, col);
         }
         
-        // (Nicole) constructor for loading from file
         /// <summary>
         /// Constructor used by child classes to create a new instance of a child class, given
-        /// parameters used to save a given Unit.
+        /// the parameters used to save a given Unit.
         /// </summary>
         /// <remarks>
         /// Author: Nicole
@@ -55,12 +54,13 @@ namespace GameOfLife
         /// <param name="parameters">An array of parameters describing the Unit in string form.</param>
         public Unit(string[] parameters)
         {
-            // convert all parameters to integer
+            // convert all parameters to numerical values
             int.TryParse(parameters[UnitFileFormat.ROW], out int r);
             int.TryParse(parameters[UnitFileFormat.COLUMN], out int c);
             double.TryParse(parameters[UnitFileFormat.DECOMPOSITION_VALUE], out double decompValue);
             int.TryParse(parameters[UnitFileFormat.SPECIES_COMPLEXITY], out int speciesComplexity);
 
+            // Initialize the Unit with the given parameters
             Location = (r, c);
             DecompositionValue = decompValue;
             SpeciesComplexity = speciesComplexity;
@@ -97,7 +97,8 @@ namespace GameOfLife
         /// <remarks>
         /// Abstract.
         /// </remarks>
-        /// <param name="parameters"></param>
+        /// <param name="parameters">An array of string parameters representing
+        /// the parameters of a saved Unit.</param>
         /// <returns>An array of parameters describing the Unit in string form.</returns>
         public abstract Unit Create(string[] parameters);
 
@@ -111,16 +112,24 @@ namespace GameOfLife
         /// <param name="grid">The grid to use for updating the state.</param>
         /// <param name="gameEnv">The Environment to use for updating the state.</param>
         public abstract void Update(Unit[,] grid, Environment gameEnv);
-        
 
-        // (Nicole) ToString method to serialize properties to string to be saved to file
-        // 0: unitType
-        // 1: row
-        // 2: column
-        // 3: decomp value
-        // 4: species complexity
+        
+        /// <summary>
+        /// ToString method to serialize properties to string to be saved to file.
+        /// Format:
+        ///     0: UnitType
+        ///     1: Row
+        ///     2: Column
+        ///     3: DecompositionValue
+        ///     4: SpeciesComplexity
+        /// </summary>
+        /// <remarks>
+        /// Author: Nicole
+        /// </remarks>
+        /// <returns>A string representation of the Unit.</returns>
         public override string ToString()
         {
+            // Construct a string that contains all critical information about the Unit
             return (int)UnitType + ";" + Location.r + ";" + Location.c + ";" + DecompositionValue + ";" + SpeciesComplexity;
         }
     }
