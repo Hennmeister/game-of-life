@@ -263,7 +263,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns the cached states stored in the current state
+        /// Returns the cached states stored in the current state
         /// </summary>
         public State[] CachedStates
         {
@@ -271,7 +271,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns and sets the carbon dioxide level of the current state
+        /// Returns and sets the carbon dioxide level of the current state
         /// </summary>
         public int CarbonDioxideLevel
         {
@@ -280,7 +280,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns the enviornment image of the current state
+        /// Returns the enviornment image of the current state
         /// </summary>
         public Image EnvironmentImage
         {
@@ -288,7 +288,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns the rain image of the current state
+        /// Returns the rain image of the current state
         /// </summary>
         public Image RainImage
         {
@@ -296,7 +296,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns the event image of the current state
+        /// Returns the event image of the current state
         /// </summary>
         public Image EventImage
         {
@@ -304,7 +304,15 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns and sets the food availability of the current state
+        /// Returns the type of the environment of the current state
+        /// </summary>
+        public Enums.EnvironmentType EnvironmentType
+        {
+            get { return currentState.EnvironmentType; }
+        }
+
+        /// <summary>
+        /// Returns and sets the food availability of the current state
         /// </summary>
         public double FoodAvailability
         {
@@ -313,7 +321,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns and sets the generation number of the current state
+        /// Returns and sets the generation number of the current state
         /// </summary>
         public int GenerationCounter
         {
@@ -322,7 +330,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns the size of the unit grid
+        /// Returns the size of the unit grid
         /// </summary>
         public int GridSize
         {
@@ -331,7 +339,7 @@ namespace GameOfLife
 
 
         /// <summary>
-        /// returns and sets the highest recorded score at a given time from the current state
+        /// Returns and sets the highest recorded score at a given time from the current state
         /// </summary>
         public int HighestConcurrentScore
         {
@@ -340,7 +348,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns and sets the water availability of the current state
+        /// Returns and sets the water availability of the current state
         /// </summary>
         public double WaterAvailability
         {
@@ -349,7 +357,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns and sets the oxygen level of the current state
+        /// Returns and sets the oxygen level of the current state
         /// </summary>
         public int OxygenLevel
         {
@@ -358,7 +366,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns and sets the score of the current state
+        /// Returns and sets the score of the current state
         /// </summary>
         public long CurrentScore
         {
@@ -367,7 +375,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns and sets the temperature of the current state
+        /// Returns and sets the temperature of the current state
         /// </summary>
         public int Temperature
         {
@@ -376,7 +384,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns and sets the username associated with the current state
+        /// Returns and sets the username associated with the current state
         /// </summary>
         public string Username
         {
@@ -385,7 +393,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns whether it is raining from the current state's environment
+        /// Returns whether it is raining from the current state's environment
         /// </summary>
         public bool IsRaining
         {
@@ -393,7 +401,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// returns whether an environmental event is occuring from the current state's environment
+        /// Returns whether an environmental event is occuring from the current state's environment
         /// </summary>
         public bool EnvEventOccurring
         {
