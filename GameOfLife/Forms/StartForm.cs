@@ -1,5 +1,5 @@
 ﻿/*
- * Tiffanie Truong (sliders and instruction form)
+ * Tiffanie Truong, Rudy Ariaz, Henning Lindig
  * January 15, 2019
  * This Form allows the user to make pre-game decisions by choosing the
  * the Environment and enviromental parameters or loading a previous save.
@@ -19,7 +19,7 @@ namespace GameOfLife
 {
     public partial class StartForm : Form
     {
-        private TrackBar[] trackBars;
+        // The number of environmental parameters to set
         private const int NUM_ENV_PARAMETERS = 5;
         // Store game actions and data
         private GameManager manager;
@@ -217,26 +217,42 @@ namespace GameOfLife
         }
 
         // ************ LOADING ************ //
+        /// <summary>
+        /// Presents a FolderBrowserDialog that allows for the user to select a past state to load.
+        /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         private void btnLoadState_Click(object sender, EventArgs e)
         {
+            // Create the browser
             using (FolderBrowserDialog browser = new FolderBrowserDialog())
             {
+                // Set the initial path to the directory with all the past states
                 browser.SelectedPath = Datastore.GeneralStatesDirectoryPath;
+                // Hide the "New Folder" button in the dialog
                 browser.ShowNewFolderButton = false;
+                // Get the result of the selection 
                 DialogResult result = browser.ShowDialog();
-                if(result == DialogResult.OK && string.IsNullOrWhiteSpace(browser.SelectedPath) ||
+                // Check if there was an error with the selection, if:
+                //     A folder was selected
+                //     The selected path was empty, or it was out of the past states directory, or 
+                //     if no subdirectory was selected
+                if(result == DialogResult.OK && (string.IsNullOrWhiteSpace(browser.SelectedPath) ||
                    !browser.SelectedPath.Contains(Datastore.GeneralStatesDirectoryPath) || 
-                   browser.SelectedPath.Length <= Datastore.GeneralStatesDirectoryPath.Length)
+                   browser.SelectedPath.Length <= Datastore.GeneralStatesDirectoryPath.Length))
                 {
+                    // Show an error message
                     MessageBox.Show("Please select a valid directory within the PastStates directory.");
                 }
+                // Otherwise, if a valid folder was selected:
                 else if (result == DialogResult.OK)
                 {
+                    // Load the selected state
                     manager.LoadState(browser.SelectedPath);
                     // Create the game form 
                     GameForm gameForm = new GameForm(manager, manager.Username);
                     // Display the new game form
-                    this.Hide();
                     gameForm.ShowDialog();
                     // Close this form
                     this.Close();
