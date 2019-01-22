@@ -396,7 +396,7 @@ namespace GameOfLife
         /// </remarks>
         /// <example>
         /// If the attempted path to create is "C:\...\PastStates\Example" and it already exists,
-        /// "C:\...\PastStates\Example (1)" will be created if it does not exist.
+        /// "C:\...\PastStates\Example(1)" will be created if it does not exist.
         /// </example>
         /// <param name="state">The State to store.</param>
         /// <param name="statePath">The path allotted for the State storage.</param>
@@ -417,14 +417,16 @@ namespace GameOfLife
                 // Start with a duplicate marker of 1
                 int duplicateNum = 1;
                 // Create the duplicate marker string
-                string duplicateSuffix = $" ({duplicateNum})";
+                string duplicateSuffix = $"({duplicateNum})";
 
                 // Increase the duplicate marker number until the path no longer matches an existing path
                 while (Directory.Exists(statePath + duplicateNum))
                 {
                     // Increase the duplicate marker number
-                    duplicateSuffix = $" ({++duplicateNum})";
+                    duplicateSuffix = $"({++duplicateNum})";
                 }
+                // Create the directory
+                Directory.CreateDirectory(statePath + duplicateSuffix);
                 // Return the first successful path with duplicate marker
                 return statePath + duplicateSuffix;
             }
