@@ -117,7 +117,11 @@ namespace GameOfLife
             CuredGenerationsLeft = 0;
         }
 
-        // (Nicole) constructor for living units to load unit
+        /// <summary>
+        /// Constructor instaniates a new LivingUnit object given an array of parameters used to describe the unit
+        /// Used when loading a living unit from file
+        /// </summary>
+        /// <param name="parameters">The array of parameters used to describe the unit</param>
         public LivingUnit(string[] parameters) : base(parameters)
         {
             // convert all parameters to numerical/Boolean values
@@ -149,7 +153,11 @@ namespace GameOfLife
             CuredGenerationsLeft = curedGenerationsLeft;
         }
 
-
+        /// <summary>
+        ///Updates a living unit with all operations that must be applied to the unit every generation.
+        /// </summary>
+        /// <param name="grid">The unit grid</param>
+        /// <param name="gameEnv">The environement of the current state</param>
         protected void UpdateLivingUnit(Unit[,] grid, Environment gameEnv)
         {
             // If the unit is dying from infection, cannot eat enough, or cannot drink enough, it dies
@@ -157,7 +165,9 @@ namespace GameOfLife
             {
                 this.Die(grid, gameEnv);
             }
+            //changes gas levels according to the unit's properties
             Respire(gameEnv);
+            // If the unit can get older, increase its age
             if (ShouldAge(gameEnv))
             {
                 AgeUp();
@@ -165,16 +175,24 @@ namespace GameOfLife
         }
         
 
-        // TODO: check if there's anything else to do here
+        /// <summary>
+        /// Checks whether the living unit should die this generation
+        /// </summary>
+        /// <returns>T
+        /// True if the unit should die
+        /// False if the unit should not die</returns>
         private bool WillDie()
         {
+            //checks if the unit is infected
             if (!Infected)
             {
                 return false;
             }
+            //if it is, check if it will die as a cause of being infected
             else
             {
                 UpdateInfection();
+                //check if time the unit has to cure itself has run out
                 if (CuredGenerationsLeft <= 0)
                 {
                     return true;
@@ -183,7 +201,9 @@ namespace GameOfLife
             }
         }
 
-        // Updates the infection status every turn
+        /// <summary>
+        /// Updates the status of the unit's infection
+        /// </summary>
         private void UpdateInfection()
         {
             // Try to cure the infection
@@ -199,30 +219,42 @@ namespace GameOfLife
             }
         }
         
-
+        /// <summary>
+        /// Infects the living unit
+        /// </summary>
         public void BeInfected()
         {
             Infected = true;
             CuredGenerationsLeft = (int)InfectionResistance;
         }
 
-        // Changed Age() to AgeUp() because it has the same name as the property
+        /// <summary>
+        /// Increase the living unit's age
+        /// </summary>
         private void AgeUp()
         {
             Age++;
         }
 
-        // AgeProbability() could be a bool function ShouldAge()
-        // May also be incorporated into Age() itself
-        // rudy
+        /// <summary>
+        /// Checks if the unit should increase in age
+        /// </summary>
+        /// <param name="gameEnv"></param>
+        /// <returns></returns>
         private bool ShouldAge(Environment gameEnv)
         {
             double ageProbability = AgeProbability(gameEnv);
-            if (Age == Senescence) return false; 
+            //if the unit's age is at its max, do not age
+            if (Age == Senescence) return false;
+            //probabilistically determine if it should age based on its conditions
             return ProbabilityHelper.EvaluateIndependentPredicate(ageProbability);
         }
         
-        // rudy
+        /// <summary>
+        /// Determines the probability of a unit increasing in age
+        /// </summary>
+        /// <param name="gameEnv">The current state's game environment</param>
+        /// <returns>The proability that it will increase in age</returns>
         private double AgeProbability(Environment gameEnv)
         {
             double temperatureTerm = Math.Abs(gameEnv.Temperature - IdealTemperature) / IdealTemperature;
@@ -232,17 +264,30 @@ namespace GameOfLife
             return prob;
         }
         
-
+        /// <summary>
+        /// Determine whether the living unit is cured of infection
+        /// </summary>
+        /// <returns></returns>
         protected bool IsCured()
         {
             return ProbabilityHelper.EvaluateIndependentPredicate(CureProbabillity());
         }
 
+        /// <summary>
+        /// Calculate the living unit's probability of curing its infection
+        /// </summary>
+        /// <returns></returns>
         private double CureProbabillity()
         {
             return InfectionResistance / MaxResistance;
         }
 
+        /// <summary>
+        /// Performs operations for the unit drinking water
+        /// </summary>
+        /// <param name="gameEnv">The current state's environment</param>
+        /// <param name="toDrink">The amount of water to drink</param>
+        /// <returns></returns>
         protected bool Drink(Environment gameEnv, int toDrink)
         {
             // Return whether the lifeform was able to drink as much water as it needs to survive
@@ -250,13 +295,22 @@ namespace GameOfLife
 
         }
 
+        /// <summary>
+        /// Performs the operation for the unit eating food
+        /// </summary>
+        /// <param name="gameEnv">The current state's environment</param>
+        /// <param name="toEat">The amount of food to eat</param>
+        /// <returns></returns>
         protected bool Eat(Environment gameEnv, double toEat)
         {
             // Return whether the lifeform was able to eat as much food as it needs to survive
             return gameEnv.DecreaseFood(toEat);
         }
         
-        // 
+        /// <summary>
+        /// Performs the operation for the unit breathing
+        /// </summary>
+        /// <param name="gameEnv"></param>
         public virtual void Respire(Environment gameEnv)
         {
             gameEnv.IncreaseCarbonDioxide(GasRequirement);
@@ -271,6 +325,19 @@ namespace GameOfLife
         // 10: output gas
         // 11: ideal temp
         // 12: infection resistence
+
+        /// <summary>
+        /// // (Nicole) ToString method to serialize properties to string to be saved to file
+        // 5: senescence
+        // 6: food requirement
+        // 7: water requirement
+        // 8: gas requirement
+        // 9: input gas
+        // 10: output gas
+        // 11: ideal temp
+        // 12: infection resistence
+        /// </summary>
+        /// <returns>The string to save</returns>
         public override string ToString()
         {
             return base.ToString() + ";" + Age + ";" + Senescence + ";" + FoodRequirement + ";" + 
