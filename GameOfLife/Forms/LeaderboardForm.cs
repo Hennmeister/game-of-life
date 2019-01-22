@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Rudy Ariaz & Henning Lindig
+ * Januray 22, 2019
+ * Displays the highest scores and allows the user to return to the main menu
+ */ 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +17,15 @@ namespace GameOfLife
 {
     public partial class LeaderboardForm : Form
     {
+        //Stores the labels used to display scores
         private Label[] scoreLabels;
+        //stores the game actions and data
         private GameManager manager;
 
+        /// <summary>
+        /// Initializes the leaderboard form
+        /// </summary>
+        /// <param name="manager"></param>
         public LeaderboardForm(GameManager manager)
         {
             this.manager = manager;
@@ -23,15 +34,21 @@ namespace GameOfLife
             DisplayScores();
         }
 
+        /// <summary>
+        /// Initializes the score labels
+        /// </summary>
         private void StoreScoreLabels()
         {
             scoreLabels = new Label[] { lblScore1, lblScore2, lblScore3, lblScore4, lblScore5 };
         }
-
+        
+        /// <summary>
+        /// Display the highest recorded concurrent scores
+        /// </summary>
         private void DisplayScores()
         {
             // Get all the scores
-            Dictionary<string, int> allScores = Datastore.GetAllHighestConcurrentScores();
+            List<KeyValuePair<string, int>> allScores = Datastore.GetAllHighestConcurrentScores();
             // Sort the scores in descending order, and only select the top 5
             var sortedScores =
                 (from score
@@ -48,9 +65,12 @@ namespace GameOfLife
             }
         }
 
+        /// <summary>
+        /// Return to the main menu
+        /// </summary>
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            //Create and show a start form and close the leaderboard form
             StartForm startForm = new StartForm(manager);
             startForm.ShowDialog();
             this.Close();

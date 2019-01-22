@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Rudy Ariaz 
+ * January 22, 2019
+ * Creates the directories required by the application and creates the start form
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

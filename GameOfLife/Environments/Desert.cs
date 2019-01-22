@@ -1,5 +1,5 @@
 ﻿/*
- * NAME
+ * Tiffanie Truong
  * January 21, 2019
  * The Desert is one of the four possible environments for the user to choose from.
  * It has a unique range of possible starting parameters, probability of rain, and environmental event.
