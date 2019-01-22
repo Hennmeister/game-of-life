@@ -4,7 +4,12 @@
  * Stores information for the Rainforest biome that the User
  * can choose as an environment for the simulation.
  */
-
+ /*
+  * NAME
+  * January 21, 2019
+  * The Rainforest is one of the four possible environments for the user to choose from.
+  * It has a unique range of possible starting parameters, probability of rain, and environmental event.
+  */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +43,7 @@ namespace GameOfLife
             CarbonDioxideLevel = 100 - OxygenLevel;
             // Lose access to 10% of the available food -- the result is rounded to 1 decimal place
             FoodAvailability -= Math.Round(0.10 * FoodAvailability, 1);
-            // Indicate that the event has stopped once it should not continue for the next generation
+            // Indicate that the event has stopped once the number of remaining generations is 0
             if (--EventGenerationsLeft == 0)
             {
                 EnvEventOccurring = false;
