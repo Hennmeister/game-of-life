@@ -253,5 +253,11 @@ namespace GameOfLife
                 }
             }
         }
+
+        private void btnDisplayInstructions_Click(object sender, EventArgs e)
+        {
+            InstructionsForm instructions = new InstructionsForm();
+            instructions.Show();
+        }
     }
 }

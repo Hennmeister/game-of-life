@@ -34,7 +34,7 @@ namespace GameOfLife
             // Wind decreases temperature by 5℃
             Temperature -= 5;
             // Lose access to 5% of available food
-            FoodAvailability -= 0.10 * FoodAvailability;
+            FoodAvailability -= 0.05 * FoodAvailability;
             // Indicate that the event has stopped once it should not continue for the next generation
             if (--EventGenerationsLeft == 0)
             {
