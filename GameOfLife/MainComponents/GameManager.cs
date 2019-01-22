@@ -335,7 +335,7 @@ namespace GameOfLife
         }
 
         ///returns and sets the score of the current state
-        public int CurrentScore
+        public long CurrentScore
         {
             get { return currentState.CurrentScore;  }
             set { currentState.CurrentScore = value; }
