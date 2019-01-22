@@ -22,19 +22,33 @@ namespace GameOfLife
     {
         //Keeps track of the number of cached states
         public const int NUMBER_OF_CACHED_STATES = 5;
-        //Keeps track of the score
+        /// <summary>
+        /// Keeps track of the score
+        /// </summary>
         public long CurrentScore { get; set; }
-        //Keeps track of the highest concurrent score of the simulation
+        /// <summary>
+        /// Keeps track of the highest concurrent score of the simulation
+        /// </summary>
         public int HighestConcurrentScore { get; set; }
-        //Stores the user's name
+        /// <summary>
+        /// Stores the user's name
+        /// </summary>
         public string Username { get; set; }
-        //Keeps track of the generation number
+        /// <summary>
+        /// Keeps track of the generation number
+        /// </summary>
         public int GenerationCounter { get; set; }
-        //Stores the unit grid associated with the state
+        /// <summary>
+        /// Stores the unit grid associated with the state
+        /// </summary>
         public Unit[,] UnitGrid { get; set; }
-        //Stores the environment associated with the state
+        /// <summary>
+        /// Stores the environment associated with the state
+        /// </summary>
         public Environment GameEnvironment { get; set; }
-        //Stores the scores of the last 5 versions of the grid
+        /// <summary>
+        /// Stores the scores of the last 5 versions of the grid
+        /// </summary>
         public Queue<int> gridScores { get; set; } = new Queue<int>();
         //Annotation indicates to not serialize this property
         //Stores deep copies of the last states
