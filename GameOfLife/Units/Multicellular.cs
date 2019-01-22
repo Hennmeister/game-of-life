@@ -46,6 +46,7 @@ namespace GameOfLife
         protected void UpdateInfectionResistance(int sameSpeciesNeighbors)
         {
             InfectionResistance += sameSpeciesNeighbors * INFECTION_RESISTANCE_BENEFIT_FOR_COMMUNITY;
+            MaxResistance = Math.Max(InfectionResistance, MaxResistance);
         }
 
         /// <summary>

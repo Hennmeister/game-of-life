@@ -34,7 +34,7 @@ namespace GameOfLife
 
         // Infection information
         protected double InfectionResistance { get; set; }
-        private static double MaxResistance { get; set; }
+        protected static double MaxResistance { get; set; }
         public bool Infected { get; set; }
         private int CuredGenerationsLeft { get; set; }
 
@@ -61,24 +61,22 @@ namespace GameOfLife
         // (Nicole) constructor for living units to load unit
         public LivingUnit(string[] parameters) : base(parameters)
         {
-            // convert all parameters to integer
-            int.TryParse(parameters[5], out int senescence);
-
-            int.TryParse(parameters[6], out int foodRequirement);
-
-            int.TryParse(parameters[7], out int waterRequirement);
-
-            int.TryParse(parameters[8], out int gasRequirement);
-
-            int.TryParse(parameters[9], out int inputGas);
-
-            int.TryParse(parameters[10], out int outputGas);
-
-            int.TryParse(parameters[11], out int idealTemp);
-
-            double.TryParse(parameters[12], out double infectionResistance);
+            // convert all parameters to numerical/Boolean values
+            int.TryParse(parameters[UnitFileFormat.AGE], out int age);
+            int.TryParse(parameters[UnitFileFormat.SENESCENCE], out int senescence);
+            int.TryParse(parameters[UnitFileFormat.FOOD_REQ], out int foodRequirement);
+            int.TryParse(parameters[UnitFileFormat.WATER_REQ], out int waterRequirement);
+            int.TryParse(parameters[UnitFileFormat.GAS_REQ], out int gasRequirement);
+            int.TryParse(parameters[UnitFileFormat.INPUT_GAS], out int inputGas);
+            int.TryParse(parameters[UnitFileFormat.OUTPUT_GAS], out int outputGas);
+            int.TryParse(parameters[UnitFileFormat.IDEAL_TEMP], out int idealTemp);
+            double.TryParse(parameters[UnitFileFormat.INFECTION_RESISTANCE], out double infectionResistance);
+            double.TryParse(parameters[UnitFileFormat.MAX_RESISTANCE], out double maxResistance);
+            bool.TryParse(parameters[UnitFileFormat.INFECTED], out bool infected);
+            int.TryParse(parameters[UnitFileFormat.CURED_GENERATIONS_LEFT], out int curedGenerationsLeft);
 
             // initialize with new parameters
+            Age = age;
             Senescence = senescence;
             FoodRequirement = foodRequirement;
             WaterRequirement = waterRequirement;
@@ -87,6 +85,9 @@ namespace GameOfLife
             OutputGas = (Enums.GasType)outputGas;
             IdealTemperature = idealTemp;
             InfectionResistance = infectionResistance;
+            MaxResistance = Math.Max(MaxResistance, maxResistance);
+            Infected = infected;
+            CuredGenerationsLeft = curedGenerationsLeft;
         }
 
 
@@ -213,9 +214,10 @@ namespace GameOfLife
         // 12: infection resistence
         public override string ToString()
         {
-            return base.ToString() + ";" + ";" + Senescence + ";" + FoodRequirement
-                + ";" + WaterRequirement + ";" + GasRequirement + ";" + (int)InputGas + ";" + (int)OutputGas
-                + ";" + IdealTemperature + ";" + InfectionResistance;
+            return base.ToString() + ";" + Age + ";" + Senescence + ";" + FoodRequirement + ";" + 
+                WaterRequirement + ";" + GasRequirement + ";" + (int)InputGas + ";" + (int)OutputGas + ";" + 
+                IdealTemperature + ";" + InfectionResistance + ";" + MaxResistance +
+                ";" + Infected + ";" + CuredGenerationsLeft;
         }
     }
 }

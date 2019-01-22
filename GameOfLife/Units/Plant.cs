@@ -36,6 +36,11 @@ namespace GameOfLife
         public Plant(string[] parameters) : base(parameters)
         {
             UnitType = Enums.UnitType.Plant;
+            int.TryParse(parameters[UnitFileFormat.TOXICITY_FACTOR], out int toxicityFactor);
+            int.TryParse(parameters[UnitFileFormat.BASELINE_WATER_REQ], out int baselineWaterReq);
+
+            ToxicityFactor = toxicityFactor;
+            BaselineWaterRequirement = baselineWaterReq;
         }
 
         public Plant(Environment gameEnv, int row = -1, int col = -1) : this(row, col)
@@ -98,6 +103,11 @@ namespace GameOfLife
             {
                 gameEnv.IncreaseFood(resourceUsage);
             }
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + ";" + ToxicityFactor + ";" + BaselineWaterRequirement;
         }
     }
 }
