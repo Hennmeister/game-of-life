@@ -12,12 +12,14 @@ namespace GameOfLife
     static class Datastore
     {
         private const string STATES_DIRECTORY_SUFFIX = @"\PastStates";
-        private const int HIGHEST_CONCURRENT_SCORE_INDEX = 3;
+        private const string SCORES_DIRECTORY_SUFFIX = @"\PastScores";
+        private const string SCORES_FILE_SUFFIX = @"\Scores.txt";
         // TODO: remove if needed
         private static bool generalStatesDirectoryExists;
         public static string GeneralStatesDirectoryPath { get; } = 
             Directory.GetCurrentDirectory() + STATES_DIRECTORY_SUFFIX;
-        
+        public static string ScoresDirectoryPath { get; } = 
+            Directory.GetCurrentDirectory() + SCORES_DIRECTORY_SUFFIX;
 
         public static void SaveState(State state, string sessionName)
         {
@@ -297,19 +299,31 @@ namespace GameOfLife
              Directory.CreateDirectory(GeneralStatesDirectoryPath);
         }
 
+        public static void AddScore(string username, int score)
+        {
+            // Open the file for writing
+            using(StreamWriter scoresFile = new StreamWriter(ScoresDirectoryPath + SCORES_FILE_SUFFIX, true))
+            {
+                scoresFile.WriteLine($"{username};{score}");
+            }
+        }
+
+        public static void CreateScoresDirectory()
+        {
+            Directory.CreateDirectory(ScoresDirectoryPath);
+        }
 
         public static Dictionary<string, int> GetAllHighestConcurrentScores()
         {
             Dictionary<string, int> allScores = new Dictionary<string, int>();
-            // Get all states
-            string[] allStates = Directory.GetDirectories(GeneralStatesDirectoryPath);
-            foreach(string statePath in allStates)
+            using (StreamReader scoresFile = new StreamReader(ScoresDirectoryPath + SCORES_FILE_SUFFIX))
             {
-                string infoPath = statePath + @"\GeneralInformation.txt";
-                string sessionName = statePath.Substring(GeneralStatesDirectoryPath.Length + 1);
-                string[] generalInfo = File.ReadAllLines(infoPath);
-                // The first line of the file is the username, the last one is the highest concurrent score
-                allScores.Add(sessionName, int.Parse(generalInfo[HIGHEST_CONCURRENT_SCORE_INDEX]));
+                string line = "";
+                while((line = scoresFile.ReadLine()) != null)
+                {
+                    string[] splitScore = line.Split(';');
+                    allScores.Add(splitScore[0], int.Parse(splitScore[1]));
+                }
             }
             return allScores;
         }

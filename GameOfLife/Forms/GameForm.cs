@@ -30,7 +30,7 @@ namespace GameOfLife
         // State variable to differentiate between choosing to erase units and clicking away from the toolbar
         private bool eraseToolSelected = false;
 
-        public GameForm(GameManager manager)
+        public GameForm(GameManager manager, string username)
         {
             this.manager = manager;
             WindowState = FormWindowState.Maximized;
@@ -43,6 +43,7 @@ namespace GameOfLife
             BackgroundImage = manager.EnvironmentImage;
             BackgroundImageLayout = ImageLayout.Stretch;
             ToggleSavingUIVisibility(shown: false);
+            manager.Username = username;
         }
 
         private void CreateToolbar()
@@ -391,5 +392,7 @@ namespace GameOfLife
             }
             
         }
+
+        
     }
 }

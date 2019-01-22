@@ -130,7 +130,7 @@ namespace GameOfLife
             else
             {
                 // Create the game form 
-                GameForm gameForm = new GameForm(manager);
+                GameForm gameForm = new GameForm(manager, txtUsername.Text);
                 // Display the new game form
                 this.Hide();
                 gameForm.ShowDialog();
@@ -235,7 +235,8 @@ namespace GameOfLife
                 browser.ShowNewFolderButton = false;
                 DialogResult result = browser.ShowDialog();
                 if(result == DialogResult.OK && string.IsNullOrWhiteSpace(browser.SelectedPath) ||
-                   !browser.SelectedPath.Contains(Datastore.GeneralStatesDirectoryPath))
+                   !browser.SelectedPath.Contains(Datastore.GeneralStatesDirectoryPath) || 
+                   browser.SelectedPath.Length <= Datastore.GeneralStatesDirectoryPath.Length)
                 {
                     MessageBox.Show("Please select a valid directory within the PastStates directory.");
                 }
@@ -243,7 +244,7 @@ namespace GameOfLife
                 {
                     manager.LoadState(browser.SelectedPath);
                     // Create the game form 
-                    GameForm gameForm = new GameForm(manager);
+                    GameForm gameForm = new GameForm(manager, manager.Username);
                     // Display the new game form
                     this.Hide();
                     gameForm.ShowDialog();

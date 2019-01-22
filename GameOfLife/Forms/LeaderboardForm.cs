@@ -50,7 +50,7 @@ namespace GameOfLife
 
         private void btnRestart_Click(object sender, EventArgs e)
         {
-            GameForm form = new GameForm(manager);
+            GameForm form = new GameForm(manager, "REPLACE");
             manager.Restart();
             this.Hide();
             form.ShowDialog();

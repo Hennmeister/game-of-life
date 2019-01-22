@@ -18,6 +18,8 @@ namespace GameOfLife
             Application.SetCompatibleTextRenderingDefault(false);
             // Initialize the states directory
             Datastore.CreateGeneralStateDirectory();
+            // Initialize the scores directory
+            Datastore.CreateScoresDirectory();
             //creates the application's game manager
             Application.Run(new StartForm(new GameManager()));
         }

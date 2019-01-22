@@ -134,7 +134,7 @@ namespace GameOfLife
             {
                 //if either are true, call gameOver in form and end the current simulation
                 var form = System.Windows.Forms.Application.OpenForms.OfType<GameForm>().Single();
-                SaveState($"Save {currentState.CurrentID.ToString()}");
+                Datastore.AddScore(Username, HighestConcurrentScore);
                 form.GameOver();
             }
             //add the score of the board 
