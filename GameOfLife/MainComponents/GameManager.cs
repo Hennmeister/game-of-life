@@ -258,7 +258,7 @@ namespace GameOfLife
             get { return currentState.CachedStates; }
         }
 
-        //returns and sets the carbon dioxide level of the current state
+        //returns and sets the carbon dioxide level of the current stat
         public int CarbonDioxideLevel
         {
             get { return currentState.CarbonDioxideLevel; }
