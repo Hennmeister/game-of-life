@@ -32,11 +32,11 @@ namespace GameOfLife
         /// </summary>
         public override void EnvironmentalEvent(Unit[,] units)
         {
-            // Oxygen level decreases by 5% and carbon dioxide level increases by 5% as trees are removed
-            OxygenLevel -= 5;
+            // Oxygen level decreases by 1% and carbon dioxide level increases by 1% as trees are removed (5% over 5 generations)
+            OxygenLevel -= 1;
             CarbonDioxideLevel = 100 - OxygenLevel;
-            // Lose access to 10% of the available food -- the result is rounded to 1 decimal place
-            FoodAvailability -= Math.Round(0.10 * FoodAvailability, 1);
+            // Lose access to 2% of the available food (10% over 5 generations) -- the result is rounded to 1 decimal place
+            FoodAvailability -= Math.Round(0.02 * FoodAvailability, 1);
             // Indicate that the event has stopped once the number of remaining generations is 0
             if (--EventGenerationsLeft == 0)
             {

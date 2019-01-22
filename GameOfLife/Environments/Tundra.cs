@@ -34,8 +34,8 @@ namespace GameOfLife
         {
             // Snow decreases temperature by 10℃ over 5 generations
             Temperature -= 2;
-            // Lose access to 10% of the available water -- answer is rounded to 1 decimal
-            WaterAvailability -= Math.Round(0.10 * WaterAvailability, 1);
+            // Lose access to 2 of the available water (10% over 5 generations) -- answer is rounded to 1 decimal 
+            WaterAvailability -= Math.Round(0.02 * WaterAvailability, 1);
             // Indicate that the event has stopped once it should not continue for the next generation
             if (--EventGenerationsLeft == 0)
             {
