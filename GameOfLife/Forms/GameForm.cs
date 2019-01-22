@@ -210,6 +210,7 @@ namespace GameOfLife
             lblEnvParams.Text = "Water Availability: " + manager.WaterAvailability.ToString() + "\r\n" + "Food Availability: "
                 + manager.FoodAvailability.ToString() +"\r\n" + "Temperature: " + manager.Temperature.ToString() +"\r\n" 
                 + "Carbon Dioxide Level: " + manager.CarbonDioxideLevel.ToString() + "\r\n" + "Oxygen Level: " + manager.OxygenLevel.ToString();
+            lblEnvironmentType.Text = "Environment Type: " + manager.EnvironmentType.ToString();
         }
 
         /// <summary>
@@ -429,7 +430,7 @@ namespace GameOfLife
             //change the pause state
             isPaused = pause;
             //change the text indicating whether the game is paused or not
-            btnPlay.Text = pause ? "Unpause" : "pause";
+            btnPlay.Text = pause ? "Unpause" : "Pause";
         }
 
         /// <summary>
@@ -483,7 +484,7 @@ namespace GameOfLife
         private void btnLoadPrevGen_Click(object sender, EventArgs e)
         {
             //Make sure the game is paused, a generation number is selected and that the selected value is a number
-            if (isPaused && cbGenNums.SelectedItem != null && cbGenNums.SelectedText != "Not Available")
+            if (isPaused && cbGenNums.SelectedItem != null && cbGenNums.SelectedItem.ToString() != "Not Available")
             {
                 //load the cached state corresponding with the generation number selected in the combobox
                 manager.LoadCachedState((int)cbGenNums.SelectedItem);

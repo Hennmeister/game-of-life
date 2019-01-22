@@ -120,7 +120,7 @@ namespace GameOfLife
             // lblCurrentEvent
             // 
             this.lblCurrentEvent.AutoSize = true;
-            this.lblCurrentEvent.Location = new System.Drawing.Point(186, 189);
+            this.lblCurrentEvent.Location = new System.Drawing.Point(223, 189);
             this.lblCurrentEvent.Name = "lblCurrentEvent";
             this.lblCurrentEvent.Size = new System.Drawing.Size(72, 13);
             this.lblCurrentEvent.TabIndex = 6;
@@ -183,6 +183,7 @@ namespace GameOfLife
             // btnPlay
             // 
             this.btnPlay.AutoEllipsis = true;
+            this.btnPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPlay.Location = new System.Drawing.Point(140, 78);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(150, 32);
@@ -205,6 +206,7 @@ namespace GameOfLife
             // 
             // cbGenNums
             // 
+            this.cbGenNums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGenNums.FormattingEnabled = true;
             this.cbGenNums.Items.AddRange(new object[] {
             "0",
