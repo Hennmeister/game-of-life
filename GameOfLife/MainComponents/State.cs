@@ -1,5 +1,5 @@
 ﻿/*
- * HENNING LINDIG + (Rudy Ariaz)
+ * henning Lindig & Rudy Ariazz
  * January 15th, 2019
  * Wraps and encapsulates all information about the game state. 
  */
