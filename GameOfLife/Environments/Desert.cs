@@ -12,10 +12,12 @@ namespace GameOfLife
         /// <summary>
         /// Create a Desert with its unique environmental parameters for the simulation's environment
         /// </summary>
-        public Desert() : base(3000, 1500, 50, 50, 45, 5, Properties.Resources.Desert, Properties.Resources.Sandstorm)
+        public Desert() : base(defaultFood: 3000, defaultWater: 1500,
+                                oxygenLevel: 50, carbonDioxideLevel: 50,
+                                temperature: 45, probOfRain: 5,
+                                envImage: Properties.Resources.Desert, eventPic: Properties.Resources.Sandstorm,
+                                envType: Enums.EnvironmentType.Desert)
         {
-            // (Nicole) assign the specific environment type
-            environmentType = EnvironmentTypeEnum.Desert;
         }
 
         /// <summary>
