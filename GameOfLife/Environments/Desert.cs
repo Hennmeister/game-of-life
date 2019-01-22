@@ -31,10 +31,10 @@ namespace GameOfLife
         /// </summary>
         public override void EnvironmentalEvent(Unit[,] units)
         {
-            // Wind decreases temperature by 5℃
-            Temperature -= 5;
-            // Lose access to 5% of available food
-            FoodAvailability -= 0.05 * FoodAvailability;
+            // Wind decreases temperature by 1℃ (5℃ over 5 generations)
+            Temperature -= 1;
+            // Lose access to 1% of available food (5% of food over 5 generations)
+            FoodAvailability -= 0.01 * FoodAvailability;
             // Indicate that the event has stopped once it should not continue for the next generation
             if (--EventGenerationsLeft == 0)
             {
