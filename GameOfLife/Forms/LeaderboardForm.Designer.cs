@@ -35,7 +35,6 @@
             this.lblScore5 = new System.Windows.Forms.Label();
             this.lblPromptLoadScore = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
-            this.btnRestart = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblScore1
@@ -107,22 +106,11 @@
             this.btnExit.Text = "Exit to Main Menu";
             this.btnExit.UseVisualStyleBackColor = true;
             // 
-            // btnRestart
-            // 
-            this.btnRestart.Location = new System.Drawing.Point(12, 374);
-            this.btnRestart.Name = "btnRestart";
-            this.btnRestart.Size = new System.Drawing.Size(145, 41);
-            this.btnRestart.TabIndex = 7;
-            this.btnRestart.Text = "Restart Same Simulation";
-            this.btnRestart.UseVisualStyleBackColor = true;
-            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
-            // 
             // LeaderboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 427);
-            this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.lblPromptLoadScore);
             this.Controls.Add(this.lblScore5);
@@ -130,7 +118,7 @@
             this.Controls.Add(this.lblScore3);
             this.Controls.Add(this.lblScore2);
             this.Controls.Add(this.lblScore1);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "LeaderboardForm";
             this.Text = "LeaderboardForm";
             this.ResumeLayout(false);
@@ -147,6 +135,5 @@
         private System.Windows.Forms.Label lblScore5;
         private System.Windows.Forms.Label lblPromptLoadScore;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Button btnRestart;
     }
 }

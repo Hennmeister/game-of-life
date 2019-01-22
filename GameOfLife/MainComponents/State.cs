@@ -29,15 +29,12 @@ namespace GameOfLife
         public Queue<int> gridScores { get; set; } = new Queue<int>();
         [NonSerialized()]
         private State[] cachedStates = new State[NUMBER_OF_CACHED_STATES];
-        [NonSerialized()]
-        public State startingState;
         private static int latestID;
         public int CurrentID { get; }
 
         public State()
         {
             GenerationCounter = 0;
-            StartingState = DeepCopy(this);
             CurrentID = ++latestID;
         }
 
@@ -112,18 +109,6 @@ namespace GameOfLife
             set
             {
                 cachedStates = value;
-            }
-        }
-
-        public State StartingState
-        {
-            get
-            {
-                return startingState;
-            }
-            set
-            {
-                startingState = value; 
             }
         }
 

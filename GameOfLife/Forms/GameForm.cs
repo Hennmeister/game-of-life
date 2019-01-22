@@ -439,10 +439,6 @@ namespace GameOfLife
             Refresh();
             //Indicate that game is over
             MessageBox.Show("GAME OVER");
-            //create the leaderboard form and close the current form
-            LeaderboardForm f = new LeaderboardForm(manager);
-            this.Close();
-            f.ShowDialog();
         }
 
         /// <summary>
