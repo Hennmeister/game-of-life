@@ -19,10 +19,10 @@ namespace GameOfLife
         // The suffix of the path of the scores file
         private const string SCORES_FILE_SUFFIX = @"\Scores.txt";
         // The path to the general states directory
-        public static string GeneralStatesDirectoryPath { get; } = 
+        public static string GeneralStatesDirectoryPath { get; } =
             Directory.GetCurrentDirectory() + STATES_DIRECTORY_SUFFIX;
         // The path to the general scores directory
-        public static string ScoresDirectoryPath { get; } = 
+        public static string ScoresDirectoryPath { get; } =
             Directory.GetCurrentDirectory() + SCORES_DIRECTORY_SUFFIX;
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace GameOfLife
             // Save all of the Units of the state
             SaveAllUnits(state, stateDirectoryPath);
         }
-        
+
         /// <summary>
         /// Loads a state stored in a given state path
         /// </summary>
@@ -99,90 +99,99 @@ namespace GameOfLife
                 envFile.WriteLine(state.Temperature);
 
                 // Save event parameters
-                envFile.WriteLine(state.GameEnvironment.EnvEventOccurring); 
+                envFile.WriteLine(state.GameEnvironment.EnvEventOccurring);
                 envFile.WriteLine(state.EventGenerationsLeft);
             }
         }
-        
+
         /// <summary>
         /// Loads Environmental parameters stored in the saved state corresponding to statePath
         /// into the given state.
         /// </summary>
         /// <remarks>
-        /// Author: Nicole Beri, Tiffanie Truong
+        /// Author: Nicole Beri
         /// </remarks>
         /// <param name="state">State to load parameters into.</param>
         /// <param name="statePath">The path of the saved state.</param>
-        private static void LoadEnvironmentalParameters (State state, string statePath)
+        private static void LoadEnvironmentalParameters(State state, string statePath)
         {
             // The path to the Environmental parameters file 
             string envPath = statePath + @"\EnvironmentalParameters.txt";
-            // Open the Environmental parameters file for reading
-            using (StreamReader envFile = new StreamReader(envPath))
+            // Try to open the file holding environment parameters for reading
+            try
             {
-                // Temporary variable for reading
-                int tempInt;
+                // Open the Environmental parameters file for reading
+                using (StreamReader envFile = new StreamReader(envPath))
+                {
+                    // Temporary variable for reading
+                    int tempInt;
 
-                // Read environment type
-                if (int.TryParse(envFile.ReadLine(), out tempInt))
-                {
-                    state.EnvironmentType = (Enums.EnvironmentType)tempInt;
-                    // Create a new Environment matching the saved type
-                    state.GameEnvironment = EnvironmentFactory.CreateEnvironment(state.EnvironmentType);
-                }
+                    // Read environment type
+                    if (int.TryParse(envFile.ReadLine(), out tempInt))
+                    {
+                        state.EnvironmentType = (Enums.EnvironmentType)tempInt;
+                        // Create a new Environment matching the saved type
+                        state.GameEnvironment = EnvironmentFactory.CreateEnvironment(state.EnvironmentType);
+                    }
 
-                // Read atmospheric parameters
-                if (int.TryParse(envFile.ReadLine(), out tempInt))
-                {
-                    state.CarbonDioxideLevel = tempInt;
-                }
+                    // Read atmospheric parameters
+                    if (int.TryParse(envFile.ReadLine(), out tempInt))
+                    {
+                        state.CarbonDioxideLevel = tempInt;
+                    }
 
-                if (int.TryParse(envFile.ReadLine(), out tempInt))
-                {
-                    state.OxygenLevel = tempInt;
-                }
+                    if (int.TryParse(envFile.ReadLine(), out tempInt))
+                    {
+                        state.OxygenLevel = tempInt;
+                    }
 
-                // Read default food/water parameters
-                double tempDouble;
-                if (double.TryParse(envFile.ReadLine(), out tempDouble))
-                {
-                    state.DefaultFood = tempDouble;
-                }
+                    // Read default food/water parameters
+                    double tempDouble;
+                    if (double.TryParse(envFile.ReadLine(), out tempDouble))
+                    {
+                        state.DefaultFood = tempDouble;
+                    }
 
-                if (int.TryParse(envFile.ReadLine(), out tempInt))
-                {
-                    state.DefaultWater = tempInt;
-                }
+                    if (int.TryParse(envFile.ReadLine(), out tempInt))
+                    {
+                        state.DefaultWater = tempInt;
+                    }
 
-                // Read food/water parameters
-                if (double.TryParse(envFile.ReadLine(), out tempDouble))
-                {
-                    state.FoodAvailability = tempDouble;
-                }
-                if (double.TryParse(envFile.ReadLine(), out tempDouble))
-                {
-                    state.WaterAvailability = tempDouble;
-                }
+                    // Read food/water parameters
+                    if (double.TryParse(envFile.ReadLine(), out tempDouble))
+                    {
+                        state.FoodAvailability = tempDouble;
+                    }
+                    if (double.TryParse(envFile.ReadLine(), out tempDouble))
+                    {
+                        state.WaterAvailability = tempDouble;
+                    }
 
-                // Read temperature
-                if (int.TryParse(envFile.ReadLine(), out tempInt))
-                {
-                    state.Temperature = tempInt;
-                }
+                    // Read temperature
+                    if (int.TryParse(envFile.ReadLine(), out tempInt))
+                    {
+                        state.Temperature = tempInt;
+                    }
 
-                // Read event parameters
-                if (bool.TryParse(envFile.ReadLine(), out bool eventOccuring))
-                {
-                    state.GameEnvironment.EnvEventOccurring = eventOccuring;
-                }
-                
-                if (int.TryParse(envFile.ReadLine(), out tempInt))
-                {
-                    state.EventGenerationsLeft = tempInt;
+                    // Read event parameters
+                    if (bool.TryParse(envFile.ReadLine(), out bool eventOccuring))
+                    {
+                        state.GameEnvironment.EnvEventOccurring = eventOccuring;
+                    }
+
+                    if (int.TryParse(envFile.ReadLine(), out tempInt))
+                    {
+                        state.EventGenerationsLeft = tempInt;
+                    }
                 }
             }
+            // Catch any errors when opening files
+            catch
+            {
+
+            }
         }
-        
+
         /// <summary>
         /// Saves all the Units of a given State into the State's directory.
         /// </summary>
@@ -195,29 +204,36 @@ namespace GameOfLife
         {
             // Path to the Units file of the State
             string unitPath = statePath + @"\Units.txt";
-            
-            // Open the Units file for writing
-            using (StreamWriter unitFile = new StreamWriter(unitPath, false))
+
+            // Try to open the file storing all units
+            try
             {
-                // Iterate through the entire unit grid, from top left to bottom right
-                // Iterate from the top row to the bottom row
-                for (int i = 0; i < state.UnitGrid.GetLength(GridHelper.ROW); i++)
+                // Open the Units file for writing
+                using (StreamWriter unitFile = new StreamWriter(unitPath, false))
                 {
-                    // Iterate from the left row to the top row
-                    for (int j = 0; j < state.UnitGrid.GetLength(GridHelper.COLUMN); j++)
+                    // Loop through all rows of the grid to check all cells for units to save
+                    for (int i = 0; i < state.UnitGrid.GetLength(GridHelper.ROW); i++)
                     {
-                        // Get the current Unit
-                        Unit currUnit = state.UnitGrid[i, j];
-                        // If the current Unit is not null, write it to the file
-                        if (currUnit != null)
+                        // Loop through all columns of the grid to check all cells for units to save
+                        for (int j = 0; j < state.UnitGrid.GetLength(GridHelper.COLUMN); j++)
                         {
-                            unitFile.WriteLine(currUnit);
+                            // Get the potential Unit stored in the grid cell
+                            Unit currUnit = state.UnitGrid[i, j];
+                            // If the current Unit exists (is not null), write it to the file
+                            if (currUnit != null)
+                            {
+                                unitFile.WriteLine(currUnit);
+                            }
                         }
                     }
                 }
             }
+            // Catch any errors when opening a file
+            catch
+            {
+            }
         }
-        
+
         /// <summary>
         /// Loads all Units of a saved State into the given State of the current simulation.
         /// </summary>
@@ -227,11 +243,13 @@ namespace GameOfLife
         /// <param name="state"> The State to load Units into.</param>
         /// <param name="statePath"> The path to the saved State's directory.</param>
         private static void LoadAllUnits(State state, string statePath)
-        { 
+        {
             // The path to the Units file of the saved State
             string unitPath = statePath + @"\Units.txt";
             // Try to load the file Units file for reading
-            try {
+            try
+            {
+                // Open the Units file for reading
                 using (StreamReader unitFile = new StreamReader(unitPath))
                 {
                     // Stores the string representing each Unit
@@ -263,8 +281,9 @@ namespace GameOfLife
                     } while (unitString != null);
                 }
             }
-            catch (Exception e)
-            { 
+            // Catch errors when opening a file
+            catch
+            {
             }
         }
 
@@ -325,7 +344,7 @@ namespace GameOfLife
             }
 
         }
-        
+
         /// <summary>
         /// Loads general information of a State saved in statePath into the given State.
         /// </summary>
@@ -365,7 +384,7 @@ namespace GameOfLife
                 }
             }
         }
-        
+
         /// <summary>
         /// Creates a directory within the general PastStates directory to 
         /// store all files associatd with the current State. The directory is named with the given
@@ -438,7 +457,7 @@ namespace GameOfLife
         public static void AddScore(string username, int score)
         {
             // Open the scores file for writing, in append mode (since there are existing scores already recorded in the file)
-            using(StreamWriter scoresFile = new StreamWriter(ScoresDirectoryPath + SCORES_FILE_SUFFIX, true))
+            using (StreamWriter scoresFile = new StreamWriter(ScoresDirectoryPath + SCORES_FILE_SUFFIX, true))
             {
                 // Write the username and the score to the file
                 scoresFile.WriteLine($"{username};{score}");
