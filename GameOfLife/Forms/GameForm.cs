@@ -459,6 +459,8 @@ namespace GameOfLife
         private void ToggleSavingUIVisibility(bool shown)
         {
             txtSessionName.Visible = shown;
+            txtSessionName.Text = string.Empty;
+            btnCancelSaving.Visible = shown;
             lblPromptSessionName.Visible = shown;
             btnConfirmSave.Visible = shown;
         }
@@ -514,6 +516,12 @@ namespace GameOfLife
             
         }
 
-        
+        /// <summary>
+        /// Button handler, closes the saving UI 
+        /// </summary>
+        private void btnCancelSaving_Click(object sender, EventArgs e)
+        {
+            ToggleSavingUIVisibility(false);
+        }
     }
 }

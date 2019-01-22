@@ -65,6 +65,8 @@ namespace GameOfLife
             {
                 // Create the game form 
                 GameForm gameForm = new GameForm(manager, txtUsername.Text);
+                //create a new grid for the state 
+                manager.CreateGrid();
                 // Display the new game form
                 this.Hide();
                 gameForm.ShowDialog();

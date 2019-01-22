@@ -54,6 +54,7 @@ namespace GameOfLife
             this.lblPromptSessionName = new System.Windows.Forms.Label();
             this.btnConfirmSave = new System.Windows.Forms.Button();
             this.lblEnvironmentType = new System.Windows.Forms.Label();
+            this.btnCancelSaving = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picEvent)).BeginInit();
             this.SuspendLayout();
             // 
@@ -258,7 +259,7 @@ namespace GameOfLife
             // btnConfirmSave
             // 
             this.btnConfirmSave.AutoSize = true;
-            this.btnConfirmSave.Location = new System.Drawing.Point(305, 361);
+            this.btnConfirmSave.Location = new System.Drawing.Point(258, 361);
             this.btnConfirmSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmSave.Name = "btnConfirmSave";
             this.btnConfirmSave.Size = new System.Drawing.Size(56, 31);
@@ -276,11 +277,22 @@ namespace GameOfLife
             this.lblEnvironmentType.TabIndex = 5;
             this.lblEnvironmentType.Text = "Environment Type ";
             // 
+            // btnCancelSaving
+            // 
+            this.btnCancelSaving.Location = new System.Drawing.Point(319, 361);
+            this.btnCancelSaving.Name = "btnCancelSaving";
+            this.btnCancelSaving.Size = new System.Drawing.Size(60, 31);
+            this.btnCancelSaving.TabIndex = 20;
+            this.btnCancelSaving.Text = "Cancel";
+            this.btnCancelSaving.UseVisualStyleBackColor = true;
+            this.btnCancelSaving.Click += new System.EventHandler(this.btnCancelSaving_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(934, 511);
+            this.Controls.Add(this.btnCancelSaving);
             this.Controls.Add(this.btnConfirmSave);
             this.Controls.Add(this.lblPromptSessionName);
             this.Controls.Add(this.txtSessionName);
@@ -342,6 +354,7 @@ namespace GameOfLife
         private System.Windows.Forms.Label lblPromptSessionName;
         private System.Windows.Forms.Button btnConfirmSave;
         private System.Windows.Forms.Label lblEnvironmentType;
+        private System.Windows.Forms.Button btnCancelSaving;
     }
 }
 

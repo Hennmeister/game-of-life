@@ -262,7 +262,7 @@ namespace GameOfLife
                 }
             }
             catch (Exception e)
-            {
+            { 
             }
         }
 

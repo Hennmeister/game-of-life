@@ -42,12 +42,11 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// Creates the unit grid
+        /// Creates the unit grid for the current state
         /// </summary>
-        /// <returns> A two-dimensional array to store the units in a grid </returns>
-        public Unit[,] CreateGrid()
+        public void CreateGrid()
         {
-            return new Unit[UNIT_GRID_SIZE, UNIT_GRID_SIZE];
+            currentState.UnitGrid = new Unit[UNIT_GRID_SIZE, UNIT_GRID_SIZE];
         }
 
         /// <summary>
@@ -62,12 +61,12 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// Creates the current state and assigns a new grid to it 
+        /// Creates the current state
         /// </summary>
         public void CreateState()
         {
             currentState = new State();
-            currentState.UnitGrid = CreateGrid();
+            CreateGrid();
         }
 
         /// <summary>
