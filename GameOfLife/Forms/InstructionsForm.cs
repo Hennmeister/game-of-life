@@ -34,7 +34,8 @@ namespace GameOfLife
                                     "     1. Any live unit with fewer than two live neighbors dies, as if by underpopulation.\r\n" +
                                     "     2. Any live unit with two or three live neighbors lives on to the next generation.\r\n" +
                                     "     3. Any live unit with more than three live neighbors dies, as if by overpopulation.\r\n" +
-                                    "     4. Any dead unit with exactly three live neighbors becomes a live cell, as if by reproduction.";
+                                    "     4. Any dead unit with exactly three live neighbors becomes a live cell, as if by reproduction.\r\n\r\n" +
+                                    "Please feel free to load one of three examples given with the simulation.";
             // Indicate that general rules are being shown
             btnGeneral.Enabled = false;
             previouslySelected = btnGeneral;
@@ -59,7 +60,8 @@ namespace GameOfLife
                                     "     1. Any live unit with fewer than two live neighbors dies, as if by underpopulation.\r\n" +
                                     "     2. Any live unit with two or three live neighbors lives on to the next generation.\r\n" +
                                     "     3. Any live unit with more than three live neighbors dies, as if by overpopulation.\r\n" +
-                                    "     4. Any dead unit with exactly three live neighbors becomes a live cell, as if by reproduction.";
+                                    "     4. Any dead unit with exactly three live neighbors becomes a live cell, as if by reproduction.\r\n\r\n" +
+                                    "Please feel free to load one of three examples given with the simulation.";
         }
 
         /// <summary>
