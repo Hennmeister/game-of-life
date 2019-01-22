@@ -79,7 +79,11 @@ namespace GameOfLife
 
         /// <summary>
         /// Updates a Virus with all operations that must be applied to the Virus every generation.
+        /// Performs infection.
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         /// <param name="grid">The grid of Units in which the Virus is.</param>
         /// <param name="gameEnv">The Environment with which the Virus interacts.</param>
         public override void Update(Unit[,] grid, Environment gameEnv)
