@@ -190,6 +190,7 @@
             this.btnDisplayInstructions.TabIndex = 15;
             this.btnDisplayInstructions.Text = "Show Instructions";
             this.btnDisplayInstructions.UseVisualStyleBackColor = true;
+            this.btnDisplayInstructions.Click += new System.EventHandler(this.btnDisplayInstructions_Click);
             // 
             // lblPromptExample
             // 

@@ -175,15 +175,31 @@ namespace GameOfLife
             //check if there are any units left on board or if the score has not changed in 5 generations
             if (gridScore == 0 || currentState.isScoreStable(gridScore))
             {
-                //if either are true, call gameOver in form and end the current simulation
-                var form = System.Windows.Forms.Application.OpenForms.OfType<GameForm>().Single();
-                Datastore.AddScore(Username, HighestConcurrentScore);
-                form.GameOver();
+                //end current simulation
+                GameOver();
             }
             //add the score of the board 
             CurrentScore += gridScore;
         }
 
+        /// <summary>
+        /// Ends the current simulation and opens leaderboard
+        /// </summary>
+        public void GameOver()
+        {
+            //get the gameform and display to display to user that game is over
+            var forms = System.Windows.Forms.Application.OpenForms.OfType<GameForm>();
+            GameForm form = forms.First();
+            Datastore.AddScore(Username, HighestConcurrentScore);
+            form.GameOver();
+            //close current form and show leaderboard
+            form.Hide();
+    //        form.Dispose();
+            form.Close();
+            LeaderboardForm f = new LeaderboardForm(this);
+            f.ShowDialog();
+            form.Close();
+        }
         /// <summary>
         /// Tell every unit to update, updating multiple parameters and checking if they merge
         /// </summary>
@@ -237,12 +253,6 @@ namespace GameOfLife
         public void SaveState(string name)
         {
             Datastore.SaveState(currentState, name);
-        }
-
-        //resets the current state to the starting state
-        public void Restart()
-        {
-            currentState = currentState.StartingState;
         }
 
         //returns the cached states stored in the current state

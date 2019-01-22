@@ -48,12 +48,11 @@ namespace GameOfLife
             }
         }
 
-        private void btnRestart_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
-            GameForm form = new GameForm(manager, "REPLACE");
-            manager.Restart();
-            this.Hide();
-            form.ShowDialog();
+            this.Dispose();
+            StartForm startForm = new StartForm(manager);
+            startForm.ShowDialog();
             this.Close();
         }
     }
