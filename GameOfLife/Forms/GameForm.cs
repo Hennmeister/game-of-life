@@ -289,6 +289,10 @@ namespace GameOfLife
         private void tmrGeneration_Tick(object sender, EventArgs e)
         {
             manager.NextGeneration();
+            if (manager.GameOver())
+            {
+                GameOver();
+            }
             UpdateDisplayedParameters();
         }
 
@@ -439,6 +443,9 @@ namespace GameOfLife
             Refresh();
             //Indicate that game is over
             MessageBox.Show("GAME OVER");
+            Close();
+            LeaderboardForm f = new LeaderboardForm(manager);
+            f.ShowDialog();
         }
 
         /// <summary>

@@ -31,7 +31,7 @@ namespace GameOfLife
         private void DisplayScores()
         {
             // Get all the scores
-            Dictionary<string, int> allScores = Datastore.GetAllHighestConcurrentScores();
+            List<KeyValuePair<string, int>> allScores = Datastore.GetAllHighestConcurrentScores();
             // Sort the scores in descending order, and only select the top 5
             var sortedScores =
                 (from score
@@ -50,7 +50,6 @@ namespace GameOfLife
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Dispose();
             StartForm startForm = new StartForm(manager);
             startForm.ShowDialog();
             this.Close();

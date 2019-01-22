@@ -120,7 +120,7 @@ namespace GameOfLife
                 }
             }
             // **** UPDATE LOGISTICS **** 
-            CalculateScore();
+            //CalculateScore();
             currentState.AddStateToCache();
             ++currentState.GenerationCounter;
         }
@@ -151,7 +151,7 @@ namespace GameOfLife
         /// Calculate the score of the current grid, adding it to the state's cumulative score
         /// and checking if the game is over
         /// </summary>
-        public void CalculateScore()
+        public int CalculateScore()
         {
             //the unit grid
             Unit[,] grid = currentState.UnitGrid;
@@ -173,32 +173,29 @@ namespace GameOfLife
             //if the current score of the board is higher than the highest recorded concurrent score, it becomes the new highest concurrent score
             if (gridScore > HighestConcurrentScore) HighestConcurrentScore = gridScore;
             //check if there are any units left on board or if the score has not changed in 5 generations
-            if (gridScore == 0 || currentState.isScoreStable(gridScore))
-            {
-                //end current simulation
-                GameOver();
-            }
+            //if (gridScore == 0 || currentState.isScoreStable(gridScore))
+            //{
+            //    //end current simulation
+            //    GameOver();
+            //}
             //add the score of the board 
             CurrentScore += gridScore;
+            return gridScore;
         }
 
         /// <summary>
         /// Ends the current simulation and opens leaderboard
         /// </summary>
-        public void GameOver()
+        public bool GameOver()
         {
-            //get the gameform and display to display to user that game is over
-            var forms = System.Windows.Forms.Application.OpenForms.OfType<GameForm>();
-            GameForm form = forms.First();
-            Datastore.AddScore(Username, HighestConcurrentScore);
-            form.GameOver();
-            //close current form and show leaderboard
-            form.Hide();
-    //        form.Dispose();
-            form.Close();
-            LeaderboardForm f = new LeaderboardForm(this);
-            f.ShowDialog();
-            form.Close();
+            int gridScore = CalculateScore();
+            bool gameOver = gridScore == 0 || currentState.isScoreStable(gridScore);
+            if (gameOver)
+            {
+                Datastore.AddScore(Username, HighestConcurrentScore);
+                return true;
+            }
+            return false;   
         }
         /// <summary>
         /// Tell every unit to update, updating multiple parameters and checking if they merge
