@@ -109,7 +109,7 @@ namespace GameOfLife
         /// into the given state.
         /// </summary>
         /// <remarks>
-        /// Author: Nicole Beri
+        /// Author: Nicole Beri, Tiffanie Truong
         /// </remarks>
         /// <param name="state">State to load parameters into.</param>
         /// <param name="statePath">The path of the saved state.</param>
@@ -127,6 +127,8 @@ namespace GameOfLife
                 if (int.TryParse(envFile.ReadLine(), out tempInt))
                 {
                     state.EnvironmentType = (Enums.EnvironmentType)tempInt;
+                    // Create a new Environment matching the saved type
+                    state.GameEnvironment = EnvironmentFactory.CreateEnvironment(state.EnvironmentType);
                 }
 
                 // Read atmospheric parameters
