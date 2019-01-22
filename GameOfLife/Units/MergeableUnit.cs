@@ -43,6 +43,7 @@ namespace GameOfLife
         {
         }
 
+        // (Nicole) constructor for mergeable units to load unit
         public MergeableUnit(string[] parameters) : base(parameters)
         {
         }

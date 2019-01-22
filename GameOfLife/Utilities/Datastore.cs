@@ -21,6 +21,7 @@ namespace GameOfLife
         public static string ScoresDirectoryPath { get; } = 
             Directory.GetCurrentDirectory() + SCORES_DIRECTORY_SUFFIX;
 
+
         public static void SaveState(State state, string sessionName)
         {
             string stateDirectoryPath = GeneralStatesDirectoryPath + $@"\{sessionName}";
@@ -30,7 +31,7 @@ namespace GameOfLife
             SaveAllUnits(state, stateDirectoryPath);
         }
 
-        // (Nicole) loading state based on current state ID
+        // (Nicole) loading state based on current state ID 
         public static void LoadState(State state, string statePath)
         {
             LoadEnvironmentalParameters(state, statePath);
