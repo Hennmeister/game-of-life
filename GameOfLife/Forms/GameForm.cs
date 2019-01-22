@@ -1,6 +1,8 @@
-﻿//
-//rudy <-- is this dude serious 
-// Updated* UI - Nicole
+﻿/*
+ * Henning Lindig
+ * January 19, 2019
+ * 
+ */
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,23 +43,27 @@ namespace GameOfLife
 
 
         /// <summary>
-        /// constructor
-        /// initializes various components and displays graphics
+        /// The constructor that initializes various components and displays graphics of the Form
         /// </summary>
-        /// <param name="manager">The simulation's game manaager</param>
+        /// <param name="manager">The simulation's game manager </param>
         public GameForm(GameManager manager, string username)
         {
-            this.manager = manager;
-            WindowState = FormWindowState.Maximized;
             InitializeComponent();
+            // Store the manager that processes all events in the simulation
+            this.manager = manager;
+            // Create the grid that the user interacts with to place units on
             CreateGrid();
+            // Create the toolbar for the user to drag and drop units
             CreateToolbar();
+            // Initialize the rectangle used to draw the cursor
             imageDragBox = new Rectangle(0, 0, BLOCK_SIZE, BLOCK_SIZE);
+            // Display the starting environmental parameters
             UpdateDisplayedParameters();
-            // Show the environment in the background
+            // Show an image of the environment in the background
             BackgroundImage = manager.EnvironmentImage;
             BackgroundImageLayout = ImageLayout.Stretch;
             ToggleSavingUIVisibility(shown: false);
+            // Save the inputted username of the user
             manager.Username = username;
         }
 
@@ -66,33 +72,33 @@ namespace GameOfLife
         /// </summary>
         private void CreateToolbar()
         {
-            //loop through the toolbar rectangles and create a row of rectangles
+            // Loop through the toolbar rectangles and create a row of rectangles for the toolbar
             for (int i = 0; i < TOOLBAR_SIZE; i++)
             {
-                // x, y, width, height
-                //increment the x by the size of a toolbar rectangle every iteration
+                // Increment the x by the size of a toolbar rectangle every iteration to draw the squares in a row
                 toolbar[i] = new Rectangle(TOOLBAR_SQUARE_LENGTH * TOOLBAR_SQUARE_LENGTH * i, 
                                             ClientSize.Height - TOOLBAR_SQUARE_LENGTH * TOOLBAR_SQUARE_LENGTH,
                                             TOOLBAR_SQUARE_LENGTH * TOOLBAR_SQUARE_LENGTH, 
                                             TOOLBAR_SQUARE_LENGTH * TOOLBAR_SQUARE_LENGTH);
             }
+            // Initialize the colours of the squares associated with each unit
             toolbarColors = new Color[] { Color.White, Virus.baselineColor, Cell.baselineColor, Colony.baselineColor, Animal.baselineColor, Plant.baselineColor };
         }
 
         /// <summary>
-        /// Creates the rectangular UI grid.
+        /// Creates the rectangular UI grid
         /// </summary>
         private void CreateGrid()
         {
-            // TODO: need to refactor to parameratize?
+            // Initialize the grid of rectangles used to display all units graphicaly
             grid = new Rectangle[manager.GridSize, manager.GridSize];
-            //loop through the rows of the grid
+            // Loop through the rows of the grid
             for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
-                //loop through the columns of the grid
+                // Loop through the columns of the grid
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
-                    //create a new rectangle at a location corresponding with the row and column of the rectangle in the grid
+                    // Create a new rectangle at a location corresponding with the row and column of the rectangle in the grid
                     grid[j, k] = new Rectangle(((ClientSize.Width/2) - BLOCK_SIZE * 5) + BLOCK_SIZE * j, BLOCK_SIZE*k, BLOCK_SIZE, BLOCK_SIZE);
                 }                      
             }
@@ -101,16 +107,18 @@ namespace GameOfLife
         /// <summary>
         /// Draws various graphical components on the form
         /// </summary>
-        /// <param name="e">data on paint event</param>
+        /// <param name="e"> data on paint event</param>
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            //draw the units into the grid
-            //loop through every row and column of the grid, drawing every block
+            // Draw the units into the grid
+            // Loop through every row of the grid to draw every block
             for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
+                // Loop through every column of the grid to draw every block
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
                 {
+                    // Get the unit that should be drawn on the current block
                     Unit u = manager.GetUnit(j, k);
                     // Set initial grid colour to white to represent no unit
                     Color c = Color.White;
@@ -163,10 +171,10 @@ namespace GameOfLife
             //check if the erase tool is selected
             if (eraseToolSelected)
             {
-                //make the cursor box white
+                // make the cursor box white to represent the erase tool
                 e.Graphics.FillRectangle(new SolidBrush(System.Drawing.Color.White), imageDragBox);
             }
-            //oherwise check if there is a toolbar selection
+            // Otherwise check if there is a toolbar selection
             else if (toolbarSelection != Enums.UnitType.None)
             {
                 //keeps track of the index of the color that corresponds with the unit type
