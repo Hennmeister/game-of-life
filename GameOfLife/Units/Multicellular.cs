@@ -20,6 +20,7 @@ namespace GameOfLife
         private const int EXTENDED_NEIGHBORHOOD_SIZE = 5;
         // The benefits that other multicellular organisms in the neighbourhood convey onto this organism
         protected const double VICTUAL_BENEFIT_FOR_COMMUNITY = 0.05;
+        // save the infection resistance that benefits the community value
         protected const double INFECTION_RESISTANCE_BENEFIT_FOR_COMMUNITY = 0.5;
 
         /// <summary>

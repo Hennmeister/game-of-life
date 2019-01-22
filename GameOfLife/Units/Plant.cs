@@ -56,6 +56,7 @@ namespace GameOfLife
             BaselineWaterRequirement = baselineWaterReq;
         }
 
+        // plant constructor with game environment and location parameters
         public Plant(Environment gameEnv, int row = -1, int col = -1) : this(row, col)
         {
             // increase the food in the environment
@@ -107,8 +108,10 @@ namespace GameOfLife
             return ProbabilityHelper.EvaluateIndependentPredicate(prob);
         }
 
+        // overrride respire
         public override void Respire(Environment gameEnv)
         {
+            // increase the oxygen level
             gameEnv.IncreaseOxygen(GasRequirement);
         }
 

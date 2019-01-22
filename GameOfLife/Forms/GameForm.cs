@@ -1,6 +1,9 @@
-﻿//
-//rudy <-- is this dude serious 
-// Updated* UI - Nicole
+﻿/*
+ * Henning Lindig
+ * January 19, 2019
+ * This form visually displays the current state of the simulation (all units and environmental parameters).
+ * The user interacts with this form to control the simulation.
+ */
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -307,8 +310,6 @@ namespace GameOfLife
         /// <summary>
         /// Event handler for mouse move, used to display the selection cursor
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void GameForm_MouseMove(object sender, MouseEventArgs e)
         {
             //check if there is a toolbar selection
@@ -320,8 +321,9 @@ namespace GameOfLife
         }
         
         /// <summary>
-        /// Event handler for mouse clicking, used to check if a selection is made
+        /// Event handler for mouse clicking that processes the user's actions
         /// </summary>
+        /// <remarks> Tiffanie </remarks>
         private void GameForm_MouseDown(object sender, MouseEventArgs e)
         {
             // Only attempt to interact with the grid if toolbar selection was made
@@ -343,7 +345,7 @@ namespace GameOfLife
                                 MessageBox.Show("Pause game to interact with board");
                                 continue;
                             }
-                            //CASE 1: user is trying to erase a unit at the clicked location
+                            // CASE 1: user is trying to erase a unit at the clicked location
                             if (manager.GetUnit(j, k) != null && eraseToolSelected)
                             {
                                 manager.KillUnit(j, k);
@@ -394,7 +396,7 @@ namespace GameOfLife
             // User did not click grid nor a unit in toolbar
             toolbarSelection = Enums.UnitType.None;
             eraseToolSelected = false;
-            //redraw form graphics
+            // Redraw form graphics
             Refresh();
         }
 
@@ -419,7 +421,7 @@ namespace GameOfLife
         /// <summary>
         /// Change the pause state
         /// </summary>
-        /// <param name="pause">The pause state</param>
+        /// <param name="pause"> A boolean representing whether or not the simulation is paused </param>
         private void ChangePauseState(bool pause)
         {
             //Change the enabled state of the generation timer
@@ -435,6 +437,7 @@ namespace GameOfLife
         /// </summary>
         public void GameOver()
         {
+            // Show the cursor now that the game is over
             Cursor.Show();
             //disable timers
             tmrGeneration.Enabled = false;
@@ -444,6 +447,7 @@ namespace GameOfLife
             //Indicate that game is over
             MessageBox.Show("GAME OVER");
             Close();
+            // Open the leaderboard form
             LeaderboardForm f = new LeaderboardForm(manager);
             f.ShowDialog();
         }
