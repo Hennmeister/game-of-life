@@ -45,7 +45,7 @@ namespace GameOfLife
             this.label2 = new System.Windows.Forms.Label();
             this.lblAnimalTool = new System.Windows.Forms.Label();
             this.lblPlantTool = new System.Windows.Forms.Label();
-            this.btnStart = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.cbGenNums = new System.Windows.Forms.ComboBox();
             this.btnLoadPrevGen = new System.Windows.Forms.Button();
@@ -101,7 +101,7 @@ namespace GameOfLife
             // tmrRefresh
             // 
             this.tmrRefresh.Enabled = true;
-            this.tmrRefresh.Interval = 25;
+            this.tmrRefresh.Interval = 10;
             this.tmrRefresh.Tick += new System.EventHandler(this.tmrRefresh_Tick);
             // 
             // lblTitle
@@ -179,16 +179,16 @@ namespace GameOfLife
             this.lblPlantTool.TabIndex = 12;
             this.lblPlantTool.Text = "Plant";
             // 
-            // btnStart
+            // btnPlay
             // 
-            this.btnStart.AutoEllipsis = true;
-            this.btnStart.Location = new System.Drawing.Point(140, 78);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(150, 32);
-            this.btnStart.TabIndex = 13;
-            this.btnStart.Text = "Start Sim!";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.btnPlay.AutoEllipsis = true;
+            this.btnPlay.Location = new System.Drawing.Point(140, 78);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(150, 32);
+            this.btnPlay.TabIndex = 13;
+            this.btnPlay.Text = "Start Sim!";
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
             // btnSave
             // 
@@ -288,7 +288,7 @@ namespace GameOfLife
             this.Controls.Add(this.btnLoadPrevGen);
             this.Controls.Add(this.cbGenNums);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.lblPlantTool);
             this.Controls.Add(this.lblAnimalTool);
             this.Controls.Add(this.label2);
@@ -333,7 +333,7 @@ namespace GameOfLife
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblAnimalTool;
         private System.Windows.Forms.Label lblPlantTool;
-        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox cbGenNums;
         private System.Windows.Forms.Button btnLoadPrevGen;
