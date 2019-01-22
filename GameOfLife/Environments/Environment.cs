@@ -29,9 +29,10 @@ namespace GameOfLife
         protected double foodAvailability;
         protected double waterAvailability;
         // the current temperature of the environment
-        protected int temperature;
-        // the background image visually depicting the environment
-        private Image environmentImage;
+        public int Temperature { get; set; }
+        // the image of the environment
+        public Image EnvironmentImage { get; }
+
         // (Nicole) environment type 
         protected Enums.EnvironmentType environmentType;
 
@@ -52,21 +53,24 @@ namespace GameOfLife
         public bool EnvEventOccurring { get; set; }
         // a counter to determine how many generations are left for an occurring event
         public int EventGenerationsLeft { get; set; }
-        // images for various events
-        private Image eventImage;
-        private Image rainImage;
+        // the image of the environmental event
+        public Image EventImage { get; set; }
+        // the image of the rain event
+        public Image RainImage { get; set; }
+   
 
         /// <summary>
         /// (Tiffanie) Create a new Environment with the given values unique to a chosen type of Environment
         /// </summary>
         /// <param name="defaultFood"> The default amount of food in this type of environment </param>
         /// <param name="defaultWater"> The default amount of water in this type of environment </param>
-        /// <param name="oxygenLevel"> The oxygen level of this environment </param>
-        /// <param name="carbonDioxideLevel"> The carbon dioxide level in this environment </param>
+        /// <param name="oxygenLevel"> The percentage of the atmosphere that is oxygen </param>
+        /// <param name="carbonDioxideLevel"> The percentage of the atmosphere that is carbon dioxide </param>
         /// <param name="temperature"> The temperature of this environment </param>
         /// <param name="probOfRain"> The probability of rain in this environment </param>
-        /// /// <param name="envImage"> The background image for this environment </param>
+        /// <param name="envImage"> The background image for this environment </param>
         /// <param name="eventPic"> The image for the unique event of this environment </param>
+        /// <param name="envType"> The subclass representing the class or type of the environment </param>
         public Environment(double defaultFood, int defaultWater,
                            int oxygenLevel, int carbonDioxideLevel,
                            int temperature, int probOfRain, 
@@ -92,41 +96,31 @@ namespace GameOfLife
 
             // IMAGES
             // Background of the environment
-            environmentImage = envImage;
+            EnvironmentImage = envImage;
             // Image for the unique environmental event
-            eventImage = eventPic;
+            EventImage = eventPic;
             // Image for rain event
-            rainImage = Properties.Resources.Rain;
-        }
-        
-        // getter for event images
-        public Image EventImage
-        {
-            get { return this.eventImage; }
+            RainImage = Properties.Resources.Rain;
         }
 
-        // getter for rain images
-        public Image RainImage
-        {
-            get { return this.rainImage; }
-        }
-
-        // getter for environment images
-        public Image EnvironmentImage
-        {
-            get { return this.environmentImage; }
-        }
-
-        // getter for carbon dioxide level
+        // Gets and modifies the percentage of carbon dioxide in the atmosphere
         public int CarbonDioxideLevel
         {
+            // Gets the carbon dioxoide level of the environment
             get { return this.carbonDioxideLevel; }
             set
             {
+                // Ensure that the % of CO2 in the environment is non-negative
                 if (value < 0)
                 {
                     this.carbonDioxideLevel = 0;
                 }
+                // Ensure that the % of CO2 in the environment does not exceed the max of 100%
+                else if (value > 100)
+                {
+                    this.carbonDioxideLevel = 100;
+                }
+                // Save the valid percentage of carbon dioxide 
                 else
                 {
                     this.carbonDioxideLevel = value;
@@ -134,31 +128,24 @@ namespace GameOfLife
             }
         }
 
-        // get and set food availability 
-        public double FoodAvailability
-        {
-            get { return this.foodAvailability; }
-            set {
-                if (value < 0) {
-                    this.foodAvailability = 0;
-                }
-                else
-                {
-                    this.foodAvailability = value;
-                }
-            }
-        }
-
-        // get and set oxygen level 
+        // Get and modifies the percentage of oxygen in the atmosphere
         public int OxygenLevel
         {
+            // Gets the oxygen level of the environment
             get { return this.oxygenLevel; }
             set
             {
+                // Ensure that the % of oxygen in the environment is non-negative
                 if (value < 0)
                 {
                     this.oxygenLevel = 0;
                 }
+                // Ensure that the % of oxygen in the environment does not exceed the max of 100%
+                else if (value > 100)
+                {
+                    this.oxygenLevel = 100;
+                }
+                // Save the valid percentage of oxygen 
                 else
                 {
                     this.oxygenLevel = value;
@@ -166,23 +153,38 @@ namespace GameOfLife
             }
         }
 
-        // get and set temperature
-        public int Temperature
+        // Get and modifies the amount of food in the environment
+        public double FoodAvailability
         {
-            get { return this.temperature; }
-            set { this.temperature = value; }
+            // Gets the amount of food in the environment
+            get { return this.foodAvailability; }
+            set {
+                // Ensure that the amount of food in the environment is non-negative
+                if (value < 0)
+                {
+                    this.foodAvailability = 0;
+                }
+                // Valid amount of food is passed in so save the new amount of food 
+                else
+                {
+                    this.foodAvailability = value;
+                }
+            }
         }
 
-        // get and set water availability
+        // Get and modifies the amount of water in the environment
         public double WaterAvailability
         {
+            // Gets the amount of water in the environment
             get { return this.waterAvailability; }
             set
             {
+                // Ensure that the amount of water in the environment is non-negative
                 if (value < 0)
                 {
                     this.waterAvailability = 0;
                 }
+                // Valid amount of water is passed in so save the new amount of water 
                 else
                 {
                     this.waterAvailability = value;
@@ -190,14 +192,13 @@ namespace GameOfLife
             }
         }
 
-
         /// <summary>
         /// Decrease the amount of food in the Environment after being consumed by a Unit
         /// </summary>
         /// <param name="required"> The amount of food required by the Unit to survive </param>
         public bool DecreaseFood(double required)
         {
-            // Check if there is  enough food for the unit to consume
+            // Check if there is enough food for the unit to consume
             if (EnoughFood(required))
             {
                 // Consume as much food as required and indicate that the unit has enough to eat
@@ -238,11 +239,10 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// Check whether there is enough water for a certain amount to be consumed
+        /// Checks whether there is enough water for a living unit to consume given its water requirement
         /// </summary>
-        /// <param name="consumed"> The amount to be consumed. </param>
-        /// <returns> True if the amount consumed is less than or equal to the water availability,
-        /// false otherwise. </returns>
+        /// <param name="consumed"> The amount to be consumed </param>
+        /// <returns> True if the amount consumed is less than or equal to the water availability and false otherwise </returns>
         public bool EnoughWater(double consumed)
         {
             return consumed <= WaterAvailability;
@@ -250,11 +250,10 @@ namespace GameOfLife
 
 
         /// <summary>
-        /// Check whether there is enough food for a certain amount to be consumed.
+        /// Checks whether there is enough food for a living unit to consume given its food requirement
         /// </summary>
-        /// <param name="consumed"> The amount to be consumed. </param>
-        /// <returns> True if the amount consumed is less than or equal to the food availability,
-        /// false otherwise. </returns>
+        /// <param name="consumed"> The amount to be consumed </param>
+        /// <returns> True if the amount consumed is less than or equal to the food availability and false otherwise </returns>
         public bool EnoughFood(double consumed)
         {
             return consumed <= FoodAvailability;
@@ -263,7 +262,7 @@ namespace GameOfLife
         /// <summary>
         /// Tip the balance of atmospheric composition towards oxygen
         /// </summary>
-        /// <param name="change"> The percent increase in oxygen levels </param>
+        /// <param name="change"> The percent increase in oxygen level </param>
         public void IncreaseOxygen(int change)
         {
             // Ensure that the atmosphere cannot consist of more than 100% oxygen
@@ -272,11 +271,12 @@ namespace GameOfLife
                 OxygenLevel = 100;
                 CarbonDioxideLevel = 0;
             }
+            // Otherwise, a valid increase in oxygen is attempted
             else
             {
                 // Increase the oxygen level by the given change in %
                 OxygenLevel += change;
-                // Apply the corresponding change to carbon dioxide levels
+                // Apply change to carbon dioxide level in the opposite direction to ensure composition sums to 100%
                 CarbonDioxideLevel -= change;
             }
         }
@@ -284,7 +284,7 @@ namespace GameOfLife
         /// <summary>
         /// Tip the balance of atmospheric composition towards carbon dioxide
         /// </summary>
-        /// <param name="change"> The percent increase in carbon dioxide levels </param>
+        /// <param name="change"> The percent increase in carbon dioxide level </param>
         public void IncreaseCarbonDioxide(int change)
         {
             // Ensure that the atmosphere cannot consist of more than 100% carbon dioxide
@@ -293,11 +293,12 @@ namespace GameOfLife
                 CarbonDioxideLevel = 100;
                 OxygenLevel = 0;
             }
+            // Otherwise, a valid increase in carbon dioxide is attempted
             else
             {
                 // Increase the carbon dioxide level by the given change in %
                 CarbonDioxideLevel += change;
-                // Apply the corresponding change to oxygen levels
+                // Apply change to oxygen level in the opposite direction to ensure composition sums to 100%
                 OxygenLevel -= change;
             }
         }
@@ -331,7 +332,7 @@ namespace GameOfLife
                 EventGenerationsLeft = 5;
                 return true;
             }
-            // Otherwise, it does not start raining so return false
+            // If the probability fails, it does not start raining
             return false;
         }
 
@@ -344,12 +345,12 @@ namespace GameOfLife
             // Probabilistically evaluate whether the event should occur in order to initiate it
             if (ProbabilityHelper.EvaluateIndependentPredicate(PROBABILITY_OF_ENV_EVENT / 100.0))
             {
-                // Indicate that the environmental event will occur for the next generation
+                // Indicate that the environmental event will begin occurring for the next 5 generations
                 EnvEventOccurring = true;
                 EventGenerationsLeft = 5;
                 return true;
             }
-            // Otherwise, the event does not start
+            // If the probability fails, the event does not start
             return false;
         }
 
