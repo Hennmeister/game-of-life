@@ -322,7 +322,33 @@ namespace GameOfLife
                 while((line = scoresFile.ReadLine()) != null)
                 {
                     string[] splitScore = line.Split(';');
-                    allScores.Add(splitScore[0], int.Parse(splitScore[1]));
+                    if (!allScores.ContainsKey(splitScore[0]))
+                    {
+                        allScores.Add(splitScore[0], int.Parse(splitScore[1]));
+                    }
+                    else
+                    {
+                        int index = 1;
+                        foreach (string s in allScores.Keys)
+                        {
+                            int i = s.IndexOf("(");
+                            if (i > 0)
+                            {
+                                if (s.Length > 3 && s.Substring(0, i) == splitScore[0])
+                                {
+                                    int x;
+                                    if (i + 1 == s.Length - 2) int.TryParse(s[i + 1].ToString(), out x);
+                                    else int.TryParse(s.Substring(i + 1, s.Length - 2), out x);
+                                    
+                                    if (++x > index)
+                                    {
+                                        index = x;
+                                    }
+                                }
+                            }
+                        }
+                        allScores.Add(splitScore[0] + "(" + index + ")", int.Parse(splitScore[1]));
+                    }
                 }
             }
             return allScores;

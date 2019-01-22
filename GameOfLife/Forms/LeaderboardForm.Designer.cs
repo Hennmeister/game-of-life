@@ -105,6 +105,7 @@
             this.btnExit.TabIndex = 6;
             this.btnExit.Text = "Exit to Main Menu";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // LeaderboardForm
             // 

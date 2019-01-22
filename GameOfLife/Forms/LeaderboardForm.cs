@@ -47,5 +47,13 @@ namespace GameOfLife
                 scoreLabels[curScoreLabel++].Text = $"{ score.Key }: { score.Value }";
             }
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+            StartForm startForm = new StartForm(manager);
+            startForm.ShowDialog();
+            this.Close();
+        }
     }
 }
