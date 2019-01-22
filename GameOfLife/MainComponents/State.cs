@@ -42,14 +42,6 @@ namespace GameOfLife
         private State[] cachedStates = new State[NUMBER_OF_CACHED_STATES];
 
         /// <summary>
-        /// Instantiate the state object
-        /// </summary>
-        /// <remarks></remarks>
-        public State()
-        {
-        }
-
-        /// <summary>
         /// Shifts the list of cached states and adds the current state to the front
         /// </summary>
         public void AddStateToCache()

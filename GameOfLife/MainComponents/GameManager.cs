@@ -19,11 +19,6 @@ namespace GameOfLife
         const int UNIT_GRID_SIZE = 50;
 
         /// <summary>
-        /// Constructs a new GameManager to coordinate actions between the user and the units
-        /// </summary>
-        public GameManager() {}
-
-        /// <summary>
         /// Creates and sets the environment of the current state
         /// </summary>
         /// <param name="envType">The type of the environment</param>
