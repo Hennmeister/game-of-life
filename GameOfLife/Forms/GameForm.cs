@@ -39,12 +39,13 @@ namespace GameOfLife
         // State variable to differentiate between choosing to erase units and clicking away from the toolbar
         private bool eraseToolSelected = false;
 
+
         /// <summary>
         /// constructor
         /// initializes various components and displays graphics
         /// </summary>
         /// <param name="manager">The simulation's game manaager</param>
-        public GameForm(GameManager manager)
+        public GameForm(GameManager manager, string username)
         {
             this.manager = manager;
             WindowState = FormWindowState.Maximized;
@@ -57,6 +58,7 @@ namespace GameOfLife
             BackgroundImage = manager.EnvironmentImage;
             BackgroundImageLayout = ImageLayout.Stretch;
             ToggleSavingUIVisibility(shown: false);
+            manager.Username = username;
         }
 
         /// <summary>
@@ -504,5 +506,7 @@ namespace GameOfLife
             }
             
         }
+
+        
     }
 }
