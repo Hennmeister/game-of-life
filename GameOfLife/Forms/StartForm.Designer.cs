@@ -80,7 +80,6 @@
             this.sldFoodAvailability.Size = new System.Drawing.Size(97, 45);
             this.sldFoodAvailability.TabIndex = 0;
             this.sldFoodAvailability.Scroll += new System.EventHandler(this.sldFoodAvailability_Scroll);
-            this.sldFoodAvailability.CursorChanged += new System.EventHandler(this.sldFoodAvailability_CursorChanged);
             // 
             // txtUsername
             // 
@@ -501,7 +500,6 @@
             this.MinimumSize = new System.Drawing.Size(735, 525);
             this.Name = "StartForm";
             this.Text = "StartForm";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StartForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.sldFoodAvailability)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldWaterAvailability)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sldTemperature)).EndInit();
