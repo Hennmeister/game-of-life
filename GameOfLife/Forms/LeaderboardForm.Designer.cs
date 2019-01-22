@@ -33,7 +33,6 @@
             this.lblScore3 = new System.Windows.Forms.Label();
             this.lblScore4 = new System.Windows.Forms.Label();
             this.lblScore5 = new System.Windows.Forms.Label();
-            this.lblPromptLoadScore = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -43,9 +42,8 @@
             this.lblScore1.Location = new System.Drawing.Point(276, 65);
             this.lblScore1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblScore1.Name = "lblScore1";
-            this.lblScore1.Size = new System.Drawing.Size(35, 13);
+            this.lblScore1.Size = new System.Drawing.Size(0, 13);
             this.lblScore1.TabIndex = 0;
-            this.lblScore1.Text = "label1";
             // 
             // lblScore2
             // 
@@ -53,9 +51,8 @@
             this.lblScore2.Location = new System.Drawing.Point(276, 107);
             this.lblScore2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblScore2.Name = "lblScore2";
-            this.lblScore2.Size = new System.Drawing.Size(35, 13);
+            this.lblScore2.Size = new System.Drawing.Size(0, 13);
             this.lblScore2.TabIndex = 1;
-            this.lblScore2.Text = "label1";
             // 
             // lblScore3
             // 
@@ -63,9 +60,8 @@
             this.lblScore3.Location = new System.Drawing.Point(276, 148);
             this.lblScore3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblScore3.Name = "lblScore3";
-            this.lblScore3.Size = new System.Drawing.Size(35, 13);
+            this.lblScore3.Size = new System.Drawing.Size(0, 13);
             this.lblScore3.TabIndex = 2;
-            this.lblScore3.Text = "label1";
             // 
             // lblScore4
             // 
@@ -73,9 +69,8 @@
             this.lblScore4.Location = new System.Drawing.Point(276, 185);
             this.lblScore4.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblScore4.Name = "lblScore4";
-            this.lblScore4.Size = new System.Drawing.Size(35, 13);
+            this.lblScore4.Size = new System.Drawing.Size(0, 13);
             this.lblScore4.TabIndex = 3;
-            this.lblScore4.Text = "label1";
             // 
             // lblScore5
             // 
@@ -83,19 +78,8 @@
             this.lblScore5.Location = new System.Drawing.Point(276, 223);
             this.lblScore5.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblScore5.Name = "lblScore5";
-            this.lblScore5.Size = new System.Drawing.Size(35, 13);
+            this.lblScore5.Size = new System.Drawing.Size(0, 13);
             this.lblScore5.TabIndex = 4;
-            this.lblScore5.Text = "label1";
-            // 
-            // lblPromptLoadScore
-            // 
-            this.lblPromptLoadScore.AutoSize = true;
-            this.lblPromptLoadScore.Location = new System.Drawing.Point(186, 42);
-            this.lblPromptLoadScore.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.lblPromptLoadScore.Name = "lblPromptLoadScore";
-            this.lblPromptLoadScore.Size = new System.Drawing.Size(247, 13);
-            this.lblPromptLoadScore.TabIndex = 5;
-            this.lblPromptLoadScore.Text = "Double click any label to load the associated state.";
             // 
             // btnExit
             // 
@@ -113,7 +97,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(591, 427);
             this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.lblPromptLoadScore);
             this.Controls.Add(this.lblScore5);
             this.Controls.Add(this.lblScore4);
             this.Controls.Add(this.lblScore3);
@@ -134,7 +117,6 @@
         private System.Windows.Forms.Label lblScore3;
         private System.Windows.Forms.Label lblScore4;
         private System.Windows.Forms.Label lblScore5;
-        private System.Windows.Forms.Label lblPromptLoadScore;
         private System.Windows.Forms.Button btnExit;
     }
 }
