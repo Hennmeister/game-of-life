@@ -1,8 +1,8 @@
 ﻿/* 
- * Tiffanie Truong
- * Nicole --> added ToString method and constructor to read from file
- * January 19, 2018
- * Base class for all living lifeforms in the simulation (Cells, Viruses, Multicellular Organisms)
+ * Tiffanie Truong, Rudy Ariaz, Nicole Beri
+ * January 22, 2018
+ * Base class for all living lifeforms in the simulation (Cells, Colonies, Multicellular Organisms).
+ * Encapsulates information and provides methods for performing operations of LivingUnits.
  */
 using System;
 using System.Collections.Generic;
@@ -15,46 +15,105 @@ namespace GameOfLife
     [Serializable]
     public abstract class LivingUnit : Unit
     {
-        // Complexity information
+        /// <summary>
+        /// Gets and sets the age of the Unit.
+        /// </summary>
         public int Age { get; private set; }
-        public int Senescence { get; }
+        /// <summary>
+        /// Gets the senescence value of the Unit (age cannot increase past this value).
+        /// </summary>
+        protected int Senescence { get; }
         
-
-        // Temperature information
-        public int IdealTemperature { get; protected set; }
-
-        // Food and water information
-        public int FoodRequirement { get; protected set; }
-        public int WaterRequirement { get; protected set; }
-
-        // Breathing information
-        public int GasRequirement { get; protected set; }
-        public Enums.GasType InputGas { get; }
-        public Enums.GasType OutputGas { get; }
-
-        // Infection information
+        /// <summary>
+        /// Gets and sets the ideal operating temperature of the organism.
+        /// </summary>
+        protected int IdealTemperature { get; set; }
+        
+        /// <summary>
+        /// Gets and sets food requirement of the Unit.
+        /// </summary>
+        protected int FoodRequirement { get; set; }
+        /// <summary>
+        /// Gets and sets water requirement of the Unit.
+        /// </summary>
+        protected int WaterRequirement { get; set; }
+        
+        /// <summary>
+        /// Gets and sets the gas unit requirement of the Unit.
+        /// </summary>
+        protected int GasRequirement { get; set; }
+        /// <summary>
+        /// Gets the type of input gas of the Unit.
+        /// </summary>
+        private Enums.GasType InputGas { get; }
+        /// <summary>
+        /// Gets the type of output gas of the Unit.
+        /// </summary>
+        private Enums.GasType OutputGas { get; }
+        
+        /// <summary>
+        /// Gets and sets the infection resistance of the LivingUnit.
+        /// </summary>
         protected double InfectionResistance { get; set; }
+        /// <summary>
+        /// Gets and sets the maximum resistance of all LivingUnits.
+        /// </summary>
         protected static double MaxResistance { get; set; }
+        /// <summary>
+        /// Gets and sets the infection status of all LivingUnits.
+        /// </summary>
         public bool Infected { get; set; }
+        /// <summary>
+        /// Gets and sets the generations left to be cured.
+        /// </summary>
         private int CuredGenerationsLeft { get; set; }
 
+        /// <summary>
+        /// Constructor instantiates a new LivingUnit object given required parameters to describe the Unit.
+        /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
+        /// <param name="type">The type of Unit.</param>
+        /// <param name="speciesComplexity">The complexity of the Unit's species.</param>
+        /// <param name="senescence">The senescence value of the Unit.</param>
+        /// <param name="foodRequirement">The food requirement of the Unit.</param>
+        /// <param name="waterRequirement">The water requirement of the Unit.</param>
+        /// <param name="gasRequirement">The gas requirement of the Unit.</param>
+        /// <param name="inputGas">The input gas of the Unit.</param>
+        /// <param name="outputGas">The output gas of the Unit.</param>
+        /// <param name="idealTemperature">The ideal temperature of the Unit.</param>
+        /// <param name="infectionResistance">The infection resistance of the Unit.</param>
+        /// <param name="decompositionValue">The decomposition value of the Unit.</param>
+        /// <param name="row">Optional: The row of the Unit (within the grid).</param>
+        /// <param name="col">Optional: The column of the Unit (within the grid).</param>
         public LivingUnit(Enums.UnitType type, int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, Enums.GasType inputGas,
                           Enums.GasType outputGas, int idealTemperature, double infectionResistance,
                           double decompositionValue, int row = -1, int col = -1) : base(type, decompositionValue, 
                           speciesComplexity, row, col )
         {
+            // Set the senesence value
             Senescence = senescence;
+            // Set the food requirement
             FoodRequirement = foodRequirement;
+            // Set the water requirement
             WaterRequirement = waterRequirement;
+            // Set the gas requirement
             GasRequirement = gasRequirement;
+            // Set the input gas
             InputGas = inputGas;
+            // Set the output gas
             OutputGas = outputGas;
+            // Set the ideal temperature
             IdealTemperature = idealTemperature;
+            // Set the infection resistance
             InfectionResistance = infectionResistance;
             // Update the max resistance if needed
             MaxResistance = Math.Max(MaxResistance, InfectionResistance);
+            // Set the infection status to false
             Infected = false;
+            // Initialize the number of generations left to be cured
             CuredGenerationsLeft = 0;
         }
 
