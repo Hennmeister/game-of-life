@@ -12,7 +12,6 @@ namespace GameOfLife
 {
     public class GameManager
     {
-        private State startingState;
         private State currentState;
         const int UNIT_GRID_SIZE = 50;
 
@@ -44,11 +43,6 @@ namespace GameOfLife
         {
             currentState = new State();
             currentState.UnitGrid = CreateGrid();
-        }
-
-        public void SetStartingState()
-        {
-            startingState = currentState;
         }
         
         public void LoadCachedState(int genNum)
@@ -185,6 +179,11 @@ namespace GameOfLife
         public void SaveState(string name)
         {
             Datastore.SaveState(currentState, name);
+        }
+
+        public void Restart()
+        {
+            currentState = currentState.StartingState;
         }
 
         public int CarbonDioxideLevel

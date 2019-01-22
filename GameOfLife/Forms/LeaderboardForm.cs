@@ -12,10 +12,12 @@ namespace GameOfLife
 {
     public partial class LeaderboardForm : Form
     {
-        private Label[] scoreLabels; 
+        private Label[] scoreLabels;
+        private GameManager manager;
 
-        public LeaderboardForm()
+        public LeaderboardForm(GameManager manager)
         {
+            this.manager = manager;
             InitializeComponent();
             StoreScoreLabels();
             DisplayScores();
@@ -45,6 +47,14 @@ namespace GameOfLife
                 scoreLabels[curScoreLabel++].Text = $"{ score.Key }: { score.Value }";
             }
         }
-        
+
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            GameForm form = new GameForm(manager);
+            manager.Restart();
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
+        }
     }
 }

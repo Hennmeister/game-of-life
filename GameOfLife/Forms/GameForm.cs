@@ -337,7 +337,7 @@ namespace GameOfLife
             tmrRefresh.Enabled = false;
             Refresh();
             MessageBox.Show("GAME OVER");
-            LeaderboardForm f = new LeaderboardForm();
+            LeaderboardForm f = new LeaderboardForm(manager);
             this.Close();
             f.ShowDialog();
         }
