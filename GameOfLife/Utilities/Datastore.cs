@@ -13,6 +13,7 @@ namespace GameOfLife
     {
         private const string STATES_DIRECTORY_SUFFIX = @"\PastStates";
         private const int HIGHEST_CONCURRENT_SCORE_INDEX = 3;
+        // TODO: remove if needed
         private static bool generalStatesDirectoryExists;
         public static string GeneralStatesDirectoryPath { get; } = 
             Directory.GetCurrentDirectory() + STATES_DIRECTORY_SUFFIX;
