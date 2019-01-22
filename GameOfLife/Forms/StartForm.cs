@@ -116,10 +116,10 @@ namespace GameOfLife
 
         private void StartGame(Enums.GameMode selectedMode)
         {
-            // Check if username has been set
-            if (txtUsername.Text == "")
+            // Check if a valid username has been set
+            if (txtUsername.Text == "" || txtUsername.Text.Contains("(") || txtUsername.Text.Contains(")"))
             {
-                MessageBox.Show("Please enter a username.");
+                MessageBox.Show("Please enter a valid username.");
             }
             // Check if an environment has been selected
             else if (!manager.IsEnvironmentCreated())
