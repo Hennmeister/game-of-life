@@ -1,5 +1,6 @@
 ﻿/*
  * Rudy Ariaz, Tiffanie Truong, Nicole Beri
+ * January 19, 2019
  * Colony class encapsulates information regarding Colonies and implements operations that a Colony
  * can perform.
  */
