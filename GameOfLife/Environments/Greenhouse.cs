@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * NAME
+ * January 21, 2019
+ * The Greenhouse is one of the four possible environments for the user to choose from.
+ * It has a unique range of possible starting parameters, probability of rain, and environmental event.
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
