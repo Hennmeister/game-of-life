@@ -484,7 +484,7 @@ namespace GameOfLife
         private void btnLoadPrevGen_Click(object sender, EventArgs e)
         {
             //Make sure the game is paused, a generation number is selected and that the selected value is a number
-            if (isPaused && cbGenNums.SelectedItem != null && cbGenNums.SelectedText != "Not Available")
+            if (isPaused && cbGenNums.SelectedItem != null && cbGenNums.SelectedItem.ToString() != "Not Available")
             {
                 //load the cached state corresponding with the generation number selected in the combobox
                 manager.LoadCachedState((int)cbGenNums.SelectedItem);

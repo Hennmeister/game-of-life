@@ -206,6 +206,7 @@ namespace GameOfLife
             // 
             // cbGenNums
             // 
+            this.cbGenNums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGenNums.FormattingEnabled = true;
             this.cbGenNums.Items.AddRange(new object[] {
             "0",
