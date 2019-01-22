@@ -56,7 +56,7 @@ namespace GameOfLife
                                     "This can be accomplished by modifying various starting parameters, consisting of both environmental factors and the locations and types of units. \r\n" +
                                     "A game over is reached when the score does not change for 5 generations.\r\n\r\n" +
                                     "Units live and die by the following rules: \r\n" +
-                                    "     1. Any live unit with fewer than two live neighbors dies, as if by underpopulation.\r\n"+
+                                    "     1. Any live unit with fewer than two live neighbors dies, as if by underpopulation.\r\n" +
                                     "     2. Any live unit with two or three live neighbors lives on to the next generation.\r\n" +
                                     "     3. Any live unit with more than three live neighbors dies, as if by overpopulation.\r\n" +
                                     "     4. Any dead unit with exactly three live neighbors becomes a live cell, as if by reproduction.";
@@ -133,7 +133,7 @@ namespace GameOfLife
                 "They evolve into either a plant or animal depending on atmospheric composition. " +
                 "The percentage of carbon dioxide in the atmosphere represents the probability of evolving into a plant. " +
                 "The same appies with oxygen and animals.\r\n\r\n" +
-                "If a colony does not have enough food to sustain itself, it splits up into 4 cells again."; 
+                "If a colony does not have enough food to sustain itself, it splits up into 4 cells again.";
         }
 
         /// <summary>
@@ -146,12 +146,9 @@ namespace GameOfLife
             previouslySelected.Enabled = true;
             previouslySelected = btnAnimal;
             // Display information about Animals
-            txtInstructions.Text = "Animals can independently thermoregulate, consuming 2 food units and 1 water unit " +
-                "to increase or decrease their ideal external temperature by 1℃ (per generation). " +
-                "They only thermoregulate if the external temperature is at least 5% higher or lower " +
-                "than their current ideal temperature, respectively.\r\n\r\n" +
-                "Animals can eat plants around them, thus killing the plant and allowing the animal to " +
-                "gain food equal to the product of the plant’s age and the plant’s food requirement. " +
+            txtInstructions.Text = "Animals can independently thermoregulate to reach their ideal temperature, consuming 2 food units and 1 water unit " +
+                "to increase or decrease their ideal external temperature by 1℃ (per generation).\r\n\r\n" +
+                "Animals can eat plants around them, thus killing the plant. " +
                 "After consuming a plant, however, the animal must enter hibernation for 3 generations, " +
                 "during which its food, water, gas, ideal temperature, decomposition value, and infection resistance values are halved. " +
                 "However, if the plant consumed is toxic, the animal dies. " +
