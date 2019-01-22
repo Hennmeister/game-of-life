@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * Rudy Ariaz
+ * January 22, 2019
+ * UnitFileFormat static class stores constants that represents the indices of Unit parameters
+ * in a string parameters array that represents a Unit. Used in saving and loading the state of the game.
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

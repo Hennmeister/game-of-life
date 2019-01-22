@@ -50,8 +50,7 @@ namespace GameOfLife
             // Set the baseline food requirement of the Animal
             BaselineFoodRequirement = FoodRequirement;
         }
-
-        // (Nicole) --> constructor for reading files
+        
         /// <summary>
         /// Used to construct a new Animal object given parameters of a saved Animal.
         /// </summary>
