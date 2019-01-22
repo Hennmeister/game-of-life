@@ -25,11 +25,13 @@ namespace GameOfLife
         /// <summary>
         /// Initializes the leaderboard form
         /// </summary>
-        /// <param name="manager"></param>
+        /// <param name="manager"> The GameManager that manages the state of the simulation </param>
         public LeaderboardForm(GameManager manager)
         {
-            this.manager = manager;
             InitializeComponent();
+            // Store the manager 
+            this.manager = manager;
+            // Display the scores on the Leaderboard form
             StoreScoreLabels();
             DisplayScores();
         }
