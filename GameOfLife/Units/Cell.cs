@@ -68,6 +68,7 @@ namespace GameOfLife
                 if(!Infected && initiallyInfected)
                 {
                     InfectionResistance += 0.5;
+                    MaxResistance = Math.Max(MaxResistance, InfectionResistance);
                 }
             }
         }

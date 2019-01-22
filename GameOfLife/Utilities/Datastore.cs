@@ -261,6 +261,11 @@ namespace GameOfLife
         /// <param name="state"> The state to store. </param>
         private static void CreateCurrentStateDirectory(State state, string statePath)
         {
+            int duplicateNum = 1;
+            while (Directory.Exists(statePath))
+            {
+                statePath += $" ({duplicateNum++})";
+            }
             Directory.CreateDirectory(statePath);
         }
 

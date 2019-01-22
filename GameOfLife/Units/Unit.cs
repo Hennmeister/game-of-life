@@ -56,22 +56,14 @@ namespace GameOfLife
         public Unit(string[] parameters)
         {
             // convert all parameters to integer
-            int r = -1;
-            int.TryParse(parameters[1], out r);
+            int.TryParse(parameters[UnitFileFormat.ROW], out int r);
+            int.TryParse(parameters[UnitFileFormat.COLUMN], out int c);
+            double.TryParse(parameters[UnitFileFormat.DECOMPOSITION_VALUE], out double decompValue);
+            int.TryParse(parameters[UnitFileFormat.SPECIES_COMPLEXITY], out int speciesComplexity);
 
-            int c = -1;
-            int.TryParse(parameters[2], out c);
-
-            int decomp = 0;
-            int.TryParse(parameters[3], out decomp);
-
-            int complexity = 0;
-            int.TryParse(parameters[4], out complexity);
-
-            // initialize with new parameters
-            DecompositionValue = decomp;
-            SpeciesComplexity = complexity;
             Location = (r, c);
+            DecompositionValue = decompValue;
+            SpeciesComplexity = speciesComplexity;
         }
                
         /// <summary>
@@ -129,7 +121,7 @@ namespace GameOfLife
         // 4: species complexity
         public override string ToString()
         {
-            return (int)UnitType + ";" + Location.r + ";" + Location.c;
+            return (int)UnitType + ";" + Location.r + ";" + Location.c + ";" + DecompositionValue + ";" + SpeciesComplexity;
         }
     }
 }

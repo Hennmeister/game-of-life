@@ -36,7 +36,12 @@ namespace GameOfLife
         public Animal(string[] parameters) : base(parameters)
         {
             UnitType = Enums.UnitType.Animal;
-            
+            bool.TryParse(parameters[UnitFileFormat.IS_HIBERNATING], out bool isHibernating);
+            int.TryParse(parameters[UnitFileFormat.HIBERNATION_GEN_LEFT], out int hibernationGenerationsLeft);
+            int.TryParse(parameters[UnitFileFormat.BASELINE_FOOD_REQ], out int baselineFoodReq);
+            IsHibernating = isHibernating;
+            HibernationGenerationsLeft = hibernationGenerationsLeft;
+            BaselineFoodRequirement = baselineFoodReq;
         }
 
         public override Unit Create(int row, int col)
@@ -180,7 +185,7 @@ namespace GameOfLife
 
         public override string ToString()
         {
-            return base.ToString() + ";" + IsHibernating + ";" + HibernationGenerationsLeft;
+            return base.ToString() + ";" + IsHibernating + ";" + HibernationGenerationsLeft + ";" + BaselineFoodRequirement ;
         }
 
     }
