@@ -29,12 +29,15 @@ namespace GameOfLife
         public Queue<int> gridScores { get; set; } = new Queue<int>();
         [NonSerialized()]
         private State[] cachedStates = new State[NUMBER_OF_CACHED_STATES];
+        [NonSerialized()]
+        public State startingState;
         private static int latestID;
         public int CurrentID { get; }
 
         public State()
         {
             GenerationCounter = 0;
+            StartingState = DeepCopy(this);
             CurrentID = ++latestID;
         }
 
@@ -58,7 +61,7 @@ namespace GameOfLife
         }
 
         //creates a deep copy of the state
-        private static State DeepCopy<State>(State state)
+        public static State DeepCopy<State>(State state)
         {
             using (var ms = new MemoryStream())
             {
@@ -106,10 +109,25 @@ namespace GameOfLife
                 }
                 else return new State[NUMBER_OF_CACHED_STATES];
             }
-            set { cachedStates = value; }
+            set
+            {
+                cachedStates = value;
+            }
         }
 
-        public EnvironmentTypeEnum EnvironmentType
+        public State StartingState
+        {
+            get
+            {
+                return startingState;
+            }
+            set
+            {
+                startingState = value; 
+            }
+        }
+
+        public Enums.EnvironmentType EnvironmentType
         {
             get
             {

@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * NAME
+ * January 21, 2019
+ * The Desert is one of the four possible environments for the user to choose from.
+ * It has a unique range of possible starting parameters, probability of rain, and environmental event.
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +18,12 @@ namespace GameOfLife
         /// <summary>
         /// Create a Desert with its unique environmental parameters for the simulation's environment
         /// </summary>
-        public Desert() : base(3000, 1500, 50, 50, 45, 5, Properties.Resources.Desert, Properties.Resources.Sandstorm)
+        public Desert() : base(defaultFood: 3000, defaultWater: 1500,
+                                oxygenLevel: 50, carbonDioxideLevel: 50,
+                                temperature: 45, probOfRain: 5,
+                                envImage: Properties.Resources.Desert, eventPic: Properties.Resources.Sandstorm,
+                                envType: Enums.EnvironmentType.Desert)
         {
-            // (Nicole) assign the specific environment type
-            environmentType = EnvironmentTypeEnum.Desert;
         }
 
         /// <summary>

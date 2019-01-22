@@ -77,7 +77,7 @@ namespace GameOfLife
                 // Read environment type
                 if (int.TryParse(envFile.ReadLine(), out tempInt))
                 {
-                    state.EnvironmentType = (EnvironmentTypeEnum)tempInt;
+                    state.EnvironmentType = (Enums.EnvironmentType)tempInt;
                 }
 
                 // Read atmospheric parameters

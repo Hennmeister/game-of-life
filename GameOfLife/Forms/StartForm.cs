@@ -129,8 +129,6 @@ namespace GameOfLife
             // Otherwise, can start the game
             else
             {
-                //set the current state as the starting state
-                manager.SetStartingState();
                 // Create the game form 
                 GameForm gameForm = new GameForm(manager);
                 // Display the new game form
@@ -244,8 +242,6 @@ namespace GameOfLife
                 else if (result == DialogResult.OK)
                 {
                     manager.LoadState(browser.SelectedPath);
-                    //set the current state as the starting state
-                    manager.SetStartingState();
                     // Create the game form 
                     GameForm gameForm = new GameForm(manager);
                     // Display the new game form

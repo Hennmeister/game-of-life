@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ * NAME
+ * January 21, 2019
+ * The Greenhouse is one of the four possible environments for the user to choose from.
+ * It has a unique range of possible starting parameters, probability of rain, and environmental event.
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +18,12 @@ namespace GameOfLife
         /// <summary>
         /// Create a Greenhouse with its unique environmental parameters for the simulation's environment
         /// </summary>
-        public Greenhouse() : base(3000, 50000, 25, 75, 35, 30, Properties.Resources.Greenhouse, Properties.Resources.Caretaker)
+        public Greenhouse() : base(defaultFood: 3000, defaultWater: 50000,
+                                    oxygenLevel: 25, carbonDioxideLevel: 75,
+                                    temperature: 35, probOfRain: 30,
+                                    envImage: Properties.Resources.Greenhouse, eventPic: Properties.Resources.Caretaker,
+                                    envType: Enums.EnvironmentType.Greenhouse)
         {
-            // (Nicole) assign the specific environment type
-            environmentType = EnvironmentTypeEnum.Greenhouse;
         }
 
         /// <summary>
@@ -24,7 +32,7 @@ namespace GameOfLife
         public override void EnvironmentalEvent(Unit[,] units)
         {
             // Water availability increases by 5% (rounded to 1 decimal place)
-            WaterAvailability += Math.Round(0.5 * WaterAvailability, 1);
+            WaterAvailability += Math.Round(0.05 * WaterAvailability, 1);
             // Loop through the all rows of the grid to remove all infected plants
             for (int i = 0; i < units.GetLength(GridHelper.ROW); i++)
             {
