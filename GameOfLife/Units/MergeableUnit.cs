@@ -82,6 +82,11 @@ namespace GameOfLife
 
         protected abstract void Merge(Unit[,] grid, Environment gameEnv);
 
+        /// <summary>
+        /// Removes the Units that a Cell or Colony merges with once it evolves
+        /// </summary>
+        /// <param name="grid"> The grid of Units currently in the simulation </param>
+        /// <param name="gameEnv"> The Environment that the Units interact with in the simulation </param>
         protected void KillMergedUnits(Unit[,] grid, Environment gameEnv)
         {
             int row = Location.r, col = Location.c;

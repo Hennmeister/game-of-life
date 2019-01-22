@@ -2,8 +2,7 @@
  * Tiffanie Truong
  * (Nicole) - added unitType and constructor for loading data from file
  * January 15, 2018
- * This class stores information for a Cell, one of the basic
- * lifeforms that can populate the grid in the simulation.
+ * This class stores information for a Cell, one of the basic lifeforms that can populate the grid in the simulation.
  */
 using System;
 using System.Collections.Generic;
@@ -37,19 +36,28 @@ namespace GameOfLife
 
         /// <summary>
         /// Used by the UnitFactory to create a new Cell
-        /// </summary>
         /// <returns> A new Cell object </returns>
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="col"></param>
+        /// <returns></returns>
         public override Unit Create(int row = -1, int col = -1)
         {
             return new Cell(row, col);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
         public override Unit Create(string[] parameters)
         {
             return new Cell(parameters);
         }
+
         /// <summary>
-        /// 
+        /// Updates the Cell for the next generation
         /// </summary>
         /// <param name="grid"> The grid of Units currently in the simulation </param>
         /// <param name="row"> The row of the grid that this Cell resides in </param>
@@ -61,18 +69,24 @@ namespace GameOfLife
             {
                 Merge(grid, gameEnv);
             }
+            // Otherwise, update the Cell as needed
             else
             {
+                // Save if the cell is initially infected to determine if it has been cured in this generation 
                 bool initiallyInfected = Infected;
+                // Process the cell's life functions (i.e. eat, drink, respire, and cure)
                 UpdateLivingUnit(grid, gameEnv);
-                if(!Infected && initiallyInfected)
+                // Check if the Cell was cured during the generationm
+                if (!Infected && initiallyInfected)
                 {
+                    // Increase its infection resistance
                     InfectionResistance += 0.5;
+                    // Ensure the maximum infection resistance is updated if need be
                     MaxResistance = Math.Max(MaxResistance, InfectionResistance);
                 }
             }
         }
-        
+
         /// <summary>
         /// Merges the current Cell with the 3 other Cells in a 2x2 block with this Cell as the top left
         /// </summary>
@@ -81,9 +95,10 @@ namespace GameOfLife
         /// <param name="col"> The column of the grid that this Cell resides in </param>
         protected override void Merge(Unit[,] grid, Environment gameEnv)
         {
+            // Remove the 3 other units merged with this Cell
             KillMergedUnits(grid, gameEnv);
-            // Replace the current Cell with a newly created Colony
-            grid[Location.r, Location.c] = 
+            // Replace the current Cell with a newly created Colony from the UnitFactory
+            grid[Location.r, Location.c] =
                 UnitFactory.CreateUnit(Enums.UnitType.Colony, Location.r, Location.c);
         }
     }
