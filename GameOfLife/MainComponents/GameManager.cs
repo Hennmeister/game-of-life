@@ -249,119 +249,157 @@ namespace GameOfLife
             currentState.UnitGrid[row, col].Die(currentState.UnitGrid, currentState.GameEnvironment);
         }
 
-        /// (Nicole) load current state
+        /// <summary>
+        /// Loads the current state
+        /// </summary>
+        /// <param name="statePath"></param>
         public void LoadState(string statePath)
         {
             Datastore.LoadState(currentState, statePath);
         }
 
-        /// (Nicole) save the current state of the game
+        /// <summary>
+        /// Loads a state with the given name
+        /// </summary>
+        /// <param name="name"></param>
         public void SaveState(string name)
         {
             Datastore.SaveState(currentState, name);
         }
 
+        /// <summary>
         /// returns the cached states stored in the current state
+        /// </summary>
         public State[] CachedStates
         {
             get { return currentState.CachedStates; }
         }
 
+        /// <summary>
         /// returns and sets the carbon dioxide level of the current state
+        /// </summary>
         public int CarbonDioxideLevel
         {
             get { return currentState.CarbonDioxideLevel; }
             set { currentState.CarbonDioxideLevel = value;  }
         }
 
+        /// <summary>
         /// returns the enviornment image of the current state
+        /// </summary>
         public Image EnvironmentImage
         {
             get { return currentState.EnvironmentalImage;  }
         }
 
+        /// <summary>
         /// returns the rain image of the current state
+        /// </summary>
         public Image RainImage
         {
             get { return currentState.RainImage; }
         }
 
+        /// <summary>
         /// returns the event image of the current state
+        /// </summary>
         public Image EventImage
         {
             get { return currentState.EventImage; }
         }
 
+        /// <summary>
         /// returns and sets the food availability of the current state
+        /// </summary>
         public double FoodAvailability
         {
             get { return currentState.FoodAvailability; }
             set { currentState.FoodAvailability = value; }
         }
 
+        /// <summary>
         /// returns and sets the generation number of the current state
+        /// </summary>
         public int GenerationCounter
         {
             get { return currentState.GenerationCounter; }
             set { currentState.GenerationCounter = value; }
         }
 
+        /// <summary>
         /// returns the size of the unit grid
+        /// </summary>
         public int GridSize
         {
             get { return UNIT_GRID_SIZE; }
         }
 
 
+        /// <summary>
         /// returns and sets the highest recorded score at a given time from the current state
+        /// </summary>
         public int HighestConcurrentScore
         {
             get { return currentState.HighestConcurrentScore; }
             set { currentState.HighestConcurrentScore = value; }
         }
 
+        /// <summary>
         /// returns and sets the water availability of the current state
+        /// </summary>
         public double WaterAvailability
         {
             get { return currentState.WaterAvailability; }
             set { currentState.WaterAvailability = value; }
         }
 
+        /// <summary>
         /// returns and sets the oxygen level of the current state
+        /// </summary>
         public int OxygenLevel
         {
             get { return currentState.OxygenLevel; }
             set { currentState.OxygenLevel = value; }
         }
 
-        ///returns and sets the score of the current state
-        public int CurrentScore
+        /// <summary>
+        /// returns and sets the score of the current state
+        /// </summary>
+        public long CurrentScore
         {
             get { return currentState.CurrentScore;  }
             set { currentState.CurrentScore = value; }
         }
 
+        /// <summary>
         /// returns and sets the temperature of the current state
+        /// </summary>
         public int Temperature
         {
             get { return currentState.Temperature; }
             set { currentState.Temperature = value; }
         }
 
+        /// <summary>
         /// returns and sets the username associated with the current state
+        /// </summary>
         public string Username
         {
             get { return currentState.Username; }
             set { currentState.Username = value; }
         }
 
+        /// <summary>
         /// returns whether it is raining from the current state's environment
+        /// </summary>
         public bool IsRaining
         {
             get { return currentState.GameEnvironment.IsRaining; }
         }
 
+        /// <summary>
         /// returns whether an environmental event is occuring from the current state's environment
+        /// </summary>
         public bool EnvEventOccurring
         {
             get { return currentState.GameEnvironment.EnvEventOccurring; }

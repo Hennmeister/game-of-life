@@ -1,7 +1,8 @@
 ﻿/*
  * Henning Lindig
  * January 22, 2019
- * Factory for environment objects that creates a child of environment given a type
+ * Factory for environments
+ * Creates new environment objects from given environmnet type
  */
 using System;
 using System.Collections.Generic;
