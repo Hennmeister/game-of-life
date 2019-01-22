@@ -36,6 +36,7 @@ namespace GameOfLife
         public Plant(string[] parameters) : base(parameters)
         {
             UnitType = Enums.UnitType.Plant;
+            ToxicityFactor = parameters[UnitFile]
         }
 
         public Plant(Environment gameEnv, int row = -1, int col = -1) : this(row, col)
@@ -98,6 +99,11 @@ namespace GameOfLife
             {
                 gameEnv.IncreaseFood(resourceUsage);
             }
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + ";" + ToxicityFactor;
         }
     }
 }

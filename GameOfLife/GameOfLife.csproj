@@ -99,6 +99,7 @@
     <Compile Include="Units\Unit.cs" />
     <Compile Include="Utilities\Factories\UnitFactory.cs" />
     <Compile Include="Units\Virus.cs" />
+    <Compile Include="Utilities\UnitFileFormat.cs" />
     <EmbeddedResource Include="Forms\GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
     </EmbeddedResource>

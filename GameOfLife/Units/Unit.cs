@@ -129,7 +129,7 @@ namespace GameOfLife
         // 4: species complexity
         public override string ToString()
         {
-            return (int)UnitType + ";" + Location.r + ";" + Location.c + ";" + DecompositionValue + ";" + SpeciesComplexity;
+            return (int)UnitType + ";" + Location.r + ";" + Location.c;
         }
     }
 }

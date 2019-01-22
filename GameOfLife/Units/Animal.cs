@@ -19,8 +19,7 @@ namespace GameOfLife
         private const double HIBERNATION_END_SCALE_FACTOR = 2.0;
 
         protected int BaselineFoodRequirement { get; }
-
-        private bool NeedToEat { get; set; }
+        
         private bool IsHibernating { get; set; }
         private int HibernationGenerationsLeft { get; set; }
 
@@ -37,6 +36,7 @@ namespace GameOfLife
         public Animal(string[] parameters) : base(parameters)
         {
             UnitType = Enums.UnitType.Animal;
+            
         }
 
         public override Unit Create(int row, int col)
@@ -106,7 +106,6 @@ namespace GameOfLife
 
         private void EatPlant(Unit[,] grid, Environment gameEnv, Plant toEat)
         {
-            NeedToEat = false;
             // Kill the plant
             toEat.Die(grid, gameEnv);
             // Check if the plant is toxic
@@ -179,6 +178,10 @@ namespace GameOfLife
             Drink(gameEnv, THERMOREGULATION_WATER);
         }
 
-        
+        public override string ToString()
+        {
+            return base.ToString() + ";" + IsHibernating + ";" + HibernationGenerationsLeft;
+        }
+
     }
 }

@@ -111,7 +111,6 @@ namespace GameOfLife
                 }
             }
         }
-
         // Checks if it's possible to split in the direction dictated by rowDirection,
         // colDirection
         private bool IsSplitPossible(Unit[,] grid, int rowDirection, int colDirection)

@@ -213,9 +213,9 @@ namespace GameOfLife
         // 12: infection resistence
         public override string ToString()
         {
-            return base.ToString() + ";" + ";" + Senescence + ";" + FoodRequirement
-                + ";" + WaterRequirement + ";" + GasRequirement + ";" + (int)InputGas + ";" + (int)OutputGas
-                + ";" + IdealTemperature + ";" + InfectionResistance;
+            return base.ToString() + ";" + Age + ";" + FoodRequirement + ";" + WaterRequirement + ";" + 
+                GasRequirement + ";" + IdealTemperature + ";" + InfectionResistance + ";" + MaxResistance +
+                ";" + Infected + ";" + CuredGenerationsLeft;
         }
     }
 }
