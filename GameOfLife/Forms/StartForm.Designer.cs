@@ -40,9 +40,6 @@
             this.lblPromptEnvParameters = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnDisplayInstructions = new System.Windows.Forms.Button();
-            this.lblPromptExample = new System.Windows.Forms.Label();
-            this.cbExamples = new System.Windows.Forms.ComboBox();
-            this.btnLoadExample = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblFoodSlider = new System.Windows.Forms.Label();
             this.lblTempSlider = new System.Windows.Forms.Label();
@@ -190,40 +187,6 @@
             this.btnDisplayInstructions.Text = "Show Instructions";
             this.btnDisplayInstructions.UseVisualStyleBackColor = true;
             this.btnDisplayInstructions.Click += new System.EventHandler(this.btnDisplayInstructions_Click);
-            // 
-            // lblPromptExample
-            // 
-            this.lblPromptExample.AutoSize = true;
-            this.lblPromptExample.Location = new System.Drawing.Point(143, 418);
-            this.lblPromptExample.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPromptExample.Name = "lblPromptExample";
-            this.lblPromptExample.Size = new System.Drawing.Size(77, 13);
-            this.lblPromptExample.TabIndex = 16;
-            this.lblPromptExample.Text = "Load Example:";
-            // 
-            // cbExamples
-            // 
-            this.cbExamples.FormattingEnabled = true;
-            this.cbExamples.Items.AddRange(new object[] {
-            "Example 1",
-            "Example 2",
-            "Example 3"});
-            this.cbExamples.Location = new System.Drawing.Point(146, 433);
-            this.cbExamples.Margin = new System.Windows.Forms.Padding(2);
-            this.cbExamples.Name = "cbExamples";
-            this.cbExamples.Size = new System.Drawing.Size(100, 21);
-            this.cbExamples.TabIndex = 17;
-            // 
-            // btnLoadExample
-            // 
-            this.btnLoadExample.Location = new System.Drawing.Point(146, 374);
-            this.btnLoadExample.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLoadExample.Name = "btnLoadExample";
-            this.btnLoadExample.Size = new System.Drawing.Size(110, 40);
-            this.btnLoadExample.TabIndex = 18;
-            this.btnLoadExample.Text = "Load Example";
-            this.btnLoadExample.UseVisualStyleBackColor = true;
-            this.btnLoadExample.Click += new System.EventHandler(this.btnLoadExample_Click);
             // 
             // lblTitle
             // 
@@ -443,10 +406,10 @@
             // 
             // btnLoadState
             // 
-            this.btnLoadState.Location = new System.Drawing.Point(260, 374);
+            this.btnLoadState.Location = new System.Drawing.Point(135, 374);
             this.btnLoadState.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoadState.Name = "btnLoadState";
-            this.btnLoadState.Size = new System.Drawing.Size(74, 40);
+            this.btnLoadState.Size = new System.Drawing.Size(94, 40);
             this.btnLoadState.TabIndex = 41;
             this.btnLoadState.Text = "Load";
             this.btnLoadState.UseVisualStyleBackColor = true;
@@ -479,9 +442,6 @@
             this.Controls.Add(this.lblTempSlider);
             this.Controls.Add(this.lblFoodSlider);
             this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.btnLoadExample);
-            this.Controls.Add(this.cbExamples);
-            this.Controls.Add(this.lblPromptExample);
             this.Controls.Add(this.btnDisplayInstructions);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblPromptEnvParameters);
@@ -523,9 +483,6 @@
         private System.Windows.Forms.Label lblPromptEnvParameters;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnDisplayInstructions;
-        private System.Windows.Forms.Label lblPromptExample;
-        private System.Windows.Forms.ComboBox cbExamples;
-        private System.Windows.Forms.Button btnLoadExample;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblFoodSlider;
         private System.Windows.Forms.Label lblTempSlider;

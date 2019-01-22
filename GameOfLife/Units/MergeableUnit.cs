@@ -1,5 +1,5 @@
 /*
- * Tiffanie Truong, Rudy Ariaz, Nicole Beri (constructor for loading data from file)
+ * Rudy Ariaz
  * January 20, 2019
  * The abstract MergeableUnit class represents a Unit that has a merge operation; that is, a Cell
  * or a Colony. These Units are similar in function and therefore inherit from MergeableUnit.
@@ -57,9 +57,12 @@ namespace GameOfLife
         /// <param name="col"> The column of the grid that this MergeableUnit resides in. </param>
         /// <returns> True if the MergeableUnit is the top left of a 2x2 square with other
         ///           MergeableUnits of the same species and should merge, false otherwise. </returns>
+        /// <remarks> Tiffanie </remarks>
         protected bool ShouldMerge(Unit[,] grid)
         {
+            // Get the type of this unit -- must merge with units of the same species
             var curType = this.GetType();
+            // Get the location of the current unit
             int row = Location.r, col = Location.c;
             // if the cell is not in a space capable of forming a 2x2 square, it cannot merge
             if (!grid.InDimension(GridHelper.ROW, row + 1) || 
@@ -67,29 +70,44 @@ namespace GameOfLife
             {
                 return false;
             }
-            // otherwise, if the surrounding 3 grids are Cells, this cell should merge
+            // otherwise, if the surrounding 3 grids cells are of the same type, this unit should merge
             else if (grid[row, col + 1]?.GetType() == curType && 
                      grid[row + 1, col]?.GetType() == curType && 
                      grid[row + 1, col + 1]?.GetType() == curType)
             {
                 return true;
             }
-            // otherwise, this Cell does not meet the requirements to form a colony
+            // otherwise, this unit does not meet the locational requirements to evolve 
             else
             {
                 return false;
             }
         }
 
+        /// <summary>
+        /// Merges this unit with its surrounding units
+        /// </summary>
+        /// <param name="grid"> The Units in the grid at the current state of simulation </param>
+        /// <param name="gameEnv"> The environment of the simulation that the units interact with </param>
         protected abstract void Merge(Unit[,] grid, Environment gameEnv);
 
+        /// <summary>
+        /// Removes the other units that are part of the merge
+        /// These units are the other units in the 2x2 square with this mergeable unit at the top left.
+        /// </summary>
+        /// <param name="grid"> The Units in the grid at the current state of simulation </param>
+        /// <param name="gameEnv"> The environment of the simulation that the units interact with </param>
         protected void KillMergedUnits(Unit[,] grid, Environment gameEnv)
         {
+            // Save the row and column that the mergeable unit resides inm
             int row = Location.r, col = Location.c;
+            // Loop through this row and the next row of the mergeable unit to process all rows of the 2x2 square
             for (int i = 0; i <= 1; i++)
             {
+                // Loop through this column and the next column of the mergeable unit to process all columns of the 2x2 square
                 for (int j = 0; j <= 1; j++)
                 {
+                    // Remove the unit in the current grid cell of the 2x2 square
                     grid[row + i, col + j].Die(grid, gameEnv);
                 }
             }

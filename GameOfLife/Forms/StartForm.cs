@@ -149,15 +149,6 @@ namespace GameOfLife
             }
         }
 
-        private void btnLoadExample_Click(object sender, EventArgs e)
-        {
-            // Check that the user has selected an example 
-            if (cbExamples.SelectedItem == null)
-            {
-                MessageBox.Show("Please select an example.");
-            }
-        }
-
         //************ SLIDER SCROLLING ************/
 
         /// <summary>
