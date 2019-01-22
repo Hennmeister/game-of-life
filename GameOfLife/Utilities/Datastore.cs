@@ -362,7 +362,6 @@ namespace GameOfLife
             }
         }
         
-
         /// <summary>
         /// Creates a directory within the general PastStates directory to 
         /// store all files associatd with the current State. The directory is named with the given
@@ -456,19 +455,36 @@ namespace GameOfLife
             Directory.CreateDirectory(ScoresDirectoryPath);
         }
 
+        /// <summary>
+        /// Gets all of the highest concurrent scores stored in the PastScores directory, 
+        /// associated with the usernames that achieved thoses scores.
+        /// </summary>
+        /// <remarks>
+        /// Authors: Rudy Ariaz, Henning Lindig
+        /// </remarks>
+        /// <returns>A list of key-value pairs, each storing a string (username) and an associated
+        /// integer (highest concurrent score)</returns>
         public static List<KeyValuePair<string, int>> GetAllHighestConcurrentScores()
         {
+            // The list that will store all scores
             List<KeyValuePair<string, int>> allScores = new List<KeyValuePair<string, int>>();
+            // Open the scores file for reading
             using (StreamReader scoresFile = new StreamReader(ScoresDirectoryPath + SCORES_FILE_SUFFIX))
             {
+                // Will store the current line (current username-score pair)
                 string line = "";
+                // Iterate through the file, reading until end of file is reached
                 while ((line = scoresFile.ReadLine()) != null)
                 {
+                    // Each line is formatted as username;score, so split the line into the components of the score
                     string[] splitScore = line.Split(';');
+                    // Convert the score from a string to an integer
                     int.TryParse(splitScore[1], out int score);
+                    // Add the current username-score pair to the list
                     allScores.Add(new KeyValuePair<string, int>(splitScore[0], score));
                 }
             }
+            // Return the list of scores
             return allScores;
         }
     }
