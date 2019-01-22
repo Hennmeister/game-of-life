@@ -29,8 +29,8 @@ namespace GameOfLife
         /// <param name="idealTemperature">The ideal temperature of the Unit.</param>
         /// <param name="infectionResistance">The infection resistance of the Unit.</param>
         /// <param name="decompositionValue">The decomposition value of the Unit.</param>
-        /// <param name="row">The row of the Unit (within the grid).</param>
-        /// <param name="col">The column of the Unit (within the grid).</param>
+        /// <param name="row">Optional: The row of the Unit (within the grid).</param>
+        /// <param name="col">Optional: The column of the Unit (within the grid).</param>
         public MergeableUnit(Enums.UnitType type, int speciesComplexity, int senescence, int foodRequirement,
                           int waterRequirement, int gasRequirement, Enums.GasType inputGas,
                           Enums.GasType outputGas, int idealTemperature, double infectionResistance,
