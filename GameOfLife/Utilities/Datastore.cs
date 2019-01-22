@@ -6,9 +6,6 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace GameOfLife
@@ -72,7 +69,7 @@ namespace GameOfLife
         /// Saves environmental parameters of a state in a given state directory.
         /// </summary>
         /// <remarks>
-        /// Authors: Rudy Ariaz, Nicole Beri
+        /// Authors: Nicole Beri
         /// </remarks>
         /// <param name="state">State whose environmental parameters should be stored.</param>
         /// <param name="statePath">Path to the state directory.</param>
@@ -188,7 +185,7 @@ namespace GameOfLife
         /// Saves all the Units of a given State into the State's directory.
         /// </summary>
         /// <remarks>
-        /// Author: Nicole Beri, Rudy Ariaz
+        /// Author: Tiffanie Truong
         /// </remarks>
         /// <param name="state">State whose Units should be saved.</param>
         /// <param name="statePath">Path of the State directory.</param>
@@ -220,47 +217,52 @@ namespace GameOfLife
         }
         
         /// <summary>
-        /// Loads all Units of a saved State into the given State.
+        /// Loads all Units of a saved State into the given State of the current simulation.
         /// </summary>
         /// <remarks>
-        /// Author: Nicole Beri
+        /// Author: Tiffanie Truong
         /// </remarks>
-        /// <param name="state">The State to load Units into.</param>
-        /// <param name="statePath">The path to the saved State's directory.</param>
+        /// <param name="state"> The State to load Units into.</param>
+        /// <param name="statePath"> The path to the saved State's directory.</param>
         private static void LoadAllUnits(State state, string statePath)
         { 
             // The path to the Units file of the saved State
             string unitPath = statePath + @"\Units.txt";
-            // Open the Units file for reading
-            using (StreamReader unitFile = new StreamReader(unitPath))
-            {
-                // Stores the string representing each Unit
-                string unitString = "";
-                // Iterate through the file and save what is read until ReadLine() returns null (end of file)
-                do
+            // Try to load the file Units file for reading
+            try {
+                using (StreamReader unitFile = new StreamReader(unitPath))
                 {
-                    // Read the current line (representing the current Unit)
-                    unitString = unitFile.ReadLine();
-                    // Check that the unitString is not null
-                    if (unitString != null)
+                    // Stores the string representing each Unit
+                    string unitString = "";
+                    // Iterate through the file and save what is read until ReadLine() returns null (end of file)
+                    do
                     {
-                        // Check that there is a Unit and add it to the grid
-                        Unit newUnit = LoadUnit(unitString);
-                        // Check if a Unit was created successfully 
-                        if (newUnit != null)
+                        // Read the current line (representing the current Unit)
+                        unitString = unitFile.ReadLine();
+                        // Check that the unitString is not null
+                        if (unitString != null)
                         {
-                            // Get the row and column of the loaded Unit
-                            int r = newUnit.Location.r;
-                            int c = newUnit.Location.c;
-                            // Check if the Unit has a valid location
-                            if (r != -1 && c != -1)
+                            // Check that there is a Unit and add it to the grid
+                            Unit newUnit = LoadUnit(unitString);
+                            // Check if a Unit was created successfully 
+                            if (newUnit != null)
                             {
-                                // Insert the Unit into the correct location in the State's grid
-                                state.UnitGrid[r, c] = newUnit;
+                                // Get the row and column of the loaded Unit
+                                int r = newUnit.Location.r;
+                                int c = newUnit.Location.c;
+                                // Check if the Unit has a valid location
+                                if (r != -1 && c != -1)
+                                {
+                                    // Insert the Unit into the correct location in the State's grid
+                                    state.UnitGrid[r, c] = newUnit;
+                                }
                             }
                         }
-                    }
-                } while (unitString != null);
+                    } while (unitString != null);
+                }
+            }
+            catch (Exception e)
+            {
             }
         }
 
@@ -298,7 +300,7 @@ namespace GameOfLife
         /// These are saved in a file in the directory of the State to save.
         /// </summary>
         /// <remarks>
-        /// Author: Rudy Ariaz
+        /// Author: Henning Lindig
         /// </remarks>
         /// <param name="state">State whose given information should be saved.</param>
         /// <param name="statePath">The path of the directory of the State to save.</param>
@@ -326,7 +328,7 @@ namespace GameOfLife
         /// Loads general information of a State saved in statePath into the given State.
         /// </summary>
         /// <remarks>
-        /// Author: Nicole Beri
+        /// Author: Henning Lindig
         /// </remarks>
         /// <param name="state">The State to load the general information into.</param>
         /// <param name="statePath">The path of the saved State to load from.</param>
