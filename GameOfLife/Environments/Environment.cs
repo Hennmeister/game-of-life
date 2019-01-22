@@ -8,18 +8,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-// Used for drawing graphics in the Environment
-using System.Drawing; 
+// Used for Images in the Environment
+using System.Drawing;
 
 namespace GameOfLife
 {
-    public enum EnvironmentTypeEnum { Rainforest, Tundra, Greenhouse, Desert };
-
     [Serializable]
     public abstract class Environment
     {
         // **** ENVIRONMENTAL PARAMETERS ****/
-        // Atmospheric composition -- used to determine evolution into animal or plant
+        // the percentage of the atmosphere that is carbon dioxide or oxygen
+        // must sum to 100 and is used to determine evolution into animal or plant
         protected int carbonDioxideLevel;
         protected int oxygenLevel;
         // (Rudy) the default amount of food and water initially available in the environment
@@ -31,13 +30,13 @@ namespace GameOfLife
         protected double waterAvailability;
         // the current temperature of the environment
         protected int temperature;
-        // visual indicator for the environment
+        // the background image visually depicting the environment
         private Image environmentImage;
         // (Nicole) environment type 
-        protected EnvironmentTypeEnum environmentType;
+        protected Enums.EnvironmentType environmentType;
 
         // (Nicole) getter and setter for environment type
-        public EnvironmentTypeEnum EnvironmentType
+        public Enums.EnvironmentType EnvironmentType
         {
             get { return environmentType; }
             set { environmentType = value; }
@@ -48,17 +47,14 @@ namespace GameOfLife
         protected int probabilityOfRain;
         // the chance of an environmental event occurring as a percent
         public const int PROBABILITY_OF_ENV_EVENT = 10;
-        // state variables recording what event is occuring
+        // state variables tracking what event is occuring
         public bool IsRaining { get; set; }
         public bool EnvEventOccurring { get; set; }
-        // determines how many generations left for an occurring event
+        // a counter to determine how many generations are left for an occurring event
         public int EventGenerationsLeft { get; set; }
         // images for various events
         private Image eventImage;
         private Image rainImage;
-
-        // generates random numbers to determine if probabalistic events occur
-        Random numberGenerator = new Random();
 
         /// <summary>
         /// (Tiffanie) Create a new Environment with the given values unique to a chosen type of Environment
@@ -74,9 +70,12 @@ namespace GameOfLife
         public Environment(double defaultFood, int defaultWater,
                            int oxygenLevel, int carbonDioxideLevel,
                            int temperature, int probOfRain, 
-                           Image envImage, Image eventPic)
+                           Image envImage, Image eventPic,
+                           Enums.EnvironmentType envType)
         {
             // **** INITIALIZE ENVIRONMENT PARAMETERS BASED ON TYPE OF ENVIRONMENT ****
+            // The type of environment (biome)
+            environmentType = envType;
             // The default/base amount of food and water in this biome
             DefaultFood = defaultFood;
             DefaultWater = defaultWater;

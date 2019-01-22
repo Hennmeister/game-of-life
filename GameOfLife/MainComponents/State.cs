@@ -109,7 +109,7 @@ namespace GameOfLife
             set { cachedStates = value; }
         }
 
-        public EnvironmentTypeEnum EnvironmentType
+        public Enums.EnvironmentType EnvironmentType
         {
             get
             {
