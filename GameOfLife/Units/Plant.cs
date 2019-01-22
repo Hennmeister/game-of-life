@@ -127,7 +127,7 @@ namespace GameOfLife
             }
         }
 
-        // (Nicole) (Nicole) ToString method to serialize properties to string to be saved to file
+        // (Nicole) ToString method to serialize properties to string to be saved to file
         public override string ToString()
         {
             return base.ToString() + ";" + ToxicityFactor + ";" + BaselineWaterRequirement;
