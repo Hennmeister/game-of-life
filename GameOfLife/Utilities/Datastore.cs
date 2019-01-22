@@ -21,7 +21,7 @@ namespace GameOfLife
         public static void SaveState(State state, string sessionName)
         {
             string stateDirectoryPath = GeneralStatesDirectoryPath + $@"\{sessionName}";
-            CreateCurrentStateDirectory(state, stateDirectoryPath);
+            stateDirectoryPath = CreateCurrentStateDirectory(state, stateDirectoryPath);
             SaveGeneralInformation(state, stateDirectoryPath);
             SaveEnvironmentalParameters(state, stateDirectoryPath);
             SaveAllUnits(state, stateDirectoryPath);
@@ -259,14 +259,27 @@ namespace GameOfLife
         /// store the current state.
         /// </summary>
         /// <param name="state"> The state to store. </param>
-        private static void CreateCurrentStateDirectory(State state, string statePath)
+        private static string CreateCurrentStateDirectory(State state, string statePath)
         {
-            int duplicateNum = 1;
-            while (Directory.Exists(statePath))
+            if (!Directory.Exists(statePath))
             {
-                statePath += $" ({duplicateNum++})";
+                Directory.CreateDirectory(statePath);
+                return statePath;
+
             }
-            Directory.CreateDirectory(statePath);
+            else
+            {
+                int duplicateNum = 1;
+                string duplicateSuffix = $" ({duplicateNum})";
+
+                while (Directory.Exists(statePath + duplicateNum))
+                {
+                    duplicateSuffix = $" ({++duplicateNum})";
+                }
+                return statePath + duplicateSuffix;
+            }
+            
+            
         }
 
         /// <summary> 
