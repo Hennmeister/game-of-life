@@ -1,5 +1,5 @@
 /*
- * Rudy Ariaz
+ * Henning Lindig
  * January 20, 2019
  * The abstract MergeableUnit class represents a Unit that has a merge operation; that is, a Cell
  * or a Colony. These Units are similar in function and therefore inherit from MergeableUnit.
