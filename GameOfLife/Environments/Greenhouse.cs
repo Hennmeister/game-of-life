@@ -31,8 +31,8 @@ namespace GameOfLife
         /// </summary>
         public override void EnvironmentalEvent(Unit[,] units)
         {
-            // Water availability increases by 5% (rounded to 1 decimal place)
-            WaterAvailability += Math.Round(0.05 * WaterAvailability, 1);
+            // Water availability increases by 1% (rounded to 1 decimal place) (5% over 5 generations)
+            WaterAvailability += Math.Round(0.01 * WaterAvailability, 1);
             // Loop through the all rows of the grid to remove all infected plants
             for (int i = 0; i < units.GetLength(GridHelper.ROW); i++)
             {
