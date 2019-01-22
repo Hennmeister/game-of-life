@@ -69,7 +69,7 @@ namespace GameOfLife
         /// Saves environmental parameters of a state in a given state directory.
         /// </summary>
         /// <remarks>
-        /// Authors: Nicole Beri
+        /// Authors: Rudy Ariaz, Nicole Beri
         /// </remarks>
         /// <param name="state">State whose environmental parameters should be stored.</param>
         /// <param name="statePath">Path to the state directory.</param>
@@ -220,7 +220,7 @@ namespace GameOfLife
         /// Loads all Units of a saved State into the given State of the current simulation.
         /// </summary>
         /// <remarks>
-        /// Author: Tiffanie Truong
+        /// Author: Nicole Beri, Tiffanie Truong
         /// </remarks>
         /// <param name="state"> The State to load Units into.</param>
         /// <param name="statePath"> The path to the saved State's directory.</param>
@@ -328,7 +328,7 @@ namespace GameOfLife
         /// Loads general information of a State saved in statePath into the given State.
         /// </summary>
         /// <remarks>
-        /// Author: Henning Lindig
+        /// Author: Nicole Beri
         /// </remarks>
         /// <param name="state">The State to load the general information into.</param>
         /// <param name="statePath">The path of the saved State to load from.</param>

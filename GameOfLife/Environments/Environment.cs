@@ -1,5 +1,6 @@
 ﻿/*
  * Tiffanie Truong
+ * Nicole - created class skeleton 
  * January 15, 2019
  * The base class for all environment types in the simulation (Rainforest, Tundra, Greenhouse, Desert).
  * It acts as a template for the information and events that all Environment types use.
