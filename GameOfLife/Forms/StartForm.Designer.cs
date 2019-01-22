@@ -38,7 +38,7 @@
             this.lblPromptEnvSelection = new System.Windows.Forms.Label();
             this.lblPromptUsername = new System.Windows.Forms.Label();
             this.lblPromptEnvParameters = new System.Windows.Forms.Label();
-            this.btnStartFree = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.btnDisplayInstructions = new System.Windows.Forms.Button();
             this.lblPromptExample = new System.Windows.Forms.Label();
             this.cbExamples = new System.Windows.Forms.ComboBox();
@@ -170,16 +170,16 @@
             this.lblPromptEnvParameters.TabIndex = 12;
             this.lblPromptEnvParameters.Text = "Enviromental Parameters";
             // 
-            // btnStartFree
+            // btnStart
             // 
-            this.btnStartFree.Location = new System.Drawing.Point(21, 374);
-            this.btnStartFree.Margin = new System.Windows.Forms.Padding(2);
-            this.btnStartFree.Name = "btnStartFree";
-            this.btnStartFree.Size = new System.Drawing.Size(110, 40);
-            this.btnStartFree.TabIndex = 14;
-            this.btnStartFree.Text = "Start";
-            this.btnStartFree.UseVisualStyleBackColor = true;
-            this.btnStartFree.Click += new System.EventHandler(this.btnStartFree_Click);
+            this.btnStart.Location = new System.Drawing.Point(21, 374);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(2);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(110, 40);
+            this.btnStart.TabIndex = 14;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnDisplayInstructions
             // 
@@ -484,7 +484,7 @@
             this.Controls.Add(this.cbExamples);
             this.Controls.Add(this.lblPromptExample);
             this.Controls.Add(this.btnDisplayInstructions);
-            this.Controls.Add(this.btnStartFree);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lblPromptEnvParameters);
             this.Controls.Add(this.lblPromptUsername);
             this.Controls.Add(this.lblPromptEnvSelection);
@@ -523,7 +523,7 @@
         private System.Windows.Forms.Label lblPromptEnvSelection;
         private System.Windows.Forms.Label lblPromptUsername;
         private System.Windows.Forms.Label lblPromptEnvParameters;
-        private System.Windows.Forms.Button btnStartFree;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnDisplayInstructions;
         private System.Windows.Forms.Label lblPromptExample;
         private System.Windows.Forms.ComboBox cbExamples;

@@ -13,7 +13,6 @@ namespace GameOfLife
 {
     public partial class StartForm : Form
     {
-        private string username;
         private TrackBar[] trackBars;
         private const int NUM_ENV_PARAMETERS = 5;
         //store game actions and data
@@ -114,7 +113,7 @@ namespace GameOfLife
             }
         }
 
-        private void StartGame(Enums.GameMode selectedMode)
+        private void StartGame()
         {
             // Check if a valid username has been set
             if (txtUsername.Text == "" || txtUsername.Text.Contains("(") || txtUsername.Text.Contains(")"))
@@ -137,17 +136,6 @@ namespace GameOfLife
                 // Close this form
                 this.Close();
             }
-        }
-        
-
-        private void btnStartRealistic_Click(object sender, EventArgs e)
-        {
-            StartGame(Enums.GameMode.Realistic);
-        }
-
-        private void btnStartFree_Click(object sender, EventArgs e)
-        {
-            StartGame(Enums.GameMode.Free);
         }
 
         // Show instructions
@@ -258,6 +246,11 @@ namespace GameOfLife
         {
             InstructionsForm instructions = new InstructionsForm();
             instructions.Show();
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            StartGame();
         }
     }
 }
