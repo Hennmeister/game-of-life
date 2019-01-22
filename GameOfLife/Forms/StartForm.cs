@@ -19,7 +19,6 @@ namespace GameOfLife
 {
     public partial class StartForm : Form
     {
-        private TrackBar[] trackBars;
         private const int NUM_ENV_PARAMETERS = 5;
         // Store game actions and data
         private GameManager manager;
