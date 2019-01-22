@@ -210,6 +210,7 @@ namespace GameOfLife
             lblEnvParams.Text = "Water Availability: " + manager.WaterAvailability.ToString() + "\r\n" + "Food Availability: "
                 + manager.FoodAvailability.ToString() +"\r\n" + "Temperature: " + manager.Temperature.ToString() +"\r\n" 
                 + "Carbon Dioxide Level: " + manager.CarbonDioxideLevel.ToString() + "\r\n" + "Oxygen Level: " + manager.OxygenLevel.ToString();
+            lblEnvironmentType.Text = "Environment Type: " + manager.EnvironmentType.ToString();
         }
 
         /// <summary>
@@ -429,7 +430,7 @@ namespace GameOfLife
             //change the pause state
             isPaused = pause;
             //change the text indicating whether the game is paused or not
-            btnPlay.Text = pause ? "Unpause" : "pause";
+            btnPlay.Text = pause ? "Unpause" : "Pause";
         }
 
         /// <summary>

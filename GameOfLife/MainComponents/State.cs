@@ -222,7 +222,7 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// Get  the image of the event in the environment of the state
+        /// Get the image of the event in the environment of the state
         /// </summary>
         public Image EventImage
         {
