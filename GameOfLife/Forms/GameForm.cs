@@ -65,7 +65,7 @@ namespace GameOfLife
         private void CreateGrid()
         {
             // TODO: need to refactor to parameratize?
-            grid = new Rectangle[manager.GridSize, manager.GetGridSize];
+            grid = new Rectangle[manager.GridSize, manager.GridSize];
             for (int j = 0; j < grid.GetLength(GridHelper.ROW); j++)
             {
                 for (int k = 0; k < grid.GetLength(GridHelper.COLUMN); k++)
