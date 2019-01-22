@@ -1,5 +1,5 @@
 ﻿/*
- * henning Lindig & Rudy Ariazz
+ * Henning Lindig
  * January 15th, 2019
  * Wraps and encapsulates all information about the game state. 
  */
@@ -23,7 +23,7 @@ namespace GameOfLife
         //Keeps track of the number of cached states
         public const int NUMBER_OF_CACHED_STATES = 5;
         //Keeps track of the score
-        public int CurrentScore { get; set; }
+        public long CurrentScore { get; set; }
         //Keeps track of the highest concurrent score of the simulation
         public int HighestConcurrentScore { get; set; }
         //Stores the user's name
