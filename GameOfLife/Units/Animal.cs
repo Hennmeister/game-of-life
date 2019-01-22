@@ -39,6 +39,9 @@ namespace GameOfLife
         /// <summary>
         /// Used to construct a completely new Animal object.
         /// </summary>
+        /// <remarks>
+        /// Author: Tiffanie Truong
+        /// </remarks>
         /// <param name="row">The row of the Animal within the grid.</param>
         /// <param name="col">The column of the Animal within the grid.</param>
         public Animal(int row = -1, int col = -1) : base(Enums.UnitType.Animal, senescence: 32,
@@ -55,7 +58,7 @@ namespace GameOfLife
         /// Used to construct a new Animal object given parameters of a saved Animal.
         /// </summary>
         /// <remarks>
-        /// Author: Nicole
+        /// Author: Nicole Beri
         /// </remarks>
         /// <param name="parameters">A parameter array formatted according to UnitFileFormat.</param>
         public Animal(string[] parameters) : base(parameters)
@@ -76,6 +79,9 @@ namespace GameOfLife
         /// <summary>
         /// Creates and returns a new Animal object with the given row and column. Used by UnitFactory.
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         /// <param name="row">The row of the Animal.</param>
         /// <param name="col">The column of the Animal.</param>
         /// <returns>A new Animal with the given row and column.</returns>
@@ -88,6 +94,9 @@ namespace GameOfLife
         /// <summary>
         /// Creates and returns a new Animal object with the given parameters of a saved Animal. Used by UnitFactory.
         /// </summary>
+        /// <remarks>
+        /// Author: Nicole Beri
+        /// </remarks>
         /// <param name="parameters">A parameter array describing an Animal according to UnitFileFormat.</param>
         /// <returns>A new Animal with the given parameters.</returns>
         public override Unit Create(string[] parameters)
@@ -100,6 +109,9 @@ namespace GameOfLife
         /// Updates the food requirements of the Animal according to the number of neighbors of the same species
         /// in the 5x5 square neighborhood centered on the Animal.
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         /// <param name="numNeighbors">the number of neighbors of the same species
         /// in the 5x5 square neighborhood centered on the Animal.</param>
         protected override void UpdateVictualRequirements(int numNeighbors)
@@ -107,13 +119,16 @@ namespace GameOfLife
             // Decrease the food requirement by 5% of the baseline food requirement for each neighbor
             FoodRequirement = BaselineFoodRequirement - (int)(BaselineFoodRequirement * numNeighbors * VICTUAL_BENEFIT_FOR_COMMUNITY);
         }
-        
+
 
         /// <summary>
         /// Updates an Animal with all operations that must be applied to the Animal every generation.
         /// </summary>
         /// <remarks>
         /// Called every generation.
+        /// </remarks>
+        /// <remarks>
+        /// Author: Rudy Ariaz
         /// </remarks>
         /// <param name="grid">The grid of Units in which the Animal is.</param>
         /// <param name="gameEnv">The Environment with which the Animal interacts.</param>
@@ -150,11 +165,14 @@ namespace GameOfLife
                 }
             }
         }
-        
+
         /// <summary>
         /// Checks for Plants to eat (which are in direct contact with the Animal, so 
         /// diagonal Plants are not included). Eats a Plant if a valid one is found (only one Plant can be eaten).
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         /// <param name="grid">The Grid to use for finding Plants.</param>
         /// <param name="gameEnv">The Environment with which the Unit interacts.</param>
         private void CheckPlantsToEat(Unit[,] grid, Environment gameEnv)
@@ -190,6 +208,9 @@ namespace GameOfLife
         /// Simulates eating a neighboring Plant. Causes Animal to die if the Plant is toxic.
         /// Animal enters hibernation after eating a Plant.
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         /// <param name="grid">The grid in which the Plant and Animal are.</param>
         /// <param name="gameEnv">The Environment with which the Units interact.</param>
         /// <param name="toEat">The Plant to eat.</param>
@@ -212,6 +233,7 @@ namespace GameOfLife
         /// </summary>
         /// <remarks>
         /// Called after eating a Plant.
+        /// Author: Rudy Ariaz
         /// </remarks>
         private void Hibernate()
         {
@@ -227,6 +249,9 @@ namespace GameOfLife
         /// Checks whether the Animal can wake up from hibernation.
         /// Precondition: the Animal is currently in hibernation.
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         private void TryWake()
         {
             // Check if hibernation should end since there are no hibernation generations left
@@ -249,6 +274,9 @@ namespace GameOfLife
         ///     Decomposition Value
         ///     Infection Resistance (and possibly Max Resistance)
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         /// <param name="scaleFactor">The scale factor (either 0.5 for the start of hibernation,
         /// 2.0 for the end of hibernation) used to scale parameters.</param>
         private void ScaleAnimalParameters(double scaleFactor)
@@ -268,11 +296,14 @@ namespace GameOfLife
             // Update the max infection resistance if needed
             MaxResistance = Math.Max(InfectionResistance, MaxResistance);
         }
-        
+
         /// <summary>
         /// Checks if the Animal is starving. An Animal is starving if the food available to it
         /// is less than 600% of the food requirement.
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         /// <param name="gameEnv">The Environment with which the Animal interacts.</param>
         /// <returns>True if the Animal is starving, false otherwise.</returns>
         public bool IsStarving(Environment gameEnv)
@@ -282,10 +313,15 @@ namespace GameOfLife
         }
 
         /// <summary>
-        /// Checks whether or not the Animal should thermoregulate. An Animal should termoregul
+        /// Checks whether or not the Animal should thermoregulate. An Animal should thermoregulate
+        /// if the percentage difference between the ideal temperature and external temperature is greater than or
+        /// equal to 5 percent.
         /// </summary>
-        /// <param name="gameEnv"></param>
-        /// <returns></returns>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
+        /// <param name="gameEnv">The Environment of the Animal.</param>
+        /// <returns>True if the Animal should thermoregulate, false, otherwise.</returns>
         private bool ShouldThermoregulate(Environment gameEnv)
         {
             // Calculate the absolute percentage difference between the external temperature and the ideal temperature
@@ -300,7 +336,8 @@ namespace GameOfLife
         /// and if it is not hibernating.
         /// </summary>
         /// <remarks>
-        /// In most cases, an Animal should be able to thermoregulat.e
+        /// In most cases, an Animal should be able to thermoregulate.
+        /// Author: Rudy Ariaz
         /// </remarks>
         /// <param name="gameEnv">The Environment of the Animal.</param>
         /// <returns>True if the Animal has enough resources to thermoregulate, fallse otherwise.</returns>
@@ -319,6 +356,9 @@ namespace GameOfLife
         /// only changes by 1 degree Celsius for every call of this method. Thermoregulation consumes
         /// 2 units of food and 1 unit of water.
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         /// <param name="gameEnv">The Environment of the Animal.</param>
         private void Thermoregulate(Environment gameEnv)
         {
@@ -349,6 +389,9 @@ namespace GameOfLife
         ///     Hibernation Generationos Left
         ///     Baseline Food Requirements
         /// </summary>
+        /// <remarks>
+        /// Author: Nicole Beri
+        /// </remarks>
         /// <returns>A string representation of the Animal's parameters.</returns>
         public override string ToString()
         {
