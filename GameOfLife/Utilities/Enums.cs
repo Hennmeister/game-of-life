@@ -30,11 +30,5 @@ namespace GameOfLife
         {
             Oxygen, CarbonDioxide
         }
-        
-        // TODO: remove
-        public enum GameMode
-        {
-            Realistic, Free
-        }
     }
 }
