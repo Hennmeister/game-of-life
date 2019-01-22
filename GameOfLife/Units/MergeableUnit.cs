@@ -43,10 +43,8 @@ namespace GameOfLife
         {
         }
 
-        // (Nicole) constructor for mergeable units to load unit
-        public MergeableUnit(string[] parameters) : base(parameters)
-        {
-        }
+        // Constructor for loading a mergable unit from file
+        public MergeableUnit(string[] parameters) : base(parameters) {}
 
         /// <summary>
         /// Checks if the MergeableUnit is in a position to merge (into a Colony if it 
@@ -57,7 +55,6 @@ namespace GameOfLife
         /// <param name="col"> The column of the grid that this MergeableUnit resides in. </param>
         /// <returns> True if the MergeableUnit is the top left of a 2x2 square with other
         ///           MergeableUnits of the same species and should merge, false otherwise. </returns>
-        /// <remarks> Tiffanie </remarks>
         protected bool ShouldMerge(Unit[,] grid)
         {
             // Get the type of this unit -- must merge with units of the same species
