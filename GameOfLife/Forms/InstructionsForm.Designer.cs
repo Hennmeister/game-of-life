@@ -42,7 +42,7 @@
             // txtInstructions
             // 
             this.txtInstructions.Location = new System.Drawing.Point(49, 140);
-            this.txtInstructions.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.txtInstructions.Margin = new System.Windows.Forms.Padding(1);
             this.txtInstructions.Multiline = true;
             this.txtInstructions.Name = "txtInstructions";
             this.txtInstructions.ReadOnly = true;
@@ -53,7 +53,7 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(11, 19);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
@@ -145,7 +145,7 @@
             this.Controls.Add(this.btnGeneral);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.txtInstructions);
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "InstructionsForm";
             this.Text = "InstructionsForm";
             this.ResumeLayout(false);

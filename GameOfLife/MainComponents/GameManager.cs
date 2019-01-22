@@ -21,11 +21,7 @@ namespace GameOfLife
         /// <summary>
         /// Constructs a new GameManager to coordinate actions between the user and the units
         /// </summary>
-        public GameManager()
-        {
-            // Creates a State to store the current moment of the simulation
-            CreateState();
-        }
+        public GameManager() {}
 
         /// <summary>
         /// Creates and sets the environment of the current state

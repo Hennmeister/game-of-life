@@ -33,6 +33,8 @@ namespace GameOfLife
             InitializeComponent();
             // Save the manager used to process the game
             this.manager = manager;
+            //create a new state for the current simulation
+            manager.CreateState();
             // Set combobox values given the Environment Type selected by default
             cbEnvironmentSelection.DataSource = Enum.GetValues(typeof(Enums.EnvironmentType));
         }
