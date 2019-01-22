@@ -235,7 +235,13 @@ namespace GameOfLife
             {
                 browser.SelectedPath = Datastore.GeneralStatesDirectoryPath;
                 browser.ShowNewFolderButton = false;
-                if (browser.ShowDialog() == DialogResult.OK && !string.IsNullOrWhiteSpace(browser.SelectedPath))
+                DialogResult result = browser.ShowDialog();
+                if(result == DialogResult.OK && string.IsNullOrWhiteSpace(browser.SelectedPath) ||
+                   !browser.SelectedPath.Contains(Datastore.GeneralStatesDirectoryPath))
+                {
+                    MessageBox.Show("Please select a valid directory within the PastStates directory.");
+                }
+                else if (result == DialogResult.OK)
                 {
                     manager.LoadState(browser.SelectedPath);
                     //set the current state as the starting state
