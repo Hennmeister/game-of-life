@@ -29,11 +29,17 @@ namespace GameOfLife
         // Store the factor by which animal stats are scaled upon the start and end of hibernation
         private const double HIBERNATION_START_SCALE_FACTOR = 0.5;
         private const double HIBERNATION_END_SCALE_FACTOR = 2.0;
-        // Store the baseline food requirement of an animal
+        /// <summary>
+        /// Get the baseline food requirement of an animal
+        /// </summary>
         protected int BaselineFoodRequirement { get; }
-        // Store whether or not the Animal is hibernating
+        /// <summary>
+        /// Get and set whether or not the Animal is hibernating
+        /// </summary>
         private bool IsHibernating { get; set; }
-        // Store how many generations are left for the Animal to hibernate if it is hibernating
+        /// <summary>
+        /// Get and set how many generations are left for the Animal to hibernate if it is hibernating
+        /// </summary>
         private int HibernationGenerationsLeft { get; set; }
 
 
