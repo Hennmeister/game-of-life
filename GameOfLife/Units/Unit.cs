@@ -16,13 +16,21 @@ namespace GameOfLife
     [Serializable]
     public abstract class Unit
     {
-        // The type of the Unit
+        /// <summary>
+        /// Get and set type of the Unit
+        /// </summary>
         protected Enums.UnitType UnitType { get; set; }
-        // A tuple representing the location of a Unit
+        /// <summary>
+        /// Get and set a tuple representing the location of a Unit
+        /// </summary>
         public (int r, int c) Location { get; }
-        // The amount of food that a Unit returns to its environment upon death
+        /// <summary>
+        /// Get and set the amount of food that a Unit returns to its environment upon death
+        /// </summary>
         protected double DecompositionValue { get; set; }
-        // The relative complexity of the Unit's species
+        /// <summary>
+        /// Get and set the relative complexity of the Unit's species
+        /// </summary>
         public int SpeciesComplexity { get; }
 
         /// <summary>
