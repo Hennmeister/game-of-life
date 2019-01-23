@@ -28,6 +28,9 @@ namespace GameOfLife
         /// <summary>
         /// Constructor used by child classes to create a new instance of a child class.
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         /// <param name="decompositionValue">The decomposition value of the Unit.</param>
         /// <param name="speciesComplexity">The species complexity of the Unit.</param>
         /// <param name="row">Optional: the row of the Unit.</param>
@@ -69,6 +72,9 @@ namespace GameOfLife
         /// <summary>
         /// Simulates death of a Unit.
         /// </summary>
+        /// <remarks>
+        /// Author: Rudy Ariaz
+        /// </remarks>
         /// <param name="grid">The grid from which the Unit should be removed.</param>
         /// <param name="gameEnv">The Environment to which food should be returned.</param>
         public void Die(Unit[,] grid, Environment gameEnv)
@@ -84,6 +90,7 @@ namespace GameOfLife
         /// </summary>
         /// <remarks>
         /// Abstract.
+        /// Author: Tiffanie Truong
         /// </remarks>
         /// <param name="row">The row of the new Unit.</param>
         /// <param name="col">The column of the new Unit.</param>
@@ -96,6 +103,7 @@ namespace GameOfLife
         /// </summary>
         /// <remarks>
         /// Abstract.
+        /// Author: Tiffanie Truong
         /// </remarks>
         /// <param name="parameters">An array of string parameters representing
         /// the parameters of a saved Unit.</param>
