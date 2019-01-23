@@ -25,7 +25,7 @@ namespace GameOfLife
             Datastore.CreateGeneralStateDirectory();
             // Initialize the scores directory
             Datastore.CreateScoresDirectory();
-            //creates the application's game manager
+            // Creates the application's game manager
             Application.Run(new StartForm(new GameManager()));
         }
     }
