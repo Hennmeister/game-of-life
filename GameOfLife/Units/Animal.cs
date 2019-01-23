@@ -1,5 +1,6 @@
 ﻿/*
- * Tiffanie, Rudy, & Nicole
+ * Rudy Ariaz, Tiffanie Truong
+ * January 21, 2019
  * The Animal class encapsulates information about an Animal and implements operations necessary
  * for an animal to interact with its environment. 
  */
