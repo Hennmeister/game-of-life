@@ -1,6 +1,7 @@
 ﻿/*
  * Tiffanie Truong
- * Nicole - created class skeleton 
+ * Nicole Beri - created class skeleton 
+ * Rudy Ariaz - EnoughFood() and EnoughWater()
  * January 15, 2019
  * The base class for all environment types in the simulation (Rainforest, Tundra, Greenhouse, Desert).
  * It acts as a template for the information and events that all Environment types use.
@@ -23,19 +24,35 @@ namespace GameOfLife
         // must sum to 100 and is used to determine evolution into animal or plant
         protected int carbonDioxideLevel;
         protected int oxygenLevel;
-        // (Rudy) the default amount of food and water initially available in the environment
-        // read-only -- can be initialized in the constructor but nowhere else
+
+        /// <summary>
+        /// Accesses and modifies the default amount of food initially available in the environment
+        /// <remarks> (Rudy Ariaz) read-only -- can be initialized in the constructor but nowhere else </remarks>
+        /// </summary>
         public virtual double DefaultFood { get; set; }
+
+        /// <summary>
+        /// Accesses and modifies the default amount of water initially available in the environment
+        /// <remarks> (Rudy Ariaz) read-only -- can be initialized in the constructor but nowhere else </remarks>
+        /// </summary>
         public virtual int DefaultWater { get; set; }
+
         // the amount of food and water in the environment during the simulation
         protected double foodAvailability;
         protected double waterAvailability;
         // the current temperature of the environment
+
+        /// <summary>
+        /// Accesses and modifies the temperature of the environment
+        /// </summary>
         public int Temperature { get; set; }
-        // the image of the environment
+
+        /// <summary>
+        /// Accesses the image depicting the information (used as a background)
+        /// </summary>
         public Image EnvironmentImage { get; }
 
-        // (Nicole) environment type 
+        // (Nicole) environment type
         protected Enums.EnvironmentType environmentType;
 
         // (Nicole) getter and setter for environment type
@@ -50,16 +67,27 @@ namespace GameOfLife
         protected int probabilityOfRain;
         // the chance of an environmental event occurring as a percent
         public const int PROBABILITY_OF_ENV_EVENT = 10;
-        // state variables tracking what event is occuring
+        /// <summary>
+        /// Accesses and modifies the state variable tracking whether or not it is raining
+        /// </summary>
         public bool IsRaining { get; set; }
+        /// <summary>
+        /// Accesses and modifies the state variable tracking whether an environmental event is occuring
+        /// </summary>
         public bool EnvEventOccurring { get; set; }
-        // a counter to determine how many generations are left for an occurring event
+        /// <summary>
+        /// Accesses and modifies the counter determining the remaining duration of an occuring event
+        /// </summary>
         public int EventGenerationsLeft { get; set; }
-        // the image of the environmental event
+        /// <summary>
+        /// Accesses and modifies the image depicting the environment's unique event
+        /// </summary>
         public Image EventImage { get; set; }
-        // the image of the rain event
+        /// <summary>
+        /// Accesses and modifies the image depicting rain
+        /// </summary>
         public Image RainImage { get; set; }
-   
+
 
         /// <summary>
         /// (Tiffanie) Create a new Environment with the given values unique to a chosen type of Environment
@@ -80,35 +108,38 @@ namespace GameOfLife
                            Enums.EnvironmentType envType)
         {
             // **** INITIALIZE ENVIRONMENT PARAMETERS BASED ON TYPE OF ENVIRONMENT ****
-            // The type of environment (biome)
+            // Save the type of environment 
             environmentType = envType;
-            // The default/base amount of food and water in this biome
+            // Save the default amount of food and water in this biome
             DefaultFood = defaultFood;
             DefaultWater = defaultWater;
-            // Amount of food and water initially available for the simulation (this can be modified by the user)
+            // Initialize the amount of food and water available in the environment to be the default values
+            // These values can be modified by the user in the StartForm
             foodAvailability = DefaultFood;
             waterAvailability = DefaultWater;
-            // Atmospheric composition
+            // Save the atmospheric composition 
             CarbonDioxideLevel = carbonDioxideLevel;
             OxygenLevel = oxygenLevel;
-            // Temperature
+            // Save the environment's temperature
             Temperature = temperature;
-            // Probability of rain as a percent
+            // Save probability of rain as a percent
             probabilityOfRain = probOfRain;
 
             // IMAGES
-            // Background of the environment
+            // Save the background of the environment
             EnvironmentImage = envImage;
-            // Image for the unique environmental event
+            // Save image for the unique environmental event
             EventImage = eventPic;
-            // Image for rain event
+            // Save image for rain event
             RainImage = Properties.Resources.Rain;
         }
 
-        // Gets and modifies the percentage of carbon dioxide in the atmosphere
+        /// <summary>
+        /// Accesses and modifies the percentage of carbon dioxide in the atmosphere
+        /// </summary>
         public int CarbonDioxideLevel
         {
-            // Gets the carbon dioxoide level of the environment
+            // Gets and returns the carbon dioxoide level of the environment
             get { return this.carbonDioxideLevel; }
             set
             {
@@ -130,10 +161,12 @@ namespace GameOfLife
             }
         }
 
-        // Get and modifies the percentage of oxygen in the atmosphere
+        /// <summary>
+        /// Accesses and modifies the percentage of oxygen in the atmosphere
+        /// </summary>
         public int OxygenLevel
         {
-            // Gets the oxygen level of the environment
+            // Gets and returns oxygen level of the environment
             get { return this.oxygenLevel; }
             set
             {
@@ -155,10 +188,12 @@ namespace GameOfLife
             }
         }
 
-        // Get and modifies the amount of food in the environment
+        /// <summary>
+        /// Accesses and modifies the amount of food in the environment
+        /// </summary>
         public double FoodAvailability
         {
-            // Gets the amount of food in the environment
+            // Gets and returns the amount of food in the environment
             get { return this.foodAvailability; }
             set {
                 // Ensure that the amount of food in the environment is non-negative
@@ -166,7 +201,7 @@ namespace GameOfLife
                 {
                     this.foodAvailability = 0;
                 }
-                // Valid amount of food is passed in so save the new amount of food 
+                // Valid amount of food is passed in, so save the new amount of food 
                 else
                 {
                     this.foodAvailability = value;
@@ -174,10 +209,12 @@ namespace GameOfLife
             }
         }
 
-        // Get and modifies the amount of water in the environment
+        /// <summary>
+        /// Accesses and modifies the amount of water in the environment
+        /// </summary>
         public double WaterAvailability
         {
-            // Gets the amount of water in the environment
+            // Gets and returns the amount of water in the environment
             get { return this.waterAvailability; }
             set
             {
@@ -186,7 +223,7 @@ namespace GameOfLife
                 {
                     this.waterAvailability = 0;
                 }
-                // Valid amount of water is passed in so save the new amount of water 
+                // Valid amount of water is passed in, so save the new amount of water 
                 else
                 {
                     this.waterAvailability = value;
@@ -244,6 +281,7 @@ namespace GameOfLife
         /// Checks whether there is enough water for a living unit to consume given its water requirement
         /// </summary>
         /// <param name="consumed"> The amount to be consumed </param>
+        /// <remarks> Author: Rudy Ariaz </remarks>
         /// <returns> True if the amount consumed is less than or equal to the water availability and false otherwise </returns>
         public bool EnoughWater(double consumed)
         {
@@ -255,6 +293,7 @@ namespace GameOfLife
         /// Checks whether there is enough food for a living unit to consume given its food requirement
         /// </summary>
         /// <param name="consumed"> The amount to be consumed </param>
+        /// <remarks> Author: Rudy Ariaz </remarks>
         /// <returns> True if the amount consumed is less than or equal to the food availability and false otherwise </returns>
         public bool EnoughFood(double consumed)
         {
@@ -318,7 +357,6 @@ namespace GameOfLife
 
         // A unique environmental event that changes the parameters or organisms in the environment
         abstract public void EnvironmentalEvent(Unit[,] grid);
-
 
         /// <summary>
         /// Determines if it starts raining in the environment
