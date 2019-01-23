@@ -1,4 +1,10 @@
-﻿// (Nicole) - added unitType and constructor for reading from file
+﻿/*
+ * Rudy Ariaz 
+ * (Tiffanie - photosynthesis) (Nicole - ToString()) (Henning - respire)
+ * January 21, 2019
+ * The Plant class encapsulates information about an Plant and implements operations necessary
+ * for an plant to interact with its environment. 
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,78 +16,105 @@ namespace GameOfLife
     [Serializable]
     class Plant : Multicellular
     {
-        // Store the colour plants will be 
+        // Store the colour that the Plant unit is represented by
         public static readonly System.Drawing.Color baselineColor = System.Drawing.Color.YellowGreen;
-        // Store the food generated upon creation
-        private const int FOOD_GENERATED_UPON_CREATION = 3;
-        // Getter for the base line water requirement
+        
+        /// <summary>
+        /// Gets the amount of water that plants require on their own
+        /// </summary>
         protected int BaselineWaterRequirement { get; }
 
-        // Getter for toxicity factor
+        /// <summary>
+        /// A unique toxicity factor used to calculate the toxicity of this plant
+        /// </summary>
         private int ToxicityFactor { get; }
-        // Store the toxicity factor lower bound
+
+        // Store the lowest toxicity factor of a plant
         private const int TOXICITY_FACTOR_LOWER_BOUND = 1;
-        // Store the toxicity factor upper bound
+        // Store the highest toxicity factor of a plant
         private const int TOXICITY_FACTOR_UPPER_BOUND = 100;
 
-        // Store the photosynthesis resource lower bound
+        // Store the lowest amount of food that can be made in photosynthesis
         private const int PHOTOSYNTHESIS_RESOURCE_LOWER_BOUND = 1;
-        // Store the photosynthesis resource upper bound
+        // Store the highest amount of food that can be made in photosynthesis
         private const int PHOTOSYNTHESIS_RESOURCE_UPPER_BOUND = 4;
-        
-        // constructor for plant with property values
+
+        /// <summary>
+        /// Construct a new Plant unit
+        /// </summary>
+        /// <param name="row"> The row of the Plant within the grid. </param>
+        /// <param name="col"> The column of the Plant within the grid. </param>
         public Plant(int row = -1, int col = -1) : base(Enums.UnitType.Plant, senescence: 50,
                        foodRequirement: 5, waterRequirement: 25,
                        gasRequirement: 4, inputGas: Enums.GasType.CarbonDioxide,
                        outputGas: Enums.GasType.Oxygen, idealTemperature: 35,
                        infectionResistance: 7, decompositionValue: 10, row: row, col: col)
         {
-            // save the generated toxicity factor
+            // Generate a unique toxicity factor for this plant -- used to calculate its toxicity
             ToxicityFactor = ProbabilityHelper.RandomInteger(TOXICITY_FACTOR_LOWER_BOUND, TOXICITY_FACTOR_UPPER_BOUND);
-            // save base line water requirement
+            // Store the minimum water requirement for a plant
             BaselineWaterRequirement = WaterRequirement;
         }
 
-        // (Nicole) --> constructor for reading files
+        /// <summary>
+        /// Used to construct a new Plant object given parameters of a saved Animal.
+        /// </summary>
+        /// <remarks> Author: Nicole </remarks>
+        /// <param name="parameters">A parameter array formatted according to UnitFileFormat.</param>
         public Plant(string[] parameters) : base(parameters)
         {
-            // save unit type
+            // Set the type of the Unit to Animal
             UnitType = Enums.UnitType.Plant;
-            // convert all parameters to numerical values
+            // Convert the string parameters into boolean or numerical values depending on their roles
             int.TryParse(parameters[UnitFileFormat.TOXICITY_FACTOR], out int toxicityFactor);
             int.TryParse(parameters[UnitFileFormat.BASELINE_WATER_REQ], out int baselineWaterReq);
 
-            // initialize with new parameters
+            // Initialize the Plants's fields using the parameters
             ToxicityFactor = toxicityFactor;
             BaselineWaterRequirement = baselineWaterReq;
         }
 
-        // plant constructor with game environment and location parameters
-        public Plant(Environment gameEnv, int row = -1, int col = -1) : this(row, col)
-        {
-            // increase the food in the environment
-            gameEnv.IncreaseFood(FOOD_GENERATED_UPON_CREATION);
-        }
-
-        // override plants location
+        /// <summary>
+        /// Creates and returns a new Plant object with the given parameters of a saved Plant. Used by UnitFactory.
+        /// </summary>
+        /// <param name="parameters">A parameter array describing an Plant according to UnitFileFormat.</param>
+        /// <returns>A new Animal with the given parameters.</returns>
         public override Unit Create(int row, int col)
         {
+            // Return the new Plant with the given parameters
             return new Plant(row, col);
         }
-
-        // used for loading the plant (pass in its saved parameters)
+        /// <summary>
+        /// Creates and returns a new Plant object with the given row and column. Used by UnitFactory.
+        /// </summary>
+        /// <param name="row">The row of the Plant.</param>
+        /// <param name="col">The column of the Plant.</param>
+        /// <returns>A new Plant with the given row and column.</returns>
         public override Unit Create(string[] parameters)
         {
+            // Return the new Plant with the given parameters
             return new Plant(parameters);
         }
 
-        // decrease food requirement based on location of species
+        /// <summary>
+        /// Updates the food requirements of the Plant according to the number of neighbors of the same species
+        /// in the 5x5 square neighborhood centered on the Plant.
+        /// </summary>
+        /// <param name="numNeighbors">the number of neighbors of the same species
+        /// in the 5x5 square neighborhood centered on the Plant.</param>
         protected override void UpdateVictualRequirements(int numNeighbors)
         {
             FoodRequirement -= (int)(BaselineWaterRequirement * numNeighbors * VICTUAL_BENEFIT_FOR_COMMUNITY);
         }
 
-        // update the plant
+        /// <summary>
+        /// Updates an Plant with all operations that must be applied to the Plant every generation.
+        /// </summary>
+        /// <remarks>
+        /// Called every generation.
+        /// </remarks>
+        /// <param name="grid">The grid of Units in which the Plant is.</param>
+        /// <param name="gameEnv">The Environment with which the Plant interacts.</param>
         public override void Update(Unit[,] grid, Environment gameEnv)
         {
             ApplyCommunityBenefits(grid);
@@ -108,26 +141,42 @@ namespace GameOfLife
             return ProbabilityHelper.EvaluateIndependentPredicate(prob);
         }
 
-        // overrride respire
+        /// <summary>
+        /// Performs respiration, a basic life function in which a plant converts carbon dioxide to oxygen
+        /// </summary>
+        /// <remarks> Henning Lindig </remarks>
+        /// <param name="gameEnv"> The Environment of the simulation that the plants reside in </param>
         public override void Respire(Environment gameEnv)
         {
-            // increase the oxygen level
+            // Plants convert carbon dioxide to oxygen, increasing the amount of oxygen in the background
             gameEnv.IncreaseOxygen(GasRequirement);
         }
-
-        // photosynthesize method, calculate the resource usage, if it meets the requirement, increase food availability
+        /// <summary>
+        /// Performs photosynthesis, consuming a random amount of the carbon dioxide and water to return food to the environment
+        /// </summary>
+        /// <remarks> Tiffanie Truong </remarks>
+        /// <param name="gameEnv"> The Environment of the simulation that the plants reside in </param>
         protected void Photosynthesize(Environment gameEnv)
         {
+            // Generate how many carbon dioxide and water units are consumed to turn into food
             int resourceUsage = 
                 ProbabilityHelper.RandomInteger(PHOTOSYNTHESIS_RESOURCE_LOWER_BOUND, PHOTOSYNTHESIS_RESOURCE_UPPER_BOUND);
+            // Check if there is enough carbon dioxide and water in the environment to create this given amount of food
             if(resourceUsage <= gameEnv.CarbonDioxideLevel && 
                resourceUsage <= gameEnv.WaterAvailability)
             {
+                // Perform photosynthesis and create more food
                 gameEnv.IncreaseFood(resourceUsage);
+                // Consume water and carbon dioxide in the environment
+                gameEnv.DecreaseFood(resourceUsage);
+                gameEnv.DecreaseWater(resourceUsage);
             }
         }
 
-        // (Nicole) ToString method to serialize properties to string to be saved to file
+        /// <summary>
+        /// ToString method to serialize properties to string to be saved to file
+        /// </summary>
+        /// <remarks> Nicole Beri </remarks>
         public override string ToString()
         {
             return base.ToString() + ";" + ToxicityFactor + ";" + BaselineWaterRequirement;
