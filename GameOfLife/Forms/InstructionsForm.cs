@@ -28,7 +28,7 @@ namespace GameOfLife
             txtInstructions.Text = "This is a single-player game based on John Conway’s famous cellular automaton, the Game of Life. \r\n" +
                                     "Fundamentally, the game consists of a rectangular grid-based environment in which a variety of cells interact. \r\n\r\n" +
                                     "The user is tasked with building a stable ecosystem and hence reaching the highest possible score. \r\n" +
-                                    "There are two types of score: concurrent score, which is the highest score of the board at one time (used for highscore), \r\n" +
+                                    "There are two types of score: concurrent score, which is the highest score of the board at any generation (used for high score), \r\n" +
                                     "and regular score, which is the cumulative sum of all concurrent scores. \r\n" +
                                     "This can be accomplished by modifying various starting parameters, consisting of both environmental factors and the locations and types of units. \r\n" +
                                     "A game over is reached when the score does not change for 5 generations.\r\n\r\n" +
@@ -55,7 +55,9 @@ namespace GameOfLife
             // Display information about the rules of game in the textbox
             txtInstructions.Text = "This is a single-player game based on John Conway’s famous cellular automaton, the Game of Life. \r\n" +
                                     "Fundamentally, the game consists of a rectangular grid-based environment in which a variety of cells interact. \r\n\r\n" +
-                                    "The user is tasked with building a stable ecosystem, measured by a score. \r\n" +
+                                    "The user is tasked with building a stable ecosystem and hence reaching the highest possible score. \r\n" +
+                                    "There are two types of score: concurrent score, which is the highest score of the board at any generation (used for highscore), \r\n" +
+                                    "and regular score, which is the cumulative sum of all concurrent scores. \r\n" +
                                     "This can be accomplished by modifying various starting parameters, consisting of both environmental factors and the locations and types of units. \r\n" +
                                     "A game over is reached when the score does not change for 5 generations.\r\n\r\n" +
                                     "Units live and die by the following rules: \r\n" +
