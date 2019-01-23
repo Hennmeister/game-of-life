@@ -18,10 +18,14 @@ namespace GameOfLife
         private const string SCORES_DIRECTORY_SUFFIX = @"\PastScores";
         // The suffix of the path of the scores file
         private const string SCORES_FILE_SUFFIX = @"\Scores.txt";
-        // The path to the general states directory
+        /// <summary>
+        /// Get and set path to the general states directory
+        /// </summary>
         public static string GeneralStatesDirectoryPath { get; } =
             Directory.GetCurrentDirectory() + STATES_DIRECTORY_SUFFIX;
-        // The path to the general scores directory
+        /// <summary>
+        /// Get and set path to the general scores directory
+        /// </summary>
         public static string ScoresDirectoryPath { get; } =
             Directory.GetCurrentDirectory() + SCORES_DIRECTORY_SUFFIX;
 
